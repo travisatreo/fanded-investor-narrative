@@ -335,6 +335,93 @@ body {
   margin-top: 4px;
 }
 
+/* Traction phases */
+.traction-phase {
+  margin-bottom: 20px;
+}
+.phase-label {
+  font-family: var(--font-w);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.phase-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.traction-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.traction-stat-wide {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 12px;
+  text-align: center;
+}
+.traction-stat-wide .label {
+  font-size: 11px;
+  color: var(--cream-muted);
+  margin-top: 3px;
+}
+.traction-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+.traction-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--cream-muted);
+}
+.pull-quote-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.pull-quote-text {
+  font-family: var(--font-d);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--cream);
+  line-height: 1.5;
+}
+.pull-quote-attr {
+  font-size: 11px;
+  color: var(--cream-muted);
+  margin-top: 6px;
+}
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
+
 /* Talent cards */
 .talent-card {
   background: var(--bg-card);
@@ -860,23 +947,67 @@ body {
   <!-- Section 6: Traction -->
   <div class="section fade-in">
     <div class="section-label">TRACTION</div>
-    <div class="traction-stats">
-      <div class="traction-stat">
-        <div class="stat-number" style="color: var(--gold);" data-count="5">0</div>
-        <div class="label">Live MAWDs</div>
+
+    <!-- Phase 1: Clubs -->
+    <div class="traction-phase">
+      <div class="phase-label">Phase 1: Fanded Clubs</div>
+      <div class="traction-stats">
+        <div class="traction-stat">
+          <div class="stat-number" style="color: var(--purple);" data-count="100" data-suffix="+">0</div>
+          <div class="label">Clubs Created</div>
+        </div>
+        <div class="traction-stat">
+          <div class="stat-number" style="color: var(--green);" data-count="20">0</div>
+          <div class="label"><span class="live-dot"></span>Live</div>
+        </div>
+        <div class="traction-stat">
+          <div class="stat-number" style="color: var(--gold); font-size: 36px;" data-count="7" data-suffix="K+">0</div>
+          <div class="label">Members</div>
+        </div>
       </div>
-      <div class="traction-stat">
-        <div class="stat-number" style="color: var(--purple); font-size: 36px;" data-count="7" data-suffix="K+">0</div>
-        <div class="label">Club Members</div>
+      <div class="traction-two-col">
+        <div class="traction-stat-wide">
+          <div class="stat-number" style="color: var(--gold); font-size: 28px;" data-prefix="$" data-count="15" data-suffix="K+">0</div>
+          <div class="label">Revenue through platform</div>
+        </div>
+        <div class="traction-stat-wide">
+          <div class="stat-number" style="color: var(--green); font-size: 28px;" data-prefix="$" data-count="100" data-suffix="-450">0</div>
+          <div class="label">/month per fan</div>
+        </div>
       </div>
-      <div class="traction-stat">
-        <div class="stat-number" style="color: var(--green); font-size: 36px;" data-count="2" data-suffix="/day">0</div>
-        <div class="label">New Builds</div>
+    </div>
+
+    <!-- The pull signal -->
+    <div class="pull-quote-card">
+      <div class="pull-quote-text">"The club is great, but can you help me run the rest of my business too?"</div>
+      <div class="pull-quote-attr">What talent kept asking. This is what created MAWD.</div>
+    </div>
+
+    <div class="traction-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+    </div>
+
+    <!-- Phase 2: MAWD -->
+    <div class="traction-phase">
+      <div class="phase-label">Phase 2: MAWD</div>
+      <div class="traction-stats">
+        <div class="traction-stat">
+          <div class="stat-number" style="color: var(--blue);" data-count="5">0</div>
+          <div class="label"><span class="live-dot"></span>Live MAWDs</div>
+        </div>
+        <div class="traction-stat">
+          <div class="stat-number" style="color: var(--teal); font-size: 36px;" data-count="2" data-suffix="/day">0</div>
+          <div class="label">New Builds</div>
+        </div>
+        <div class="traction-stat">
+          <div class="stat-number" style="color: var(--gold); font-size: 28px;" data-count="100">0</div>
+          <div class="label">Target in 60 days</div>
+        </div>
       </div>
     </div>
 
     <div class="card" style="padding: 16px 18px; margin-bottom: 16px;">
-      <div class="body-text" style="color: var(--cream); font-size: 15px; line-height: 1.6;"><span style="color: var(--gold); font-family: var(--font-w); font-weight: 700;">$15K+</span> already through the platform. Multiple fans paying talent <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">$100 to $450/month</span> each. Not theoretical. Live revenue from real relationships.</div>
+      <div class="body-text" style="color: var(--cream); font-size: 15px; line-height: 1.6;">Clubs proved fans will pay <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">$100 to $450/month</span> for real relationships with talent. MAWD is the answer to what talent asked for next: help running the business those relationships create. Not theoretical. Live revenue from real relationships.</div>
     </div>
 
     <!-- Talent Card 1 -->
