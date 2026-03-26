@@ -629,6 +629,101 @@ body {
   color: var(--cream-dim);
   line-height: 1.7;
 }
+.why-now-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.why-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.why-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.why-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.why-icon.declining {
+  background: rgba(231, 76, 60, 0.12);
+}
+.why-icon.declining svg { stroke: #E74C3C; }
+.why-icon.growing {
+  background: rgba(46, 204, 113, 0.12);
+}
+.why-icon.growing svg { stroke: #2ECC71; }
+.why-icon.shifting {
+  background: rgba(230, 126, 34, 0.12);
+}
+.why-icon.shifting svg { stroke: #E67E22; }
+.why-icon.opportunity {
+  background: rgba(59, 173, 228, 0.12);
+}
+.why-icon.opportunity svg { stroke: var(--blue); }
+.why-content {
+  flex: 1;
+  min-width: 0;
+}
+.why-label {
+  font-family: var(--font-w);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.why-label.red { color: #E74C3C; }
+.why-label.amber { color: #E67E22; }
+.why-label.green { color: #2ECC71; }
+.why-label.blue { color: var(--blue); }
+.why-desc {
+  font-size: 13px;
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+.why-stat {
+  font-family: var(--font-w);
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 6px;
+}
+.why-stat.red { color: #E74C3C; }
+.why-stat.amber { color: #E67E22; }
+.why-stat.green { color: #2ECC71; }
+.why-stat.blue { color: var(--blue); }
+.why-thesis {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  margin-top: 16px;
+}
+.why-thesis-text {
+  font-family: var(--font-d);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.6;
+}
+.why-thesis-sub {
+  font-size: 13px;
+  color: var(--cream-muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
 
 /* Architecture card */
 .arch-card {
@@ -900,7 +995,84 @@ body {
   <!-- Section 9: Why Now -->
   <div class="section fade-in">
     <div class="section-label">WHY NOW</div>
-    <div class="why-now-body">Studios contracting.<br>Streaming broke production economics.<br>Brand deals saturating.<br>Conventions crowding.<br><br>Every traditional talent revenue channel showing diminishing returns simultaneously.<br><br>The fan relationship is the only channel that isn't saturating. Because it's not a channel. It's a relationship. Relationships don't commoditize.<br><br>AI finally makes it possible for solo talent to operate with the intelligence of a Fortune 500 company.<br><br>The infrastructure is being built right now.<br>On real talent.<br>With real data.<br>Today.</div>
+
+    <div class="why-now-grid">
+      <!-- Studios contracting -->
+      <div class="why-card">
+        <div class="why-icon declining">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+        </div>
+        <div class="why-content">
+          <div class="why-label red">STUDIOS CONTRACTING</div>
+          <div class="why-desc">Major studios slashing output. Fewer projects, fewer paychecks, more talent competing for less work.</div>
+          <div class="why-stat red">-26% production volume</div>
+        </div>
+      </div>
+
+      <!-- Streaming economics -->
+      <div class="why-card">
+        <div class="why-icon declining">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="why-content">
+          <div class="why-label red">STREAMING BROKE ECONOMICS</div>
+          <div class="why-desc">Artists need 250+ streams to earn what one iTunes download paid. Revenue per play approaching zero.</div>
+          <div class="why-stat red">$0.003/stream avg</div>
+        </div>
+      </div>
+
+      <!-- Brand deals saturating -->
+      <div class="why-card">
+        <div class="why-icon shifting">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="why-content">
+          <div class="why-label amber">BRAND DEALS SATURATING</div>
+          <div class="why-desc">Every creator is a billboard now. Audiences tuning out sponsored content. CPMs falling across platforms.</div>
+          <div class="why-stat amber">-40% engagement on #ad</div>
+        </div>
+      </div>
+
+      <!-- Conventions crowding -->
+      <div class="why-card">
+        <div class="why-icon shifting">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="why-content">
+          <div class="why-label amber">CONVENTIONS CROWDING</div>
+          <div class="why-desc">Fan expo market oversaturated. Too many events, fragmented attendance, rising booth costs, thinning margins.</div>
+        </div>
+      </div>
+
+      <!-- The opportunity -->
+      <div class="why-card">
+        <div class="why-icon growing">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <div class="why-content">
+          <div class="why-label green">FAN RELATIONSHIPS DON'T SATURATE</div>
+          <div class="why-desc">The only channel with increasing returns. Because it's not a channel. It's a relationship. Relationships don't commoditize.</div>
+          <div class="why-stat green">$500+ LTV per superfan</div>
+        </div>
+      </div>
+
+      <!-- AI timing -->
+      <div class="why-card">
+        <div class="why-icon opportunity">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
+        </div>
+        <div class="why-content">
+          <div class="why-label blue">AI MAKES IT POSSIBLE NOW</div>
+          <div class="why-desc">For the first time, solo talent can operate with the intelligence of a Fortune 500 company. The cost of a full C-suite just went to zero.</div>
+          <div class="why-stat blue">95% cost reduction</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-thesis">
+      <div class="why-thesis-text">The infrastructure is being built right now. On real talent. With real data. Today.</div>
+      <div class="why-thesis-sub">Every traditional revenue channel is declining simultaneously. Fanded is the infrastructure for the one that isn't.</div>
+    </div>
   </div>
 
   <!-- Section 10: Team -->
