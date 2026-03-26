@@ -343,6 +343,19 @@ body {
   padding: 16px 18px;
   margin-bottom: 10px;
 }
+.talent-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.talent-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 .talent-name {
   font-family: var(--font-d);
   font-weight: 700;
@@ -773,8 +786,13 @@ body {
 
     <!-- Talent Card 1 -->
     <div class="talent-card">
-      <div class="talent-name">Anna Akana</div>
-      <div class="talent-role">Actress · Filmmaker · YouTuber</div>
+      <div class="talent-header">
+        <img src="photos/anna.png" alt="Anna Akana" class="talent-photo">
+        <div>
+          <div class="talent-name">Anna Akana</div>
+          <div class="talent-role">Actress · Filmmaker · YouTuber</div>
+        </div>
+      </div>
       <div class="talent-pills">
         <span class="pill pill-purple">2.8M subscribers</span>
         <span class="pill pill-gold">547M lifetime views</span>
@@ -786,8 +804,13 @@ body {
 
     <!-- Talent Card 2 -->
     <div class="talent-card">
-      <div class="talent-name">Asian American Girl Club</div>
-      <div class="talent-role">Brand · Community · Ecommerce</div>
+      <div class="talent-header">
+        <img src="photos/aagc.png" alt="Asian American Girl Club" class="talent-photo">
+        <div>
+          <div class="talent-name">Asian American Girl Club</div>
+          <div class="talent-role">Brand · Community · Ecommerce</div>
+        </div>
+      </div>
       <div class="talent-pills">
         <span class="pill pill-gold">$1.4M revenue</span>
         <span class="pill pill-purple">115K IG followers</span>
@@ -798,8 +821,13 @@ body {
 
     <!-- Talent Card 3 -->
     <div class="talent-card">
-      <div class="talent-name">Travis Atreo</div>
-      <div class="talent-role">Artist · Producer · Founder</div>
+      <div class="talent-header">
+        <img src="photos/travis.jpg" alt="Travis Atreo" class="talent-photo">
+        <div>
+          <div class="talent-name">Travis Atreo</div>
+          <div class="talent-role">Artist · Producer · Founder</div>
+        </div>
+      </div>
       <div class="talent-pills">
         <span class="pill pill-purple">400M Spotify & Apple streams</span>
         <span class="pill pill-gold">100M YouTube views</span>
@@ -808,7 +836,20 @@ body {
       <div class="talent-body">MAWD found 20% new revenue in the first analysis. Running his own MAWD as proof of concept. The founder is the market.</div>
     </div>
 
-    <div class="body-text" style="margin-top: 12px; font-size: 14px;">Ted Schilowitz (co-founder RED Camera) onboarded this week. Management companies forming a waitlist. 2 new MAWDs going live daily.</div>
+    <!-- Talent Card 4 -->
+    <div class="talent-card">
+      <div class="talent-header">
+        <img src="photos/manny.png" alt="Manny Jacinto" class="talent-photo">
+        <div>
+          <div class="talent-name">Manny Jacinto</div>
+          <div class="talent-role">Actor · The Good Place · Top Gun: Maverick</div>
+        </div>
+      </div>
+      <div class="talent-pills">
+        <span class="pill pill-purple">3.2M IG followers</span>
+      </div>
+      <div class="talent-body">Onboarding now. Hollywood talent with a massive audience and zero infrastructure to monetize the fan relationship directly.</div>
+    </div>
   </div>
 
   <!-- Section 7: Business Model -->
