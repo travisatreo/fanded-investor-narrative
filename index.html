@@ -5,25 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Fanded — Investor Briefing</title>
 <meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#07070F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+::-webkit-scrollbar{width:0}
 
 :root {
   --bg: #07070F;
-  --surface: #0a0a12;
-  --card: #0f0f1a;
-  --card-border: rgba(255,255,255,0.06);
-  --text-primary: #F5F1EA;
-  --text-secondary: rgba(241,241,234,0.6);
-  --gold: #C4953A;
-  --gold-accent: #E8B84B;
-  --purple: #7C3AED;
-  --purple-light: #8B5CF6;
-  --green: #059669;
-  --red: #DC2626;
+  --bg-card: #0F0F1C;
+  --bg-input: #161624;
+  --bg-accent: #0A0F1E;
+  --cream: #F5F1EA;
+  --cream-dim: #9999BB;
+  --cream-muted: #6B6B8A;
+  --blue: #3BADE4;
+  --blue-soft: rgba(59,173,228,0.12);
+  --blue-hover: #5BC0F0;
+  --green: #2ECC71;
+  --red: #E74C3C;
+  --gold: #C9A84C;
+  --orange: #E67E22;
+  --purple: #9B59B6;
   --teal: #0D9488;
-  --blue: #3B82F6;
   --pink: #EC4899;
+  --border: #1C1C2E;
+  --border-focus: rgba(59,173,228,0.4);
+  --r: 16px;
+  --r-sm: 10px;
+  --r-full: 9999px;
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'DM Sans', -apple-system, sans-serif;
+  --font-w: 'Bricolage Grotesque', 'DM Sans', sans-serif;
 }
 
 html {
@@ -33,8 +50,8 @@ html {
 
 body {
   background: var(--bg);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--cream);
+  font-family: var(--font-b);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -42,29 +59,25 @@ body {
   overflow-x: hidden;
 }
 
-/* Desktop: gold vertical lines on edges of content */
-@media (min-width: 431px) {
+/* Desktop: subtle gold vertical lines on edges of content */
+@media (min-width: 481px) {
   body::before, body::after {
     content: '';
     position: fixed;
     top: 0;
     bottom: 0;
     width: 1px;
-    background: rgba(196,149,58,0.12);
+    background: rgba(201,168,76,0.08);
     z-index: 10;
   }
-  body::before {
-    left: calc(50% - 215px);
-  }
-  body::after {
-    right: calc(50% - 215px);
-  }
+  body::before { left: calc(50% - 240px); }
+  body::after { right: calc(50% - 240px); }
 }
 
 .page {
-  max-width: 430px;
+  max-width: 480px;
   margin: 0 auto;
-  background: var(--surface);
+  background: var(--bg);
   min-height: 100vh;
   padding: 0 20px;
   position: relative;
@@ -75,65 +88,68 @@ body {
   height: 2px;
   width: calc(100% + 40px);
   margin-left: -20px;
-  background: linear-gradient(to right, var(--gold), var(--purple));
+  background: linear-gradient(to right, var(--gold), var(--blue));
 }
 
-/* Section label */
+/* Section label — Bricolage Grotesque */
 .section-label {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.15em;
+  font-family: var(--font-w);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 16px;
 }
 
-/* Section spacing */
 .section {
   padding-top: 32px;
   padding-bottom: 32px;
 }
 
-/* Headline */
+/* Headline — Playfair Display */
 .headline {
-  font-family: 'Arial Black', sans-serif;
-  color: var(--text-primary);
+  font-family: var(--font-d);
+  font-weight: 900;
+  color: var(--cream);
   line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
 /* Body text */
 .body-text {
-  color: var(--text-secondary);
-  font-size: 16px;
-  line-height: 1.6;
+  color: var(--cream-dim);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.65;
+  font-weight: 400;
 }
 
 /* Card */
 .card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 16px;
-}
-
-.card-sm {
-  border-radius: 12px;
-  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
 }
 
 /* Divider */
 .divider {
   height: 1px;
-  background: rgba(196,149,58,0.15);
+  background: var(--border);
   width: calc(100% + 40px);
   margin-left: -20px;
 }
 
 /* Scroll animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 400ms ease-out, transform 400ms ease-out;
+  transition: opacity 500ms ease, transform 500ms ease;
 }
 .fade-in.visible {
   opacity: 1;
@@ -144,19 +160,22 @@ body {
 .pill {
   display: inline-block;
   padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: var(--r-full);
   font-size: 11px;
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-b);
+  font-weight: 600;
   margin: 2px;
 }
-.pill-gold { background: rgba(196,149,58,0.15); color: var(--gold); }
-.pill-purple { background: rgba(124,58,237,0.15); color: var(--purple-light); }
-.pill-green { background: rgba(5,150,105,0.15); color: var(--green); }
-.pill-teal { background: rgba(13,148,136,0.15); color: var(--teal); }
+.pill-gold { background: rgba(201,168,76,0.12); color: var(--gold); }
+.pill-purple { background: rgba(155,89,182,0.12); color: var(--purple); }
+.pill-green { background: rgba(46,204,113,0.12); color: var(--green); }
+.pill-teal { background: rgba(13,148,136,0.12); color: var(--teal); }
+.pill-blue { background: var(--blue-soft); color: var(--blue); }
 
-/* Stat number */
+/* Stat number — Bricolage Grotesque */
 .stat-number {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 800;
   font-size: 48px;
   line-height: 1;
 }
@@ -164,11 +183,12 @@ body {
 /* Header */
 .header {
   text-align: center;
-  padding-top: 24px;
+  padding-top: 28px;
 }
 .wordmark {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 14px;
+  font-family: var(--font-w);
+  font-weight: 800;
+  font-size: 15px;
   color: var(--gold);
   letter-spacing: 0.05em;
   text-transform: lowercase;
@@ -176,12 +196,14 @@ body {
 }
 .confidential {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
+  font-family: var(--font-b);
+  font-weight: 400;
 }
 
 /* Opening */
 .opening-headline {
-  font-size: 32px;
+  font-size: 30px;
   margin-top: 40px;
   margin-bottom: 16px;
 }
@@ -197,20 +219,22 @@ body {
   margin-bottom: 16px;
 }
 .problem-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   border-left: 3px solid var(--purple);
   padding: 14px;
 }
 .problem-card .small-label {
   font-size: 11px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
+  font-family: var(--font-d);
+  font-style: italic;
   margin-bottom: 6px;
 }
 .problem-card .card-body {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   line-height: 1.5;
 }
 
@@ -222,33 +246,38 @@ body {
   margin-top: 16px;
 }
 .stat-pill {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   padding: 16px;
   text-align: center;
 }
 .stat-pill .value {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 800;
   font-size: 32px;
   color: var(--gold);
 }
 .stat-pill .label {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-top: 4px;
 }
 
 /* Agent cards */
 .agent-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 8px;
+  transition: all 0.2s;
+}
+.agent-card:hover {
+  border-color: rgba(59,173,228,0.2);
 }
 .agent-icon {
   font-size: 20px;
@@ -257,14 +286,16 @@ body {
   text-align: center;
 }
 .agent-name {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.05em;
 }
 .agent-desc {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-top: 2px;
+  font-weight: 400;
 }
 
 /* Traction stats */
@@ -275,36 +306,38 @@ body {
   margin-bottom: 16px;
 }
 .traction-stat {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
   padding: 16px 8px;
   text-align: center;
 }
 .traction-stat .label {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-top: 4px;
 }
 
 /* Talent cards */
 .talent-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
   border-left: 3px solid var(--gold);
   margin-bottom: 10px;
 }
 .talent-name {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-d);
+  font-weight: 700;
   color: var(--gold);
-  font-size: 16px;
+  font-size: 17px;
 }
 .talent-role {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-bottom: 8px;
+  font-weight: 400;
 }
 .talent-pills {
   margin-bottom: 8px;
@@ -314,60 +347,66 @@ body {
 }
 .talent-body {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   line-height: 1.5;
 }
 
 /* Revenue cards */
 .revenue-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
   margin-bottom: 10px;
 }
 .revenue-card.gold-border { border-left: 3px solid var(--gold); }
 .revenue-card.purple-border { border-left: 3px solid var(--purple); }
 .revenue-card.teal-border { border-left: 3px solid var(--teal); }
 .revenue-title {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 700;
   font-size: 14px;
   margin-bottom: 4px;
 }
 .revenue-desc {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   line-height: 1.5;
 }
 .revenue-math {
   font-size: 12px;
   margin-top: 8px;
+  font-family: var(--font-b);
+  font-weight: 500;
 }
 .revenue-result {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 800;
   font-size: 24px;
   margin-top: 4px;
 }
 
 /* The Ask */
 .ask-amount {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 56px;
+  font-family: var(--font-d);
+  font-weight: 900;
+  font-size: 52px;
   text-align: center;
-  color: var(--text-primary);
+  color: var(--cream);
   line-height: 1;
+  letter-spacing: -1px;
 }
 .ask-terms {
   text-align: center;
   font-size: 16px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   margin-top: 8px;
   margin-bottom: 20px;
 }
 .ask-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
   padding: 20px;
 }
 .ask-card .body-text {
@@ -377,10 +416,10 @@ body {
 
 /* Team */
 .person-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
   margin-bottom: 10px;
   display: flex;
   gap: 14px;
@@ -393,24 +432,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 800;
   font-size: 14px;
   color: var(--bg);
   flex-shrink: 0;
 }
 .person-name {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 15px;
-  color: var(--text-primary);
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--cream);
 }
 .person-role {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-bottom: 4px;
 }
 .person-bio {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   line-height: 1.5;
 }
 
@@ -424,51 +465,61 @@ body {
   margin-top: 8px;
 }
 .advisor-pill {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  padding: 8px 14px;
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
 }
 
 /* Demo */
 .demo-card {
-  background: var(--card);
+  background: linear-gradient(135deg, #12122A 0%, #1E1E40 40%, #12122A 100%);
   border: 1px solid var(--gold);
-  border-radius: 16px;
+  border-radius: var(--r);
   padding: 24px;
   text-align: center;
 }
 .demo-subtitle {
-  font-size: 12px;
-  color: var(--text-secondary);
+  font-size: 13px;
+  color: var(--cream-dim);
   margin-bottom: 20px;
   line-height: 1.5;
+  font-family: var(--font-d);
+  font-style: italic;
 }
 .demo-btn {
   display: block;
   width: 100%;
   padding: 18px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, var(--gold), var(--purple));
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, var(--blue), #7B5CF6);
   color: white;
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 700;
   font-size: 16px;
   text-decoration: none;
   text-align: center;
   border: none;
   cursor: pointer;
-  animation: pulse-glow 2s infinite;
+  animation: glowPulse 2s infinite;
+  transition: transform 0.2s;
+  letter-spacing: 0.02em;
 }
-@keyframes pulse-glow {
-  0% { opacity: 0.8; box-shadow: 0 0 20px rgba(196,149,58,0.3), 0 0 20px rgba(124,58,237,0.3); }
-  50% { opacity: 1; box-shadow: 0 0 30px rgba(196,149,58,0.5), 0 0 30px rgba(124,58,237,0.5); }
-  100% { opacity: 0.8; box-shadow: 0 0 20px rgba(196,149,58,0.3), 0 0 20px rgba(124,58,237,0.3); }
+.demo-btn:hover {
+  transform: translateY(-1px);
+}
+.demo-btn:active {
+  transform: scale(0.98);
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59,173,228,0.25), 0 0 20px rgba(123,92,246,0.25); }
+  50% { box-shadow: 0 0 36px rgba(59,173,228,0.45), 0 0 36px rgba(123,92,246,0.4); }
 }
 .demo-below {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-top: 16px;
   line-height: 1.5;
 }
@@ -480,7 +531,7 @@ body {
   padding-bottom: 48px;
 }
 .closing-headline {
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1.3;
   margin-bottom: 16px;
 }
@@ -488,23 +539,27 @@ body {
   margin-bottom: 32px;
 }
 .closing-email {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 700;
   font-size: 16px;
   color: var(--gold);
   text-decoration: none;
+  transition: color 0.2s;
 }
 .closing-email:hover {
-  color: var(--gold-accent);
+  color: var(--blue);
 }
 
 /* Gold pill standalone */
 .gold-pill-standalone {
   display: inline-block;
-  background: rgba(196,149,58,0.12);
+  background: rgba(201,168,76,0.1);
   color: var(--gold);
   font-size: 12px;
+  font-family: var(--font-b);
+  font-weight: 600;
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: var(--r-full);
   margin-top: 12px;
 }
 
@@ -514,45 +569,47 @@ body {
   padding: 20px 0;
 }
 .total-mrr {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 800;
   font-size: 40px;
   color: var(--gold);
 }
 .total-arr {
-  font-family: 'Arial Black', sans-serif;
+  font-family: var(--font-w);
+  font-weight: 700;
   font-size: 20px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   margin-top: 4px;
 }
 .total-note {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--cream-muted);
   margin-top: 12px;
   line-height: 1.5;
 }
 
-/* Why Now body */
+/* Why Now */
 .why-now-body {
-  font-size: 16px;
-  color: var(--text-secondary);
+  font-size: 15px;
+  color: var(--cream-dim);
   line-height: 1.7;
 }
 
 /* Architecture card */
 .arch-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
   padding: 20px;
 }
 
-/* Backed by section */
+/* Backed by */
 .backed-section {
   margin-top: 16px;
 }
 .backer-item {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--cream-dim);
   padding: 4px 0;
 }
 </style>
@@ -614,7 +671,7 @@ body {
   <!-- Section 4: The Solution -->
   <div class="section fade-in">
     <div class="section-label">THE SOLUTION</div>
-    <div class="headline" style="font-size: 24px; margin-bottom: 16px;">Fanded is the operating system<br>for talent holding companies.</div>
+    <div class="headline" style="font-size: 22px; margin-bottom: 16px;">Fanded is the operating system<br>for talent holding companies.</div>
     <div class="body-text" style="margin-bottom: 16px;">MAWD — Management AI Working Daily — is the AI chief of staff trained on everything about a talent's business.</div>
 
     <div class="agent-card">
@@ -627,7 +684,7 @@ body {
     <div class="agent-card">
       <div class="agent-icon">📊</div>
       <div>
-        <div class="agent-name" style="color: var(--purple-light);">PULSE</div>
+        <div class="agent-name" style="color: var(--purple);">PULSE</div>
         <div class="agent-desc">Audience intelligence · True fan identification</div>
       </div>
     </div>
@@ -676,7 +733,7 @@ body {
         <div class="label">Live MAWDs</div>
       </div>
       <div class="traction-stat">
-        <div class="stat-number" style="color: var(--purple-light); font-size: 36px;" data-count="7" data-suffix="K+">0</div>
+        <div class="stat-number" style="color: var(--purple); font-size: 36px;" data-count="7" data-suffix="K+">0</div>
         <div class="label">Club Members</div>
       </div>
       <div class="traction-stat">
@@ -733,10 +790,10 @@ body {
     </div>
 
     <div class="revenue-card purple-border">
-      <div class="revenue-title" style="color: var(--purple-light);">MAWD Subscription</div>
+      <div class="revenue-title" style="color: var(--purple);">MAWD Subscription</div>
       <div class="revenue-desc">$20/month per talent installation. Low barrier by design.</div>
-      <div class="revenue-math" style="color: var(--purple-light);">1,000 × $20</div>
-      <div class="revenue-result" style="color: var(--purple-light);">$20K/month</div>
+      <div class="revenue-math" style="color: var(--purple);">1,000 × $20</div>
+      <div class="revenue-result" style="color: var(--purple);">$20K/month</div>
     </div>
 
     <div class="revenue-card teal-border">
@@ -749,7 +806,7 @@ body {
     <div class="divider" style="margin: 20px 0; margin-left: -20px;"></div>
 
     <div class="total-section">
-      <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Combined MRR at 18 months</div>
+      <div style="font-size: 12px; color: var(--cream-muted); margin-bottom: 8px;">Combined MRR at 18 months</div>
       <div class="total-mrr" data-count="130" data-prefix="$" data-suffix="K/month">$0</div>
       <div class="total-arr">$1.56M ARR</div>
       <div class="total-note">GMV flowing through platform: $1M/month<br>Platform take: $100K/month</div>
@@ -846,7 +903,6 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      // Trigger count-up for stat numbers within this section
       const counters = entry.target.querySelectorAll('[data-count]');
       counters.forEach(el => {
         if (el.dataset.counted) return;
@@ -871,7 +927,6 @@ function animateCount(el) {
   function update(now) {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = Math.round(eased * target);
     el.textContent = prefix + current + suffix;
