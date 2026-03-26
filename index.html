@@ -240,7 +240,6 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
-  border-left: 3px solid var(--purple);
   padding: 14px;
 }
 .problem-card .small-label {
@@ -342,7 +341,6 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--r);
   padding: 16px 18px;
-  border-left: 3px solid var(--gold);
   margin-bottom: 10px;
 }
 .talent-name {
@@ -377,9 +375,9 @@ body {
   padding: 16px 18px;
   margin-bottom: 10px;
 }
-.revenue-card.gold-border { border-left: 3px solid var(--gold); }
-.revenue-card.purple-border { border-left: 3px solid var(--purple); }
-.revenue-card.teal-border { border-left: 3px solid var(--teal); }
+.revenue-card.gold-border { }
+.revenue-card.purple-border { }
+.revenue-card.teal-border { }
 .revenue-title {
   font-family: var(--font-w);
   font-weight: 700;
@@ -512,7 +510,7 @@ body {
   width: 100%;
   padding: 18px;
   border-radius: var(--r-full);
-  background: linear-gradient(135deg, var(--blue), #7B5CF6);
+  background: linear-gradient(135deg, var(--gold), var(--blue));
   color: white;
   font-family: var(--font-w);
   font-weight: 700;
@@ -532,8 +530,12 @@ body {
   transform: scale(0.98);
 }
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(59,173,228,0.25), 0 0 20px rgba(123,92,246,0.25); }
-  50% { box-shadow: 0 0 36px rgba(59,173,228,0.45), 0 0 36px rgba(123,92,246,0.4); }
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.25), 0 0 20px rgba(59,173,228,0.2); }
+  50% { box-shadow: 0 0 36px rgba(201,168,76,0.45), 0 0 36px rgba(59,173,228,0.35); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { transition: none; opacity: 1; transform: none; }
+  .demo-btn { animation: none; }
 }
 .demo-below {
   font-size: 12px;
@@ -563,6 +565,8 @@ body {
   color: var(--gold);
   text-decoration: none;
   transition: color 0.2s;
+  display: inline-block;
+  padding: 12px 24px;
 }
 .closing-email:hover {
   color: var(--blue);
@@ -673,7 +677,7 @@ body {
   <!-- Section 3: The Insight -->
   <div class="section fade-in">
     <div class="section-label">THE INSIGHT</div>
-    <div class="card" style="border-left: 4px solid var(--gold); padding: 20px;">
+    <div class="card" style="padding: 20px;">
       <h2 class="headline" style="font-size: 20px; margin-bottom: 12px;">True fans are not casual listeners.</h2>
       <div class="body-text">They drove hours to the show.<br>They flew from another continent.<br>They showed up after three years of silence.<br><br>They belong to the talent.<br>Not to the platform.<br><br>LTV:CAC from our platform data:</div>
       <div class="stat-pills">
@@ -935,7 +939,17 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in').forEach(el => {
+  observer.observe(el);
+  // Handle elements already in viewport on load
+  const rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) {
+    el.classList.add('visible');
+    el.querySelectorAll('[data-count]').forEach(c => {
+      if (!c.dataset.counted) { c.dataset.counted = 'true'; animateCount(c); }
+    });
+  }
+});
 
 // Count-up animation
 function animateCount(el) {
