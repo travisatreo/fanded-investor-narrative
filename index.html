@@ -900,6 +900,95 @@ body {
   margin-top: 8px;
 }
 
+/* TAM/SAM/SOM */
+.tam-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.tam-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.tam-card:first-child {
+  border-radius: var(--r) var(--r) 0 0;
+}
+.tam-card:last-child {
+  border-radius: 0 0 var(--r) var(--r);
+}
+.tam-card + .tam-card {
+  border-top: none;
+}
+.tam-tier-label {
+  font-family: var(--font-w);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.tam-stat {
+  font-family: var(--font-w);
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.tam-label {
+  font-family: var(--font-b);
+  font-size: 15px;
+  color: var(--cream);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.tam-desc {
+  font-size: 12px;
+  color: var(--cream-muted);
+  line-height: 1.5;
+}
+.tam-bar-track {
+  height: 8px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.tam-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.5s ease;
+}
+.tam-dollar {
+  font-family: var(--font-w);
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.tam-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 2px 0;
+}
+.tam-arrow svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--cream-muted);
+}
+.tam-wedge-note {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-top: 16px;
+  text-align: center;
+}
+
 /* Architecture card */
 .arch-card {
   background: var(--bg-card);
@@ -1142,7 +1231,7 @@ body {
         <span class="pill pill-gold">547M lifetime views</span>
         <span class="pill pill-green">731 tour fans contacted</span>
       </div>
-      <div class="talent-body">Sent her first voice memo to fans who attended her comedy tour and never heard from her again after the show. First time in her career she had infrastructure to do it.</div>
+      <div class="talent-body">731 fans came to her comedy tour. After the show, she had no way to reach them. With Fanded, she sent her first voice memo directly to every one of them. First time in her career she could do that.</div>
       <div class="talent-body" style="margin-top: 10px; font-style: italic; color: var(--cream);">"I don't want robots replacing me. I need it to do all the boring stuff so I can keep creating."</div>
     </div>
 
@@ -1320,6 +1409,64 @@ body {
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Section 9b: TAM/SAM/SOM -->
+  <div class="section fade-in">
+    <div class="section-label">THE MARKET</div>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 20px;">How big is this?</h2>
+
+    <div class="tam-section">
+      <!-- TAM -->
+      <div class="tam-card">
+        <div class="tam-tier-label" style="color: var(--cream-muted);">TAM</div>
+        <div class="tam-stat" style="color: var(--cream-dim);" data-count="300" data-suffix="M+">0</div>
+        <div class="tam-label">Everyone who creates for a living</div>
+        <div class="tam-desc">Musicians, actors, athletes, YouTubers, podcasters, streamers, writers. Every single one runs a business. Most have zero tools built for them.</div>
+        <div class="tam-bar-track">
+          <div class="tam-bar-fill" style="width: 100%; background: linear-gradient(to right, rgba(153,153,187,0.3), rgba(153,153,187,0.1));"></div>
+        </div>
+        <div class="tam-dollar" style="color: var(--cream-muted);">$250B creator economy</div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="tam-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      </div>
+
+      <!-- SAM -->
+      <div class="tam-card">
+        <div class="tam-tier-label" style="color: var(--gold);">SAM</div>
+        <div class="tam-stat" style="color: var(--gold);" data-count="45" data-suffix="M">0</div>
+        <div class="tam-label">The ones doing it full-time</div>
+        <div class="tam-desc">Professional creators, working artists, and 700K+ pro athletes. They earn real money but have no infrastructure. Managers cost $60K+/yr. Most can't afford one.</div>
+        <div class="tam-bar-track">
+          <div class="tam-bar-fill" style="width: 15%; background: linear-gradient(to right, var(--gold), rgba(201,168,76,0.3));"></div>
+        </div>
+        <div class="tam-dollar" style="color: var(--gold);">$48B addressable</div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="tam-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      </div>
+
+      <!-- SOM -->
+      <div class="tam-card" style="border-color: rgba(46,204,113,0.3);">
+        <div class="tam-tier-label" style="color: var(--green);">SOM</div>
+        <div class="tam-stat" style="color: var(--green);" data-count="2" data-suffix="M+">0</div>
+        <div class="tam-label">Our first customers</div>
+        <div class="tam-desc">Professional creators earning $100K+. Full-time independent artists and musicians. Pro athletes with direct fan relationships. These people already feel the pain. They're already looking for this.</div>
+        <div class="tam-bar-track">
+          <div class="tam-bar-fill" style="width: 4%; background: linear-gradient(to right, var(--green), rgba(46,204,113,0.3));"></div>
+        </div>
+        <div class="tam-dollar" style="color: var(--green);">$2.4B immediate opportunity</div>
+      </div>
+    </div>
+
+    <div class="tam-wedge-note">
+      <div style="font-size: 13px; color: var(--cream-dim); line-height: 1.6;">We only need <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">1,000</span> of them to hit <span style="color: var(--gold); font-family: var(--font-w); font-weight: 700;">$2.5M ARR</span></div>
     </div>
   </div>
 
