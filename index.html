@@ -823,6 +823,83 @@ body {
   line-height: 1.5;
 }
 
+/* Product screenshots */
+.product-screenshot {
+  width: 100%;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  margin: 16px 0;
+  display: block;
+}
+.screenshot-label {
+  font-size: 11px;
+  color: var(--cream-muted);
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  font-family: var(--font-b);
+  font-style: italic;
+}
+
+/* Platform logos */
+.platform-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px 0;
+  margin: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.platform-logo {
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--cream-muted);
+  font-family: var(--font-b);
+  font-weight: 500;
+}
+.platform-logo svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Why Now data viz */
+.why-bar-container {
+  margin-top: 8px;
+}
+.why-bar-track {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.why-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.5s ease;
+}
+.why-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--cream-muted);
+  margin-top: 3px;
+}
+.why-big-stat {
+  font-family: var(--font-w);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+  margin-top: 8px;
+}
+
 /* Architecture card */
 .arch-card {
   background: var(--bg-card);
@@ -942,6 +1019,33 @@ body {
     </div>
 
     <div class="body-text" style="margin-top: 16px;">Every data source unified.<br>Every business visible in one place.<br>The parts that don't require being human, automated.</div>
+
+    <img src="screenshots/mawd-mobile.png" alt="MAWD AI interface showing real-time business intelligence for a creator" class="product-screenshot">
+    <div class="screenshot-label">MAWD live, analyzing a creator's business in real time</div>
+
+    <!-- Platform integrations strip -->
+    <div class="platform-strip">
+      <div class="platform-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Spotify
+      </div>
+      <div class="platform-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </div>
+      <div class="platform-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        Instagram
+      </div>
+      <div class="platform-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Apple
+      </div>
+      <div class="platform-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.337 23.979l7.216-7.216c1.264-1.264 1.264-3.314 0-4.578l-4.914-4.914c-1.264-1.264-3.314-1.264-4.578 0L5.845 14.487c-1.264 1.264-1.264 3.314 0 4.578l4.914 4.914c1.264 1.264 3.314 1.264 4.578 0zM3.563 11.293L10.779 4.077c1.264-1.264 1.264-3.314 0-4.578C9.901-1.376 8.534-1.67 7.462-.931L.753 5.778c-1.264 1.264-.877 3.127.339 4.343l1.236 1.236c.415.415 1.028.143 1.235-.064z"/></svg>
+        Shopify
+      </div>
+    </div>
   </div>
 
   <!-- Section 5: Architecture -->
@@ -1020,6 +1124,9 @@ body {
     <div class="card" style="padding: 16px 18px; margin-bottom: 16px;">
       <div class="body-text" style="color: var(--cream); font-size: 15px; line-height: 1.6;">Clubs proved fans will pay <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">$100 to $500/month</span> for real relationships with talent. MAWD is the answer to what talent asked for next: help running the business those relationships create. Not theoretical. Live revenue from real relationships.</div>
     </div>
+
+    <img src="screenshots/mawd-dashboard.png" alt="MAWD dashboard showing business intelligence, insights, and revenue tracking" class="product-screenshot">
+    <div class="screenshot-label">MAWD dashboard with live business intelligence</div>
 
     <!-- Talent Card 1 -->
     <div class="talent-card">
@@ -1147,7 +1254,19 @@ body {
         </div>
         <div class="why-content">
           <div class="why-label red">THE INDUSTRY IS COLLAPSING</div>
-          <div class="why-desc">Studios contracting. Streaming paying fractions of a cent. Brand deals saturating. Every traditional revenue channel talent relies on is shrinking at the same time.</div>
+          <div class="why-desc">Every traditional revenue channel is shrinking at the same time.</div>
+          <div class="why-bar-container">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--cream-muted);"><span>Studio deals</span><span style="color: #E74C3C;">-40%</span></div>
+            <div class="why-bar-track"><div class="why-bar-fill" style="width: 60%; background: linear-gradient(to right, #E74C3C, rgba(231,76,60,0.3));"></div></div>
+          </div>
+          <div class="why-bar-container" style="margin-top: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--cream-muted);"><span>Streaming payouts</span><span style="color: #E74C3C;">$0.003/stream</span></div>
+            <div class="why-bar-track"><div class="why-bar-fill" style="width: 15%; background: linear-gradient(to right, #E74C3C, rgba(231,76,60,0.3));"></div></div>
+          </div>
+          <div class="why-bar-container" style="margin-top: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--cream-muted);"><span>Brand deal rates</span><span style="color: #E67E22;">saturated</span></div>
+            <div class="why-bar-track"><div class="why-bar-fill" style="width: 45%; background: linear-gradient(to right, #E67E22, rgba(230,126,34,0.3));"></div></div>
+          </div>
         </div>
       </div>
 
@@ -1157,8 +1276,18 @@ body {
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
         </div>
         <div class="why-content">
-          <div class="why-label green">FANDOM IS BIGGER THAN EVER</div>
-          <div class="why-desc">Talent still has fans. Millions of them. Fans who want to support the people they love but have no real way to do it. The supply of willing supporters is massive and completely untapped.</div>
+          <div class="why-label green">BUT FANS STILL EXIST</div>
+          <div class="why-desc">Millions of fans want to support talent directly. They just don't have a way.</div>
+          <div style="display: flex; gap: 12px; margin-top: 10px;">
+            <div style="flex: 1; text-align: center; background: rgba(46,204,113,0.08); border-radius: 8px; padding: 10px 6px;">
+              <div style="font-family: var(--font-w); font-weight: 800; font-size: 22px; color: var(--green);">250M+</div>
+              <div style="font-size: 10px; color: var(--cream-muted); margin-top: 2px;">Creator economy fans</div>
+            </div>
+            <div style="flex: 1; text-align: center; background: rgba(46,204,113,0.08); border-radius: 8px; padding: 10px 6px;">
+              <div style="font-family: var(--font-w); font-weight: 800; font-size: 22px; color: var(--green);">&lt;2%</div>
+              <div style="font-size: 10px; color: var(--cream-muted); margin-top: 2px;">Currently monetized</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1168,8 +1297,27 @@ body {
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
         </div>
         <div class="why-content">
-          <div class="why-label blue">AI MAKES IT POSSIBLE NOW</div>
-          <div class="why-desc">For the first time, AI can know more about a talent's business than any single manager, agent, or accountant ever could. It sees every revenue stream, every fan interaction, every opportunity. It never sleeps, never forgets, and costs a fraction of one hire.</div>
+          <div class="why-label blue">AI MAKES THIS POSSIBLE NOW</div>
+          <div class="why-desc">For the first time, AI can know more about a talent's business than any human ever could.</div>
+          <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></div>
+              <div style="font-size: 11px; color: var(--cream-dim);">Sees every revenue stream at once</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></div>
+              <div style="font-size: 11px; color: var(--cream-dim);">Never sleeps, never forgets</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></div>
+              <div style="font-size: 11px; color: var(--cream-dim);">Costs a fraction of one hire</div>
+            </div>
+          </div>
+          <div style="margin-top: 10px; background: rgba(59,173,228,0.08); border-radius: 8px; padding: 10px; text-align: center;">
+            <div style="font-size: 10px; color: var(--cream-muted);">Cost of a human manager</div>
+            <div style="font-family: var(--font-w); font-weight: 800; font-size: 18px; color: var(--cream-muted); text-decoration: line-through;">$60K-$120K/yr</div>
+            <div style="font-size: 10px; color: var(--blue); margin-top: 4px;">MAWD: $20/month</div>
+          </div>
         </div>
       </div>
     </div>
