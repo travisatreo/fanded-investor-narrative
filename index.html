@@ -488,6 +488,40 @@ body {
   line-height: 1.5;
 }
 
+/* Moment photos — lifestyle proof under talent cards */
+.moment-photo {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.moment-photo img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+  transition: filter 0.4s ease;
+}
+.moment-photo:hover img {
+  filter: brightness(1);
+}
+.moment-photo .moment-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 12px;
+  background: linear-gradient(to top, rgba(7,7,15,0.85), transparent);
+  font-size: 11px;
+  color: var(--cream-muted);
+  font-family: var(--font-b);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
 /* Revenue cards */
 .revenue-card {
   background: var(--bg-card);
@@ -1084,7 +1118,7 @@ body {
   <!-- Section 1: Opening -->
   <div class="section fade-in">
     <h1 class="headline opening-headline">Every working talent<br>is running a holding<br>company.</h1>
-    <div class="body-text opening-body">They just don't know it yet.<br>They feel it. In the chaos of managing<br>5 or 6 completely different businesses<br>around one person, one brand,<br>and zero infrastructure.</div>
+    <div class="body-text opening-body">They just don't know it yet.</div>
     <div class="divider"></div>
   </div>
 
@@ -1101,7 +1135,7 @@ body {
         <div class="card-body">Also a producer for hire, content creator, merchandise business, brand partner, live performer. All disconnected. All demanding the same human being.</div>
       </div>
     </div>
-    <div class="body-text">No platform was built for this. Every tool they use was built for the platform's benefit.<br><br>Their audience data flows to Spotify, Instagram, YouTube. Not to them.<br><br>Talent burns out running businesses they can't see, can't manage, and can't afford help for.</div>
+    <div class="body-text">No platform was built for this. Every tool they use was built for the platform's benefit. Not theirs.</div>
   </div>
 
   <!-- Section 3: The Insight -->
@@ -1109,7 +1143,7 @@ body {
     <div class="section-label">THE INSIGHT</div>
     <div class="card" style="padding: 20px;">
       <h2 class="headline" style="font-size: 20px; margin-bottom: 12px;">True fans are not casual listeners.</h2>
-      <div class="body-text">They drove hours to the show.<br>They flew from another continent.<br>They showed up after three years of silence.<br><br>They belong to the talent.<br>Not to the platform.<br><br>LTV:CAC from our platform data:</div>
+      <div class="body-text">They belong to the talent. Not to the platform.</div>
       <div class="stat-pills">
         <div class="stat-pill">
           <div class="value" data-count="20" data-suffix=":1">0:1</div>
@@ -1127,7 +1161,7 @@ body {
   <div class="section fade-in">
     <div class="section-label">THE SOLUTION</div>
     <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">Fanded is the operating system<br>for talent holding companies.</h2>
-    <div class="body-text" style="margin-bottom: 16px;">MAWD, Management AI Working Daily, is the AI chief of staff trained on everything about a talent's business.</div>
+    <div class="body-text" style="margin-bottom: 16px;">MAWD — Management AI Working Daily. An AI chief of staff for every talent.</div>
 
     <div class="agent-card">
       <div class="agent-icon">🧭</div>
@@ -1165,7 +1199,7 @@ body {
       </div>
     </div>
 
-    <div class="body-text" style="margin-top: 16px;">Every data source unified.<br>Every business visible in one place.<br>The parts that don't require being human, automated.</div>
+    <div class="body-text" style="margin-top: 16px;">Every data source unified. Everything that doesn't require being human, automated.</div>
 
     <img src="screenshots/mawd-mobile.png" alt="MAWD AI interface showing real-time business intelligence for a creator" class="product-screenshot" style="max-width: 320px; margin-left: auto; margin-right: auto;">
     <div class="screenshot-label">MAWD live, analyzing a creator's business in real time</div>
@@ -1199,7 +1233,7 @@ body {
   <div class="section fade-in">
     <div class="section-label">WHY IT'S DEFENSIBLE</div>
     <div class="arch-card">
-      <div class="body-text">Every MAWD is containerized. A private walled environment belonging entirely to the talent.<br><br>Their data never commingles with another talent's data. No platform can access it. No advertiser can buy it.<br><br>The longer MAWD runs, the smarter it gets. The switching cost becomes the relationship itself.</div>
+      <div class="body-text">Every MAWD is containerized. Private. The talent's data never commingles. The longer it runs, the smarter it gets. The switching cost is the relationship itself.</div>
     </div>
     <div style="margin-top: 12px;">
       <span class="gold-pill-standalone">Data sovereignty for the creative class</span>
@@ -1269,7 +1303,7 @@ body {
     </div>
 
     <div class="card" style="padding: 16px 18px; margin-bottom: 16px;">
-      <div class="body-text" style="color: var(--cream); font-size: 15px; line-height: 1.6;">Clubs proved fans will pay <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">$100 to $500/month</span> for real relationships with talent. MAWD is the answer to what talent asked for next: help running the business those relationships create. Not theoretical. Live revenue from real relationships.</div>
+      <div class="body-text" style="color: var(--cream); font-size: 15px; line-height: 1.6;">Fans pay <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">$100–$500/month</span> for real relationships. Talent asked for help running the business those relationships create. That's MAWD.</div>
     </div>
 
     <img src="screenshots/mawd-dashboard.png" alt="Fanded Club dashboard showing 690K+ audience, conversion funnel, and 90% retention" class="product-screenshot">
@@ -1289,11 +1323,16 @@ body {
         <span class="pill pill-gold">547M lifetime views</span>
         <span class="pill pill-green">731 tour fans contacted</span>
       </div>
-      <div class="talent-body">731 fans came to her comedy tour. After the show, she had no way to reach them. With Fanded, she sent her first voice memo directly to every one of them. First time in her career she could do that.</div>
-      <div class="talent-body" style="margin-top: 10px; font-style: italic; color: var(--cream);">"I don't want robots replacing me. I need it to do all the boring stuff so I can keep creating."</div>
+      <div class="talent-body">731 fans came to her tour. No way to reach them after. Fanded changed that.</div>
+      <div class="talent-body" style="margin-top: 10px; font-style: italic; color: var(--cream);">"I need it to do the boring stuff so I can keep creating."</div>
     </div>
 
-    <!-- Talent Card 2 -->
+    <!-- Talent Card 2 - AAGC -->
+    <!-- AAGC community meetup photo strip -->
+    <div class="moment-photo fade-in">
+      <img src="photos/IMG_0219.jpg" alt="Asian American Girl Club community meetup at Venice Beach">
+      <div class="moment-caption">AAGC community meetup — Venice Beach, CA</div>
+    </div>
     <div class="talent-card">
       <div class="talent-header">
         <img src="photos/aagc.png" alt="Asian American Girl Club" class="talent-photo">
@@ -1307,10 +1346,16 @@ body {
         <span class="pill pill-purple">115K IG followers</span>
         <span class="pill pill-green">2,500 club members</span>
       </div>
-      <div class="talent-body">MAWD's first analysis surfaced 8,200 SMS subscribers they'd never marketed to. Revenue they were sitting on and didn't know it.</div>
+      <div class="talent-body">MAWD surfaced 8,200 SMS subscribers they'd never marketed to. Revenue they were sitting on.</div>
     </div>
 
-    <!-- Talent Card 3 -->
+    <!-- AAGC Trailblazers editorial -->
+    <div class="moment-photo fade-in">
+      <img src="photos/AAGC.jpg" alt="Asian American Girl Club x Love Bonito Trailblazers editorial" style="height: 280px; object-position: top;">
+      <div class="moment-caption">Love Bonito x Asian American Girl Club — Trailblazers campaign</div>
+    </div>
+
+    <!-- Talent Card 3 - Travis -->
     <div class="talent-card">
       <div class="talent-header">
         <img src="photos/travis.jpg" alt="Travis Atreo" class="talent-photo">
@@ -1324,10 +1369,16 @@ body {
         <span class="pill pill-gold">100M YouTube views</span>
         <span class="pill pill-green">148 club members</span>
       </div>
-      <div class="talent-body">MAWD found 20% new revenue in the first analysis. Running his own MAWD as proof of concept. The founder is the market.</div>
+      <div class="talent-body">MAWD found 20% new revenue in first analysis. The founder is the market.</div>
     </div>
 
-    <!-- Talent Card 4 -->
+    <!-- Travis live at Brick & Mortar -->
+    <div class="moment-photo fade-in">
+      <img src="photos/IMG_0922.jpg" alt="Travis Atreo performing live at Brick & Mortar Music Hall">
+      <div class="moment-caption">Travis Atreo live — Brick & Mortar Music Hall, SF</div>
+    </div>
+
+    <!-- Talent Card 4 - Manny -->
     <div class="talent-card">
       <div class="talent-header">
         <img src="photos/manny.png" alt="Manny Jacinto" class="talent-photo">
@@ -1340,7 +1391,13 @@ body {
         <span class="pill pill-purple">564K IG followers</span>
         <span class="pill pill-gold">200+ club members from 1 event</span>
       </div>
-      <div class="talent-body">100+ fans shared his club with each other. No paid marketing, all organic growth. Hollywood talent proving the fan relationship scales without ad spend.</div>
+      <div class="talent-body">100+ fans shared his club organically. Zero paid marketing. Zero ad spend.</div>
+    </div>
+
+    <!-- Manny in The Acolyte -->
+    <div class="moment-photo fade-in">
+      <img src="photos/manny_h-1600x1063.webp" alt="Manny Jacinto in Star Wars: The Acolyte" style="height: 240px; object-position: center 30%;">
+      <div class="moment-caption">Manny Jacinto — Star Wars: The Acolyte (Disney+)</div>
     </div>
   </div>
 
@@ -1364,7 +1421,7 @@ body {
 
     <div class="revenue-card teal-border">
       <div class="revenue-title" style="color: var(--teal);">Enterprise Manager Seats</div>
-      <div class="revenue-desc">$99/month per manager or agency seat. Talent is the acquisition channel. Manager is the enterprise upsell.</div>
+      <div class="revenue-desc">$99/month per manager or agency seat.</div>
       <div class="revenue-math" style="color: var(--teal);">100 managers × $99</div>
       <div class="revenue-result" style="color: var(--teal);">$9,900/month</div>
     </div>
@@ -1375,7 +1432,7 @@ body {
       <div style="font-size: 12px; color: var(--cream-muted); margin-bottom: 8px;">Combined MRR at 18 months</div>
       <div class="total-mrr" data-count="209" data-prefix="$" data-suffix="K/month">$0</div>
       <div class="total-arr">$2.5M ARR</div>
-      <div class="total-note">GMV flowing through platform: $1M/month<br>Platform take: $100K/month</div>
+      <div class="total-note">$1M/month GMV · $100K/month take</div>
     </div>
   </div>
 
@@ -1385,7 +1442,7 @@ body {
     <div class="ask-amount">$500,000</div>
     <div class="ask-terms">$15M post-money SAFE</div>
     <div class="ask-card">
-      <div class="body-text" style="font-size: 15px; line-height: 1.7;">Use of funds:<br><br>→ Full-time CTO<br>→ Founder salary<br>→ Automated API onboarding<br>&nbsp;&nbsp;&nbsp;(Shopify · YouTube · Spotify ·<br>&nbsp;&nbsp;&nbsp;Buzzsprout · Instagram · Email)<br>→ 100 MAWDs launched within<br>&nbsp;&nbsp;&nbsp;60 days of close<br><br>First revenue: within 60 days of close.<br><br>Currently white-glove onboarding, building every MAWD by hand to prove the product before automating. The raise funds the automation.</div>
+      <div class="body-text" style="font-size: 15px; line-height: 1.7;">→ Full-time CTO<br>→ Founder salary<br>→ Automated API onboarding<br>→ 100 MAWDs in 60 days<br><br>First revenue within 60 days of close.</div>
     </div>
   </div>
 
@@ -1401,7 +1458,7 @@ body {
         </div>
         <div class="why-content">
           <div class="why-label red">THE INDUSTRY IS COLLAPSING</div>
-          <div class="why-desc">Every traditional revenue channel is shrinking at the same time.</div>
+          <div class="why-desc">Every revenue channel is shrinking at once.</div>
           <div class="why-bar-container">
             <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--cream-muted);"><span>Studio deals</span><span style="color: #E74C3C;">-40%</span></div>
             <div class="why-bar-track"><div class="why-bar-fill" style="width: 60%; background: linear-gradient(to right, #E74C3C, rgba(231,76,60,0.3));"></div></div>
@@ -1424,7 +1481,7 @@ body {
         </div>
         <div class="why-content">
           <div class="why-label green">BUT FANS STILL EXIST</div>
-          <div class="why-desc">Millions of fans want to support talent directly. They just don't have a way.</div>
+          <div class="why-desc">Fans want to pay. No one built a way.</div>
           <div style="display: flex; gap: 12px; margin-top: 10px;">
             <div style="flex: 1; text-align: center; background: rgba(46,204,113,0.08); border-radius: 8px; padding: 10px 6px;">
               <div style="font-family: var(--font-w); font-weight: 800; font-size: 22px; color: var(--green);">250M+</div>
@@ -1445,7 +1502,7 @@ body {
         </div>
         <div class="why-content">
           <div class="why-label blue">AI MAKES THIS POSSIBLE NOW</div>
-          <div class="why-desc">For the first time, AI can know more about a talent's business than any human ever could.</div>
+          <div class="why-desc">AI can now know more about a talent's business than any human.</div>
           <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></div>
@@ -1481,7 +1538,7 @@ body {
         <div class="tam-tier-label" style="color: var(--cream-muted);">TAM</div>
         <div class="tam-stat" style="color: var(--cream-dim);" data-count="300" data-suffix="M+">0</div>
         <div class="tam-label">Everyone who creates for a living</div>
-        <div class="tam-desc">Musicians, actors, athletes, YouTubers, podcasters, streamers, writers. Every single one runs a business. Most have zero tools built for them.</div>
+        <div class="tam-desc">Musicians, actors, athletes, creators. All running businesses with zero infrastructure.</div>
         <div class="tam-bar-track">
           <div class="tam-bar-fill" style="width: 100%; background: linear-gradient(to right, rgba(153,153,187,0.3), rgba(153,153,187,0.1));"></div>
         </div>
@@ -1498,7 +1555,7 @@ body {
         <div class="tam-tier-label" style="color: var(--gold);">SAM</div>
         <div class="tam-stat" style="color: var(--gold);" data-count="45" data-suffix="M">0</div>
         <div class="tam-label">The ones doing it full-time</div>
-        <div class="tam-desc">Professional creators, working artists, and 700K+ pro athletes. They earn real money but have no infrastructure. Managers cost $60K+/yr. Most can't afford one.</div>
+        <div class="tam-desc">Full-time creators and 700K+ pro athletes. Real money, no infrastructure.</div>
         <div class="tam-bar-track">
           <div class="tam-bar-fill" style="width: 15%; background: linear-gradient(to right, var(--gold), rgba(201,168,76,0.3));"></div>
         </div>
@@ -1515,7 +1572,7 @@ body {
         <div class="tam-tier-label" style="color: var(--green);">SOM</div>
         <div class="tam-stat" style="color: var(--green);" data-count="2" data-suffix="M+">0</div>
         <div class="tam-label">Our first customers</div>
-        <div class="tam-desc">Professional creators earning $100K+. Full-time independent artists and musicians. Pro athletes with direct fan relationships. These people already feel the pain. They're already looking for this.</div>
+        <div class="tam-desc">Creators earning $100K+. They already feel the pain.</div>
         <div class="tam-bar-track">
           <div class="tam-bar-fill" style="width: 4%; background: linear-gradient(to right, var(--green), rgba(46,204,113,0.3));"></div>
         </div>
@@ -1537,7 +1594,7 @@ body {
       <div>
         <div class="person-name">Travis Atreo</div>
         <div class="person-role">Founder & CEO</div>
-        <div class="person-bio">Artist with 400M streams, 100M YouTube views, The Voice. Built Fanded after a platform algorithm change eliminated his income overnight. 19 years building a network of creators, athletes, and small businesses. He is the market.</div>
+        <div class="person-bio">400M streams. 100M YouTube views. The Voice. Built Fanded after a platform algorithm change eliminated his income. He is the market.</div>
       </div>
     </div>
 
@@ -1546,7 +1603,7 @@ body {
       <div>
         <div class="person-name">Kevin Pamittan</div>
         <div class="person-role">CTO</div>
-        <div class="person-bio">20+ years leading tech, data, and AI strategy at Weedmaps, Luxottica, and Beachbody. Scaled tech orgs managing $100M+ budgets. Now building MAWD.</div>
+        <div class="person-bio">20+ years: Weedmaps, Luxottica, Beachbody. Scaled $100M+ tech orgs.</div>
       </div>
     </div>
 
@@ -1605,10 +1662,15 @@ body {
     </div>
   </div>
 
+  <!-- Founder moment -->
+  <div class="moment-photo fade-in" style="margin-bottom: 0;">
+    <img src="photos/ThomasNg+Headshot.jpg" alt="Travis Atreo" style="height: 300px; object-position: center 20%;">
+  </div>
+
   <!-- Section 12: Closing -->
   <div class="closing fade-in">
     <h2 class="headline closing-headline">The future of talent business<br>is self-managed,<br>powered by AI.</h2>
-    <div class="body-text closing-body">Fanded builds the infrastructure<br>for that world.<br><br>We're not predicting this future<br>from the outside.<br><br>We're already living it.</div>
+    <div class="body-text closing-body">We're not predicting this future.<br>We're already living it.</div>
     <a href="mailto:travis@fanded.com" class="closing-email">travis@fanded.com</a>
   </div>
 
