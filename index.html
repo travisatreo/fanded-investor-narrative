@@ -1615,52 +1615,38 @@ body {
       </div>
     </div>
 
-    <!-- Growing Brain: MAWD intelligence over time -->
-    <div id="brainGrow" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px 16px;margin-bottom:16px;overflow:hidden;height:340px;">
-      <!-- Brain SVG with fill level -->
-      <div style="position:relative;width:140px;height:140px;margin:0 auto 16px;">
-        <!-- Brain outline circle -->
-        <svg viewBox="0 0 140 140" style="width:100%;height:100%;">
-          <!-- Outer glow -->
-          <circle cx="70" cy="70" r="64" fill="none" stroke="rgba(77,199,77,0.06)" stroke-width="1"/>
-          <!-- Brain shape (simplified) -->
-          <circle cx="70" cy="70" r="56" fill="rgba(77,199,77,0.03)" stroke="rgba(77,199,77,0.15)" stroke-width="1.5"/>
-          <!-- Fill level - clips from bottom -->
-          <defs>
-            <clipPath id="brainFill">
-              <rect id="brainFillRect" x="0" y="140" width="140" height="140"/>
-            </clipPath>
-          </defs>
-          <circle cx="70" cy="70" r="55" fill="rgba(77,199,77,0.12)" clip-path="url(#brainFill)"/>
-          <!-- Center text -->
-          <text x="70" y="64" text-anchor="middle" fill="rgba(77,199,77,0.4)" font-family="var(--font-w)" font-size="8" font-weight="700" letter-spacing="1">MAWD</text>
-          <text id="brainPct" x="70" y="82" text-anchor="middle" fill="#4DC74D" font-family="var(--font-w)" font-size="18" font-weight="700">0%</text>
-        </svg>
-      </div>
-
-      <!-- Milestone timeline -->
-      <div id="brainMilestones" style="position:relative;padding-left:20px;border-left:2px solid rgba(77,199,77,0.1);margin-left:16px;">
-        <div class="brain-milestone" data-day="1" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease;margin-bottom:10px;">
-          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:rgba(77,199,77,0.15);border:1.5px solid rgba(77,199,77,0.3);"></div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:var(--font-w);font-weight:700;">DAY 1</div>
-          <div style="font-size:9.5px;color:var(--cream-muted);font-family:var(--font-b);line-height:1.4;">Connected 8 platforms. <span style="color:rgba(77,199,77,0.6);">12,847 fans found.</span></div>
-        </div>
-        <div class="brain-milestone" data-day="30" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.15s;margin-bottom:10px;">
-          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:rgba(77,199,77,0.2);border:1.5px solid rgba(77,199,77,0.4);"></div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:var(--font-w);font-weight:700;">DAY 30</div>
-          <div style="font-size:9.5px;color:var(--cream-muted);font-family:var(--font-b);line-height:1.4;">Learned fan purchase patterns. <span style="color:rgba(77,199,77,0.6);">Revenue up 12%.</span></div>
-        </div>
-        <div class="brain-milestone" data-day="90" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.3s;margin-bottom:10px;">
-          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:rgba(77,199,77,0.3);border:1.5px solid rgba(77,199,77,0.5);"></div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:var(--font-w);font-weight:700;">DAY 90</div>
-          <div style="font-size:9.5px;color:var(--cream-muted);font-family:var(--font-b);line-height:1.4;">Predicts tour revenue by city. <span style="color:rgba(77,199,77,0.6);">Content calendar automated.</span></div>
-        </div>
-        <div class="brain-milestone" data-day="365" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.45s;margin-bottom:0;">
-          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:#4DC74D;border:1.5px solid #4DC74D;box-shadow:0 0 8px rgba(77,199,77,0.4);"></div>
-          <div style="font-size:8px;color:#4DC74D;font-family:var(--font-w);font-weight:700;">DAY 365</div>
-          <div style="font-size:9.5px;color:var(--cream);font-family:var(--font-b);line-height:1.4;font-weight:600;">Runs the business. <span style="color:#4DC74D;">Competitor starting today? Day 0.</span></div>
-        </div>
-      </div>
+    <!-- Diverging Lines: The Moat Chart -->
+    <div id="moatChart" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px 16px 16px;margin-bottom:16px;overflow:hidden;">
+      <div style="text-align:center;font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1px;color:var(--cream-muted);margin-bottom:12px;">INTELLIGENCE OVER TIME</div>
+      <svg id="moatSvg" viewBox="0 0 320 180" style="width:100%;height:auto;">
+        <!-- Grid lines -->
+        <line x1="40" y1="20" x2="40" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <line x1="40" y1="155" x2="310" y2="155" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        <!-- Y-axis labels -->
+        <text x="36" y="25" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Smart</text>
+        <text x="36" y="90" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="6" font-family="var(--font-b)"></text>
+        <text x="36" y="158" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Zero</text>
+        <!-- X-axis labels -->
+        <text x="50" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 1</text>
+        <text x="117" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 30</text>
+        <text x="185" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 90</text>
+        <text x="275" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 365</text>
+        <!-- The moat gap fill (animated) -->
+        <path id="moatGap" d="" fill="rgba(77,199,77,0.06)" stroke="none"/>
+        <!-- Your MAWD line (green, curves up) -->
+        <path id="moatLineGreen" d="M50,150" fill="none" stroke="#4DC74D" stroke-width="2" stroke-linecap="round"/>
+        <!-- Competitor line (gray, stays flat) -->
+        <path id="moatLineGray" d="M50,150" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>
+        <!-- Moat label (appears at end) -->
+        <text id="moatLabel" x="210" y="100" text-anchor="middle" fill="rgba(77,199,77,0.5)" font-size="9" font-family="var(--font-w)" font-weight="700" letter-spacing="2" opacity="0">THE MOAT</text>
+        <!-- Milestone dots on green line -->
+        <g id="moatDots"></g>
+        <!-- Legend -->
+        <line x1="50" y1="178" x2="64" y2="178" stroke="#4DC74D" stroke-width="2"/>
+        <text x="67" y="180" fill="rgba(255,255,255,0.35)" font-size="5.5" font-family="var(--font-b)">Your MAWD</text>
+        <line x1="130" y1="178" x2="144" y2="178" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="147" y="180" fill="rgba(255,255,255,0.25)" font-size="5.5" font-family="var(--font-b)">Competitor starting today</text>
+      </svg>
     </div>
 
     <div style="text-align:center;font-size:11px;color:var(--cream);font-family:var(--font-w);font-weight:700;margin-bottom:4px;">Intelligence compounds. The moat widens every day.</div>
@@ -2697,58 +2683,103 @@ sections.forEach(sec => dotObserver.observe(sec));
   obs.observe(chaosBox);
 })();
 
-// Growing Brain animation
+// Moat Chart animation — two diverging lines
 (function() {
-  var brain = document.getElementById('brainGrow');
-  if (!brain) return;
-  var fillRect = document.getElementById('brainFillRect');
-  var pctText = document.getElementById('brainPct');
-  var milestones = brain.querySelectorAll('.brain-milestone');
+  var chart = document.getElementById('moatChart');
+  if (!chart) return;
+  var greenLine = document.getElementById('moatLineGreen');
+  var grayLine = document.getElementById('moatLineGray');
+  var gapPath = document.getElementById('moatGap');
+  var moatLabel = document.getElementById('moatLabel');
+  var dotsG = document.getElementById('moatDots');
   var started = false;
 
-  function animateBrain() {
-    var targets = [
-      { pct: 8, delay: 300 },
-      { pct: 25, delay: 1200 },
-      { pct: 55, delay: 2400 },
-      { pct: 95, delay: 3800 },
-    ];
+  var totalFrames = 60;
+  var xStart = 50, xEnd = 300, yBottom = 150, yTop = 25;
 
-    // Animate fill smoothly with setInterval
-    var currentPct = 0;
-    var targetPct = 0;
+  function greenY(t) {
+    return yBottom - Math.pow(t, 1.8) * (yBottom - yTop);
+  }
+  function grayY(t) {
+    return yBottom - t * 18;
+  }
+
+  var milestones = [
+    { t: 0.27, x: 117, label: 'Fans mapped' },
+    { t: 0.54, x: 185, label: 'Revenue optimized' },
+    { t: 1.0, x: 275, label: 'Runs the business' },
+  ];
+
+  function animateMoat() {
+    var frame = 0;
     var iv = setInterval(function() {
-      if (currentPct < targetPct) {
-        currentPct = Math.min(currentPct + 0.8, targetPct);
-        var fillH = (currentPct / 100) * 112;
-        fillRect.setAttribute('y', String(140 - fillH));
-        pctText.textContent = Math.round(currentPct) + '%';
-      }
-      if (currentPct >= 95) clearInterval(iv);
-    }, 20);
+      frame++;
+      var progress = Math.min(frame / totalFrames, 1);
+      var numPts = Math.ceil(progress * totalFrames);
 
-    // Trigger each step on a schedule
-    targets.forEach(function(t, i) {
-      setTimeout(function() {
-        targetPct = t.pct;
-        if (milestones[i]) {
-          milestones[i].style.opacity = '1';
-          milestones[i].style.transform = 'translateX(0)';
+      var gPath = 'M50,150';
+      var grPath = 'M50,150';
+      for (var i = 1; i <= numPts; i++) {
+        var t = i / totalFrames;
+        var x = xStart + t * (xEnd - xStart);
+        gPath += ' L' + x.toFixed(1) + ',' + greenY(t).toFixed(1);
+        grPath += ' L' + x.toFixed(1) + ',' + grayY(t).toFixed(1);
+      }
+      greenLine.setAttribute('d', gPath);
+      grayLine.setAttribute('d', grPath);
+
+      // Gap fill
+      var gapD = gPath;
+      for (var k = numPts; k >= 0; k--) {
+        var t3 = k / totalFrames;
+        var x3 = xStart + t3 * (xEnd - xStart);
+        gapD += ' L' + x3.toFixed(1) + ',' + grayY(t3).toFixed(1);
+      }
+      gapD += ' Z';
+      gapPath.setAttribute('d', gapD);
+
+      milestones.forEach(function(m) {
+        if (progress >= m.t && !m.shown) {
+          m.shown = true;
+          var gy = greenY(m.t);
+          var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          dot.setAttribute('cx', m.x);
+          dot.setAttribute('cy', gy.toFixed(1));
+          dot.setAttribute('r', '3.5');
+          dot.setAttribute('fill', '#4DC74D');
+          dot.setAttribute('stroke', '#0a0a14');
+          dot.setAttribute('stroke-width', '1.5');
+          dotsG.appendChild(dot);
+          var txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          txt.setAttribute('x', m.x);
+          txt.setAttribute('y', String(gy - 8));
+          txt.setAttribute('text-anchor', 'middle');
+          txt.setAttribute('fill', 'rgba(77,199,77,0.7)');
+          txt.setAttribute('font-size', '6');
+          txt.setAttribute('font-family', 'var(--font-b)');
+          txt.textContent = m.label;
+          dotsG.appendChild(txt);
         }
-      }, t.delay);
-    });
+      });
+
+      if (progress > 0.7) {
+        moatLabel.setAttribute('opacity', String(Math.min((progress - 0.7) / 0.15, 1)));
+      }
+
+      if (frame >= totalFrames) clearInterval(iv);
+    }, 40);
   }
 
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting && !started) {
         started = true;
-        animateBrain();
+        animateMoat();
         obs.unobserve(entry.target);
       }
     });
   }, {threshold: 0.1});
-  obs.observe(brain);
+  obs.observe(chart);
 })();
 </script>
 
