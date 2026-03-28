@@ -2001,7 +2001,7 @@ const dotObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 sections.forEach(sec => dotObserver.observe(sec));
 
-// Phone notification animation
+// Phone notification animation — never stops
 (function() {
   var notifs = [
     {icon: '🟢', app: 'Spotify', msg: 'Your royalty rate changed', color: '#1DB954'},
@@ -2021,39 +2021,56 @@ sections.forEach(sec => dotObserver.observe(sec));
     {icon: '🛒', app: 'Shopify', msg: 'Merch restock needed - 2 items', color: '#96BF48'},
     {icon: '▶️', app: 'YouTube', msg: 'Comment needs response (4.2K views)', color: '#FF0000'},
     {icon: '🟢', app: 'Spotify', msg: 'Playlist submission deadline', color: '#1DB954'},
+    {icon: '💬', app: 'iMessage', msg: 'Publicist: "where is the bio?"', color: '#34C759'},
+    {icon: '📱', app: 'TikTok', msg: 'Sound removed from 3 videos', color: '#ffffff'},
+    {icon: '📅', app: 'Google Cal', msg: 'Interview in 15 min — no prep', color: '#4285F4'},
+    {icon: '🎵', app: 'Apple Music', msg: 'Pre-save link broken', color: '#FC3C44'},
+    {icon: '📧', app: 'Gmail', msg: 'Label wants updated press kit', color: '#EA4335'},
+    {icon: '🔵', app: 'Facebook', msg: 'Event page needs cover photo', color: '#4267B2'},
+    {icon: '🛒', app: 'Shopify', msg: 'Refund request - wrong size', color: '#96BF48'},
+    {icon: '📸', app: 'Instagram', msg: 'Story mention from verified acct', color: '#E4405F'},
+    {icon: '💰', app: 'Stripe', msg: 'Subscription payment failed', color: '#635BFF'},
+    {icon: '▶️', app: 'YouTube', msg: 'New copyright claim filed', color: '#FF0000'},
+    {icon: '🟢', app: 'Spotify', msg: 'Editorial pitch window closing', color: '#1DB954'},
+    {icon: '💬', app: 'iMessage', msg: 'Agent: "call me ASAP"', color: '#34C759'},
+    {icon: '🎤', app: 'Bandsintown', msg: 'Fan asking about VIP upgrade', color: '#00CEC8'},
+    {icon: '📱', app: 'TikTok', msg: 'Duet going viral — respond?', color: '#ffffff'},
+    {icon: '📧', app: 'Gmail', msg: 'Accountant needs Q1 receipts', color: '#EA4335'},
+    {icon: '🛒', app: 'Shopify', msg: 'New product review (1 star)', color: '#96BF48'},
+    {icon: '📅', app: 'Google Cal', msg: 'Double-booked studio session', color: '#4285F4'},
+    {icon: '📸', app: 'Instagram', msg: 'Reel insights: reach down 60%', color: '#E4405F'},
+    {icon: '🎵', app: 'DistroKid', msg: 'Takedown notice on remix', color: '#FF6B35'},
   ];
   var phone = document.getElementById('notifPhone');
   var stack = document.getElementById('notifStack');
   var counter = document.getElementById('notifCount');
   if (!phone || !stack || !counter) return;
   var started = false;
+  var count = 0;
+  var idx = 0;
+  var interval;
+  function addNotif() {
+    var n = notifs[idx % notifs.length];
+    idx++;
+    count++;
+    counter.textContent = count;
+    var el = document.createElement('div');
+    el.className = 'notif-item';
+    el.innerHTML = '<span style="font-size:14px;flex-shrink:0;">' + n.icon + '</span>' +
+      '<div style="min-width:0;"><div style="font-size:8px;font-weight:700;color:' + n.color + ';font-family:var(--font-w);letter-spacing:0.03em;">' + n.app + '</div>' +
+      '<div style="font-size:8.5px;color:rgba(255,255,255,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;">' + n.msg + '</div></div>';
+    stack.insertBefore(el, stack.firstChild);
+    if (stack.children.length > 8) stack.removeChild(stack.lastChild);
+  }
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting && !started) {
         started = true;
-        var count = 0;
-        notifs.forEach(function(n, i) {
-          setTimeout(function() {
-            count++;
-            counter.textContent = count;
-            var el = document.createElement('div');
-            el.className = 'notif-item';
-            el.style.animationDelay = '0s';
-            el.innerHTML = '<span style="font-size:14px;flex-shrink:0;">' + n.icon + '</span>' +
-              '<div style="min-width:0;"><div style="font-size:8px;font-weight:700;color:' + n.color + ';font-family:var(--font-w);letter-spacing:0.03em;">' + n.app + '</div>' +
-              '<div style="font-size:8.5px;color:rgba(255,255,255,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;">' + n.msg + '</div></div>';
-            stack.insertBefore(el, stack.firstChild);
-            if (stack.children.length > 8) stack.removeChild(stack.lastChild);
-          }, 200 + i * 180);
-        });
-        // After all notifs, pulse the counter red
-        setTimeout(function() {
-          counter.style.animation = 'pulse 0.6s ease-in-out 3';
-        }, 200 + notifs.length * 180 + 200);
+        interval = setInterval(addNotif, 800);
         obs.unobserve(entry.target);
       }
     });
-  }, {threshold: 0.3});
+  }, {threshold: 0.2});
   obs.observe(phone);
 })();
 </script>
