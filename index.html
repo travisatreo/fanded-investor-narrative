@@ -1615,58 +1615,55 @@ body {
       </div>
     </div>
 
-    <!-- Intelligence Race: Side-by-side comparison -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-      <!-- Your client's MAWD (Month 8) -->
-      <div style="background:rgba(77,199,77,0.04);border:1px solid rgba(77,199,77,0.15);border-radius:10px;padding:14px 12px;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:0.8px;color:#4DC74D;margin-bottom:10px;">ANNA'S MAWD — MONTH 8</div>
-        <!-- Intelligence bar -->
-        <div style="position:relative;height:120px;background:rgba(255,255,255,0.03);border-radius:6px;overflow:hidden;margin-bottom:10px;">
-          <div style="position:absolute;bottom:0;left:0;right:0;height:85%;background:linear-gradient(to top,rgba(77,199,77,0.2),rgba(77,199,77,0.05));border-top:2px solid rgba(77,199,77,0.4);"></div>
-          <!-- Data layer labels inside the bar -->
-          <div style="position:absolute;bottom:4px;left:6px;right:6px;">
-            <div style="font-size:7px;color:rgba(77,199,77,0.7);font-family:var(--font-b);padding:2px 0;border-bottom:1px solid rgba(77,199,77,0.08);">Platform connections</div>
-            <div style="font-size:7px;color:rgba(77,199,77,0.7);font-family:var(--font-b);padding:2px 0;border-bottom:1px solid rgba(77,199,77,0.08);">Fan behavior patterns</div>
-            <div style="font-size:7px;color:rgba(77,199,77,0.7);font-family:var(--font-b);padding:2px 0;border-bottom:1px solid rgba(77,199,77,0.08);">Revenue optimization</div>
-            <div style="font-size:7px;color:rgba(77,199,77,0.7);font-family:var(--font-b);padding:2px 0;border-bottom:1px solid rgba(77,199,77,0.08);">Content calendar learned</div>
-            <div style="font-size:7px;color:rgba(77,199,77,0.7);font-family:var(--font-b);padding:2px 0;border-bottom:1px solid rgba(77,199,77,0.08);">Tour prediction model</div>
-            <div style="font-size:7px;color:#4DC74D;font-family:var(--font-w);font-weight:700;padding:2px 0;">Predictive intelligence</div>
-          </div>
-        </div>
-        <!-- Stats -->
-        <div style="font-size:8px;color:var(--cream-muted);line-height:1.8;font-family:var(--font-b);">
-          <div><span style="color:#4DC74D;font-weight:700;">12,847</span> fans mapped</div>
-          <div><span style="color:#4DC74D;font-weight:700;">3</span> revenue streams optimized</div>
-          <div><span style="color:#4DC74D;font-weight:700;">243</span> days of learning</div>
-        </div>
+    <!-- Growing Brain: MAWD intelligence over time -->
+    <div id="brainGrow" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px 16px;margin-bottom:16px;overflow:hidden;height:340px;">
+      <!-- Brain SVG with fill level -->
+      <div style="position:relative;width:140px;height:140px;margin:0 auto 16px;">
+        <!-- Brain outline circle -->
+        <svg viewBox="0 0 140 140" style="width:100%;height:100%;">
+          <!-- Outer glow -->
+          <circle cx="70" cy="70" r="64" fill="none" stroke="rgba(77,199,77,0.06)" stroke-width="1"/>
+          <!-- Brain shape (simplified) -->
+          <circle cx="70" cy="70" r="56" fill="rgba(77,199,77,0.03)" stroke="rgba(77,199,77,0.15)" stroke-width="1.5"/>
+          <!-- Fill level - clips from bottom -->
+          <defs>
+            <clipPath id="brainFill">
+              <rect id="brainFillRect" x="0" y="140" width="140" height="140"/>
+            </clipPath>
+          </defs>
+          <circle cx="70" cy="70" r="55" fill="rgba(77,199,77,0.12)" clip-path="url(#brainFill)"/>
+          <!-- Center text -->
+          <text x="70" y="64" text-anchor="middle" fill="rgba(77,199,77,0.4)" font-family="var(--font-w)" font-size="8" font-weight="700" letter-spacing="1">MAWD</text>
+          <text id="brainPct" x="70" y="82" text-anchor="middle" fill="#4DC74D" font-family="var(--font-w)" font-size="18" font-weight="700">0%</text>
+        </svg>
       </div>
 
-      <!-- Competitor's AI (Day 1) -->
-      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 12px;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:0.8px;color:rgba(255,255,255,0.3);margin-bottom:10px;">COMPETITOR'S AI — DAY 1</div>
-        <!-- Intelligence bar (nearly empty) -->
-        <div style="position:relative;height:120px;background:rgba(255,255,255,0.03);border-radius:6px;overflow:hidden;margin-bottom:10px;">
-          <div style="position:absolute;bottom:0;left:0;right:0;height:6%;background:linear-gradient(to top,rgba(255,255,255,0.08),rgba(255,255,255,0.02));border-top:1px solid rgba(255,255,255,0.1);"></div>
-          <!-- Empty state -->
-          <div style="position:absolute;bottom:10px;left:6px;right:6px;">
-            <div style="font-size:7px;color:rgba(255,255,255,0.2);font-family:var(--font-b);padding:2px 0;">connecting Spotify...</div>
-          </div>
-          <!-- Blinking cursor -->
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-            <div style="font-size:20px;color:rgba(255,255,255,0.06);">?</div>
-            <div style="font-size:7px;color:rgba(255,255,255,0.15);font-family:var(--font-b);margin-top:4px;">no data yet</div>
-          </div>
+      <!-- Milestone timeline -->
+      <div id="brainMilestones" style="position:relative;padding-left:20px;border-left:2px solid rgba(77,199,77,0.1);margin-left:16px;">
+        <div class="brain-milestone" data-day="1" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease;margin-bottom:10px;">
+          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:rgba(77,199,77,0.15);border:1.5px solid rgba(77,199,77,0.3);"></div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:var(--font-w);font-weight:700;">DAY 1</div>
+          <div style="font-size:9.5px;color:var(--cream-muted);font-family:var(--font-b);line-height:1.4;">Connected 8 platforms. <span style="color:rgba(77,199,77,0.6);">12,847 fans found.</span></div>
         </div>
-        <!-- Stats -->
-        <div style="font-size:8px;color:rgba(255,255,255,0.2);line-height:1.8;font-family:var(--font-b);">
-          <div><span style="font-weight:700;">0</span> fans mapped</div>
-          <div><span style="font-weight:700;">0</span> revenue streams</div>
-          <div><span style="font-weight:700;">0</span> days of learning</div>
+        <div class="brain-milestone" data-day="30" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.15s;margin-bottom:10px;">
+          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:rgba(77,199,77,0.2);border:1.5px solid rgba(77,199,77,0.4);"></div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:var(--font-w);font-weight:700;">DAY 30</div>
+          <div style="font-size:9.5px;color:var(--cream-muted);font-family:var(--font-b);line-height:1.4;">Learned fan purchase patterns. <span style="color:rgba(77,199,77,0.6);">Revenue up 12%.</span></div>
+        </div>
+        <div class="brain-milestone" data-day="90" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.3s;margin-bottom:10px;">
+          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:rgba(77,199,77,0.3);border:1.5px solid rgba(77,199,77,0.5);"></div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:var(--font-w);font-weight:700;">DAY 90</div>
+          <div style="font-size:9.5px;color:var(--cream-muted);font-family:var(--font-b);line-height:1.4;">Predicts tour revenue by city. <span style="color:rgba(77,199,77,0.6);">Content calendar automated.</span></div>
+        </div>
+        <div class="brain-milestone" data-day="365" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.45s;margin-bottom:0;">
+          <div style="position:absolute;left:-6px;width:10px;height:10px;border-radius:50%;background:#4DC74D;border:1.5px solid #4DC74D;box-shadow:0 0 8px rgba(77,199,77,0.4);"></div>
+          <div style="font-size:8px;color:#4DC74D;font-family:var(--font-w);font-weight:700;">DAY 365</div>
+          <div style="font-size:9.5px;color:var(--cream);font-family:var(--font-b);line-height:1.4;font-weight:600;">Runs the business. <span style="color:#4DC74D;">Competitor starting today? Day 0.</span></div>
         </div>
       </div>
     </div>
 
-    <div style="text-align:center;font-size:11px;color:var(--cream);font-family:var(--font-w);font-weight:700;margin-bottom:4px;">This gap is the moat. It widens every day.</div>
+    <div style="text-align:center;font-size:11px;color:var(--cream);font-family:var(--font-w);font-weight:700;margin-bottom:4px;">Intelligence compounds. The moat widens every day.</div>
     <div style="text-align:center;font-size:10px;color:var(--cream-muted);font-family:var(--font-b);">Our early clients are already months ahead of anyone who starts tomorrow.</div>
   </div>
 
@@ -2698,6 +2695,75 @@ sections.forEach(sec => dotObserver.observe(sec));
     });
   }, {threshold: 0.3});
   obs.observe(chaosBox);
+})();
+
+// Growing Brain animation
+(function() {
+  var brain = document.getElementById('brainGrow');
+  if (!brain) return;
+  var fillRect = document.getElementById('brainFillRect');
+  var pctText = document.getElementById('brainPct');
+  var milestones = brain.querySelectorAll('.brain-milestone');
+  var started = false;
+
+  function animateBrain() {
+    var steps = [
+      { pct: 8, day: 1, duration: 800 },
+      { pct: 25, day: 30, duration: 1200 },
+      { pct: 55, day: 90, duration: 1200 },
+      { pct: 95, day: 365, duration: 1500 },
+    ];
+    var currentPct = 0;
+    var stepIdx = 0;
+
+    function runStep() {
+      if (stepIdx >= steps.length) return;
+      var step = steps[stepIdx];
+      var startPct = currentPct;
+      var targetPct = step.pct;
+      var startTime = performance.now();
+
+      // Reveal milestone
+      if (milestones[stepIdx]) {
+        milestones[stepIdx].style.opacity = '1';
+        milestones[stepIdx].style.transform = 'translateX(0)';
+      }
+
+      function tick(now) {
+        var elapsed = now - startTime;
+        var progress = Math.min(elapsed / step.duration, 1);
+        // Ease out
+        progress = 1 - Math.pow(1 - progress, 3);
+        currentPct = startPct + (targetPct - startPct) * progress;
+
+        // Update fill (y goes from 140 down, so y = 140 - (pct/100 * 112) mapped to circle area)
+        var fillH = (currentPct / 100) * 112;
+        fillRect.setAttribute('y', 140 - fillH);
+        pctText.textContent = Math.round(currentPct) + '%';
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          stepIdx++;
+          setTimeout(runStep, 400);
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+
+    setTimeout(runStep, 300);
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        started = true;
+        animateBrain();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.3});
+  obs.observe(brain);
 })();
 </script>
 
