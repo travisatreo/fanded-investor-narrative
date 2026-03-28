@@ -1326,8 +1326,42 @@ body {
     <div class="section-label">THE PROBLEM</div>
     <h2 class="headline" style="font-size: 24px; margin-bottom: 16px;">Then I talked to other talent.<br>Same story. Every single one.</h2>
     <div class="body-text" style="margin-bottom: 16px;">Fans scattered across 5-10 platforms. Revenue falling through the cracks. No way to message the people who love their work. Even the ones with managers can't keep up.</div>
+
+    <!-- Animated phone notifications -->
+    <div id="notifPhone" style="display: flex; justify-content: center; margin: 24px 0;">
+      <div style="width: 200px; background: #1a1a2e; border-radius: 24px; padding: 12px 14px 20px; border: 2px solid rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; overflow: hidden;">
+        <!-- Status bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 8px; padding: 0 2px;">
+          <span>9:41</span>
+          <div style="display: flex; gap: 3px; align-items: center;">
+            <div style="width: 12px; height: 7px; border: 1px solid rgba(255,255,255,0.5); border-radius: 1px; position: relative;"><div style="position: absolute; right: 1px; top: 1px; bottom: 1px; left: 1px; background: rgba(255,255,255,0.5); border-radius: 0.5px;"></div></div>
+          </div>
+        </div>
+        <!-- Notification counter -->
+        <div style="text-align: center; margin-bottom: 10px;">
+          <span id="notifCount" style="font-family: var(--font-w); font-weight: 800; font-size: 36px; color: var(--red);">0</span>
+          <div style="font-size: 9px; color: rgba(255,255,255,0.4); font-family: var(--font-b); letter-spacing: 0.05em;">UNREAD NOTIFICATIONS</div>
+        </div>
+        <!-- Notification stack -->
+        <div id="notifStack" style="display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow: hidden;"></div>
+      </div>
+    </div>
+
     <div class="divider" style="margin-top: 24px;"></div>
   </div>
+
+  <style>
+    .notif-item {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 7px 9px;
+      opacity: 0; transform: translateY(-8px);
+      animation: notifSlide 0.3s ease forwards;
+    }
+    @keyframes notifSlide {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 
   <!-- Section: Fan Clubs Origin -->
   <div class="section fade-in">
@@ -1967,7 +2001,69 @@ const dotObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 sections.forEach(sec => dotObserver.observe(sec));
 
+// Phone notification animation
+(function() {
+  var notifs = [
+    {icon: '🟢', app: 'Spotify', msg: 'Your royalty rate changed', color: '#1DB954'},
+    {icon: '📸', app: 'Instagram', msg: '12 new DM requests', color: '#E4405F'},
+    {icon: '🛒', app: 'Shopify', msg: '3 orders need fulfillment', color: '#96BF48'},
+    {icon: '📧', app: 'Gmail', msg: 'Venue contract - sign by EOD', color: '#EA4335'},
+    {icon: '▶️', app: 'YouTube', msg: 'Revenue claim on your video', color: '#FF0000'},
+    {icon: '🎵', app: 'DistroKid', msg: 'Missing metadata for release', color: '#FF6B35'},
+    {icon: '📱', app: 'TikTok', msg: '8 brand deal inquiries', color: '#ffffff'},
+    {icon: '💬', app: 'iMessage', msg: 'Manager: "did you see the email?"', color: '#34C759'},
+    {icon: '📅', app: 'Google Cal', msg: '3 scheduling conflicts', color: '#4285F4'},
+    {icon: '🔵', app: 'Facebook', msg: 'Page insights dropped 40%', color: '#4267B2'},
+    {icon: '🎤', app: 'Bandsintown', msg: 'Confirm Austin show details', color: '#00CEC8'},
+    {icon: '📸', app: 'Instagram', msg: '5 collab requests pending', color: '#E4405F'},
+    {icon: '💰', app: 'PayPal', msg: 'Payment dispute opened', color: '#003087'},
+    {icon: '📧', app: 'Gmail', msg: 'Sync license opportunity expiring', color: '#EA4335'},
+    {icon: '🛒', app: 'Shopify', msg: 'Merch restock needed - 2 items', color: '#96BF48'},
+    {icon: '▶️', app: 'YouTube', msg: 'Comment needs response (4.2K views)', color: '#FF0000'},
+    {icon: '🟢', app: 'Spotify', msg: 'Playlist submission deadline', color: '#1DB954'},
+  ];
+  var phone = document.getElementById('notifPhone');
+  var stack = document.getElementById('notifStack');
+  var counter = document.getElementById('notifCount');
+  if (!phone || !stack || !counter) return;
+  var started = false;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        started = true;
+        var count = 0;
+        notifs.forEach(function(n, i) {
+          setTimeout(function() {
+            count++;
+            counter.textContent = count;
+            var el = document.createElement('div');
+            el.className = 'notif-item';
+            el.style.animationDelay = '0s';
+            el.innerHTML = '<span style="font-size:14px;flex-shrink:0;">' + n.icon + '</span>' +
+              '<div style="min-width:0;"><div style="font-size:8px;font-weight:700;color:' + n.color + ';font-family:var(--font-w);letter-spacing:0.03em;">' + n.app + '</div>' +
+              '<div style="font-size:8.5px;color:rgba(255,255,255,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;">' + n.msg + '</div></div>';
+            stack.insertBefore(el, stack.firstChild);
+            if (stack.children.length > 8) stack.removeChild(stack.lastChild);
+          }, 200 + i * 180);
+        });
+        // After all notifs, pulse the counter red
+        setTimeout(function() {
+          counter.style.animation = 'pulse 0.6s ease-in-out 3';
+        }, 200 + notifs.length * 180 + 200);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.3});
+  obs.observe(phone);
+})();
 </script>
+
+<style>
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+</style>
 
 </body>
 </html>
