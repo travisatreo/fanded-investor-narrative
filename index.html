@@ -6,7 +6,7 @@
 <title>Fanded - Investor Briefing</title>
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="Fanded - Investor Briefing">
-<meta property="og:description" content="The first agentic team for creator businesses.">
+<meta property="og:description" content="The AI management team for every artist.">
 <meta property="og:image" content="https://fanded-investor-narrative.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -14,14 +14,14 @@
 <meta property="og:url" content="https://fanded-investor-narrative.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Fanded - Investor Briefing">
-<meta name="twitter:description" content="The first agentic team for creator businesses.">
+<meta name="twitter:description" content="The AI management team for every artist.">
 <meta name="twitter:image" content="https://fanded-investor-narrative.vercel.app/og-image.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#07070F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Onest:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 ::-webkit-scrollbar{width:0}
@@ -34,9 +34,8 @@
   --cream: #F5F1EA;
   --cream-dim: #9999BB;
   --cream-muted: #6B6B8A;
-  --blue: #3BADE4;
-  --blue-soft: rgba(59,173,228,0.12);
-  --blue-hover: #5BC0F0;
+  --blue: #3B82F6;
+  --blue-soft: rgba(59,130,246,0.12);
   --green: #2ECC71;
   --red: #E74C3C;
   --gold: #C9A84C;
@@ -45,13 +44,12 @@
   --teal: #0D9488;
   --pink: #EC4899;
   --border: #1C1C2E;
-  --border-focus: rgba(59,173,228,0.4);
+  --border-focus: rgba(59,130,246,0.4);
   --r: 16px;
-  --r-sm: 10px;
+  --r-sm: 12px;
   --r-full: 9999px;
-  --font-d: 'Playfair Display', Georgia, serif;
+  --font-h: 'Bricolage Grotesque', 'Arial Black', 'DM Sans', sans-serif;
   --font-b: 'DM Sans', -apple-system, sans-serif;
-  --font-w: 'Bricolage Grotesque', 'DM Sans', sans-serif;
 }
 
 html {
@@ -71,7 +69,7 @@ body {
 }
 
 /* Desktop: subtle gold vertical lines on edges of content */
-@media (min-width: 481px) {
+@media (min-width: 461px) {
   body::before, body::after {
     content: '';
     position: fixed;
@@ -81,12 +79,12 @@ body {
     background: rgba(201,168,76,0.08);
     z-index: 10;
   }
-  body::before { left: calc(50% - 240px); }
-  body::after { right: calc(50% - 240px); }
+  body::before { left: calc(50% - 215px); }
+  body::after { right: calc(50% - 215px); }
 }
 
 .page {
-  max-width: 480px;
+  max-width: 430px;
   margin: 0 auto;
   background: var(--bg);
   min-height: 100vh;
@@ -99,1187 +97,582 @@ body {
   height: 2px;
   width: calc(100% + 40px);
   margin-left: -20px;
-  background: linear-gradient(to right, var(--gold), var(--blue));
-}
-
-/* Section label - Bricolage Grotesque */
-.section-label {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-
-.section {
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
-
-/* Headline - Playfair Display */
-.headline {
-  font-family: var(--font-d);
-  font-weight: 900;
-  color: var(--cream);
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-}
-
-/* Body text */
-.body-text {
-  color: var(--cream-dim);
-  font-family: var(--font-b);
-  font-size: 15px;
-  line-height: 1.65;
-  font-weight: 400;
-}
-
-/* Card */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 16px 18px;
-}
-
-/* Divider */
-.divider {
-  height: 1px;
-  background: var(--border);
-  width: calc(100% + 40px);
-  margin-left: -20px;
-}
-
-/* Scroll animation */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 500ms ease, transform 500ms ease;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Pill */
-.pill {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: var(--r-full);
-  font-size: 11px;
-  font-family: var(--font-b);
-  font-weight: 600;
-  margin: 2px;
-}
-.pill-gold { background: rgba(201,168,76,0.12); color: var(--gold); }
-.pill-purple { background: rgba(155,89,182,0.12); color: var(--purple); }
-.pill-green { background: rgba(46,204,113,0.12); color: var(--green); }
-.pill-teal { background: rgba(13,148,136,0.12); color: var(--teal); }
-.pill-blue { background: var(--blue-soft); color: var(--blue); }
-
-/* Stat number - Bricolage Grotesque */
-.stat-number {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 48px;
-  line-height: 1;
+  background: linear-gradient(90deg, #C4953A, #7C3AED);
 }
 
 /* Header */
 .header {
-  text-align: center;
-  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 12px;
 }
+
 .logo-lockup {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 8px;
 }
+
 .logo-icon {
-  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
 }
+
 .wordmark {
-  font-family: var(--font-w);
+  font-family: var(--font-h);
   font-weight: 800;
   font-size: 18px;
-  color: var(--cream);
-  letter-spacing: 0.03em;
+  color: var(--gold);
+  letter-spacing: -0.5px;
   text-transform: lowercase;
 }
-/* Agent C-suite tag */
-.agent-title {
-  font-family: var(--font-b);
-  font-weight: 500;
-  font-size: 11px;
-  color: var(--cream-muted);
-  margin-left: 6px;
-  letter-spacing: 0;
-}
+
 .confidential {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--cream-muted);
-  font-family: var(--font-b);
-  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* Opening */
-.opening-headline {
-  font-size: 30px;
-  margin-top: 40px;
-  margin-bottom: 16px;
-}
-.opening-body {
-  margin-bottom: 32px;
+/* Sections */
+.section {
+  padding: 32px 0;
 }
 
-/* Problem cards */
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.problem-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 14px;
-}
-.problem-card .small-label {
+.section-label {
+  font-family: var(--font-h);
+  font-weight: 700;
   font-size: 11px;
-  color: var(--cream-muted);
-  font-family: var(--font-d);
-  font-style: italic;
-  margin-bottom: 6px;
-}
-.problem-card .card-body {
-  font-size: 13px;
-  color: var(--cream-dim);
-  line-height: 1.5;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
-/* Insight stat pills */
-.stat-pills {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 16px;
+.headline {
+  font-family: var(--font-h);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.2;
 }
-.stat-pill {
+
+.body-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--cream-dim);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+  margin: 8px 0;
+}
+
+/* Cards */
+.card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: 16px;
-  text-align: center;
-}
-.stat-pill .value {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 32px;
-  color: var(--gold);
-}
-.stat-pill .label {
-  font-size: 12px;
-  color: var(--cream-muted);
-  margin-top: 4px;
 }
 
 /* Agent cards */
 .agent-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 14px 16px;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 8px;
-  transition: all 0.2s;
-}
-.agent-card:hover {
-  border-color: rgba(59,173,228,0.2);
-}
-.agent-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  width: 32px;
-  text-align: center;
-}
-.agent-name {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-}
-.agent-desc {
-  font-size: 12px;
-  color: var(--cream-muted);
-  margin-top: 2px;
-  font-weight: 400;
-}
-
-/* Traction stats */
-.traction-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.traction-stat {
+  gap: 14px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 16px 8px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.traction-stat .label {
-  font-size: 12px;
-  color: var(--cream-muted);
-  margin-top: 6px;
-}
-
-/* Traction phases */
-.traction-phase {
-  margin-bottom: 20px;
-}
-.phase-label {
-  font-family: var(--font-w);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--cream-muted);
+  border-radius: var(--r-sm);
+  padding: 14px;
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
-.phase-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+
+.agent-card .agent-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
-.traction-two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.traction-stat-wide {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 14px 12px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.traction-stat-wide .label {
-  font-size: 11px;
-  color: var(--cream-muted);
-  margin-top: 4px;
-}
-.traction-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 0;
-}
-.traction-arrow svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--cream-muted);
-}
-.pull-quote-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 18px 20px;
-  margin-bottom: 8px;
-}
-.pull-quote-text {
-  font-family: var(--font-d);
-  font-style: italic;
-  font-size: 16px;
-  color: var(--cream);
-  line-height: 1.55;
-  text-align: left;
-}
-.pull-quote-attr {
+
+.agent-card .agent-name {
+  font-family: var(--font-h);
+  font-weight: 700;
   font-size: 12px;
-  color: var(--cream-muted);
-  margin-top: 8px;
-  text-align: left;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
-.live-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--green);
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 4px;
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
-  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .live-dot { animation: none; }
+
+.agent-card .agent-desc {
+  font-size: 12px;
+  color: var(--cream-dim);
+  line-height: 1.6;
 }
 
 /* Talent cards */
 .talent-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
   border-radius: var(--r);
-  padding: 16px 18px;
-  margin-bottom: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
 }
-.talent-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.talent-photo {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.talent-name {
-  font-family: var(--font-d);
-  font-weight: 700;
+
+.talent-card .talent-name {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 16px;
   color: var(--gold);
-  font-size: 17px;
+  margin-bottom: 2px;
 }
-.talent-role {
+
+.talent-card .talent-role {
   font-size: 12px;
   color: var(--cream-muted);
-  margin-bottom: 8px;
-  font-weight: 400;
+  margin-bottom: 12px;
 }
-.talent-pills {
-  margin-bottom: 8px;
+
+.talent-card .talent-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-}
-.talent-body {
-  font-size: 14px;
-  color: var(--cream-dim);
-  line-height: 1.5;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
-/* Moment photos -lifestyle proof under talent cards */
-.moment-photo {
-  width: calc(100% + 40px);
-  margin-left: -20px;
-  margin-top: 6px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  position: relative;
-}
-.moment-photo img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.85);
-  transition: filter 0.4s ease;
-}
-.moment-photo:hover img {
-  filter: brightness(1);
-}
-.moment-photo .moment-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 24px 20px 12px;
-  background: linear-gradient(to top, rgba(7,7,15,0.85), transparent);
+.pill {
   font-size: 11px;
-  color: var(--cream-muted);
-  font-family: var(--font-b);
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  border: 1px solid;
 }
 
-/* Revenue cards */
-.revenue-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 16px 18px;
-  margin-bottom: 10px;
-}
-.revenue-card.gold-border { }
-.revenue-card.purple-border { }
-.revenue-card.teal-border { }
-.revenue-title {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-.revenue-desc {
-  font-size: 14px;
+.pill-gold { color: var(--gold); border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.08); }
+.pill-purple { color: var(--purple); border-color: rgba(155,89,182,0.3); background: rgba(155,89,182,0.08); }
+.pill-green { color: var(--green); border-color: rgba(46,204,113,0.3); background: rgba(46,204,113,0.08); }
+.pill-blue { color: var(--blue); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
+.pill-teal { color: var(--teal); border-color: rgba(13,148,136,0.3); background: rgba(13,148,136,0.08); }
+
+.talent-card .talent-body {
+  font-size: 13px;
   color: var(--cream-dim);
-  line-height: 1.5;
-}
-.revenue-math {
-  font-size: 12px;
-  margin-top: 8px;
-  font-family: var(--font-b);
-  font-weight: 500;
-}
-.revenue-result {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 24px;
-  margin-top: 4px;
+  line-height: 1.6;
 }
 
-/* The Ask */
-.ask-amount {
-  font-family: var(--font-d);
-  font-weight: 900;
-  font-size: 52px;
-  text-align: center;
-  color: var(--cream);
-  line-height: 1;
-  letter-spacing: -1px;
-}
-.ask-terms {
-  text-align: center;
-  font-size: 16px;
-  color: var(--cream-dim);
-  margin-top: 8px;
-  margin-bottom: 20px;
-}
-.ask-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px;
-}
-.ask-card .body-text {
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-/* Team */
+/* Person cards (team) */
 .person-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--r);
-  padding: 16px 18px;
+  padding: 16px;
   margin-bottom: 10px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
 }
-.avatar {
+
+.person-avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-w);
+  font-family: var(--font-h);
   font-weight: 800;
   font-size: 14px;
   color: var(--bg);
   flex-shrink: 0;
 }
+
 .person-name {
-  font-family: var(--font-d);
+  font-family: var(--font-h);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--cream);
 }
+
 .person-role {
   font-size: 12px;
   color: var(--cream-muted);
-  margin-bottom: 4px;
-}
-.person-bio {
-  font-size: 13px;
-  color: var(--cream-dim);
-  line-height: 1.5;
+  margin-bottom: 6px;
 }
 
-.advisors-section {
-  margin-top: 20px;
+.person-bio {
+  font-size: 12px;
+  color: var(--cream-dim);
+  line-height: 1.6;
 }
-.advisor-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
+
+/* Traction stats */
+.traction-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
 }
-.advisor-pill {
+
+.traction-stat {
+  text-align: center;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-full);
-  padding: 8px 14px;
-  font-size: 12px;
-  color: var(--cream-dim);
+  border-radius: var(--r-sm);
+  padding: 16px 8px;
 }
 
-/* Demo */
-.demo-card {
-  background: linear-gradient(135deg, #12122A 0%, #1E1E40 40%, #12122A 100%);
-  border: 1px solid var(--gold);
-  border-radius: var(--r);
-  padding: 24px;
-  text-align: center;
+.stat-number {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 4px;
 }
-.demo-subtitle {
-  font-size: 13px;
-  color: var(--cream-dim);
-  margin-bottom: 20px;
-  line-height: 1.5;
-  font-family: var(--font-d);
-  font-style: italic;
-}
-.demo-btn {
-  display: block;
-  width: 100%;
-  padding: 18px;
-  border-radius: var(--r-full);
-  background: linear-gradient(135deg, var(--gold), var(--blue));
-  color: white;
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 16px;
-  text-decoration: none;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  animation: glowPulse 2s infinite;
-  transition: transform 0.2s;
-  letter-spacing: 0.02em;
-}
-.demo-btn:hover {
-  transform: translateY(-1px);
-}
-.demo-btn:active {
-  transform: scale(0.98);
-}
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.25), 0 0 20px rgba(59,173,228,0.2); }
-  50% { box-shadow: 0 0 36px rgba(201,168,76,0.45), 0 0 36px rgba(59,173,228,0.35); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .fade-in { transition: none; opacity: 1; transform: none; }
-  .demo-btn { animation: none; }
-}
-.demo-below {
-  font-size: 12px;
+
+.stat-label {
+  font-size: 11px;
   color: var(--cream-muted);
-  margin-top: 16px;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
-/* Scroll progress bar */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(to right, var(--gold), var(--blue));
-  z-index: 100;
-  width: 0%;
-  transition: width 50ms linear;
+/* Stat pills row */
+.stat-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
 }
 
-/* Dot nav */
-.dot-nav {
-  position: fixed;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 90;
+.stat-pill {
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 16px 12px;
 }
-.dot-nav-item {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(245,241,234,0.15);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  padding: 0;
+
+.stat-pill .stat-big {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
 }
-.dot-nav-item.active {
-  background: var(--gold);
-  box-shadow: 0 0 8px rgba(201,168,76,0.4);
-  transform: scale(1.3);
+
+.stat-pill .stat-small {
+  font-size: 11px;
+  color: var(--cream-muted);
 }
-.dot-nav-item:hover:not(.active) {
-  background: rgba(245,241,234,0.35);
+
+/* Revenue cards */
+.revenue-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 16px;
+  margin-bottom: 10px;
 }
-@media (max-width: 480px) {
-  .dot-nav { right: 6px; gap: 8px; }
-  .dot-nav-item { width: 6px; height: 6px; }
+
+.revenue-card .rev-title {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.revenue-card .rev-body {
+  font-size: 12px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.revenue-card .rev-math {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--green);
+}
+
+/* Ask */
+.ask-amount {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 56px;
+  text-align: center;
+  color: var(--cream);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.ask-terms {
+  font-size: 16px;
+  color: var(--cream-dim);
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 /* Closing */
 .closing {
   text-align: center;
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding: 48px 0 32px;
 }
+
 .closing-headline {
-  font-size: 26px;
-  line-height: 1.3;
-  margin-bottom: 16px;
-}
-.closing-body {
-  margin-bottom: 32px;
-}
-.closing-email {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--gold);
-  text-decoration: none;
-  transition: color 0.2s;
-  display: inline-block;
-  padding: 12px 24px;
-}
-.closing-email:hover {
-  color: var(--blue);
-}
-
-/* Gold pill standalone */
-.gold-pill-standalone {
-  display: inline-block;
-  background: rgba(201,168,76,0.1);
-  color: var(--gold);
-  font-size: 12px;
-  font-family: var(--font-b);
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: var(--r-full);
-  margin-top: 12px;
-}
-
-/* Total MRR */
-.total-section {
-  text-align: center;
-  padding: 20px 0;
-}
-.total-mrr {
-  font-family: var(--font-w);
+  font-family: var(--font-h);
   font-weight: 800;
-  font-size: 40px;
-  color: var(--gold);
-}
-.total-arr {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--cream-dim);
-  margin-top: 4px;
-}
-.total-note {
-  font-size: 13px;
-  color: var(--cream-muted);
-  margin-top: 12px;
-  line-height: 1.5;
+  font-size: 28px;
+  color: var(--cream);
+  line-height: 1.3;
+  margin-bottom: 20px;
 }
 
-/* Why Now */
-.why-now-body {
+.closing-body {
   font-size: 15px;
   color: var(--cream-dim);
   line-height: 1.7;
+  margin-bottom: 32px;
 }
-.why-now-grid {
+
+.closing-email {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.closing-email:hover {
+  text-decoration: underline;
+}
+
+/* Demo card */
+.demo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold);
+  border-radius: var(--r);
+  padding: 24px;
+  text-align: center;
+}
+
+.demo-subtitle {
+  font-size: 13px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.demo-btn {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #C4953A, #7C3AED);
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  animation: pulse-glow 2s ease-in-out infinite;
+  text-align: center;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(196,149,58,0.3); }
+  50% { box-shadow: 0 0 40px rgba(124,58,237,0.4), 0 0 20px rgba(196,149,58,0.3); }
+}
+
+.demo-below {
+  font-size: 12px;
+  color: var(--cream-muted);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* Scroll progress */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), #7C3AED);
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* Dot nav */
+.dot-nav {
+  position: fixed;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  z-index: 50;
+}
+
+.dot-nav-item {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cream-muted);
+  opacity: 0.3;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot-nav-item.active {
+  opacity: 1;
+  background: var(--gold);
+}
+
+/* Fade in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pricing row */
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.pricing-row + .pricing-row {
+  border-top: 1px solid var(--border);
+}
+
+.pricing-label {
+  font-size: 13px;
+  color: var(--cream-dim);
+}
+
+.pricing-value {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+/* Enterprise two-col */
+.ent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 400px) {
+  .ent-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ent-col-label {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ent-col-body {
+  font-size: 12px;
+  color: var(--cream-dim);
+  line-height: 1.7;
+}
+
+/* Problem two-col cards */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-bottom: 20px;
 }
-.why-card {
+
+@media (max-width: 400px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.problem-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--purple);
   border-radius: var(--r-sm);
   padding: 16px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.why-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.why-icon svg {
-  width: 20px;
-  height: 20px;
-}
-.why-icon.declining {
-  background: rgba(231, 76, 60, 0.12);
-}
-.why-icon.declining svg { stroke: #E74C3C; }
-.why-icon.growing {
-  background: rgba(46, 204, 113, 0.12);
-}
-.why-icon.growing svg { stroke: #2ECC71; }
-.why-icon.shifting {
-  background: rgba(230, 126, 34, 0.12);
-}
-.why-icon.shifting svg { stroke: #E67E22; }
-.why-icon.opportunity {
-  background: rgba(59, 173, 228, 0.12);
-}
-.why-icon.opportunity svg { stroke: var(--blue); }
-.why-content {
-  flex: 1;
-  min-width: 0;
-}
-.why-label {
-  font-family: var(--font-w);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
-}
-.why-label.red { color: #E74C3C; }
-.why-label.amber { color: #E67E22; }
-.why-label.green { color: #2ECC71; }
-.why-label.blue { color: var(--blue); }
-.why-desc {
-  font-size: 13px;
-  color: var(--cream-dim);
-  line-height: 1.5;
-}
-.why-stat {
-  font-family: var(--font-w);
-  font-size: 18px;
-  font-weight: 800;
-  margin-top: 6px;
-}
-.why-stat.red { color: #E74C3C; }
-.why-stat.amber { color: #E67E22; }
-.why-stat.green { color: #2ECC71; }
-.why-stat.blue { color: var(--blue); }
-.why-thesis {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px;
-  margin-top: 16px;
-}
-.why-thesis-text {
-  font-family: var(--font-d);
-  font-size: 17px;
-  font-style: italic;
-  color: var(--cream);
-  line-height: 1.6;
-}
-.why-thesis-sub {
-  font-size: 13px;
-  color: var(--cream-muted);
-  margin-top: 10px;
-  line-height: 1.5;
 }
 
-/* Product screenshots */
-.product-screenshot {
-  width: 100%;
-  border-radius: var(--r);
-  border: 1px solid var(--border);
-  margin: 16px 0;
-  display: block;
-}
-.screenshot-label {
+.problem-card .pc-label {
   font-size: 11px;
   color: var(--cream-muted);
-  text-align: center;
-  margin-top: -8px;
-  margin-bottom: 16px;
-  font-family: var(--font-b);
-  font-style: italic;
+  margin-bottom: 8px;
 }
 
-/* Platform logos */
-.platform-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 16px 0;
-  margin: 16px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  flex-wrap: wrap;
-}
-.platform-logo {
-  opacity: 0.4;
-  transition: opacity 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--cream-muted);
-  font-family: var(--font-b);
-  font-weight: 500;
-}
-.platform-logo svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* Why Now data viz */
-.why-bar-container {
-  margin-top: 8px;
-}
-.why-bar-track {
-  height: 6px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-.why-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 1.5s ease;
-}
-.why-bar-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: var(--cream-muted);
-  margin-top: 3px;
-}
-.why-big-stat {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 28px;
-  line-height: 1;
-  margin-top: 8px;
-}
-
-/* TAM/SAM/SOM */
-.tam-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-.tam-card {
-  position: relative;
-  padding: 20px;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-}
-.tam-card:first-child {
-  border-radius: var(--r) var(--r) 0 0;
-}
-.tam-card:last-child {
-  border-radius: 0 0 var(--r) var(--r);
-}
-.tam-card + .tam-card {
-  border-top: none;
-}
-.tam-tier-label {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.tam-stat {
-  font-family: var(--font-w);
-  font-weight: 800;
-  font-size: 36px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.tam-label {
-  font-family: var(--font-b);
-  font-size: 15px;
-  color: var(--cream);
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-.tam-desc {
+.problem-card .pc-body {
   font-size: 12px;
-  color: var(--cream-muted);
-  line-height: 1.5;
-}
-.tam-bar-track {
-  height: 8px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 12px;
-}
-.tam-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 1.5s ease;
-}
-.tam-dollar {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 13px;
-  margin-top: 8px;
-}
-.tam-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-card);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  padding: 2px 0;
-}
-.tam-arrow svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--cream-muted);
-}
-.tam-wedge-note {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 14px 16px;
-  margin-top: 16px;
-  text-align: center;
-}
-
-/* Architecture card */
-.arch-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px;
-}
-
-/* Backed by */
-.backed-section {
-  margin-top: 16px;
-}
-.backer-item {
-  font-size: 13px;
   color: var(--cream-dim);
-  padding: 4px 0;
+  line-height: 1.7;
+  white-space: pre-line;
 }
 
-/* Market rings */
-.market-rings {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0 24px;
+/* Three-col stat pills */
+.stat-pills-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin: 20px 0;
 }
-.ring {
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+
+.stat-pills-3 .stat-pill {
+  padding: 14px 8px;
 }
-.ring-tam {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, transparent 60%, rgba(153,153,187,0.06) 100%);
-  border: 1px solid rgba(153,153,187,0.15);
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
-  transition-delay: 0.8s;
-}
-.ring-sam {
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, transparent 55%, rgba(201,168,76,0.08) 100%);
-  border: 1px solid rgba(201,168,76,0.25);
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-  transition-delay: 0.4s;
-}
-.ring-som {
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, rgba(46,204,113,0.2) 0%, rgba(46,204,113,0.05) 100%);
-  border: 1px solid rgba(46,204,113,0.4);
-  box-shadow: 0 0 30px rgba(46,204,113,0.12), 0 0 60px rgba(46,204,113,0.06);
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
-  transition-delay: 0s;
-}
-/* Animate in when section is visible */
-.visible .ring-tam,
-.visible .ring-sam,
-.visible .ring-som {
-  transform: scale(1);
-  opacity: 1;
-}
-/* Glow burst on SOM after it lands */
-.visible .ring-som {
-  animation: som-glow 3s ease-in-out 1.2s infinite;
-}
-@keyframes som-glow {
-  0%, 100% {
-    box-shadow: 0 0 30px rgba(46,204,113,0.12), 0 0 60px rgba(46,204,113,0.06);
-    border-color: rgba(46,204,113,0.4);
-  }
-  50% {
-    box-shadow: 0 0 50px rgba(46,204,113,0.25), 0 0 100px rgba(46,204,113,0.12), 0 0 150px rgba(46,204,113,0.05);
-    border-color: rgba(46,204,113,0.6);
-  }
-}
-/* Labels fade in with their rings */
-.ring-label-outer {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.visible .ring-tam .ring-label-outer {
-  opacity: 1;
-  transition-delay: 1.2s;
-}
-.visible .ring-label-sam {
-  opacity: 1;
-  transition-delay: 0.8s;
-}
-.som-content {
-  text-align: center;
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.visible .som-content {
-  opacity: 1;
-  transform: scale(1);
-  transition-delay: 0.3s;
-}
-.som-number {
-  font-family: var(--font-w);
+
+.stat-pills-3 .stat-big {
+  font-family: var(--font-h);
   font-weight: 800;
   font-size: 24px;
-  color: var(--green);
   line-height: 1;
+  margin-bottom: 4px;
 }
-.som-label {
-  font-size: 9px;
-  color: var(--cream-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 2px;
-}
-.som-dollar {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--green);
-  margin-top: 4px;
-}
-.ring-label-sam {
-  top: 10px;
-}
-.ring-tier {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.ring-dollar {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 14px;
-}
-.ring-tam .ring-label-outer .ring-tier { color: var(--cream-muted); }
-.ring-tam .ring-label-outer .ring-dollar { color: var(--cream-muted); }
-.ring-label-sam .ring-tier { color: var(--gold); }
-.ring-label-sam .ring-dollar { color: var(--gold); }
 
-/* Legend animate in */
-.market-legend {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 8px;
+.stat-pills-3 .stat-small {
+  font-size: 10px;
+  color: var(--cream-muted);
+  line-height: 1.4;
 }
-.legend-item {
+
+/* Advisor/Backed pills */
+.advisor-pill {
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.visible .legend-item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 1.4s; }
-.visible .legend-item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 1.6s; }
-.visible .legend-item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 1.8s; }
-.legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.legend-tier {
-  font-family: var(--font-w);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1px;
-  margin-right: 6px;
-}
-.legend-desc {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  padding: 6px 14px;
+  margin-bottom: 6px;
   font-size: 12px;
   color: var(--cream-dim);
-}
-/* Wedge note animate */
-.tam-wedge-note {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.visible .tam-wedge-note {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 2s;
 }
 </style>
 </head>
@@ -1300,682 +693,383 @@ body {
     <div class="confidential">Investor Briefing - Confidential</div>
   </div>
 
-  <!-- Founder photo -->
-  <div class="moment-photo fade-in" style="margin-top: 24px; margin-bottom: 0;">
-    <img src="photos/V20240131LJ-0180.jpg" alt="Travis Atreo with Vice President Kamala Harris" style="height: 320px; object-position: center 15%;">
+  <!-- SECTION 1: OPENING -->
+  <div class="section fade-in" style="padding-top: 16px;">
+    <h1 class="headline" style="font-size: 32px; line-height: 1.2; margin-bottom: 20px;">Every artist needs a manager,<br>an agent, a publicist, and a CFO.<br><br><span style="color: var(--gold);">99% can't afford one.</span></h1>
+    <div class="body-text" style="white-space: pre-line;">So they burn out running a business they were never trained to run.
+They lose deals they never knew existed.
+They get taken advantage of by the people they finally do hire.
+And they make a fraction of what their talent is actually worth.
+
+We built the team they've always needed.
+<span style="color: var(--cream); font-family: var(--font-h); font-weight: 700;">For $20 a month.</span></div>
+    <div class="divider" style="margin-top: 32px;"></div>
   </div>
 
-  <!-- Section 0: Founder Story -->
-  <div class="section fade-in" style="padding-top: 12px;">
-    <div style="font-family: var(--font-w); font-weight: 700; font-size: 20px; color: var(--cream); margin-bottom: 4px;">Travis Atreo</div>
-    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 16px;">Founder & CEO · 500M+ streams · The Voice · Performed at the Vice President's residence · Taylor Swift tweeted my cover</div>
-    <h1 class="headline opening-headline" style="font-size: 32px; line-height: 1.2;">I was making<br><span style="color: var(--green);">$20K/month</span><br>from music.</h1>
-    <div class="body-text" style="margin-top: 16px; font-size: 17px; color: var(--cream);">Then the algorithm changed.</div>
-    <div class="divider" style="margin: 20px 0;"></div>
-    <div class="body-text" style="font-size: 15px; line-height: 1.7; color: var(--cream-dim);">I still had millions of monthly listeners. 40,000 of them were in Manila alone. So I flew there to tour for them.</div>
-    <div class="body-text" style="font-size: 15px; line-height: 1.7; color: var(--cream-dim); margin-top: 12px;">I booked the show. Then I tried to tell my fans I was coming.</div>
-    <div class="body-text" style="font-size: 17px; line-height: 1.7; color: var(--cream); margin-top: 12px; font-family: var(--font-w); font-weight: 600;">Spotify wouldn't let me message them.<br>YouTube wouldn't let me message them.<br>No platform would.</div>
-    <div class="body-text" style="font-size: 15px; line-height: 1.7; color: var(--cream-dim); margin-top: 12px;">I posted a video. Barely anyone saw it. Algorithms only show 2% of your audience unless you pay to boost.</div>
-    <div class="body-text" style="font-size: 15px; line-height: 1.7; color: var(--red); margin-top: 12px; font-style: italic;">These were MY fans. And I couldn't reach a single one of them.</div>
-
-    <div style="margin-top: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 20px; text-align: center;">
-      <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 12px;">Over 10 years. 400M streams.</div>
-      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 16px;">
-        <div style="flex: 1; text-align: center;">
-          <div style="font-family: var(--font-w); font-weight: 800; font-size: 36px; color: var(--red);">$200K</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">what I kept</div>
-        </div>
-        <div style="font-size: 16px; color: var(--cream-dim);">vs.</div>
-        <div style="flex: 1; text-align: center;">
-          <div style="font-family: var(--font-w); font-weight: 800; font-size: 36px; color: var(--green);">$53M+</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">total value created<br>for platforms</div>
-        </div>
-      </div>
-      <div style="text-align: left; margin: 16px 0; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 8px;">
-        <div style="font-size: 11px; color: var(--cream-dim); line-height: 1.8;">
-          <span style="color: var(--cream-muted);">Streaming revenue:</span> Spotify earned $2.8M from my plays<br>
-          <span style="color: var(--cream-muted);">Listener data:</span> Demographics, behavior, purchase signals sold across their $33B/yr ad network<br>
-          <span style="color: var(--cream-muted);">My cut of the data:</span> <span style="color: var(--red);">$0</span>
-        </div>
-      </div>
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 15px; color: var(--gold);">For every $1.00 I earned, platforms made $250.</div>
-      <div style="font-size: 12px; color: var(--cream-dim); margin-top: 8px;">If I leave tomorrow, they lose the content AND the data source.<br>That's why talent owning their fan database changes everything.</div>
-    </div>
-    <div class="divider"></div>
-  </div>
-
-  <!-- Section 1: The Systemic Problem -->
+  <!-- SECTION 2: THE PROBLEM -->
   <div class="section fade-in">
     <div class="section-label">THE PROBLEM</div>
-    <div class="body-text" style="margin-bottom: 16px;">Every creator follows the same arc. The algorithm gives, then the algorithm takes. <span style="color: var(--cream); font-family: var(--font-w); font-weight: 700;">Borrowed attention on rented land.</span></div>
-    <img src="photos/creator-lifecycle_opt.jpg" alt="The Life Cycle of a Social Media Creator" style="width: 100%; border-radius: var(--r-sm);">
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pc-label">The team they need</div>
+        <div class="pc-body">Manager: $3,000-$5,000/month + 20%
+Agent: 10% of every deal
+Publicist: $3,000-$8,000/month
+CFO: $10,000+/month
+Full team: $25,000-$50,000/month</div>
+      </div>
+      <div class="problem-card">
+        <div class="pc-label">What they actually have</div>
+        <div class="pc-body">Themselves.
+A group chat.
+A spreadsheet they stopped updating.
+And a growing sense that their career is happening to them instead of being run by them.</div>
+      </div>
+    </div>
+
+    <div class="body-text" style="margin-bottom: 16px;">Platforms promised artists a new deal. Upload here. Build your audience here. Reach your fans here.</div>
+    <div class="body-text" style="margin-bottom: 16px;">But the deal had the same hidden clause it always did.</div>
+    <div class="body-text" style="margin-bottom: 16px; color: var(--cream); font-family: var(--font-h); font-weight: 700;">We distribute you. You give us the economics.</div>
+    <div class="body-text" style="margin-bottom: 16px;">Spotify pays $0.004 per stream. The data about who streamed, where they live, what they buy, how loyal they are: Spotify keeps all of it.</div>
+    <div class="body-text" style="margin-bottom: 16px;">Artists built the audience. Platforms captured the value. The team took their cut. The artist was left with the least information about their own career of anyone in the room.</div>
+    <div class="body-text" style="color: var(--cream); font-family: var(--font-h); font-weight: 700;">MAWD closes that gap.</div>
+    <div class="divider" style="margin-top: 32px;"></div>
   </div>
 
-  <!-- Section 1b: The Thesis -->
+  <!-- SECTION 3: THE PRODUCT - MAWD -->
   <div class="section fade-in">
-    <h2 class="headline opening-headline" style="font-size: 26px;">The only talent who survive the AI era are the ones who own their fan database.</h2>
-    <div class="body-text opening-body">Platforms were a 30-year interruption of the oldest model in art: direct patronage. We're returning to that. With AI infrastructure.</div>
+    <div class="section-label">THE PRODUCT</div>
+    <h2 class="headline" style="font-size: 28px; margin-bottom: 8px;">MAWD. Management AI Working Daily.</h2>
+    <div class="body-text" style="margin-bottom: 24px;">Five specialist agents. One chief of staff. Runs 24/7. Costs less than dinner.</div>
+
+    <div class="agent-card" style="border-left: 3px solid var(--gold);">
+      <div class="agent-icon">🤖</div>
+      <div>
+        <div class="agent-name" style="color: var(--gold);">DOLLAR - Your CFO</div>
+        <div class="agent-desc">Tracks every dollar across every revenue stream. Finds the money you didn't know existed. Tells you exactly what you need to do to hit your number this month.</div>
+      </div>
+    </div>
+
+    <div class="agent-card" style="border-left: 3px solid var(--purple);">
+      <div class="agent-icon">📊</div>
+      <div>
+        <div class="agent-name" style="color: var(--purple);">PULSE - Your A&R and Fan Intelligence</div>
+        <div class="agent-desc">Identifies your true fans inside the noise of casual followers. Knows who drove hours to your show. Who flew from another country. Who has been there since the beginning.</div>
+      </div>
+    </div>
+
+    <div class="agent-card" style="border-left: 3px solid var(--teal);">
+      <div class="agent-icon">🔍</div>
+      <div>
+        <div class="agent-name" style="color: var(--teal);">SCOUT - Your Agent</div>
+        <div class="agent-desc">Finds sync opportunities in your catalog. Identifies brand partnerships that fit. Scores every opportunity by revenue and alignment with who you are.</div>
+      </div>
+    </div>
+
+    <div class="agent-card" style="border-left: 3px solid var(--blue);">
+      <div class="agent-icon">🧭</div>
+      <div>
+        <div class="agent-name" style="color: var(--blue);">COMPASS - Your Manager</div>
+        <div class="agent-desc">Sees the full picture of your career. Thinks in quarters not days. Keeps you on strategy when the day-to-day pulls you off course.</div>
+      </div>
+    </div>
+
+    <div class="agent-card" style="border-left: 3px solid var(--pink);">
+      <div class="agent-icon">✨</div>
+      <div>
+        <div class="agent-name" style="color: var(--pink);">HYPE - Your Publicist</div>
+        <div class="agent-desc">Knows your voice. Writes your fan letters, your announcements, your direct asks, all in your words, never sounding like AI. Always pointing fans toward the relationship that matters most.</div>
+      </div>
+    </div>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--gold); border-radius: var(--r); padding: 20px; text-align: center; margin-top: 20px;">
+      <div class="body-text" style="font-size: 15px; margin-bottom: 12px;">The full team costs $25,000-$50,000/month.</div>
+      <div style="font-family: var(--font-h); font-weight: 800; font-size: 24px; color: var(--gold); margin-bottom: 12px;">MAWD costs $20/month.</div>
+      <div class="body-text" style="font-size: 14px;">Same intelligence. No misaligned incentives. No one taking 20% of your earnings. Just your business, running.</div>
+    </div>
+    <div class="divider" style="margin-top: 32px;"></div>
+  </div>
+
+  <!-- SECTION 4: FANDED CLUBS -->
+  <div class="section fade-in">
+    <div class="section-label">THE SECOND PRODUCT</div>
+    <h2 class="headline" style="font-size: 24px; margin-bottom: 16px;">Fanded Clubs.<br>The direct fan relationship.</h2>
+
+    <div class="body-text" style="margin-bottom: 16px;">Every artist gets a private fan club, a direct channel to their true fans.</div>
+    <div class="body-text" style="margin-bottom: 16px;">No algorithm deciding who sees the message. No platform sitting between the artist and the people who love them.</div>
+    <div class="body-text" style="margin-bottom: 16px;">The fan who drove hours to your show. Who flew from another continent. Who showed up after three years of silence.</div>
+    <div class="body-text" style="margin-bottom: 16px; color: var(--cream); font-family: var(--font-h); font-weight: 700;">These are not casual followers. These are true fans. They belong to the artist. Not to the platform.</div>
+    <div class="body-text" style="margin-bottom: 20px;">Fanded Clubs give artists the infrastructure to own that relationship directly, and the database that powers everything MAWD does.</div>
+
+    <div class="stat-pills">
+      <div class="stat-pill">
+        <div class="stat-big" data-count="20" data-suffix=":1">0</div>
+        <div class="stat-small">minimum LTV:CAC</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-big" data-count="80" data-suffix=":1">0</div>
+        <div class="stat-small">top tier LTV:CAC</div>
+      </div>
+    </div>
     <div class="divider"></div>
   </div>
 
-  <!-- Section 3: The Insight -->
+  <!-- SECTION 5: PROOF -->
   <div class="section fade-in">
-    <div class="section-label">THE INSIGHT</div>
-    <div class="card" style="padding: 20px;">
-      <h2 class="headline" style="font-size: 20px; margin-bottom: 12px;">The fan database is the business.</h2>
-      <div class="body-text">Not a marketing tool. The foundational asset of a talent-owned business. The talent who owns it has leverage, intelligence, and durability no platform can touch.</div>
-    </div>
-  </div>
+    <div class="section-label">ALREADY RUNNING</div>
+    <h2 class="headline" style="font-size: 24px; margin-bottom: 24px;">MAWD is already running<br>real talent businesses.</h2>
 
-  <!-- Moment: AAGC community meetup -->
-  <div class="moment-photo fade-in">
-    <img src="photos/IMG_0219_opt.jpg" alt="Asian American Girl Club community meetup at Venice Beach">
-    <div class="moment-caption">AAGC community meetup -Venice Beach, CA</div>
-  </div>
-
-  <!-- Section 4: The Solution -->
-  <div class="section fade-in">
-    <div class="section-label">THE SOLUTION</div>
-    <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">Fanded is the infrastructure for talent-owned businesses.</h2>
-    <div class="body-text" style="margin-bottom: 16px;">Own your fan database. Deploy AI on top of it. MAWD (Management AI Working Daily) is your AI chief of staff. It compounds intelligence on data that belongs entirely to you.</div>
-
-    <div class="agent-card">
-      <div class="agent-icon">🧭</div>
-      <div>
-        <div class="agent-name" style="color: var(--blue);">COMPASS <span class="agent-title">Your CEO</span></div>
-        <div class="agent-desc">Strategy · Career roadmap · 90-day planning</div>
+    <div class="traction-stats">
+      <div class="traction-stat">
+        <div class="stat-number" style="color: var(--gold);" data-count="5">0</div>
+        <div class="stat-label">Live MAWDs</div>
       </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">📊</div>
-      <div>
-        <div class="agent-name" style="color: var(--purple);">PULSE <span class="agent-title">Your COO</span></div>
-        <div class="agent-desc">Audience intelligence · True fan identification</div>
+      <div class="traction-stat">
+        <div class="stat-number" style="color: var(--purple); font-size: 36px;" data-count="7" data-suffix="K+">0</div>
+        <div class="stat-label">Club Members</div>
       </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">🤖</div>
-      <div>
-        <div class="agent-name" style="color: var(--gold);">DOLLAR <span class="agent-title">Your CFO</span></div>
-        <div class="agent-desc">Financial intelligence · Revenue tracking · Revenue gap detection</div>
-      </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">✨</div>
-      <div>
-        <div class="agent-name" style="color: var(--pink);">HYPE <span class="agent-title">Your CMO</span></div>
-        <div class="agent-desc">Content strategy · Voice · Fan communication</div>
-      </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">🔍</div>
-      <div>
-        <div class="agent-name" style="color: var(--teal);">SCOUT <span class="agent-title">Your CBO</span></div>
-        <div class="agent-desc">Opportunity identification · Sync licensing · Partnerships</div>
+      <div class="traction-stat">
+        <div class="stat-number" style="color: var(--green); font-size: 32px;">2/day</div>
+        <div class="stat-label">New Builds</div>
       </div>
     </div>
 
-    <div class="body-text" style="margin-top: 16px;">Every data source unified. Everything that doesn't require being human, automated.</div>
-
-    <!-- Platform integrations strip -->
-    <div class="platform-strip">
-      <div class="platform-logo">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Spotify
-      </div>
-      <div class="platform-logo">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </div>
-      <div class="platform-logo">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-        Instagram
-      </div>
-      <div class="platform-logo">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Apple
-      </div>
-      <div class="platform-logo">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.337 23.979l7.216-7.216c1.264-1.264 1.264-3.314 0-4.578l-4.914-4.914c-1.264-1.264-3.314-1.264-4.578 0L5.845 14.487c-1.264 1.264-1.264 3.314 0 4.578l4.914 4.914c1.264 1.264 3.314 1.264 4.578 0zM3.563 11.293L10.779 4.077c1.264-1.264 1.264-3.314 0-4.578C9.901-1.376 8.534-1.67 7.462-.931L.753 5.778c-1.264 1.264-.877 3.127.339 4.343l1.236 1.236c.415.415 1.028.143 1.235-.064z"/></svg>
-        Shopify
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 4b: Why Not Them -->
-  <div class="section fade-in">
-    <div class="section-label">WHY NOT PATREON, ONLYFANS, CAMEO?</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">They sell content on platforms they own.<br>We give talent their fan database.</h2>
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream-muted); min-width: 70px;">Patreon</div>
-        <div style="font-size: 12px; color: var(--cream-dim);">Video subscriptions. Doesn't work if you're not making video content.</div>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream-muted); min-width: 70px;">OnlyFans</div>
-        <div style="font-size: 12px; color: var(--cream-dim);">Brand stigma. Transactional content sales. No business intelligence.</div>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream-muted); min-width: 70px;">Cameo</div>
-        <div style="font-size: 12px; color: var(--cream-dim);">Platform owns the data. Product is a video, not a fan relationship.</div>
-      </div>
-    </div>
-    <div style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid var(--teal); border-radius: var(--r); padding: 16px; text-align: center;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--cream); margin-bottom: 6px;">Fanded</div>
-      <div style="font-size: 13px; color: var(--cream-dim); line-height: 1.5;">The first tech that lets talent own their fan database and deploys private AI to run their business from it.</div>
-    </div>
-  </div>
-
-  <!-- Section 5: Architecture -->
-  <div class="section fade-in">
-    <div class="section-label">WHY IT'S DEFENSIBLE</div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; text-align: center;">
-        <div style="font-size: 28px; margin-bottom: 6px;">🔒</div>
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream); margin-bottom: 4px;">Containerized</div>
-        <div style="font-size: 11px; color: var(--cream-muted); line-height: 1.4;">Every MAWD is private. Data never commingles.</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; text-align: center;">
-        <div style="font-size: 28px; margin-bottom: 6px;">🧠</div>
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream); margin-bottom: 4px;">Compounds</div>
-        <div style="font-size: 11px; color: var(--cream-muted); line-height: 1.4;">The longer it runs, the smarter it gets.</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; text-align: center;">
-        <div style="font-size: 28px; margin-bottom: 6px;">🔄</div>
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream); margin-bottom: 4px;">Switching Cost</div>
-        <div style="font-size: 11px; color: var(--cream-muted); line-height: 1.4;">The relationship itself is the moat.</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; text-align: center;">
-        <div style="font-size: 28px; margin-bottom: 6px;">👑</div>
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream); margin-bottom: 4px;">Data Sovereignty</div>
-        <div style="font-size: 11px; color: var(--cream-muted); line-height: 1.4;">Talent owns their data. Period.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 5b: The Data Asset -->
-  <div class="section fade-in">
-    <div class="section-label">WHY THIS GETS MASSIVE</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">The $300B third-party data industry is collapsing.</h2>
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px; line-height: 1.7;">iOS 14 killed tracking. Cookies are dying. GDPR made non-consensual data collection a legal risk. The entire ad industry is desperate for a new source of audience data.</div>
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px; line-height: 1.7;">The only data that survives is <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">consent-based first-party data.</span> Data where the consumer explicitly opted into a direct relationship.</div>
-    <div class="body-text" style="margin-bottom: 20px; font-size: 14px; line-height: 1.7;">That's exactly what a Fanded fan database is.</div>
-
-    <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream); margin-bottom: 4px;">Today: 100+ talent databases, 10K+ fan profiles</div>
-        <div style="font-size: 11px; color: var(--cream-muted);">Consent-based, enriched by AI, owned by talent</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--gold); margin-bottom: 4px;">1,000 MAWDs = 5M+ consent-based fan profiles</div>
-        <div style="font-size: 11px; color: var(--cream-muted);">The most valuable data type in a post-cookie world</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid rgba(46,204,113,0.3); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--green); margin-bottom: 4px;">Talent-controlled data brokerage</div>
-        <div style="font-size: 11px; color: var(--cream-muted);">Brands pay to access audiences. Talent sets the terms. Revenue split 50/50.</div>
-      </div>
-    </div>
-
-    <div class="body-text" style="font-size: 13px; color: var(--cream-dim); line-height: 1.6;">Every MAWD deployed grows the network. The data compounds. And unlike platforms, talent WANTS to enrich it because they share in the value.</div>
-  </div>
-
-  <!-- Section 6: Traction -->
-  <div class="section fade-in">
-    <div class="section-label">TRACTION</div>
-
-    <div class="traction-phase">
-      <div class="traction-stats">
-        <div class="traction-stat">
-          <div class="stat-number" style="color: var(--green);" data-count="100" data-suffix="+">0</div>
-          <div class="label">Talent Databases</div>
-          <div style="font-size: 10px; color: var(--cream-muted); margin-top: 4px;">Active fan databases on Fanded</div>
-        </div>
-        <div class="traction-stat">
-          <div class="stat-number" style="color: var(--gold); font-size: 36px;" data-count="50" data-suffix="K+">0</div>
-          <div class="label">Fan Data Points</div>
-          <div style="font-size: 10px; color: var(--cream-muted); margin-top: 4px;">Under management</div>
-        </div>
-        <div class="traction-stat">
-          <div class="stat-number" style="color: var(--blue);" data-count="12">0</div>
-          <div class="label"><span class="live-dot"></span>Live MAWDs</div>
-          <div style="font-size: 10px; color: var(--cream-muted); margin-top: 4px;">100+ on waitlist</div>
-        </div>
-      </div>
-      <div class="traction-two-col">
-        <div class="traction-stat-wide">
-          <div class="stat-number" style="color: var(--green); font-size: 28px;">$0</div>
-          <div class="label">Customer Acquisition Cost</div>
-          <div style="font-size: 10px; color: var(--cream-muted); margin-top: 4px;">Talent brings their own fans</div>
-        </div>
-        <div class="traction-stat-wide">
-          <div class="stat-number" style="color: var(--green); font-size: 28px;">20:1</div>
-          <div class="label">LTV:CAC ratio (min)</div>
-          <div style="font-size: 10px; color: var(--cream-muted); margin-top: 4px;">Top tier: 80:1</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- The pull signal -->
-    <div class="pull-quote-card">
-      <div class="pull-quote-text">"I have millions of followers and I can't name a single one."</div>
-      <div class="pull-quote-attr">What talent kept telling us. The database is the product.</div>
-    </div>
-
-    <img src="screenshots/mawd-mobile.png" alt="MAWD AI chief of staff -live briefing, revenue tracking, action items" class="product-screenshot" style="max-width: 320px; margin-left: auto; margin-right: auto;">
-    <div class="screenshot-label">MAWD live -briefing, revenue, action items</div>
-
-    <!-- Anna Akana comedy tour -->
-    <div class="moment-photo fade-in">
-      <img src="photos/anna-tour_opt.jpg" alt="Anna Akana sold-out comedy tour" style="height: 300px; object-position: center 75%;">
-      <div class="moment-caption">Anna Akana -sold-out comedy tour</div>
-    </div>
-
-    <!-- Talent Card 1 -->
+    <!-- Talent Card 1: Anna Akana -->
     <div class="talent-card">
-      <div class="talent-header">
-        <img src="photos/anna_opt.jpg" alt="Anna Akana" class="talent-photo">
-        <div>
-          <div class="talent-name">Anna Akana</div>
-          <div class="talent-role">Actress · Filmmaker · YouTuber</div>
-        </div>
-      </div>
+      <div class="talent-name">Anna Akana</div>
+      <div class="talent-role">Actress · Filmmaker · YouTuber</div>
       <div class="talent-pills">
         <span class="pill pill-purple">2.8M subscribers</span>
         <span class="pill pill-gold">547M lifetime views</span>
-        <span class="pill pill-green">Fan data across 9 platforms</span>
+        <span class="pill pill-green">731 tour fans contacted</span>
       </div>
-      <div class="talent-body">Patreon, Shopify, Spotify, YouTube, tour emails, tour SMS, Instagram, Facebook, Fanded. All disconnected. MAWD unified 9 sources into one fan database.</div>
-      <div class="talent-body" style="margin-top: 10px; font-style: italic; color: var(--cream);">"I need AI to do the boring stuff, not replace me, so I can keep creating."</div>
+      <div class="talent-body">Sent her first voice memo to fans who attended her comedy tour and never heard from her again after the show. MAWD found revenue her management missed.</div>
     </div>
 
-    <!-- AAGC Trailblazers editorial -->
-    <div class="moment-photo fade-in">
-      <img src="photos/IMG_0213_opt.jpg" alt="Asian American Girl Club community meetup group photo" style="height: 240px; object-position: center 55%;">
-      <div class="moment-caption">AAGC community meetup -Venice Beach, CA</div>
-    </div>
-
-    <!-- Talent Card 2 - AAGC -->
+    <!-- Talent Card 2: AAGC -->
     <div class="talent-card">
-      <div class="talent-header">
-        <img src="photos/aagc_opt.jpg" alt="Asian American Girl Club" class="talent-photo">
-        <div>
-          <div class="talent-name">Asian American Girl Club</div>
-          <div class="talent-role">Brand · Community · Ecommerce</div>
-        </div>
-      </div>
+      <div class="talent-name">Asian American Girl Club</div>
+      <div class="talent-role">Brand · Community · Ecommerce</div>
       <div class="talent-pills">
+        <span class="pill pill-purple">115K followers</span>
         <span class="pill pill-gold">$1.4M revenue</span>
-        <span class="pill pill-purple">115K IG followers</span>
-        <span class="pill pill-green">22K+ customers unified</span>
       </div>
-      <div class="talent-body">22,900 Shopify customers, 8,200 SMS subscribers, 12,200 email opted-in. All scattered. MAWD unified it into one fan database for the first time.</div>
+      <div class="talent-body">MAWD's first analysis surfaced 8,200 SMS subscribers they'd never marketed to. Revenue sitting there that no one on their team knew to activate.</div>
     </div>
 
-    <!-- Travis live at Brick & Mortar -->
-    <div class="moment-photo fade-in">
-      <img src="photos/IMG_0922_opt.jpg" alt="Travis Atreo performing live at Brick & Mortar Music Hall">
-      <div class="moment-caption">Travis Atreo live -Brick & Mortar Music Hall, SF</div>
-    </div>
-
-    <!-- Talent Card 3 - Travis -->
+    <!-- Talent Card 3: Travis Atreo -->
     <div class="talent-card">
-      <div class="talent-header">
-        <img src="photos/travis_opt.jpg" alt="Travis Atreo" class="talent-photo">
-        <div>
-          <div class="talent-name">Travis Atreo</div>
-          <div class="talent-role">Artist · Producer · Founder</div>
-        </div>
-      </div>
+      <div class="talent-name">Travis Atreo</div>
+      <div class="talent-role">Artist · Producer · Founder</div>
       <div class="talent-pills">
-        <span class="pill pill-purple">400M Spotify & Apple streams</span>
+        <span class="pill pill-purple">400M streams</span>
         <span class="pill pill-gold">100M YouTube views</span>
-        <span class="pill pill-green">Fans scattered across 5+ platforms</span>
       </div>
-      <div class="talent-body">Platforms generated $53M+ from his art and audience data. He kept less than $200K. Couldn't name or reach a single fan. Built Fanded because he is the market.</div>
+      <div class="talent-body">The founder replaced his entire management team with MAWD. Running three businesses simultaneously. MAWD found 20% new revenue in the first analysis.</div>
     </div>
 
-    <!-- Manny in The Acolyte -->
-    <div class="moment-photo fade-in">
-      <img src="photos/manny_h-1600x1063.webp" alt="Manny Jacinto in Star Wars: The Acolyte" style="height: 240px; object-position: center 30%;">
-      <div class="moment-caption">Manny Jacinto -Star Wars: The Acolyte (Disney+)</div>
-    </div>
-
-    <!-- Talent Card 4 - Manny -->
+    <!-- Talent Card 4: Manny Jacinto -->
     <div class="talent-card">
-      <div class="talent-header">
-        <img src="photos/manny_opt.jpg" alt="Manny Jacinto" class="talent-photo">
-        <div>
-          <div class="talent-name">Manny Jacinto</div>
-          <div class="talent-role">Actor · Star Wars: The Acolyte · The Good Place</div>
-        </div>
-      </div>
+      <div class="talent-name">Manny Jacinto</div>
+      <div class="talent-role">Actor · Star Wars: The Acolyte · The Good Place</div>
       <div class="talent-pills">
-        <span class="pill pill-purple">564K IG followers</span>
-        <span class="pill pill-gold">200+ fans from 1 event</span>
-        <span class="pill pill-green">Fan database: started at zero</span>
+        <span class="pill pill-purple">564K followers</span>
+        <span class="pill pill-gold">200+ club members</span>
       </div>
-      <div class="talent-body">564K followers on Instagram. Zero in his own database. One Fanded event captured 200+ real fan profiles with contact info, purchase intent, and engagement data. MAWD now powers his production company and film premieres on his terms.</div>
+      <div class="talent-body">100+ fans shared his club with each other. No paid marketing. No publicist. Just the direct fan relationship working.</div>
     </div>
+
+    <div class="divider"></div>
   </div>
 
-  <!-- Section 7: Business Model -->
+  <!-- SECTION 6: ENTERPRISE -->
+  <div class="section fade-in">
+    <div class="section-label">THE ENTERPRISE PLAY</div>
+    <h2 class="headline" style="font-size: 24px; margin-bottom: 16px;">Built for artists.<br>Scaled for management companies.</h2>
+    <div class="body-text" style="margin-bottom: 16px;">Every artist on your roster gets their own MAWD, a private AI chief of staff that knows their business, their fans, and their pipeline.</div>
+    <div class="body-text" style="margin-bottom: 20px;">Your MAWD sees across all of them at once, so you always know what needs your attention before they call you.</div>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--gold); border-radius: var(--r); padding: 20px; margin-bottom: 20px;">
+      <div class="ent-grid">
+        <div>
+          <div class="ent-col-label">For the artist</div>
+          <div class="ent-col-body">Their own private MAWD. Knows their catalog, their fans, their revenue, their opportunities. Speaks first every morning. Handles what doesn't require being human.</div>
+        </div>
+        <div>
+          <div class="ent-col-label">For the manager</div>
+          <div class="ent-col-body">One MAWD that sees across every client simultaneously. Surfaces the one thing that needs your attention today. Knows which client needs you before they call.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-text" style="margin-bottom: 16px;">Both MAWDs communicate. The talent stays focused on creating. The manager stays focused on strategy. The operational layer runs itself.</div>
+    <div class="body-text" style="margin-bottom: 20px;">This is not a tool that replaces managers. It is the infrastructure that makes a team of 3 operate like a team of 30.</div>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 16px; margin-bottom: 16px;">
+      <div class="pricing-row">
+        <div class="pricing-label">Artist MAWD</div>
+        <div class="pricing-value">$20/month</div>
+      </div>
+      <div class="pricing-row">
+        <div class="pricing-label">Manager MAWD</div>
+        <div class="pricing-value">$299/month</div>
+      </div>
+      <div class="pricing-row">
+        <div class="pricing-label">Club take rate</div>
+        <div class="pricing-value">10% of fan revenue</div>
+      </div>
+      <div style="border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px;">
+        <div style="font-family: var(--font-h); font-weight: 700; font-size: 14px; color: var(--cream); line-height: 1.6;">One management company. 15 clients.<br>$600+/month before data revenue.</div>
+      </div>
+    </div>
+    <div class="body-text" style="font-size: 13px; color: var(--cream-muted);">Management companies are already forming a waitlist.</div>
+    <div class="divider" style="margin-top: 24px;"></div>
+  </div>
+
+  <!-- SECTION 7: WHY THIS GETS MASSIVE -->
+  <div class="section fade-in">
+    <div class="section-label">WHY THIS GETS MASSIVE</div>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">Every MAWD builds something the entire advertising industry is desperate for.</h2>
+
+    <div class="body-text" style="margin-bottom: 16px; color: var(--cream); font-family: var(--font-h); font-weight: 700;">A consent-based fan database.</div>
+    <div class="body-text" style="margin-bottom: 16px;">iOS 14 killed behavioral tracking. Cookies are dying. The $300 billion data brokerage industry is collapsing.</div>
+    <div class="body-text" style="margin-bottom: 16px;">The replacement is first-party data: data a fan gives directly to a talent they love. Legally bulletproof. Worth 10x a standard ad profile.</div>
+    <div class="body-text" style="margin-bottom: 20px;">Talent owns it. MAWD enriches it. Brands license it. Revenue splits 50/50 with talent.</div>
+
+    <div class="stat-pills-3">
+      <div class="stat-pill">
+        <div class="stat-big" style="color: var(--gold);" data-count="1000" data-suffix="">0</div>
+        <div class="stat-small">MAWDs at scale</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-big" style="color: var(--purple);" data-count="5000" data-suffix="">0</div>
+        <div class="stat-small">fans per MAWD avg</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-big" style="color: var(--green);">5M+</div>
+        <div class="stat-small">consent-based profiles</div>
+      </div>
+    </div>
+
+    <div class="body-text" style="font-size: 13px;">This is not a SaaS company with a take rate. This is the data infrastructure for the post-cookie creator economy.</div>
+    <div class="divider" style="margin-top: 24px;"></div>
+  </div>
+
+  <!-- SECTION 8: BUSINESS MODEL -->
   <div class="section fade-in">
     <div class="section-label">HOW WE MAKE MONEY</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 8px;">Three revenue layers.<br>Each one bigger than the last.</h2>
-    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 20px; font-style: italic;">Projected at 1,000 MAWDs</div>
+    <div class="body-text" style="margin-bottom: 20px;">Three revenue lines. Starting simple. Getting massive.</div>
 
-    <!-- Layer 1: Infrastructure -->
-    <div style="margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--cream-muted); margin-bottom: 8px;">LAYER 1: INFRASTRUCTURE</div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-          <div>
-            <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--purple);">MAWD Subscription</div>
-            <div style="font-size: 11px; color: var(--cream-muted);">$50/mo per talent</div>
-          </div>
-          <div style="font-family: var(--font-w); font-weight: 800; font-size: 16px; color: var(--purple);">$50K/mo</div>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-          <div>
-            <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--teal);">Manager Seats</div>
-            <div style="font-size: 11px; color: var(--cream-muted);">$100/mo per agency seat</div>
-          </div>
-          <div style="font-family: var(--font-w); font-weight: 800; font-size: 16px; color: var(--teal);">$10K/mo</div>
-        </div>
-      </div>
+    <div class="revenue-card" style="border-left: 3px solid var(--gold);">
+      <div class="rev-title" style="color: var(--gold);">Artist MAWD Subscription</div>
+      <div class="rev-body">$20/month per talent installation. Low barrier by design: talent needs to be able to start.</div>
+      <div class="rev-math">1,000 x $20 = $20K/month</div>
     </div>
 
-    <!-- Layer 2: Platform -->
-    <div style="margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--cream-muted); margin-bottom: 8px;">LAYER 2: PLATFORM</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--gold);">Platform Take Rate</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">10% of all fan revenue through Fanded</div>
-        </div>
-        <div style="font-family: var(--font-w); font-weight: 800; font-size: 16px; color: var(--green);">$100K/mo</div>
-      </div>
+    <div class="revenue-card" style="border-left: 3px solid var(--purple);">
+      <div class="rev-title" style="color: var(--purple);">Fan Club Take Rate</div>
+      <div class="rev-body">10% of all fan membership revenue flowing through the platform. $10/month per member average.</div>
+      <div class="rev-math">1,000 MAWDs x 100 members x $10 x 10% = $100K/month</div>
     </div>
 
-    <!-- Layer 3: Data -->
-    <div style="margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--cream-muted); margin-bottom: 8px;">LAYER 3: THE DATA NETWORK</div>
-      <div style="background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(201,168,76,0.1)); border: 1px solid rgba(46,204,113,0.4); border-radius: var(--r-sm); padding: 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--green); margin-bottom: 8px;">Talent-Controlled Data Brokerage</div>
-        <div style="font-size: 12px; color: var(--cream); line-height: 1.6; margin-bottom: 10px;">Brands pay to access consent-based fan audiences through clean room matching. Talent controls who sees their data. 50/50 revenue share.</div>
-        <div style="font-size: 12px; color: var(--cream-dim); line-height: 1.6;">iOS 14 killed tracking. Cookies are dying. The $300B third-party data industry is collapsing. Consent-based first-party data is the only thing left. Every MAWD we deploy adds thousands of profiles to the network.</div>
-      </div>
+    <div class="revenue-card" style="border-left: 3px solid var(--teal);">
+      <div class="rev-title" style="color: var(--teal);">Enterprise Manager Seats</div>
+      <div class="rev-body">$299/month per management company seat. Talent is the acquisition channel. Manager is the enterprise upsell.</div>
+      <div class="rev-math">100 managers x $299 = $29,900/month</div>
     </div>
 
-    <div style="text-align: center; padding: 12px; border-top: 1px solid var(--border);">
-      <div style="font-size: 11px; color: var(--cream-muted);">At 1,000 MAWDs</div>
-      <div style="font-family: var(--font-w); font-weight: 800; font-size: 28px; color: var(--green);">$1.9M ARR</div>
-      <div style="font-size: 11px; color: var(--cream-dim);">from infrastructure + platform. Data brokerage is additive.</div>
+    <div class="divider" style="margin: 20px 0;"></div>
+
+    <div style="text-align: center;">
+      <div style="font-size: 12px; color: var(--cream-muted); margin-bottom: 8px;">Combined MRR at 18 months</div>
+      <div style="font-family: var(--font-h); font-weight: 800; font-size: 40px; color: var(--gold); line-height: 1;" data-count="150" data-prefix="$" data-suffix="K/month">0</div>
+      <div style="font-family: var(--font-h); font-weight: 800; font-size: 20px; color: var(--cream-dim); margin-top: 8px;">$1.8M ARR</div>
+      <div class="body-text" style="font-size: 13px; margin-top: 12px;">GMV flowing through platform: $1M/month<br>First revenue: within 60 days of close</div>
     </div>
+    <div class="divider" style="margin-top: 24px;"></div>
   </div>
 
-  <!-- Section 8: The Pipeline -->
-  <div class="section fade-in">
-    <div class="section-label">THE PIPELINE</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">Built for musicians.<br>Pulling us everywhere.</h2>
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px;">We built MAWD for music. Then actors needed it. Then athletes. Turns out every talent with a fanbase has the same problem. And no solution.</div>
-
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Darren Hayes (Savage Garden)</div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--green);">~$1M/yr</div>
-        </div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">New album + tour -ops, album sales, fan club. 1 MAWD powers everything.</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">FPAC Festival</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">20,000+ festival community -powering their tech year-round</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Olympic Athletes · LA 2028</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">Pro golfers, Olympians using Fanded to power their bids and monetize fanbases</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Celebrity Waitlist</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">Colton Haynes (9M followers), Holland Roden, legacy artists</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Industry Access</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">Sony, CAA, WME, HBO Max meetings done. Warner Music's Head of Streaming joining as advisor with his own label.</div>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Management Companies</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">Already sending the demo to their artists. Need MAWDs built yesterday.</div>
-      </div>
-    </div>
-
-    <div class="pull-quote-card" style="margin-bottom: 20px;">
-      <div class="pull-quote-text" style="font-size: 15px;">"We build MAWDs one by one. The pipeline needs them by the hundreds."</div>
-      <div class="pull-quote-attr">The bottleneck is onboarding automation. That's what the capital is for.</div>
-    </div>
-  </div>
-
-  <!-- Section 8b: The Ask -->
+  <!-- SECTION 9: THE ASK -->
   <div class="section fade-in">
     <div class="section-label">THE ASK</div>
-    <div class="ask-amount">$1,000,000</div>
+    <div class="ask-amount">$500,000</div>
     <div class="ask-terms">$15M post-money SAFE</div>
-    <div style="display: flex; flex-direction: column; gap: 8px; margin: 20px 0;">
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-size: 20px; flex-shrink: 0;">⚡</div>
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--cream);">Automate MAWD onboarding</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">The bottleneck between us and 100+ waiting talent</div>
-        </div>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-size: 20px; flex-shrink: 0;">🛠</div>
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--cream);">Full-time CTO</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">Build the machine that serves the pipeline</div>
-        </div>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid rgba(46,204,113,0.3); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-size: 20px; flex-shrink: 0;">🚀</div>
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--green);">100 MAWDs in 60 days</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">200K+ fans on the platform -$0 acquisition cost</div>
-        </div>
-      </div>
-    </div>
 
-    <div style="background: rgba(46,204,113,0.06); border: 1px solid rgba(46,204,113,0.15); border-radius: var(--r); padding: 16px; text-align: center; margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 24px; color: var(--green);">10,000 fan profiles</div>
-      <div style="font-size: 12px; color: var(--cream-muted); margin-top: 4px;">added to the data network from just 2 talent. Every MAWD deployed grows the network.</div>
+    <div class="card" style="padding: 20px;">
+      <div style="font-family: var(--font-h); font-weight: 700; font-size: 14px; color: var(--cream); margin-bottom: 12px;">Use of funds:</div>
+      <div class="body-text" style="font-size: 14px; line-height: 1.8;">
+        <span style="color: var(--gold);">→</span> Full-time CTO (Kevin Pamittan, currently part-time)<br>
+        <span style="color: var(--gold);">→</span> Founder salary (Travis Atreo)<br>
+        <span style="color: var(--gold);">→</span> Automated API onboarding (Shopify · YouTube · Spotify · Buzzsprout · Instagram · Email)<br>
+        <span style="color: var(--gold);">→</span> 100 MAWDs launched within 60 days of close
+      </div>
+      <div class="body-text" style="font-size: 13px; margin-top: 16px;">Currently white-glove onboarding: building every MAWD by hand to prove the product before automating. The raise funds the automation.</div>
     </div>
-
-    <div style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--r); padding: 16px; text-align: center;">
-      <div style="font-family: var(--font-w); font-weight: 800; font-size: 14px; color: var(--gold); letter-spacing: 0.5px;">3 MONTHS OF RUNWAY LEFT</div>
-      <div style="font-size: 13px; color: var(--cream-dim); margin-top: 6px;">The biggest pipeline we've ever had.</div>
-    </div>
+    <div class="divider" style="margin-top: 24px;"></div>
   </div>
 
-  <!-- Section 9: Why Now -->
-  <div class="section fade-in">
-    <div class="section-label">WHY NOW</div>
-
-    <div class="why-now-grid">
-      <!-- The industry is collapsing -->
-      <div class="why-card">
-        <div class="why-icon declining">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
-        </div>
-        <div class="why-content">
-          <div class="why-label red">REVENUE IS COLLAPSING</div>
-          <div class="why-desc">Studio deals down 40%. Streaming pays $0.003. Brand deals saturated.</div>
-        </div>
-      </div>
-
-      <!-- The data window -->
-      <div class="why-card">
-        <div class="why-icon growing">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <div class="why-content">
-          <div class="why-label green">THE DATA WINDOW IS OPEN</div>
-          <div class="why-desc">iOS 14 killed tracking. Cookies are dying. Consent-based first-party data is the only thing left. Brands are desperate for it right now.</div>
-        </div>
-      </div>
-
-      <!-- AI makes it possible now -->
-      <div class="why-card">
-        <div class="why-icon opportunity">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
-        </div>
-        <div class="why-content">
-          <div class="why-label blue">AI CUTS BOTH WAYS</div>
-          <div class="why-desc">AI floods platforms with infinite content, making algorithmic dependency fatal. But AI on owned fan data lets one person operate like a full company. Threat and solution arrived at the same time.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 9b: TAM/SAM/SOM -Concentric Circles -->
-  <div class="section fade-in">
-    <div class="section-label">THE MARKET</div>
-
-    <div class="market-rings">
-      <!-- Outer ring: TAM -->
-      <div class="ring ring-tam">
-        <div class="ring-label-outer">
-          <span class="ring-tier">TAM</span>
-          <span class="ring-dollar">$300B+</span>
-        </div>
-        <!-- Middle ring: SAM -->
-        <div class="ring ring-sam">
-          <div class="ring-label-outer ring-label-sam">
-            <span class="ring-tier">SAM</span>
-            <span class="ring-dollar">$65B</span>
-          </div>
-          <!-- Inner ring: SOM -->
-          <div class="ring ring-som">
-            <div class="som-content">
-              <div class="som-number" data-count="2" data-suffix="M+">0</div>
-              <div class="som-label">creators</div>
-              <div class="som-dollar">$2.4B</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Legend below -->
-    <div class="market-legend">
-      <div class="legend-item">
-        <div class="legend-dot" style="background: rgba(153,153,187,0.15); border: 1px solid rgba(153,153,187,0.3);"></div>
-        <div>
-          <span class="legend-tier" style="color: var(--cream-muted);">TAM</span>
-          <span class="legend-desc">Global data brokerage + ad data market</span>
-        </div>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);"></div>
-        <div>
-          <span class="legend-tier" style="color: var(--gold);">SAM</span>
-          <span class="legend-desc">Entertainment + sports audience data</span>
-        </div>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background: rgba(46,204,113,0.2); border: 1px solid rgba(46,204,113,0.5);"></div>
-        <div>
-          <span class="legend-tier" style="color: var(--green);">SOM</span>
-          <span class="legend-desc">2M+ pro talent with fan databases on Fanded</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tam-wedge-note">
-      <div style="font-size: 13px; color: var(--cream-dim); line-height: 1.6;"><span style="color: var(--cream); font-family: var(--font-w); font-weight: 700;">$300B</span> flows through third-party data brokers. We need <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">0.01%</span> of that to be a <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">$30M company</span>. We already have <span style="color: var(--gold); font-family: var(--font-w); font-weight: 700;">100+</span> talent databases feeding the network.</div>
-    </div>
-  </div>
-
-  <!-- Section 10: Team -->
+  <!-- SECTION 10: TEAM -->
   <div class="section fade-in">
     <div class="section-label">THE TEAM</div>
 
     <div class="person-card">
-      <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" style="width: 100%; height: 100%; object-fit: cover; object-position: center 35%; transform: scale(1.5); transform-origin: center 38%;"></div>
+      <div class="person-avatar" style="background: var(--gold);">TA</div>
       <div>
         <div class="person-name">Travis Atreo</div>
         <div class="person-role">Founder & CEO</div>
-        <div class="person-bio">400M streams. 100M YouTube views. The Voice. Built Fanded after a platform algorithm change eliminated his income. He is the market.</div>
+        <div class="person-bio">400M streams. 100M YouTube views. Lost his income overnight when Spotify changed their algorithm. Built Fanded because the fans were always his: the platform just owned the relationship. He is the market.</div>
       </div>
     </div>
 
     <div class="person-card">
-      <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><img src="photos/kevin_opt.jpg" alt="Kevin Pamittan" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transform: scale(1.5); transform-origin: center 30%;"></div>
+      <div class="person-avatar" style="background: var(--purple);">KP</div>
       <div>
         <div class="person-name">Kevin Pamittan</div>
-        <div class="person-role">CTO</div>
-        <div class="person-bio">AI/ML engineer. 20+ years: Weedmaps, Luxottica, Beachbody. Scaled $100M+ tech orgs. Artist.</div>
+        <div class="person-role">AI/ML Engineer</div>
+        <div class="person-bio">Building containerized multi-tenant MAWD architecture. Full-time on close.</div>
       </div>
     </div>
 
     <div class="person-card">
-      <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><img src="photos/lewis.png" alt="Lewis Zhuo" style="width: 100%; height: 100%; object-fit: cover; object-position: center 35%; transform: scale(1.5); transform-origin: center 38%;"></div>
+      <div class="person-avatar" style="background: var(--teal);">LZ</div>
       <div>
         <div class="person-name">Lewis Zhuo</div>
         <div class="person-role">COO · Head of Clubs</div>
-        <div class="person-bio">Ex-Apple & Tesla ops. Leads customer onboarding and retention. Automotive YouTube creator.</div>
       </div>
     </div>
 
-    <div class="advisors-section">
+    <div style="margin-top: 24px;">
       <div class="section-label" style="margin-bottom: 8px;">ADVISORS</div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 14px 6px 6px;">
-          <img src="photos/ted.png" alt="Ted Schilowitz" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
-          <span style="font-size: 12px; color: var(--cream-dim);">Ted Schilowitz · Creator of RED Camera · Co-founder of G-Drive</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 14px 6px 6px;">
-          <img src="photos/chris.jpg" alt="Dr. Chris Mattmann" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
-          <span style="font-size: 12px; color: var(--cream-dim);">Dr. Chris Mattmann · Chief Data & AI Officer, UCLA · Former CTIO, NASA JPL</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 14px 6px 6px;">
-          <img src="photos/eric.jpg" alt="Eric Toda" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
-          <span style="font-size: 12px; color: var(--cream-dim);">Eric Toda · Global Head of Social Marketing, Meta</span>
-        </div>
-      </div>
+      <div class="advisor-pill">Ted Schilowitz · RED Camera</div>
+      <div class="advisor-pill">Dr. Chris Mattmann · UCLA / NASA JPL</div>
+      <div class="advisor-pill">Eric Toda · Meta</div>
     </div>
 
-    <div class="backed-section">
+    <div style="margin-top: 20px;">
       <div class="section-label" style="margin-bottom: 8px;">BACKED BY</div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 14px 6px 6px;">
-          <img src="photos/dave.jpeg" alt="Dave Lu" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
-          <span style="font-size: 12px; color: var(--cream-dim);">Dave Lu · Hyphen Capital</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 14px 6px 6px;">
-          <img src="photos/daniel.jpg" alt="Daniel Lurie" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
-          <span style="font-size: 12px; color: var(--cream-dim);">Daniel Lurie Family Office (Mayor of San Francisco)</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 14px 6px 6px;">
-          <img src="photos/jason.jpeg" alt="Jason Kwon" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
-          <span style="font-size: 12px; color: var(--cream-dim);">Jason Kwon · CSO, OpenAI</span>
-        </div>
-      </div>
+      <div class="advisor-pill">Dave Lu · Hyphen Capital</div>
+      <div class="advisor-pill">Daniel Lurie Family Office</div>
+      <div class="advisor-pill">Jason Kwon · CSO, OpenAI</div>
     </div>
+
+    <div class="divider" style="margin-top: 24px;"></div>
   </div>
 
-  <!-- Section 11: Live Demo -->
+  <!-- SECTION 11: DEMO -->
   <div class="section fade-in">
     <div class="demo-card">
-      <div class="demo-subtitle">Real creator. 2.8M subscribers.<br>500M+ lifetime views. Anonymized for privacy.</div>
-      <a href="https://fanded-demo-investor.vercel.app" target="_blank" rel="noopener" class="demo-btn">See MAWD Live →</a>
-      <div class="demo-below">MAWD is fully live.<br>Ask it anything about this creator's business.</div>
+      <div class="demo-subtitle">Real creator. 2.8M subscribers.<br>500M+ lifetime views.<br>Anonymized for privacy.</div>
+      <a href="https://fanded-creator-x.vercel.app" target="_blank" rel="noopener" class="demo-btn">See MAWD Live →</a>
+      <div class="demo-below">MAWD is fully live.<br>Ask it anything about the business.</div>
     </div>
+    <div class="divider" style="margin-top: 24px;"></div>
   </div>
 
-  <!-- Section 12: Closing -->
+  <!-- SECTION 12: CLOSING -->
   <div class="closing fade-in">
-    <h2 class="headline closing-headline">The future of talent business<br>is self-managed,<br>powered by AI.</h2>
-    <div class="body-text closing-body">We're not predicting this future.<br>We're already living it.</div>
+    <h2 class="closing-headline">The future of talent business<br>is self-managed,<br>powered by AI.</h2>
+    <div class="closing-body">Fanded builds the infrastructure<br>for that world.<br><br>We're not predicting this future<br>from the outside.<br><br>We're already living it.</div>
     <a href="mailto:travis@fanded.com" class="closing-email">travis@fanded.com</a>
   </div>
 
@@ -2026,7 +1120,7 @@ function animateCount(el) {
     const progress = Math.min(elapsed / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = Math.round(eased * target);
-    el.textContent = prefix + current + suffix;
+    el.textContent = prefix + current.toLocaleString() + suffix;
     if (progress < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
