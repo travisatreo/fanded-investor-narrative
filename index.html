@@ -2076,7 +2076,7 @@ const problemObs = new IntersectionObserver((entries) => {
       problemObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.1 });
 const ps = document.getElementById('problemSection');
 if (ps) problemObs.observe(ps);
 </script>
