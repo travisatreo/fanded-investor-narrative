@@ -1825,55 +1825,54 @@ body {
   <div class="section fade-in">
     <div class="section-label">HOW WE MAKE MONEY</div>
     <h2 class="headline" style="font-size: 20px; margin-bottom: 8px;">Three revenue layers.<br>Each one bigger than the last.</h2>
-    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 20px; font-style: italic;">Projected at 1,000 MAWDs</div>
+    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 24px; font-style: italic;">Projected at 1,000 MAWDs</div>
 
-    <!-- Layer 1: Infrastructure -->
-    <div style="margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--cream-muted); margin-bottom: 8px;">LAYER 1: INFRASTRUCTURE</div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-          <div>
-            <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--purple);">MAWD Subscription</div>
-            <div style="font-size: 11px; color: var(--cream-muted);">$20/mo per talent</div>
-          </div>
-          <div style="font-family: var(--font-w); font-weight: 800; font-size: 16px; color: var(--purple);">$20K/mo</div>
+    <!-- Stacking Revenue Bars -->
+    <div id="revenueBars" style="display:flex;flex-direction:column;gap:18px;margin-bottom:24px;">
+
+      <!-- Layer 1: They pay for MAWD -->
+      <div class="rev-bar" id="revBar1" style="opacity:0;transform:translateX(-30px);transition:all 0.6s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">They pay for MAWD</div>
+          <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--purple);">$30K<span style="font-size:11px;font-weight:600;color:var(--cream-muted);">/mo</span></div>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-          <div>
-            <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--teal);">Manager Seats</div>
-            <div style="font-size: 11px; color: var(--cream-muted);">$100/mo per agency seat</div>
-          </div>
-          <div style="font-family: var(--font-w); font-weight: 800; font-size: 16px; color: var(--teal);">$10K/mo</div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:6px;height:28px;width:100%;overflow:hidden;">
+          <div style="background:linear-gradient(90deg, rgba(138,92,246,0.5), rgba(138,92,246,0.15));border-radius:6px;height:100%;width:8%;transition:width 0.8s ease;" id="revBarFill1"></div>
         </div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">$20/mo per talent · $100/mo per manager seat</div>
       </div>
+
+      <!-- Layer 2: We take 10% of fan revenue -->
+      <div class="rev-bar" id="revBar2" style="opacity:0;transform:translateX(-30px);transition:all 0.6s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">We take 10% of fan revenue</div>
+          <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--gold);">$100K<span style="font-size:11px;font-weight:600;color:var(--cream-muted);">/mo</span></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:6px;height:28px;width:100%;overflow:hidden;">
+          <div style="background:linear-gradient(90deg, rgba(212,175,55,0.5), rgba(212,175,55,0.15));border-radius:6px;height:100%;width:8%;transition:width 0.8s ease;" id="revBarFill2"></div>
+        </div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Every ticket, merch sale, and membership through Fanded</div>
+      </div>
+
+      <!-- Layer 3: Brands pay to reach their fans -->
+      <div class="rev-bar" id="revBar3" style="opacity:0;transform:translateX(-30px);transition:all 0.6s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Brands pay to reach their fans</div>
+          <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--green);">$300B<span style="font-size:11px;font-weight:600;color:var(--cream-muted);"> mkt</span></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:6px;height:28px;width:100%;overflow:hidden;">
+          <div style="background:linear-gradient(90deg, rgba(77,199,77,0.5), rgba(77,199,77,0.1));border-radius:6px;height:100%;width:8%;transition:width 0.8s ease;" id="revBarFill3"></div>
+        </div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Consent-based data licensing · 50/50 split with talent</div>
+      </div>
+
     </div>
 
-    <!-- Layer 2: Platform -->
-    <div style="margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--cream-muted); margin-bottom: 8px;">LAYER 2: PLATFORM</div>
-      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--gold);">Platform Take Rate</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">10% of all fan revenue through Fanded</div>
-        </div>
-        <div style="font-family: var(--font-w); font-weight: 800; font-size: 16px; color: var(--green);">$100K/mo</div>
-      </div>
-    </div>
-
-    <!-- Layer 3: Data -->
-    <div style="margin-bottom: 16px;">
-      <div style="font-family: var(--font-w); font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--cream-muted); margin-bottom: 8px;">LAYER 3: THE DATA NETWORK</div>
-      <div style="background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(201,168,76,0.1)); border: 1px solid rgba(46,204,113,0.4); border-radius: var(--r-sm); padding: 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--green); margin-bottom: 8px;">Talent-Controlled Data Brokerage</div>
-        <div style="font-size: 12px; color: var(--cream); line-height: 1.6; margin-bottom: 10px;">Brands pay to access consent-based fan audiences through clean room matching. Talent controls who sees their data. 50/50 revenue share.</div>
-        <div style="font-size: 12px; color: var(--cream-dim); line-height: 1.6;">iOS 14 killed tracking. Cookies are dying. The $300B third-party data industry is collapsing. Consent-based first-party data is the only thing left. Every MAWD we deploy adds thousands of profiles to the network.</div>
-      </div>
-    </div>
-
-    <div style="text-align: center; padding: 12px; border-top: 1px solid var(--border);">
-      <div style="font-size: 11px; color: var(--cream-muted);">At 1,000 MAWDs</div>
-      <div style="font-family: var(--font-w); font-weight: 800; font-size: 28px; color: var(--green);">$1.56M ARR</div>
-      <div style="font-size: 11px; color: var(--cream-dim);">from infrastructure + platform. Data brokerage is additive.</div>
+    <!-- Total -->
+    <div id="revTotal" style="text-align:center;padding:16px;border-top:1px solid var(--border);opacity:0;transition:opacity 0.6s ease;">
+      <div style="font-size:11px;color:var(--cream-muted);margin-bottom:4px;">At 1,000 MAWDs</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:32px;color:var(--green);">$1.56M ARR</div>
+      <div style="font-size:12px;color:var(--cream-muted);margin-top:4px;">Before data revenue even kicks in.</div>
     </div>
   </div>
 
@@ -2895,6 +2894,62 @@ sections.forEach(sec => dotObserver.observe(sec));
   var rect = funnel.getBoundingClientRect();
   if (rect.top < window.innerHeight && rect.bottom > 0 && !started) {
     runFunnel();
+  }
+})();
+</script>
+
+<script>
+// Revenue bars stacking animation
+(function() {
+  var container = document.getElementById('revenueBars');
+  if (!container) return;
+  var bar1 = document.getElementById('revBar1');
+  var bar2 = document.getElementById('revBar2');
+  var bar3 = document.getElementById('revBar3');
+  var fill1 = document.getElementById('revBarFill1');
+  var fill2 = document.getElementById('revBarFill2');
+  var fill3 = document.getElementById('revBarFill3');
+  var total = document.getElementById('revTotal');
+  var started = false;
+
+  function runBars() {
+    started = true;
+    // Bar 1 slides in + fills to ~23% (30K relative scale)
+    setTimeout(function() {
+      bar1.style.opacity = '1';
+      bar1.style.transform = 'translateX(0)';
+      fill1.style.width = '23%';
+    }, 200);
+    // Bar 2 slides in + fills to ~65% (100K relative scale)
+    setTimeout(function() {
+      bar2.style.opacity = '1';
+      bar2.style.transform = 'translateX(0)';
+      fill2.style.width = '65%';
+    }, 700);
+    // Bar 3 slides in + fills to 100%
+    setTimeout(function() {
+      bar3.style.opacity = '1';
+      bar3.style.transform = 'translateX(0)';
+      fill3.style.width = '100%';
+    }, 1200);
+    // Total fades in
+    setTimeout(function() {
+      total.style.opacity = '1';
+    }, 1800);
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        runBars();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.1});
+  obs.observe(container);
+  var rect = container.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) {
+    runBars();
   }
 })();
 </script>
