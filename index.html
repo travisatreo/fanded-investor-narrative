@@ -1411,13 +1411,13 @@ body {
     <div class="body-text" style="margin-bottom: 12px;">But talent couldn't manage them. So we built MAWD to run the club. To do that, we had to connect every platform the talent was on.</div>
 
     <!-- Terminal boot sequence: MAWD connecting platforms -->
-    <div id="terminalBoot" style="margin: 24px 0; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.9; overflow: hidden; height: 320px;">
+    <div id="terminalBoot" style="margin: 24px 0; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.9; overflow: hidden; min-height: 0;">
       <div style="display:flex;gap:5px;margin-bottom:12px;">
         <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
         <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
         <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
       </div>
-      <div id="termLines" style="min-height: 180px;"></div>
+      <div id="termLines"></div>
     </div>
 
     <div class="body-text" style="margin-bottom: 12px;">The moment we did, MAWD found <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">20% new revenue</span> talent didn't know they were missing. No one had ever connected all their databases before.</div>
@@ -2204,15 +2204,6 @@ sections.forEach(sec => dotObserver.observe(sec));
 
     function showNext() {
       if (idx >= events.length) {
-        // Hold, then fade and restart
-        setTimeout(function() {
-          timeline.style.transition = 'opacity 0.5s';
-          timeline.style.opacity = '0';
-          setTimeout(function() {
-            timeline.style.opacity = '1';
-            runTimeline();
-          }, 800);
-        }, 3000);
         return;
       }
 
@@ -2222,7 +2213,7 @@ sections.forEach(sec => dotObserver.observe(sec));
 
       // Timeline dot
       var dot = document.createElement('div');
-      dot.style.cssText = 'position: absolute; left: -6px; width: 10px; height: 10px; border-radius: 50%; background: ' + e.color + '; margin-top: 2px;';
+      dot.style.cssText = 'position: absolute; left: -26px; width: 10px; height: 10px; border-radius: 50%; background: ' + e.color + '; top: 2px;';
       item.style.position = 'relative';
       item.appendChild(dot);
 
