@@ -1879,23 +1879,51 @@ body {
   <!-- Section 8: The Pipeline -->
   <div class="section fade-in">
     <div class="section-label">THE PIPELINE</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">Built for musicians.<br>Pulling us everywhere.</h2>
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px;">We built MAWD for music. Then actors needed it. Then athletes. Turns out every talent with a fanbase has the same problem. And no solution.</div>
+    <h2 class="headline" style="font-size: 20px; margin-bottom: 8px;">Built for musicians.<br>Pulling us everywhere.</h2>
+    <div class="body-text" style="margin-bottom: 20px; font-size: 13px; color: var(--cream-muted);">We built MAWD for music. Then actors needed it. Then athletes. Every talent with a fanbase has the same problem.</div>
 
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Darren Hayes (Savage Garden)</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">New album + world tour. Needs one MAWD to run fan club, tour ops, and album sales.</div>
+    <!-- Expanding rings animation -->
+    <div id="pipelineRings" style="position:relative;width:100%;height:320px;margin-bottom:16px;overflow:hidden;">
+      <!-- Center: Music -->
+      <div id="ringMusic" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:100px;height:100px;border-radius:50%;background:rgba(138,92,246,0.2);border:2px solid rgba(138,92,246,0.5);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:transform 0.5s ease;z-index:5;">
+        <div style="font-size:24px;">🎤</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:10px;color:var(--cream);letter-spacing:1px;">MUSIC</div>
       </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">FPAC Festival</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">20,000+ attendee community. Needs year-round fan engagement, not just one weekend.</div>
+      <!-- Ring 2: Actors -->
+      <div id="ringActors" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:180px;height:180px;border-radius:50%;border:1px solid rgba(212,175,55,0.25);background:rgba(212,175,55,0.05);transition:transform 0.5s ease;z-index:4;">
+        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);text-align:center;">
+          <div style="font-size:16px;">🎬</div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:8px;color:var(--gold);letter-spacing:1px;">ACTORS</div>
+        </div>
       </div>
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px;">
-        <div style="font-family: var(--font-w); font-weight: 700; font-size: 13px; color: var(--cream);">Olympic Athletes · LA 2028</div>
-        <div style="font-size: 11px; color: var(--cream-muted); margin-top: 4px;">Pro golfers and Olympians monetizing their fanbases for the first time.</div>
+      <!-- Ring 3: Athletes -->
+      <div id="ringAthletes" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:250px;height:250px;border-radius:50%;border:1px solid rgba(77,199,77,0.2);background:rgba(77,199,77,0.03);transition:transform 0.5s ease;z-index:3;">
+        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);text-align:center;">
+          <div style="font-size:16px;">🏅</div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:8px;color:var(--green);letter-spacing:1px;">ATHLETES</div>
+        </div>
+        <div style="position:absolute;bottom:16px;right:20px;text-align:center;">
+          <div style="font-size:12px;">⛳</div>
+          <div style="font-family:var(--font-b);font-size:7px;color:var(--cream-muted);">Pro Golf</div>
+        </div>
+      </div>
+      <!-- Ring 4: Festivals + Orgs -->
+      <div id="ringFestivals" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:310px;height:310px;border-radius:50%;border:1px solid rgba(0,163,255,0.15);background:rgba(0,163,255,0.02);transition:transform 0.5s ease;z-index:2;">
+        <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);text-align:center;">
+          <div style="font-size:16px;">🎪</div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:8px;color:var(--blue);letter-spacing:1px;">FESTIVALS</div>
+        </div>
+        <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);text-align:center;">
+          <div style="font-size:12px;">🎓</div>
+          <div style="font-family:var(--font-b);font-size:7px;color:var(--cream-muted);">Colleges</div>
+        </div>
+        <div style="position:absolute;top:50%;right:4px;transform:translateY(-50%);text-align:center;">
+          <div style="font-size:12px;">🏢</div>
+          <div style="font-family:var(--font-b);font-size:7px;color:var(--cream-muted);">Mgmt Cos</div>
+        </div>
       </div>
     </div>
+    <div style="text-align:center;font-size:12px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Same problem. Same solution. Every vertical.</div>
   </div>
 
   <!-- Section 8b: The Ask -->
@@ -1903,33 +1931,43 @@ body {
     <div class="section-label">THE ASK</div>
     <div class="ask-amount">$1,000,000</div>
     <div class="ask-terms">$15M post-money SAFE</div>
-    <div style="display: flex; flex-direction: column; gap: 8px; margin: 20px 0;">
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-size: 20px; flex-shrink: 0;">⚡</div>
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--cream);">Automate MAWD onboarding</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">The bottleneck between us and 100+ waiting talent</div>
-        </div>
+
+    <!-- Visual Timeline Roadmap -->
+    <div id="askTimeline" style="position:relative;margin:24px 0 20px;padding-left:28px;">
+      <!-- Vertical line -->
+      <div style="position:absolute;left:12px;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.06);"></div>
+      <!-- Animated fill line -->
+      <div id="timelineFill" style="position:absolute;left:12px;top:0;width:2px;height:0;background:linear-gradient(180deg, var(--green), var(--gold));transition:height 1.5s ease;"></div>
+
+      <!-- Milestone 1: TODAY -->
+      <div class="timeline-node" id="askNode1" style="position:relative;margin-bottom:28px;opacity:0;transform:translateX(-10px);transition:all 0.5s ease;">
+        <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--bg);z-index:2;"></div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:2px;color:var(--green);margin-bottom:4px;">IMMEDIATELY</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Hire full-time CTO</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:2px;">Build the machine that serves the pipeline</div>
       </div>
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-size: 20px; flex-shrink: 0;">🛠</div>
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--cream);">Full-time CTO</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">Build the machine that serves the pipeline</div>
-        </div>
+
+      <!-- Milestone 2: 30 DAYS -->
+      <div class="timeline-node" id="askNode2" style="position:relative;margin-bottom:28px;opacity:0;transform:translateX(-10px);transition:all 0.5s ease;">
+        <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid var(--bg);z-index:2;"></div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:2px;color:var(--blue);margin-bottom:4px;">30 DAYS</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Automate MAWD onboarding</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:2px;">The bottleneck between us and 100+ waiting talent</div>
       </div>
-      <div style="display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid rgba(46,204,113,0.3); border-radius: var(--r-sm); padding: 14px 16px;">
-        <div style="font-size: 20px; flex-shrink: 0;">🚀</div>
-        <div>
-          <div style="font-family: var(--font-w); font-weight: 700; font-size: 14px; color: var(--green);">100 MAWDs in 60 days</div>
-          <div style="font-size: 11px; color: var(--cream-muted);">Connecting talent's existing databases — Shopify, email, SMS, tour data</div>
-        </div>
+
+      <!-- Milestone 3: 60 DAYS -->
+      <div class="timeline-node" id="askNode3" style="position:relative;margin-bottom:0;opacity:0;transform:translateX(-10px);transition:all 0.5s ease;">
+        <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);z-index:2;"></div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">60 DAYS</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--green);">100 MAWDs live</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:2px;">Connecting talent's existing databases — Shopify, email, SMS, tour data</div>
       </div>
     </div>
 
-    <div style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--r); padding: 16px; text-align: center;">
-      <div style="font-family: var(--font-w); font-weight: 800; font-size: 14px; color: var(--gold); letter-spacing: 0.5px;">3 MONTHS OF RUNWAY LEFT</div>
-      <div style="font-size: 13px; color: var(--cream-dim); margin-top: 6px;">The biggest pipeline we've ever had.</div>
+    <!-- Urgency -->
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:var(--r);padding:16px;text-align:center;animation:urgencyPulse 2s ease-in-out infinite;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:14px;color:var(--gold);letter-spacing:0.5px;">3 MONTHS OF RUNWAY LEFT</div>
+      <div style="font-size:13px;color:var(--cream-dim);margin-top:6px;">The biggest pipeline we've ever had.</div>
     </div>
   </div>
 
@@ -1937,38 +1975,26 @@ body {
   <div class="section fade-in">
     <div class="section-label">WHY NOW</div>
 
-    <div class="why-now-grid">
-      <!-- The industry is collapsing -->
-      <div class="why-card">
-        <div class="why-icon declining">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
-        </div>
-        <div class="why-content">
-          <div class="why-label red">REVENUE IS COLLAPSING</div>
-          <div class="why-desc">Studio deals down 40%. Streaming pays $0.003. Brand deals saturated.</div>
-        </div>
+    <div id="whyNowCards" style="display:flex;flex-direction:column;gap:12px;">
+      <!-- Card 1: Revenue collapsing -->
+      <div class="why-stat-card" id="whyCard1" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(231,76,60,0.08), transparent);border:1px solid rgba(231,76,60,0.2);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:rgba(231,76,60,0.9);line-height:1;">$0.003</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(231,76,60,0.7);margin-top:4px;">PER STREAM</div>
+        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;line-height:1.5;">That's what talent earns. Studio deals down 40%. Brand deals saturated.<br><strong style="color:var(--cream);">The old model is dead.</strong></div>
       </div>
 
-      <!-- The data window -->
-      <div class="why-card">
-        <div class="why-icon growing">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <div class="why-content">
-          <div class="why-label green">THE DATA WINDOW IS OPEN</div>
-          <div class="why-desc">iOS 14 killed tracking. Cookies are dying. Consent-based first-party data is the only thing left. Brands are desperate for it right now.</div>
-        </div>
+      <!-- Card 2: Data window -->
+      <div class="why-stat-card" id="whyCard2" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(77,199,77,0.08), transparent);border:1px solid rgba(77,199,77,0.2);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:rgba(77,199,77,0.9);line-height:1;">$300B</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(77,199,77,0.7);margin-top:4px;">DATA MARKET COLLAPSING</div>
+        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;line-height:1.5;">iOS 14 killed tracking. Cookies are dying.<br><strong style="color:var(--cream);">First-party fan data is the only thing left.</strong></div>
       </div>
 
-      <!-- AI makes it possible now -->
-      <div class="why-card">
-        <div class="why-icon opportunity">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
-        </div>
-        <div class="why-content">
-          <div class="why-label blue">AI CUTS BOTH WAYS</div>
-          <div class="why-desc">AI floods platforms with infinite content, making algorithmic dependency fatal. But AI on owned fan data lets one person operate like a full company.</div>
-        </div>
+      <!-- Card 3: AI -->
+      <div class="why-stat-card" id="whyCard3" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(0,163,255,0.08), transparent);border:1px solid rgba(0,163,255,0.2);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:rgba(0,163,255,0.9);line-height:1;">1 person</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(0,163,255,0.7);margin-top:4px;">= FULL COMPANY</div>
+        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;line-height:1.5;">AI on owned fan data lets one person operate like a full team.<br><strong style="color:var(--cream);">That person just needs MAWD.</strong></div>
       </div>
     </div>
   </div>
@@ -2951,6 +2977,113 @@ sections.forEach(sec => dotObserver.observe(sec));
   if (rect.top < window.innerHeight && rect.bottom > 0 && !started) {
     runBars();
   }
+})();
+</script>
+
+<style>
+@keyframes urgencyPulse {
+  0%, 100% { border-color: rgba(201,168,76,0.25); }
+  50% { border-color: rgba(201,168,76,0.5); }
+}
+</style>
+
+<script>
+// Pipeline expanding rings animation
+(function() {
+  var container = document.getElementById('pipelineRings');
+  if (!container) return;
+  var rings = ['ringMusic', 'ringActors', 'ringAthletes', 'ringFestivals'];
+  var started = false;
+
+  function runRings() {
+    started = true;
+    rings.forEach(function(id, i) {
+      setTimeout(function() {
+        var el = document.getElementById(id);
+        if (el) el.style.transform = 'translate(-50%,-50%) scale(1)';
+      }, 300 + i * 400);
+    });
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        runRings();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.1});
+  obs.observe(container);
+  var rect = container.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runRings();
+})();
+</script>
+
+<script>
+// Ask timeline animation
+(function() {
+  var timeline = document.getElementById('askTimeline');
+  if (!timeline) return;
+  var fill = document.getElementById('timelineFill');
+  var nodes = [document.getElementById('askNode1'), document.getElementById('askNode2'), document.getElementById('askNode3')];
+  var started = false;
+
+  function runTimeline() {
+    started = true;
+    nodes.forEach(function(node, i) {
+      setTimeout(function() {
+        node.style.opacity = '1';
+        node.style.transform = 'translateX(0)';
+        // Grow the fill line to match
+        var pct = ((i + 1) / nodes.length) * 100;
+        fill.style.height = pct + '%';
+      }, 300 + i * 500);
+    });
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        runTimeline();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.1});
+  obs.observe(timeline);
+  var rect = timeline.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runTimeline();
+})();
+</script>
+
+<script>
+// Why Now cards stagger animation
+(function() {
+  var container = document.getElementById('whyNowCards');
+  if (!container) return;
+  var cards = [document.getElementById('whyCard1'), document.getElementById('whyCard2'), document.getElementById('whyCard3')];
+  var started = false;
+
+  function runCards() {
+    started = true;
+    cards.forEach(function(card, i) {
+      setTimeout(function() {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 200 + i * 400);
+    });
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        runCards();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.1});
+  obs.observe(container);
+  var rect = container.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runCards();
 })();
 </script>
 
