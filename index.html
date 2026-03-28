@@ -1433,40 +1433,9 @@ body {
     <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">MAWD AI Agents.<br>Management AI Working Daily.</h2>
     <div class="body-text" style="margin-bottom: 16px;">Five AI agents that connect to every platform you're on, know your entire business, and run the parts that don't require being human. So you stay creating. $20/month.</div>
 
-    <div class="agent-card">
-      <div class="agent-icon">🧭</div>
-      <div>
-        <div class="agent-name" style="color: var(--blue);">COMPASS <span class="agent-title">Your CEO</span></div>
-        <div class="agent-desc">Strategy · Career roadmap · 90-day planning</div>
-      </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">📊</div>
-      <div>
-        <div class="agent-name" style="color: var(--purple);">PULSE <span class="agent-title">Your COO</span></div>
-        <div class="agent-desc">Audience intelligence · True fan identification</div>
-      </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">🤖</div>
-      <div>
-        <div class="agent-name" style="color: var(--gold);">DOLLAR <span class="agent-title">Your CFO</span></div>
-        <div class="agent-desc">Financial intelligence · Revenue tracking · Revenue gap detection</div>
-      </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">✨</div>
-      <div>
-        <div class="agent-name" style="color: var(--pink);">HYPE <span class="agent-title">Your CMO</span></div>
-        <div class="agent-desc">Content strategy · Voice · Fan communication</div>
-      </div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-icon">🔍</div>
-      <div>
-        <div class="agent-name" style="color: var(--teal);">SCOUT <span class="agent-title">Your CBO</span></div>
-        <div class="agent-desc">Opportunity identification · Sync licensing · Partnerships</div>
-      </div>
+    <!-- Day in the life timeline — animated like a message thread -->
+    <div id="mawdTimeline" style="margin: 20px 0 16px; position: relative; padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.06);">
+      <!-- Timeline items get inserted here by JS -->
     </div>
 
     <div class="body-text" style="margin-top: 16px;">Every data source unified. Everything that doesn't require being human, automated.</div>
@@ -2211,6 +2180,103 @@ sections.forEach(sec => dotObserver.observe(sec));
     });
   }, {threshold: 0.3});
   obs.observe(wrap);
+})();
+
+// MAWD "Day in the Life" timeline animation (loops)
+(function() {
+  var timeline = document.getElementById('mawdTimeline');
+  if (!timeline) return;
+  var started = false;
+
+  var events = [
+    { time: '9:00 AM', agent: 'COMPASS', color: '#5B9BD5', msg: 'Good morning. Here\'s your daily briefing:', detail: '2 fan club signups overnight. Merch restock needed by Friday. Austin show — 340 tickets sold, 160 remaining.' },
+    { time: '10:15 AM', agent: 'PULSE', color: '#A855F7', msg: 'New audience insight:', detail: '847 fans in Dallas engage weekly but you\'ve never played there. Recommending Dallas for Q3 tour routing.' },
+    { time: '11:00 AM', agent: 'DOLLAR', color: '#F5A623', msg: 'Found missing revenue:', detail: '$2,140 in uncollected Shopify payouts from last month. Initiated transfer — funds arriving in 2 days.' },
+    { time: '1:30 PM', agent: 'HYPE', color: '#EC4899', msg: 'Draft ready for review:', detail: 'Fan club email for Austin show presale. Subject: "You\'re getting in first." Open rate prediction: 62%.' },
+    { time: '3:00 PM', agent: 'DOLLAR', color: '#F5A623', msg: 'Revenue alert:', detail: 'Fan club MRR hit $1,847 this month — up 23% from last month. 4 annual renewals coming up next week.' },
+    { time: '4:15 PM', agent: 'SCOUT', color: '#2DD4BF', msg: 'Sync opportunity flagged:', detail: 'Netflix show runner requested indie tracks for S3. Your catalog matches 3 briefs. Submitted automatically.' },
+    { time: '6:00 PM', agent: 'COMPASS', color: '#5B9BD5', msg: 'End of day summary:', detail: 'Revenue recovered: $2,140. New fans identified: 847. Emails drafted: 2. Opportunities submitted: 1. You created. We handled the rest.' },
+  ];
+
+  function runTimeline() {
+    timeline.innerHTML = '';
+    var idx = 0;
+
+    function showNext() {
+      if (idx >= events.length) {
+        // Hold, then fade and restart
+        setTimeout(function() {
+          timeline.style.transition = 'opacity 0.5s';
+          timeline.style.opacity = '0';
+          setTimeout(function() {
+            timeline.style.opacity = '1';
+            runTimeline();
+          }, 800);
+        }, 3000);
+        return;
+      }
+
+      var e = events[idx];
+      var item = document.createElement('div');
+      item.style.cssText = 'margin-bottom: 16px; opacity: 0; transform: translateY(8px); transition: opacity 0.4s, transform 0.4s;';
+
+      // Timeline dot
+      var dot = document.createElement('div');
+      dot.style.cssText = 'position: absolute; left: -6px; width: 10px; height: 10px; border-radius: 50%; background: ' + e.color + '; margin-top: 2px;';
+      item.style.position = 'relative';
+      item.appendChild(dot);
+
+      // Time
+      var time = document.createElement('div');
+      time.style.cssText = 'font-size: 10px; color: rgba(255,255,255,0.35); font-family: var(--font-b); margin-bottom: 3px; letter-spacing: 0.03em;';
+      time.textContent = e.time;
+      item.appendChild(time);
+
+      // Agent badge + message
+      var badge = document.createElement('div');
+      badge.style.cssText = 'background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 12px;';
+
+      var agentLine = document.createElement('div');
+      agentLine.style.cssText = 'font-size: 11px; font-family: var(--font-w); font-weight: 700; color: ' + e.color + '; margin-bottom: 3px;';
+      agentLine.textContent = e.agent;
+      badge.appendChild(agentLine);
+
+      var msgLine = document.createElement('div');
+      msgLine.style.cssText = 'font-size: 12.5px; color: var(--cream); font-family: var(--font-w); font-weight: 600; margin-bottom: 4px;';
+      msgLine.textContent = e.msg;
+      badge.appendChild(msgLine);
+
+      var detailLine = document.createElement('div');
+      detailLine.style.cssText = 'font-size: 11.5px; color: var(--cream-muted); line-height: 1.5; font-family: var(--font-b);';
+      detailLine.textContent = e.detail;
+      badge.appendChild(detailLine);
+
+      item.appendChild(badge);
+      timeline.appendChild(item);
+
+      // Animate in
+      setTimeout(function() {
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+      }, 50);
+
+      idx++;
+      setTimeout(showNext, 1200);
+    }
+
+    showNext();
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        started = true;
+        runTimeline();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.15});
+  obs.observe(timeline);
 })();
 
 // Terminal boot sequence — MAWD connecting platforms (loops)
