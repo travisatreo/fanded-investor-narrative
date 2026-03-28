@@ -1411,7 +1411,7 @@ body {
     <div class="body-text" style="margin-bottom: 12px;">But talent needed help managing their club. So we built MAWD to run the club. To do that, we had to connect every platform the talent was on.</div>
 
     <!-- Terminal boot sequence: MAWD connecting platforms -->
-    <div id="terminalBoot" style="margin: 24px 0; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.9; overflow: hidden; min-height: 0;">
+    <div id="terminalBoot" style="margin: 24px 0; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.9; overflow: hidden; height: 310px;">
       <div style="display:flex;gap:5px;margin-bottom:12px;">
         <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
         <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
@@ -1470,6 +1470,37 @@ body {
     <div class="section-label">MAWD FOR MANAGERS</div>
     <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">Managers are drowning too.<br>One manager. 10+ clients. Nobody can keep up.</h2>
     <div class="body-text" style="margin-bottom: 20px;">MFM (MAWD for Managers) connects to every client's MAWD. One AI chief of staff that sees across the entire roster in real time.</div>
+
+    <!-- Air traffic control radar -->
+    <div id="mfmRadar" style="position: relative; width: 280px; height: 280px; margin: 24px auto; border-radius: 50%; background: radial-gradient(circle, rgba(245,166,35,0.06) 0%, rgba(0,0,0,0.4) 70%); border: 1.5px solid rgba(245,166,35,0.2); overflow: hidden;">
+      <!-- Radar rings -->
+      <div style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(245,166,35,0.06);width:66%;height:66%;margin:auto;"></div>
+      <div style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(245,166,35,0.06);width:33%;height:33%;margin:auto;"></div>
+      <!-- Crosshairs -->
+      <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(245,166,35,0.06);"></div>
+      <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(245,166,35,0.06);"></div>
+      <!-- Sweep arm (rotates) -->
+      <div id="radarSweep" style="position:absolute;left:50%;top:50%;width:50%;height:2px;background:linear-gradient(90deg,rgba(245,166,35,0.6),rgba(245,166,35,0));transform-origin:left center;transform:rotate(0deg);"></div>
+      <!-- Sweep glow trail -->
+      <div id="radarGlow" style="position:absolute;left:50%;top:50%;width:0;height:0;transform-origin:left center;">
+        <div style="position:absolute;left:0;top:-70px;width:140px;height:140px;background:conic-gradient(from 0deg,rgba(245,166,35,0.12),transparent 60deg);transform-origin:left center;border-radius:0 140px 0 0;"></div>
+      </div>
+      <!-- Center hub -->
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:rgba(245,166,35,0.15);border:1.5px solid rgba(245,166,35,0.4);display:flex;align-items:center;justify-content:center;z-index:5;">
+        <div style="font-size:7px;font-family:var(--font-w);font-weight:700;color:var(--gold);letter-spacing:0.5px;">MFM</div>
+      </div>
+      <!-- Client dots (placed by JS) -->
+      <div id="radarDots"></div>
+      <!-- Alert popup -->
+      <div id="radarAlert" style="position:absolute;bottom:12px;left:12px;right:12px;background:rgba(10,10,20,0.9);border:1px solid rgba(231,76,60,0.4);border-radius:8px;padding:8px 10px;opacity:0;transition:opacity 0.5s;z-index:10;">
+        <div style="font-size:9px;color:var(--red);font-family:var(--font-w);font-weight:700;margin-bottom:2px;">ALERT — Client #7</div>
+        <div style="font-size:8.5px;color:var(--cream-muted);line-height:1.4;">No post in 12 days. Revenue down 18%.</div>
+        <div style="display:flex;gap:4px;margin-top:5px;">
+          <div style="font-size:7.5px;font-family:var(--font-w);font-weight:600;padding:3px 7px;border-radius:4px;background:var(--red);color:#0a0a14;">Nudge</div>
+          <div style="font-size:7.5px;font-family:var(--font-w);font-weight:600;padding:3px 7px;border-radius:4px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.1);">Schedule call</div>
+        </div>
+      </div>
+    </div>
 
     <div style="background: var(--bg-card); border: 1px solid var(--gold); border-radius: var(--r); padding: 20px; margin-bottom: 20px;">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
@@ -2351,6 +2382,8 @@ sections.forEach(sec => dotObserver.observe(sec));
                 result.style.opacity = '0';
                 termLines.appendChild(result);
                 setTimeout(function() { result.style.transition = 'opacity 0.4s'; result.style.opacity = '1'; }, 50);
+                // Loop: restart after pause
+                setTimeout(function() { runBoot(); }, 3000);
               }, 300);
             }
           }, 30);
@@ -2401,12 +2434,94 @@ sections.forEach(sec => dotObserver.observe(sec));
   }, {threshold: 0.2});
   obs.observe(container);
 })();
+
+// MFM Air traffic control radar
+(function() {
+  var radar = document.getElementById('mfmRadar');
+  if (!radar) return;
+  var sweep = document.getElementById('radarSweep');
+  var glow = document.getElementById('radarGlow');
+  var dotsContainer = document.getElementById('radarDots');
+  var alert = document.getElementById('radarAlert');
+  var started = false;
+
+  var clients = [
+    { name: 'Anna', status: 'touring', color: '#4DC74D', angle: 25, dist: 0.7 },
+    { name: 'AAGC', status: 'growing', color: '#4DC74D', angle: 70, dist: 0.55 },
+    { name: 'Manny', status: 'posting', color: '#4DC74D', angle: 115, dist: 0.8 },
+    { name: 'Client 4', status: 'posting', color: '#4DC74D', angle: 155, dist: 0.45 },
+    { name: 'Client 5', status: 'growing', color: '#F5A623', angle: 195, dist: 0.65 },
+    { name: 'Client 6', status: 'touring', color: '#4DC74D', angle: 230, dist: 0.75 },
+    { name: 'Client 7', status: 'dormant', color: '#E74C3C', angle: 265, dist: 0.5 },
+    { name: 'Client 8', status: 'posting', color: '#4DC74D', angle: 295, dist: 0.85 },
+    { name: 'Client 9', status: 'growing', color: '#F5A623', angle: 330, dist: 0.6 },
+    { name: 'Client 10', status: 'posting', color: '#4DC74D', angle: 10, dist: 0.4 },
+  ];
+
+  // Place dots (initially hidden)
+  var cx = 140, cy = 140, maxR = 120;
+  clients.forEach(function(c, i) {
+    var rad = c.angle * Math.PI / 180;
+    var x = cx + Math.cos(rad) * maxR * c.dist;
+    var y = cy + Math.sin(rad) * maxR * c.dist;
+    var dot = document.createElement('div');
+    dot.className = 'radar-client';
+    dot.id = 'radarClient' + i;
+    dot.style.cssText = 'position:absolute;left:' + (x - 4) + 'px;top:' + (y - 4) + 'px;opacity:0;transition:opacity 0.3s;z-index:4;text-align:center;';
+    var circle = '<div style="width:8px;height:8px;border-radius:50%;background:' + c.color + ';margin:0 auto;' + (c.color === '#E74C3C' ? 'animation:radarBlink 1s infinite;' : '') + '"></div>';
+    var label = '<div style="font-size:6.5px;color:rgba(255,255,255,0.5);font-family:var(--font-b);margin-top:2px;white-space:nowrap;">' + c.name + '</div>';
+    var statusLabel = '<div style="font-size:5.5px;color:' + c.color + ';font-family:var(--font-b);text-transform:uppercase;letter-spacing:0.3px;">' + c.status + '</div>';
+    dot.innerHTML = circle + label + statusLabel;
+    dotsContainer.appendChild(dot);
+  });
+
+  function startRadar() {
+    var angle = 0;
+    var revealedAlready = {};
+
+    var iv = setInterval(function() {
+      angle = (angle + 2) % 360;
+      sweep.style.transform = 'rotate(' + angle + 'deg)';
+      glow.style.transform = 'rotate(' + angle + 'deg)';
+
+      // Reveal dots as sweep passes them
+      clients.forEach(function(c, i) {
+        var diff = ((angle - c.angle) % 360 + 360) % 360;
+        if (diff < 15 && !revealedAlready[i]) {
+          revealedAlready[i] = true;
+          document.getElementById('radarClient' + i).style.opacity = '1';
+        }
+      });
+
+      // Show alert after first full sweep
+      if (angle > 270 && !alert.dataset.shown) {
+        alert.dataset.shown = 'true';
+        alert.style.opacity = '1';
+      }
+    }, 25);
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        started = true;
+        startRadar();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.3});
+  obs.observe(radar);
+})();
 </script>
 
 <style>
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.15); }
+}
+@keyframes radarBlink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(231,76,60,0.8); }
+  50% { opacity: 0.3; box-shadow: none; }
 }
 </style>
 
