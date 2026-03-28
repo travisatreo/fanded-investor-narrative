@@ -2780,6 +2780,12 @@ sections.forEach(sec => dotObserver.observe(sec));
     });
   }, {threshold: 0.1});
   obs.observe(chart);
+  // Fallback: check if already in viewport
+  var rect = chart.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) {
+    started = true;
+    animateMoat();
+  }
 })();
 </script>
 
