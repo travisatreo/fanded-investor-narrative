@@ -1398,6 +1398,54 @@ body {
     </div>
 
     <div class="body-text" style="margin-bottom: 12px;">But talent couldn't manage them. So we built MAWD to run the club. To do that, we had to connect every platform the talent was on.</div>
+
+    <!-- Disconnected → Connected databases animation -->
+    <div id="dbAnimation" style="margin: 24px 0; position: relative; height: 200px; overflow: hidden;">
+      <!-- Scattered platform nodes -->
+      <div id="dbNodes" style="position: relative; width: 100%; height: 100%;">
+        <div class="db-node" style="position:absolute;left:8%;top:12%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(30,215,96,0.15);border:1.5px solid rgba(30,215,96,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">🎵</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">Spotify</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:70%;top:8%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,0,80,0.15);border:1.5px solid rgba(255,0,80,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">📸</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">Instagram</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:38%;top:2%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,68,68,0.15);border:1.5px solid rgba(255,68,68,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">▶️</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">YouTube</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:2%;top:55%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(0,150,136,0.15);border:1.5px solid rgba(0,150,136,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">🛒</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">Shopify</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:72%;top:55%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(0,0,0,0.15);border:1.5px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:16px;">🎵</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">TikTok</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:22%;top:70%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(100,100,255,0.15);border:1.5px solid rgba(100,100,255,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">✉️</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">Email</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:52%;top:72%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,165,0,0.15);border:1.5px solid rgba(255,165,0,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">🎫</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">Bandsintown</div>
+        </div>
+        <div class="db-node" style="position:absolute;left:35%;top:40%;opacity:0;" data-cx="50" data-cy="50">
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(66,133,244,0.15);border:1.5px solid rgba(66,133,244,0.5);display:flex;align-items:center;justify-content:center;font-size:16px;">📱</div>
+          <div style="font-size:7px;color:var(--cream-muted);text-align:center;margin-top:3px;font-family:var(--font-b);">SMS</div>
+        </div>
+      </div>
+      <!-- Connection lines SVG (drawn when unifying) -->
+      <svg id="dbLines" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 300 200"></svg>
+      <!-- Center hub (appears on unify) -->
+      <div id="dbHub" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.5s;">
+        <div style="width:52px;height:52px;border-radius:50%;background:rgba(77,199,77,0.2);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:14px;font-family:var(--font-w);font-weight:700;color:var(--green);">MAWD</div>
+      </div>
+      <!-- Status label -->
+      <div id="dbStatus" style="position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:10px;font-family:var(--font-b);color:var(--red);opacity:0;transition:opacity 0.4s;">all disconnected</div>
+    </div>
+
     <div class="body-text" style="margin-bottom: 12px;">The moment we did, MAWD found <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">20% new revenue</span> talent didn't know they were missing. No one had ever connected all their databases before.</div>
     <div class="body-text" style="color: var(--cream); font-family: var(--font-w); font-weight: 700;">Then we realized: this isn't just for fan clubs. This is the entire business.</div>
     <div class="divider"></div>
@@ -2103,56 +2151,186 @@ sections.forEach(sec => dotObserver.observe(sec));
   obs.observe(phone);
 })();
 
-// Revenue comparison graph animation
+// Revenue comparison graph animation — loops forever
 (function() {
   var wrap = document.getElementById('revenueCompare');
   if (!wrap) return;
-  // Streaming: spike up then crash
-  var streamPts = [
-    [0,65],[10,58],[20,45],[30,30],[40,18],[50,8],[60,5],[70,8],
-    [75,10],[80,15],[85,28],[90,42],[95,50],[100,55],[110,58],[120,60],[130,62],[140,64]
+  // Streaming: spike up then crash — repeats with slight variation each cycle
+  var streamCycles = [
+    [[0,65],[10,58],[20,45],[30,30],[40,18],[50,8],[60,5],[70,8],[75,10],[80,15],[85,28],[90,42],[95,50],[100,55],[110,58],[120,60],[130,62],[140,64]],
+    [[0,65],[10,60],[20,50],[30,35],[40,22],[50,12],[60,8],[65,10],[70,14],[80,25],[90,40],[100,52],[110,58],[120,61],[130,63],[140,64]],
+    [[0,65],[10,55],[20,40],[30,25],[40,15],[50,5],[55,3],[60,6],[70,12],[80,22],[85,35],[90,45],[100,52],[110,57],[120,60],[130,63],[140,65]],
   ];
-  // Fan club: steady staircase up
-  var clubPts = [
-    [0,65],[10,60],[20,55],[30,50],[40,45],[50,42],[60,39],[70,36],
-    [80,33],[90,30],[100,27],[110,25],[120,23],[130,21],[140,19]
-  ];
+  // Fan club: steady climb — each cycle picks up where the last left off (lower = higher revenue)
+  var clubBase = 65;
+  var sp = document.getElementById('streamPath');
+  var sf = document.getElementById('streamFill');
+  var cp = document.getElementById('clubPath');
+  var cf = document.getElementById('clubFill');
+  var sLabel = document.getElementById('streamLabel');
+  var cLabel = document.getElementById('clubLabel');
   var started = false;
+  function runCycle(cycleNum) {
+    var streamPts = streamCycles[cycleNum % streamCycles.length];
+    // Fan club goes higher each cycle (lower y = higher on graph)
+    var clubTop = Math.max(5, clubBase - (cycleNum + 1) * 12);
+    var clubPts = [];
+    var steps = 15;
+    for (var i = 0; i <= steps; i++) {
+      var x = (i / steps) * 140;
+      var y = clubBase - (clubBase - clubTop) * (i / steps);
+      clubPts.push([Math.round(x), Math.round(y)]);
+    }
+    var step = 0;
+    var totalSteps = Math.max(streamPts.length, clubPts.length);
+    var iv = setInterval(function() {
+      step++;
+      // Draw streaming
+      var sCount = Math.min(step, streamPts.length);
+      var sLine = streamPts.slice(0, sCount).map(function(p,i){ return (i===0?'M':'L')+p[0]+' '+p[1]; }).join(' ');
+      var sFill = sLine + ' L ' + streamPts[sCount-1][0] + ' 65 L 0 65 Z';
+      sp.setAttribute('d', sLine); sp.setAttribute('opacity','1');
+      sf.setAttribute('d', sFill); sf.setAttribute('opacity','1');
+      // Draw club
+      var cCount = Math.min(step, clubPts.length);
+      var cLine = clubPts.slice(0, cCount).map(function(p,i){ return (i===0?'M':'L')+p[0]+' '+p[1]; }).join(' ');
+      var cFill = cLine + ' L ' + clubPts[cCount-1][0] + ' 65 L 0 65 Z';
+      cp.setAttribute('d', cLine); cp.setAttribute('opacity','1');
+      cf.setAttribute('d', cFill); cf.setAttribute('opacity','1');
+      if (step >= totalSteps) {
+        clearInterval(iv);
+        sLabel.style.opacity = '1';
+        cLabel.style.opacity = '1';
+        // Pause, then reset and run next cycle
+        setTimeout(function() {
+          sLabel.style.opacity = '0';
+          cLabel.style.opacity = '0';
+          clubBase = clubTop;
+          runCycle(cycleNum + 1);
+        }, 2000);
+      }
+    }, 150);
+  }
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting && !started) {
         started = true;
-        var step = 0;
-        var totalSteps = 18;
-        var iv = setInterval(function() {
-          step++;
-          // Draw streaming path
-          var sCount = Math.min(step, streamPts.length);
-          var sLine = streamPts.slice(0, sCount).map(function(p,i){ return (i===0?'M':'L')+p[0]+' '+p[1]; }).join(' ');
-          var sFill = sLine + ' L ' + streamPts[sCount-1][0] + ' 65 L 0 65 Z';
-          var sp = document.getElementById('streamPath');
-          var sf = document.getElementById('streamFill');
-          sp.setAttribute('d', sLine); sp.setAttribute('opacity','1');
-          sf.setAttribute('d', sFill); sf.setAttribute('opacity','1');
-          // Draw club path
-          var cCount = Math.min(step, clubPts.length);
-          var cLine = clubPts.slice(0, cCount).map(function(p,i){ return (i===0?'M':'L')+p[0]+' '+p[1]; }).join(' ');
-          var cFill = cLine + ' L ' + clubPts[cCount-1][0] + ' 65 L 0 65 Z';
-          var cp = document.getElementById('clubPath');
-          var cf = document.getElementById('clubFill');
-          cp.setAttribute('d', cLine); cp.setAttribute('opacity','1');
-          cf.setAttribute('d', cFill); cf.setAttribute('opacity','1');
-          if (step >= totalSteps) {
-            clearInterval(iv);
-            document.getElementById('streamLabel').style.opacity = '1';
-            document.getElementById('clubLabel').style.opacity = '1';
-          }
-        }, 150);
+        runCycle(0);
         obs.unobserve(entry.target);
       }
     });
   }, {threshold: 0.3});
   obs.observe(wrap);
+})();
+
+// Disconnected → Connected databases animation (loops)
+(function() {
+  var container = document.getElementById('dbAnimation');
+  if (!container) return;
+  var nodes = container.querySelectorAll('.db-node');
+  var hub = document.getElementById('dbHub');
+  var status = document.getElementById('dbStatus');
+  var linesSvg = document.getElementById('dbLines');
+  var started = false;
+
+  // Original positions (from CSS)
+  var origPositions = [];
+  nodes.forEach(function(n) {
+    origPositions.push({ left: n.style.left, top: n.style.top });
+  });
+
+  // Target positions (circled around center)
+  var centerX = 150, centerY = 90, radius = 72;
+  var targetPositions = [];
+  nodes.forEach(function(n, i) {
+    var angle = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
+    targetPositions.push({
+      x: centerX + Math.cos(angle) * radius - 22,
+      y: centerY + Math.sin(angle) * radius - 22
+    });
+  });
+
+  function runAnimation() {
+    // Phase 1: Fade in scattered (disconnected)
+    hub.style.opacity = '0';
+    linesSvg.innerHTML = '';
+    status.style.opacity = '0';
+    nodes.forEach(function(n, i) {
+      n.style.left = origPositions[i].left;
+      n.style.top = origPositions[i].top;
+      n.style.transition = 'none';
+      n.style.opacity = '0';
+    });
+
+    // Stagger fade in
+    nodes.forEach(function(n, i) {
+      setTimeout(function() {
+        n.style.opacity = '1';
+        n.style.transition = 'opacity 0.3s';
+      }, i * 120);
+    });
+
+    // Show "all disconnected" label
+    setTimeout(function() {
+      status.textContent = 'all disconnected';
+      status.style.color = 'var(--red)';
+      status.style.opacity = '1';
+    }, nodes.length * 120 + 200);
+
+    // Phase 2: After pause, move to circle + show hub
+    setTimeout(function() {
+      status.style.opacity = '0';
+      nodes.forEach(function(n, i) {
+        n.style.transition = 'left 0.8s cubic-bezier(0.4,0,0.2,1), top 0.8s cubic-bezier(0.4,0,0.2,1)';
+        n.style.left = (targetPositions[i].x / 300 * 100) + '%';
+        n.style.top = (targetPositions[i].y / 200 * 100) + '%';
+      });
+
+      // Show hub
+      setTimeout(function() {
+        hub.style.opacity = '1';
+
+        // Draw connection lines
+        var linesHtml = '';
+        nodes.forEach(function(n, i) {
+          var nx = targetPositions[i].x + 22;
+          var ny = targetPositions[i].y + 22;
+          linesHtml += '<line x1="' + centerX + '" y1="' + (centerY + 4) + '" x2="' + nx + '" y2="' + ny + '" stroke="rgba(77,199,77,0.3)" stroke-width="1" stroke-dasharray="3,3"><animate attributeName="stroke-opacity" from="0" to="0.5" dur="0.5s" fill="freeze"/></line>';
+        });
+        linesSvg.innerHTML = linesHtml;
+
+        // Show "unified" label
+        setTimeout(function() {
+          status.textContent = 'unified by MAWD';
+          status.style.color = 'var(--green)';
+          status.style.opacity = '1';
+        }, 400);
+      }, 500);
+    }, nodes.length * 120 + 1800);
+
+    // Phase 3: Hold unified, then reset and loop
+    var totalPhase = nodes.length * 120 + 1800 + 500 + 400 + 2500;
+    setTimeout(function() {
+      // Fade everything out
+      nodes.forEach(function(n) { n.style.transition = 'opacity 0.4s'; n.style.opacity = '0'; });
+      hub.style.opacity = '0';
+      linesSvg.innerHTML = '';
+      status.style.opacity = '0';
+      // Restart after fade
+      setTimeout(runAnimation, 600);
+    }, totalPhase);
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started) {
+        started = true;
+        runAnimation();
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.2});
+  obs.observe(container);
 })();
 </script>
 
