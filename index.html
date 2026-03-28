@@ -2189,13 +2189,13 @@ sections.forEach(sec => dotObserver.observe(sec));
   var started = false;
 
   var events = [
-    { time: '9:00 AM', agent: 'COMPASS', color: '#5B9BD5', msg: 'Good morning. Here\'s your daily briefing:', detail: '2 fan club signups overnight. Merch restock needed by Friday. Austin show — 340 tickets sold, 160 remaining.' },
-    { time: '10:15 AM', agent: 'PULSE', color: '#A855F7', msg: 'New audience insight:', detail: '847 fans in Dallas engage weekly but you\'ve never played there. Recommending Dallas for Q3 tour routing.' },
-    { time: '11:00 AM', agent: 'DOLLAR', color: '#F5A623', msg: 'Found missing revenue:', detail: '$2,140 in uncollected Shopify payouts from last month. Initiated transfer — funds arriving in 2 days.' },
-    { time: '1:30 PM', agent: 'HYPE', color: '#EC4899', msg: 'Draft ready for review:', detail: 'Fan club email for Austin show presale. Subject: "You\'re getting in first." Open rate prediction: 62%.' },
-    { time: '3:00 PM', agent: 'DOLLAR', color: '#F5A623', msg: 'Revenue alert:', detail: 'Fan club MRR hit $1,847 this month — up 23% from last month. 4 annual renewals coming up next week.' },
-    { time: '4:15 PM', agent: 'SCOUT', color: '#2DD4BF', msg: 'Sync opportunity flagged:', detail: 'Netflix show runner requested indie tracks for S3. Your catalog matches 3 briefs. Submitted automatically.' },
-    { time: '6:00 PM', agent: 'COMPASS', color: '#5B9BD5', msg: 'End of day summary:', detail: 'Revenue recovered: $2,140. New fans identified: 847. Emails drafted: 2. Opportunities submitted: 1. You created. We handled the rest.' },
+    { time: '9:00 AM', agent: 'COMPASS', color: '#5B9BD5', msg: 'Good morning. Here\'s your daily briefing:', detail: '2 fan club signups overnight. Merch restock needed by Friday. Austin show — 340 tickets sold, 160 remaining.', actions: ['Got it', 'Remind me at noon'] },
+    { time: '10:15 AM', agent: 'PULSE', color: '#A855F7', msg: '847 fans in Dallas engage weekly but you\'ve never played there.', detail: 'I can add Dallas to your Q3 tour routing and notify your booking agent.', actions: ['Add Dallas', 'Skip'] },
+    { time: '11:00 AM', agent: 'DOLLAR', color: '#F5A623', msg: '$2,140 in uncollected Shopify payouts found.', detail: 'These are from last month\'s merch sales. I can initiate the transfer now — funds arrive in 2 days.', actions: ['Transfer now', 'Later'] },
+    { time: '1:30 PM', agent: 'HYPE', color: '#EC4899', msg: 'Austin presale email drafted for your fan club.', detail: 'Subject: "You\'re getting in first." Open rate prediction: 62%. Ready to send to 1,847 subscribers.', actions: ['Send it', 'Edit first', 'Schedule for tomorrow'] },
+    { time: '3:00 PM', agent: 'DOLLAR', color: '#F5A623', msg: '4 annual fan club renewals coming up next week.', detail: 'Total value: $2,400. I can send personalized renewal reminders with a thank-you note from you.', actions: ['Send reminders', 'Later'] },
+    { time: '4:15 PM', agent: 'SCOUT', color: '#2DD4BF', msg: 'Netflix sync opportunity — your catalog matches 3 briefs.', detail: 'S3 show runner requested indie tracks. I can submit your masters to the music supervisor now.', actions: ['Submit', 'Review tracks first'] },
+    { time: '6:00 PM', agent: 'COMPASS', color: '#5B9BD5', msg: 'End of day summary:', detail: 'Revenue recovered: $2,140. New fans identified: 847. Emails sent: 1. Submissions: 1. You created. We handled the rest.', actions: null },
   ];
 
   function runTimeline() {
@@ -2241,6 +2241,23 @@ sections.forEach(sec => dotObserver.observe(sec));
       detailLine.style.cssText = 'font-size: 11.5px; color: var(--cream-muted); line-height: 1.5; font-family: var(--font-b);';
       detailLine.textContent = e.detail;
       badge.appendChild(detailLine);
+
+      // Action buttons
+      if (e.actions) {
+        var btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;';
+        e.actions.forEach(function(label, i) {
+          var btn = document.createElement('div');
+          var isPrimary = i === 0;
+          btn.style.cssText = 'font-size: 10px; font-family: var(--font-w); font-weight: 600; padding: 5px 10px; border-radius: 6px; cursor: default;' +
+            (isPrimary
+              ? 'background: ' + e.color + '; color: #0a0a14;'
+              : 'background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.1);');
+          btn.textContent = label;
+          btnRow.appendChild(btn);
+        });
+        badge.appendChild(btnRow);
+      }
 
       item.appendChild(badge);
       timeline.appendChild(item);
