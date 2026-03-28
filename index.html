@@ -2747,7 +2747,7 @@ sections.forEach(sec => dotObserver.observe(sec));
         obs.unobserve(entry.target);
       }
     });
-  }, {threshold: 0.3});
+  }, {threshold: 0.1});
   obs.observe(brain);
 })();
 </script>
