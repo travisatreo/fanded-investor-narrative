@@ -2707,51 +2707,36 @@ sections.forEach(sec => dotObserver.observe(sec));
   var started = false;
 
   function animateBrain() {
-    var steps = [
-      { pct: 8, day: 1, duration: 800 },
-      { pct: 25, day: 30, duration: 1200 },
-      { pct: 55, day: 90, duration: 1200 },
-      { pct: 95, day: 365, duration: 1500 },
+    var targets = [
+      { pct: 8, delay: 300 },
+      { pct: 25, delay: 1200 },
+      { pct: 55, delay: 2400 },
+      { pct: 95, delay: 3800 },
     ];
+
+    // Animate fill smoothly with setInterval
     var currentPct = 0;
-    var stepIdx = 0;
-
-    function runStep() {
-      if (stepIdx >= steps.length) return;
-      var step = steps[stepIdx];
-      var startPct = currentPct;
-      var targetPct = step.pct;
-      var startTime = performance.now();
-
-      // Reveal milestone
-      if (milestones[stepIdx]) {
-        milestones[stepIdx].style.opacity = '1';
-        milestones[stepIdx].style.transform = 'translateX(0)';
-      }
-
-      function tick(now) {
-        var elapsed = now - startTime;
-        var progress = Math.min(elapsed / step.duration, 1);
-        // Ease out
-        progress = 1 - Math.pow(1 - progress, 3);
-        currentPct = startPct + (targetPct - startPct) * progress;
-
-        // Update fill (y goes from 140 down, so y = 140 - (pct/100 * 112) mapped to circle area)
+    var targetPct = 0;
+    var iv = setInterval(function() {
+      if (currentPct < targetPct) {
+        currentPct = Math.min(currentPct + 0.8, targetPct);
         var fillH = (currentPct / 100) * 112;
-        fillRect.setAttribute('y', 140 - fillH);
+        fillRect.setAttribute('y', String(140 - fillH));
         pctText.textContent = Math.round(currentPct) + '%';
-
-        if (progress < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          stepIdx++;
-          setTimeout(runStep, 400);
-        }
       }
-      requestAnimationFrame(tick);
-    }
+      if (currentPct >= 95) clearInterval(iv);
+    }, 20);
 
-    setTimeout(runStep, 300);
+    // Trigger each step on a schedule
+    targets.forEach(function(t, i) {
+      setTimeout(function() {
+        targetPct = t.pct;
+        if (milestones[i]) {
+          milestones[i].style.opacity = '1';
+          milestones[i].style.transform = 'translateX(0)';
+        }
+      }, t.delay);
+    });
   }
 
   var obs = new IntersectionObserver(function(entries) {
