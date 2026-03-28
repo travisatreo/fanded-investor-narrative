@@ -2351,15 +2351,6 @@ sections.forEach(sec => dotObserver.observe(sec));
                 result.style.opacity = '0';
                 termLines.appendChild(result);
                 setTimeout(function() { result.style.transition = 'opacity 0.4s'; result.style.opacity = '1'; }, 50);
-                // Hold, then restart
-                setTimeout(function() {
-                  termLines.style.transition = 'opacity 0.5s';
-                  termLines.style.opacity = '0';
-                  setTimeout(function() {
-                    termLines.style.opacity = '1';
-                    runBoot();
-                  }, 800);
-                }, 3000);
               }, 300);
             }
           }, 30);
