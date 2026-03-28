@@ -2466,12 +2466,11 @@ sections.forEach(sec => dotObserver.observe(sec));
       }
       var m = messages[idx];
       var bubble = document.createElement('div');
-      var fromLeft = Math.random() > 0.5;
+      var fromLeft = idx % 2 === 0;
       var topPos = 30 + (idx * 26) % 290;
-      var xStart = fromLeft ? -260 : 360;
-      var xEnd = 6 + Math.random() * 60;
-      var rotation = (Math.random() - 0.5) * 12;
-      bubble.style.cssText = 'position:absolute;top:' + topPos + 'px;left:' + xEnd + 'px;max-width:240px;padding:8px 11px;border-radius:10px;font-size:10px;line-height:1.4;font-family:var(--font-b);opacity:0;transform:translateX(' + (xStart - xEnd) + 'px) rotate(' + rotation + 'deg);transition:all 0.4s cubic-bezier(0.17,0.67,0.35,1.2);z-index:' + (idx + 1) + ';background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);';
+      var leftPct = fromLeft ? (2 + Math.random() * 15) : (35 + Math.random() * 15);
+      var rotation = (Math.random() - 0.5) * 8;
+      bubble.style.cssText = 'position:absolute;top:' + topPos + 'px;left:' + leftPct + '%;max-width:55%;padding:8px 11px;border-radius:10px;font-size:10px;line-height:1.4;font-family:var(--font-b);opacity:0;transform:translateX(' + (fromLeft ? '-120%' : '120%') + ') rotate(' + rotation + 'deg);transition:all 0.4s cubic-bezier(0.17,0.67,0.35,1.2);z-index:' + (idx + 1) + ';background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);';
       bubble.innerHTML = '<span style="font-weight:700;color:' + m.color + ';font-size:9px;">' + m.client + '</span><br><span style="color:var(--cream-muted);">' + m.text + '</span>';
       msgContainer.appendChild(bubble);
       bubbles.push({ el: bubble, msg: m });
@@ -2480,7 +2479,7 @@ sections.forEach(sec => dotObserver.observe(sec));
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
           bubble.style.opacity = '1';
-          bubble.style.transform = 'translateX(0) rotate(' + rotation + 'deg)';
+          bubble.style.transform = 'translateX(0%) rotate(' + rotation + 'deg)';
         });
       });
 
