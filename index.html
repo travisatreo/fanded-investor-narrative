@@ -1947,26 +1947,23 @@ body {
   <div class="section fade-in">
     <div class="section-label">WHY NOW</div>
 
-    <div id="whyNowCards" style="display:flex;flex-direction:column;gap:12px;">
-      <!-- Card 1: Revenue collapsing -->
-      <div class="why-stat-card" id="whyCard1" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(231,76,60,0.08), transparent);border:1px solid rgba(231,76,60,0.2);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:rgba(231,76,60,0.9);line-height:1;">$0.003</div>
-        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(231,76,60,0.7);margin-top:4px;">PER STREAM</div>
-        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;line-height:1.5;">That's what talent earns. Studio deals down 40%. Brand deals saturated.<br><strong style="color:var(--cream);">The old model is dead.</strong></div>
+    <div id="whyNowCards" style="display:flex;flex-direction:column;gap:36px;padding:8px 0;">
+      <!-- Statement 1 -->
+      <div id="whyCard1" style="opacity:0;transform:translateX(-20px);transition:all 0.6s ease;">
+        <div style="font-family:var(--font-d);font-weight:900;font-size:28px;color:var(--cream);line-height:1.2;">The old model is <span style="color:var(--red);">dead.</span></div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;line-height:1.6;">Streaming pays $0.003. Studio deals down 40%. Brand deals saturated. Talent has no direct revenue path.</div>
       </div>
 
-      <!-- Card 2: Data window -->
-      <div class="why-stat-card" id="whyCard2" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(77,199,77,0.08), transparent);border:1px solid rgba(77,199,77,0.2);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:rgba(77,199,77,0.9);line-height:1;">$300B</div>
-        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(77,199,77,0.7);margin-top:4px;">DATA MARKET COLLAPSING</div>
-        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;line-height:1.5;">iOS 14 killed tracking. Cookies are dying.<br><strong style="color:var(--cream);">First-party fan data is the only thing left.</strong></div>
+      <!-- Statement 2 -->
+      <div id="whyCard2" style="opacity:0;transform:translateX(-20px);transition:all 0.6s ease;">
+        <div style="font-family:var(--font-d);font-weight:900;font-size:28px;color:var(--cream);line-height:1.2;">First-party data is the <span style="color:var(--green);">last asset standing.</span></div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;line-height:1.6;">iOS 14 killed tracking. Cookies are dying. Consent-based fan data is all that's left. Brands are desperate for it.</div>
       </div>
 
-      <!-- Card 3: AI -->
-      <div class="why-stat-card" id="whyCard3" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(0,163,255,0.08), transparent);border:1px solid rgba(0,163,255,0.2);border-radius:12px;padding:20px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:rgba(0,163,255,0.9);line-height:1;">1 person</div>
-        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(0,163,255,0.7);margin-top:4px;">= FULL COMPANY</div>
-        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;line-height:1.5;">AI on owned fan data lets one person operate like a full team.<br><strong style="color:var(--cream);">That person just needs MAWD.</strong></div>
+      <!-- Statement 3 -->
+      <div id="whyCard3" style="opacity:0;transform:translateX(-20px);transition:all 0.6s ease;">
+        <div style="font-family:var(--font-d);font-weight:900;font-size:28px;color:var(--cream);line-height:1.2;">AI means <span style="color:var(--blue);">one person = full company.</span></div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;line-height:1.6;">That person just needs MAWD.</div>
       </div>
     </div>
   </div>
@@ -1974,29 +1971,28 @@ body {
 
   <!-- Section 9b: TAM/SAM/SOM -->
   <div class="section fade-in">
-    <div class="section-label">THE MARKET</div>
+    <div class="section-label">TOTAL ADDRESSABLE MARKET</div>
 
-    <div id="tamCards" style="display:flex;flex-direction:column;gap:12px;">
-      <!-- TAM -->
-      <div class="tam-stat-card" id="tamCard1" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(153,153,187,0.06), transparent);border:1px solid rgba(153,153,187,0.2);border-radius:12px;padding:24px 20px;text-align:center;">
+    <div id="tamCards" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <!-- TAM — full width -->
+      <div class="tam-stat-card" id="tamCard1" style="width:100%;opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(153,153,187,0.06), transparent);border:1px solid rgba(153,153,187,0.2);border-radius:12px;padding:24px 20px;text-align:center;">
         <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(153,153,187,0.6);margin-bottom:8px;">TAM</div>
-        <div style="font-family:var(--font-w);font-weight:800;font-size:56px;color:var(--cream);line-height:1;">$300B+</div>
-        <div style="font-size:14px;color:var(--cream-muted);margin-top:10px;">All talent managing their business across platforms</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:52px;color:var(--cream);line-height:1;">$300B+</div>
+        <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;">All talent managing their business across platforms</div>
       </div>
 
-      <!-- SAM -->
-      <div class="tam-stat-card" id="tamCard2" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(212,175,55,0.08), transparent);border:1px solid rgba(212,175,55,0.25);border-radius:12px;padding:24px 20px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(212,175,55,0.7);margin-bottom:8px;">SAM</div>
-        <div style="font-family:var(--font-w);font-weight:800;font-size:56px;color:var(--gold);line-height:1;">$65B</div>
-        <div style="font-size:14px;color:var(--cream-muted);margin-top:10px;">Music, film, sports, creators with fanbases</div>
+      <!-- SAM — 78% width -->
+      <div class="tam-stat-card" id="tamCard2" style="width:78%;opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(212,175,55,0.08), transparent);border:1px solid rgba(212,175,55,0.25);border-radius:12px;padding:20px 16px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(212,175,55,0.7);margin-bottom:6px;">SAM</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--gold);line-height:1;">$65B</div>
+        <div style="font-size:12px;color:var(--cream-muted);margin-top:8px;">Music, film, sports, creators with fanbases</div>
       </div>
 
-      <!-- SOM -->
-      <div class="tam-stat-card" id="tamCard3" style="opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(46,204,113,0.1), transparent);border:1px solid rgba(46,204,113,0.3);border-radius:12px;padding:24px 20px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(46,204,113,0.7);margin-bottom:8px;">SOM</div>
-        <div style="font-family:var(--font-w);font-weight:800;font-size:56px;color:var(--green);line-height:1;">2M+</div>
-        <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);margin-top:6px;">pro talent who need MAWD today</div>
-        <div style="font-family:var(--font-w);font-weight:800;font-size:24px;color:var(--green);margin-top:8px;">$2.4B</div>
+      <!-- SOM — 56% width -->
+      <div class="tam-stat-card" id="tamCard3" style="width:56%;opacity:0;transform:translateY(15px);transition:all 0.5s ease;background:linear-gradient(135deg, rgba(46,204,113,0.1), transparent);border:1px solid rgba(46,204,113,0.3);border-radius:12px;padding:18px 14px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:rgba(46,204,113,0.7);margin-bottom:6px;">SOM</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--green);line-height:1;">2M+</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);margin-top:6px;">$2.4B</div>
       </div>
     </div>
   </div>
@@ -3014,8 +3010,8 @@ sections.forEach(sec => dotObserver.observe(sec));
     cards.forEach(function(card, i) {
       setTimeout(function() {
         card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }, 200 + i * 400);
+        card.style.transform = 'translateX(0)';
+      }, 300 + i * 500);
     });
   }
 
