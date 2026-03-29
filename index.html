@@ -2015,66 +2015,48 @@ body {
     <div class="section-label">THE PIPELINE</div>
     <h2 class="headline" style="font-size: 20px; margin-bottom: 24px;">Built for music.<br><span style="color: var(--gold);">Then everyone started calling.</span></h2>
 
-    <!-- Inbound message thread -->
-    <div id="pipelineInbox" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px 14px; display: flex; flex-direction: column; gap: 0;">
-      <!-- Message 1 -->
-      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎤</div>
-        <div style="flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Music manager, LA</div>
-            <div style="font-size:9px;color:var(--cream-muted);">Oct 2024</div>
-          </div>
-          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Can my other artists use this too?"</div>
+    <!-- Phone with iMessage-style inbound texts -->
+    <div id="pipelineInbox" style="display: flex; justify-content: center; margin: 0 0 20px;">
+      <div style="width: 220px; background: #1a1a2e; border-radius: 24px; padding: 12px 14px 16px; border: 2px solid rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative;">
+        <!-- Status bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 6px; padding: 0 2px;">
+          <span>9:41</span>
+          <div style="width: 12px; height: 7px; border: 1px solid rgba(255,255,255,0.5); border-radius: 1px; position: relative;"><div style="position: absolute; right: 1px; top: 1px; bottom: 1px; left: 1px; background: rgba(255,255,255,0.5); border-radius: 0.5px;"></div></div>
         </div>
-      </div>
-      <!-- Message 2 -->
-      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 0.3s;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎓</div>
-        <div style="flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">University program director</div>
-            <div style="font-size:9px;color:var(--cream-muted);">Nov 2024</div>
+        <!-- Header -->
+        <div style="text-align:center;font-size:10px;color:rgba(255,255,255,0.4);font-family:var(--font-b);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06);">Messages</div>
+        <!-- Message bubbles -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <!-- Msg 1 -->
+          <div class="inbox-msg" style="opacity:0;transform:translateX(-12px);transition:all 0.4s ease;">
+            <div style="font-size:8px;color:var(--cream-muted);margin-bottom:2px;">🎤 Music manager, LA · Oct 2024</div>
+            <div style="background:rgba(138,92,246,0.15);border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:11px;color:var(--cream);line-height:1.4;max-width:85%;">"Can my other artists use this too?"</div>
           </div>
-          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"We want this for our student creators and alumni athletes."</div>
-        </div>
-      </div>
-      <!-- Message 3 -->
-      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 0.6s;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🏌️</div>
-        <div style="flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Golf management company</div>
-            <div style="font-size:9px;color:var(--cream-muted);">Dec 2024</div>
+          <!-- Msg 2 -->
+          <div class="inbox-msg" style="opacity:0;transform:translateX(-12px);transition:all 0.4s ease;">
+            <div style="font-size:8px;color:var(--cream-muted);margin-bottom:2px;">🎓 University director · Nov 2024</div>
+            <div style="background:rgba(13,148,136,0.15);border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:11px;color:var(--cream);line-height:1.4;max-width:90%;">"We want this for our student creators and alumni athletes."</div>
           </div>
-          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Our athletes need this. Can we talk?"</div>
-        </div>
-      </div>
-      <!-- Message 4 -->
-      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 0.9s;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎬</div>
-        <div style="flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Actor, Star Wars: The Acolyte</div>
-            <div style="font-size:9px;color:var(--cream-muted);">Jan 2025</div>
+          <!-- Msg 3 -->
+          <div class="inbox-msg" style="opacity:0;transform:translateX(-12px);transition:all 0.4s ease;">
+            <div style="font-size:8px;color:var(--cream-muted);margin-bottom:2px;">🏌️ Golf mgmt company · Dec 2024</div>
+            <div style="background:rgba(77,199,77,0.12);border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:11px;color:var(--cream);line-height:1.4;max-width:80%;">"Our athletes need this. Can we talk?"</div>
           </div>
-          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"I want to use Fanded for my meet and greet at Star Wars Celebration Japan."</div>
-        </div>
-      </div>
-      <!-- Message 5 -->
-      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 1.2s;display:flex;gap:10px;padding:12px 0;">
-        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎪</div>
-        <div style="flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">FilAm Arts, Los Angeles</div>
-            <div style="font-size:9px;color:var(--cream-muted);">Feb 2025</div>
+          <!-- Msg 4 -->
+          <div class="inbox-msg" style="opacity:0;transform:translateX(-12px);transition:all 0.4s ease;">
+            <div style="font-size:8px;color:var(--cream-muted);margin-bottom:2px;">🎬 Actor, Star Wars · Jan 2025</div>
+            <div style="background:rgba(212,175,55,0.12);border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:11px;color:var(--cream);line-height:1.4;max-width:92%;">"I want to use Fanded for my meet and greet at Star Wars Celebration Japan."</div>
           </div>
-          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Can MAWD handle our event fan data and artist coordination?"</div>
+          <!-- Msg 5 -->
+          <div class="inbox-msg" style="opacity:0;transform:translateX(-12px);transition:all 0.4s ease;">
+            <div style="font-size:8px;color:var(--cream-muted);margin-bottom:2px;">🎪 FilAm Arts, LA · Feb 2025</div>
+            <div style="background:rgba(236,72,153,0.12);border-radius:12px 12px 12px 4px;padding:8px 10px;font-size:11px;color:var(--cream);line-height:1.4;max-width:88%;">"Can MAWD handle our event fan data and artist coordination?"</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="pipelinePunch" style="margin-top:20px;text-align:center;opacity:0;transition:opacity 0.6s ease;">
+    <div id="pipelinePunch" style="text-align:center;opacity:0;transition:opacity 0.6s ease;">
       <div style="font-size:14px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Zero paid marketing. They all found us.</div>
       <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Same problem. Same solution. Every vertical.</div>
     </div>
