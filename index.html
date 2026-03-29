@@ -2013,36 +2013,71 @@ body {
   <!-- Section 8: The Pipeline -->
   <div class="section fade-in" data-track="Pipeline">
     <div class="section-label">THE PIPELINE</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 24px;">Built for music.<br><span style="color: var(--gold);">Pulling us everywhere.</span></h2>
+    <h2 class="headline" style="font-size: 20px; margin-bottom: 24px;">Built for music.<br><span style="color: var(--gold);">Then everyone started calling.</span></h2>
 
-    <!-- Horizontal expansion: started here → now here -->
-    <div id="pipelineExpand" style="display:flex;flex-direction:column;gap:0;">
-      <!-- Row: Started -->
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1.5px;color:var(--cream-muted);width:70px;flex-shrink:0;">STARTED</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(138,92,246,0.12);border:1px solid rgba(138,92,246,0.3);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);">🎤 Musicians</span>
+    <!-- Inbound message thread -->
+    <div id="pipelineInbox" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px 14px; display: flex; flex-direction: column; gap: 0;">
+      <!-- Message 1 -->
+      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎤</div>
+        <div style="flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Music manager, LA</div>
+            <div style="font-size:9px;color:var(--cream-muted);">Oct 2024</div>
+          </div>
+          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Can my other artists use this too?"</div>
         </div>
       </div>
-
-      <!-- Arrow -->
-      <div style="margin-left:35px;color:rgba(255,255,255,0.15);font-size:16px;margin-bottom:12px;">↓</div>
-
-      <!-- Row: Now -->
-      <div id="pipelineNow" style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1.5px;color:var(--green);width:70px;flex-shrink:0;padding-top:8px;">NOW</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(138,92,246,0.12);border:1px solid rgba(138,92,246,0.3);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎤 Musicians</span>
-          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎬 Actors</span>
-          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(77,199,77,0.1);border:1px solid rgba(77,199,77,0.25);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🏅 Athletes</span>
-          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(0,163,255,0.1);border:1px solid rgba(0,163,255,0.2);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎪 Festivals</span>
-          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🏢 Mgmt Cos</span>
-          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.2);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎓 Colleges</span>
+      <!-- Message 2 -->
+      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 0.3s;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🏌️</div>
+        <div style="flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Golf management company</div>
+            <div style="font-size:9px;color:var(--cream-muted);">Dec 2024</div>
+          </div>
+          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Our athletes need this. Can we talk?"</div>
+        </div>
+      </div>
+      <!-- Message 3 -->
+      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 0.6s;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎬</div>
+        <div style="flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Actor's agent, NYC</div>
+            <div style="font-size:9px;color:var(--cream-muted);">Jan 2025</div>
+          </div>
+          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Manny told us about Fanded. We have 4 clients who need this."</div>
+        </div>
+      </div>
+      <!-- Message 4 -->
+      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 0.9s;display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎪</div>
+        <div style="flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">Festival promoter, Austin</div>
+            <div style="font-size:9px;color:var(--cream-muted);">Feb 2025</div>
+          </div>
+          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"Can MAWD handle our vendor and fan data across 3 festivals?"</div>
+        </div>
+      </div>
+      <!-- Message 5 -->
+      <div class="inbox-msg" style="opacity:0;transform:translateY(12px);transition:all 0.5s ease 1.2s;display:flex;gap:10px;padding:12px 0;">
+        <div style="font-size:20px;flex-shrink:0;width:28px;text-align:center;">🎓</div>
+        <div style="flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div style="font-family:var(--font-w);font-weight:700;font-size:12px;color:var(--cream);">University program director</div>
+            <div style="font-size:9px;color:var(--cream-muted);">Mar 2025</div>
+          </div>
+          <div style="font-size:11px;color:var(--cream-dim);line-height:1.5;">"We want this for our student creators and alumni athletes."</div>
         </div>
       </div>
     </div>
 
-    <div style="margin-top:20px;font-size:13px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Same problem. Same solution. Every vertical.</div>
+    <div id="pipelinePunch" style="margin-top:20px;text-align:center;opacity:0;transition:opacity 0.6s ease;">
+      <div style="font-size:14px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Zero paid marketing. They all found us.</div>
+      <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Same problem. Same solution. Every vertical.</div>
+    </div>
   </div>
 
 
@@ -3161,35 +3196,38 @@ sections.forEach(sec => dotObserver.observe(sec));
 </style>
 
 <script>
-// Pipeline pills stagger animation
+// Pipeline inbound messages animation
 (function() {
-  var container = document.getElementById('pipelineExpand');
-  if (!container) return;
-  var pills = container.querySelectorAll('.pipe-pill');
+  var inbox = document.getElementById('pipelineInbox');
+  if (!inbox) return;
+  var msgs = inbox.querySelectorAll('.inbox-msg');
+  var punch = document.getElementById('pipelinePunch');
   var started = false;
 
-  function runPills() {
+  function runMsgs() {
     started = true;
-    for (var i = 0; i < pills.length; i++) {
+    for (var i = 0; i < msgs.length; i++) {
       (function(idx) {
         setTimeout(function() {
-          pills[idx].style.opacity = '1';
-        }, 200 + idx * 200);
+          msgs[idx].style.opacity = '1';
+          msgs[idx].style.transform = 'translateY(0)';
+        }, 300 + idx * 400);
       })(i);
     }
+    if (punch) setTimeout(function() { punch.style.opacity = '1'; }, 300 + msgs.length * 400 + 200);
   }
 
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting && !started) {
-        runPills();
+        runMsgs();
         obs.unobserve(entry.target);
       }
     });
   }, {threshold: 0.1});
-  obs.observe(container);
-  var rect = container.getBoundingClientRect();
-  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runPills();
+  obs.observe(inbox);
+  var rect = inbox.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runMsgs();
 })();
 </script>
 
