@@ -2346,13 +2346,9 @@ sections.forEach(sec => dotObserver.observe(sec));
   var started = false;
 
   var events = [
-    { time: '9:00 AM', agent: 'COMPASS', color: '#5B9BD5', msg: 'Good morning. Here\'s your daily briefing:', detail: '2 fan club signups overnight. Merch restock needed by Friday. Austin show — 340 tickets sold, 160 remaining.', actions: ['Got it', 'Remind me at noon'] },
-    { time: '10:15 AM', agent: 'PULSE', color: '#A855F7', msg: '847 fans in Dallas engage weekly but you\'ve never played there.', detail: 'I can add Dallas to your Q3 tour routing and notify your booking agent.', actions: ['Add Dallas', 'Skip'] },
-    { time: '11:00 AM', agent: 'DOLLAR', color: '#F5A623', msg: '$2,140 in uncollected Shopify payouts found.', detail: 'These are from last month\'s merch sales. I can initiate the transfer now — funds arrive in 2 days.', actions: ['Transfer now', 'Later'] },
-    { time: '1:30 PM', agent: 'HYPE', color: '#EC4899', msg: 'Austin presale email drafted for your fan club.', detail: 'Subject: "You\'re getting in first." Open rate prediction: 62%. Ready to send to 1,847 subscribers.', actions: ['Send it', 'Edit first', 'Schedule for tomorrow'] },
-    { time: '3:00 PM', agent: 'DOLLAR', color: '#F5A623', msg: '4 annual fan club renewals coming up next week.', detail: 'Total value: $2,400. I can send personalized renewal reminders with a thank-you note from you.', actions: ['Send reminders', 'Later'] },
-    { time: '4:15 PM', agent: 'SCOUT', color: '#2DD4BF', msg: 'Netflix sync opportunity — your catalog matches 3 briefs.', detail: 'S3 show runner requested indie tracks. I can submit your masters to the music supervisor now.', actions: ['Submit', 'Review tracks first'] },
-    { time: '6:00 PM', agent: 'COMPASS', color: '#5B9BD5', msg: 'End of day summary:', detail: 'Revenue recovered: $2,140. New fans identified: 847. Emails sent: 1. Submissions: 1. You created. We handled the rest.', actions: null },
+    { time: '9:00 AM', agent: 'COMPASS', color: '#5B9BD5', msg: 'Good morning. Here\'s your daily briefing:', detail: '2 fan club signups overnight. Austin show — 340 tickets sold, 160 remaining.', actions: ['Got it'] },
+    { time: '11:00 AM', agent: 'DOLLAR', color: '#F5A623', msg: '$2,140 in uncollected Shopify payouts found.', detail: 'Last month\'s merch sales. I can transfer now — funds arrive in 2 days.', actions: ['Transfer now', 'Later'] },
+    { time: '1:30 PM', agent: 'PULSE', color: '#A855F7', msg: '847 fans in Dallas engage weekly but you\'ve never played there.', detail: 'I can add Dallas to your Q3 tour routing and notify your booking agent.', actions: ['Add Dallas', 'Skip'] },
   ];
 
   function runTimeline() {
