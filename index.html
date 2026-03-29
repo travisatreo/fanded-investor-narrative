@@ -1341,7 +1341,7 @@ body {
   <!-- Section 1: The Problem -->
   <div class="section fade-in" id="problemSection" data-track="The Problem">
     <div class="section-label">THE PROBLEM</div>
-    <h2 class="headline" style="font-size: 24px; margin-bottom: 16px;">Every creator is overwhelmed and burning out. And the brand deals keep getting smaller.</h2>
+    <h2 class="headline" style="font-size: 24px; margin-bottom: 16px;">Every creator is overwhelmed and burning out.</h2>
 
     <!-- Animated phone notifications -->
     <div id="notifPhone" style="display: flex; justify-content: center; margin: 24px 0;">
@@ -1361,6 +1361,53 @@ body {
         <!-- Notification stack -->
         <div id="notifStack" style="display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow: hidden;"></div>
       </div>
+    </div>
+
+    <!-- Act 2: Brand deals shrinking -->
+    <h2 class="headline" style="font-size: 22px; margin-top: 32px; margin-bottom: 8px;">And the brand deals keep getting smaller.</h2>
+    <div style="font-size: 12px; color: var(--cream-muted); margin-bottom: 20px;">Same post. Same work. Less money every year.</div>
+
+    <!-- Animated shrinking bar chart -->
+    <div id="brandDecline" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 16px 16px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; height: 160px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <!-- 2021 -->
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div id="brandBar1" style="width:100%; background: linear-gradient(to top, rgba(46,204,113,0.3), rgba(46,204,113,0.6)); border-radius:4px 4px 0 0; height:0; transition: height 0.8s ease; position:relative;">
+            <div style="position:absolute;top:-18px;width:100%;text-align:center;font-family:var(--font-w);font-weight:800;font-size:11px;color:var(--green);opacity:0;" class="bar-label">$2,500</div>
+          </div>
+          <div style="font-size:10px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;">2021</div>
+        </div>
+        <!-- 2022 -->
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div id="brandBar2" style="width:100%; background: linear-gradient(to top, rgba(46,204,113,0.2), rgba(212,175,55,0.5)); border-radius:4px 4px 0 0; height:0; transition: height 0.8s ease 0.3s; position:relative;">
+            <div style="position:absolute;top:-18px;width:100%;text-align:center;font-family:var(--font-w);font-weight:800;font-size:11px;color:var(--gold);opacity:0;" class="bar-label">$2,000</div>
+          </div>
+          <div style="font-size:10px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;">2022</div>
+        </div>
+        <!-- 2023 -->
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div id="brandBar3" style="width:100%; background: linear-gradient(to top, rgba(212,175,55,0.2), rgba(230,126,34,0.5)); border-radius:4px 4px 0 0; height:0; transition: height 0.8s ease 0.6s; position:relative;">
+            <div style="position:absolute;top:-18px;width:100%;text-align:center;font-family:var(--font-w);font-weight:800;font-size:11px;color:var(--orange);opacity:0;" class="bar-label">$1,500</div>
+          </div>
+          <div style="font-size:10px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;">2023</div>
+        </div>
+        <!-- 2024 -->
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div id="brandBar4" style="width:100%; background: linear-gradient(to top, rgba(230,126,34,0.2), rgba(231,76,60,0.5)); border-radius:4px 4px 0 0; height:0; transition: height 0.8s ease 0.9s; position:relative;">
+            <div style="position:absolute;top:-18px;width:100%;text-align:center;font-family:var(--font-w);font-weight:800;font-size:11px;color:var(--red);opacity:0;" class="bar-label">$1,100</div>
+          </div>
+          <div style="font-size:10px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;">2024</div>
+        </div>
+        <!-- 2025 -->
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div id="brandBar5" style="width:100%; background: linear-gradient(to top, rgba(231,76,60,0.3), rgba(231,76,60,0.7)); border-radius:4px 4px 0 0; height:0; transition: height 0.8s ease 1.2s; position:relative;">
+            <div style="position:absolute;top:-18px;width:100%;text-align:center;font-family:var(--font-w);font-weight:800;font-size:11px;color:var(--red);opacity:0;" class="bar-label">$700</div>
+          </div>
+          <div style="font-size:10px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;">2025</div>
+        </div>
+      </div>
+      <div id="brandDeclineLabel" style="text-align:center;margin-top:12px;font-family:var(--font-w);font-weight:700;font-size:13px;color:var(--red);opacity:0;transition:opacity 0.6s ease;">CPM down 42% in 2025 alone.</div>
+      <div style="margin-top:8px;font-size:10px;color:var(--cream-muted);text-align:center;">Avg. sponsored post rate for mid-tier creators (50K-500K followers). Source: <a href="https://influencermarketinghub.com/influencer-rates/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Influencer Marketing Hub</a>, <a href="https://pageoneformula.com/influencer-marketing-cost-cpm-benchmarks-2024-2025/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Page One Formula</a></div>
     </div>
 
     <div class="divider" style="margin-top: 24px;"></div>
@@ -2227,6 +2274,36 @@ const dotObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 sections.forEach(sec => dotObserver.observe(sec));
+
+// Brand deal decline bar chart animation
+(function() {
+  var wrap = document.getElementById('brandDecline');
+  if (!wrap) return;
+  var heights = [140, 112, 84, 62, 39]; // px heights proportional to $2500 down to $700
+  var started = false;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !started) {
+        started = true;
+        for (var i = 1; i <= 5; i++) {
+          (function(idx) {
+            var bar = document.getElementById('brandBar' + idx);
+            if (bar) {
+              bar.style.height = heights[idx-1] + 'px';
+              var label = bar.querySelector('.bar-label');
+              if (label) {
+                setTimeout(function() { label.style.opacity = '1'; }, 300 + (idx-1) * 300);
+              }
+            }
+          })(i);
+        }
+        var decLabel = document.getElementById('brandDeclineLabel');
+        if (decLabel) setTimeout(function() { decLabel.style.opacity = '1'; }, 2000);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(wrap);
+})();
 
 // Phone notification animation — never stops
 (function() {
