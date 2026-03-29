@@ -1333,7 +1333,67 @@ body {
       <div style="margin-top:10px;font-size:10px;color:var(--cream-muted);line-height:1.6;">Sources: <a href="https://www.rollingstone.com/culture-council/articles/how-data-ownership-reshape-the-artist-fan-relationship-industry-itself-1235459413/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Rolling Stone</a>, <a href="https://ads.spotify.com/en-US/news-and-insights/spotify-fourth-quarter-earnings-2024/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Spotify Q4 Earnings</a></div>
     </div>
 
-    <img src="photos/creator-lifecycle_opt.jpg" alt="The Life Cycle of a Social Media Creator" style="width: 100%; border-radius: var(--r-sm); margin-top: 20px;">
+    <!-- Animated Creator Lifecycle Chart -->
+    <div id="lifecycleChart" style="margin-top: 20px; background: linear-gradient(180deg, rgba(15,15,28,1) 0%, rgba(60,40,100,0.3) 100%); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r-sm); padding: 20px 12px 12px; overflow: hidden;">
+      <div style="text-align:center;font-family:var(--font-w);font-weight:700;font-size:13px;color:var(--cream);margin-bottom:16px;">The Life Cycle of a Social Media Creator</div>
+      <svg id="lifecycleSvg" viewBox="0 0 340 200" style="width:100%;height:auto;">
+        <!-- Grid lines -->
+        <line x1="40" y1="10" x2="40" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="40" y1="170" x2="330" y2="170" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        <!-- Y-axis labels -->
+        <text x="36" y="14" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">5</text>
+        <text x="36" y="46" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">4</text>
+        <text x="36" y="78" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">3</text>
+        <text x="36" y="110" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">2</text>
+        <text x="36" y="142" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">1</text>
+        <text x="36" y="173" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">0</text>
+        <!-- Y-axis title -->
+        <text x="8" y="100" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="var(--font-b)" transform="rotate(-90,8,100)">Relevance</text>
+        <!-- X-axis labels -->
+        <text x="40" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">0</text>
+        <text x="98" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">2</text>
+        <text x="156" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">4</text>
+        <text x="214" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">6</text>
+        <text x="272" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">8</text>
+        <text x="330" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">10</text>
+        <!-- X-axis title -->
+        <text x="185" y="196" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="var(--font-b)">Time (Years)</text>
+        <!-- Gradient fill -->
+        <defs>
+          <linearGradient id="lcGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E74C3C" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#E74C3C" stop-opacity="0.05"/>
+          </linearGradient>
+          <clipPath id="lcClip">
+            <rect id="lcClipRect" x="40" y="0" width="0" height="200"/>
+          </clipPath>
+        </defs>
+        <!-- Area fill (clipped for animation) -->
+        <path d="M40,170 L40,138 C55,130 70,105 98,42 C110,18 125,10 156,10 C175,12 195,30 214,74 C230,105 250,120 272,138 C290,152 310,162 330,170 Z" fill="url(#lcGrad)" clip-path="url(#lcClip)"/>
+        <!-- Line (clipped for animation) -->
+        <path d="M40,138 C55,130 70,105 98,42 C110,18 125,10 156,10 C175,12 195,30 214,74 C230,105 250,120 272,138 C290,152 310,162 330,170" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round" clip-path="url(#lcClip)"/>
+        <!-- Phase labels (appear as line reaches them) -->
+        <g id="lcLabel1" opacity="0">
+          <text x="60" y="150" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Discovery</text>
+          <text x="60" y="158" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(New and Exciting)</text>
+        </g>
+        <g id="lcLabel2" opacity="0">
+          <text x="78" y="32" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Hypergrowth</text>
+          <text x="78" y="40" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Algorithm)</text>
+        </g>
+        <g id="lcLabel3" opacity="0">
+          <text x="155" y="22" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Plateau</text>
+          <text x="155" y="30" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Organic Reach dies)</text>
+        </g>
+        <g id="lcLabel4" opacity="0">
+          <text x="228" y="118" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Burnout</text>
+          <text x="228" y="126" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Mental Health)</text>
+        </g>
+        <g id="lcLabel5" opacity="0">
+          <text x="290" y="148" fill="var(--red)" font-size="7" font-family="var(--font-w)" font-weight="700">Exit/Quit</text>
+        </g>
+      </svg>
+    </div>
 
     <div class="divider"></div>
   </div>
@@ -2274,6 +2334,42 @@ const dotObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 sections.forEach(sec => dotObserver.observe(sec));
+
+// Creator lifecycle chart animation — line sweeps left to right, labels appear
+(function() {
+  var chart = document.getElementById('lifecycleChart');
+  if (!chart) return;
+  var clipRect = document.getElementById('lcClipRect');
+  var labels = [
+    { id: 'lcLabel1', at: 60 },
+    { id: 'lcLabel2', at: 98 },
+    { id: 'lcLabel3', at: 156 },
+    { id: 'lcLabel4', at: 250 },
+    { id: 'lcLabel5', at: 310 }
+  ];
+  var started = false;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !started) {
+        started = true;
+        var width = 0;
+        var maxW = 290;
+        var interval = setInterval(function() {
+          width += 3;
+          if (width > maxW) { clearInterval(interval); width = maxW; }
+          clipRect.setAttribute('width', width);
+          labels.forEach(function(l) {
+            if (width >= l.at - 40) {
+              var el = document.getElementById(l.id);
+              if (el) el.setAttribute('opacity', '1');
+            }
+          });
+        }, 16);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(chart);
+})();
 
 // Brand deal decline bar chart animation
 (function() {
