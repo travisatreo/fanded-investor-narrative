@@ -1863,11 +1863,41 @@ body {
   <div class="section fade-in" data-track="Data Network">
     <div class="section-label">AND THEN IT GETS BIGGER</div>
     <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">Brands already work with our clients.<br><span style="color: var(--red);">They're all getting underpaid.</span></h2>
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px; line-height: 1.7;">Brand deals today are priced on bad data — follower counts, estimated impressions, outdated CPMs. Our golfers, actors, and musicians all have the same problem: brands lowball them because nobody has the real numbers.</div>
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px; line-height: 1.7;">MAWD becomes the <span style="color: var(--cream); font-family: var(--font-w); font-weight: 700;">source of truth</span> for the entire talent brand — real fan demographics, engagement depth, purchase behavior, retention. When talent can prove what their audience is actually worth, they negotiate from strength instead of guessing.</div>
-    <div style="background: rgba(46,204,113,0.06); border: 1px solid rgba(46,204,113,0.15); border-radius: 10px; padding: 14px 16px;">
-      <div style="font-size: 14px; color: var(--cream-dim); line-height: 1.7;"><span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">The unlock:</span> First-party, consent-based fan data — the only kind that survives post-iOS 14. Talent owns it. Brands license it. 50/50 split.</div>
+    <div class="body-text" style="margin-bottom: 20px; font-size: 14px; line-height: 1.7;">Brand deals are priced on bad data. MAWD becomes the source of truth.</div>
+
+    <!-- Before/After brand deal animation -->
+    <div id="brandDealCompare" style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <!-- Without MAWD -->
+      <div style="flex: 1; background: rgba(231,76,60,0.06); border: 1px solid rgba(231,76,60,0.15); border-radius: 12px; padding: 14px 12px 16px; text-align: center;">
+        <div style="font-size: 8px; color: var(--red); font-family: var(--font-w); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 12px;">WITHOUT MAWD</div>
+        <div style="font-size: 10px; color: var(--cream-muted); margin-bottom: 4px;">Brand offers based on:</div>
+        <div id="badMetrics" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+          <div class="brand-metric-bad" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease;font-size: 10px; color: var(--cream-muted); background: rgba(231,76,60,0.08); border-radius: 6px; padding: 4px 8px;">Follower count</div>
+          <div class="brand-metric-bad" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease;font-size: 10px; color: var(--cream-muted); background: rgba(231,76,60,0.08); border-radius: 6px; padding: 4px 8px;">Estimated impressions</div>
+          <div class="brand-metric-bad" style="opacity:0;transform:translateX(-8px);transition:all 0.4s ease;font-size: 10px; color: var(--cream-muted); background: rgba(231,76,60,0.08); border-radius: 6px; padding: 4px 8px;">Outdated CPMs</div>
+        </div>
+        <div style="border-top: 1px solid rgba(231,76,60,0.15); padding-top: 10px;">
+          <div style="font-size: 9px; color: var(--cream-muted); margin-bottom: 2px;">BRAND DEAL OFFER</div>
+          <div id="badDeal" style="font-family: var(--font-w); font-weight: 800; font-size: 28px; color: var(--red); opacity: 0; transition: all 0.5s ease;">$2,000</div>
+        </div>
+      </div>
+      <!-- With MAWD -->
+      <div style="flex: 1; background: rgba(46,204,113,0.06); border: 1px solid rgba(46,204,113,0.15); border-radius: 12px; padding: 14px 12px 16px; text-align: center;">
+        <div style="font-size: 8px; color: var(--green); font-family: var(--font-w); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 12px;">WITH MAWD</div>
+        <div style="font-size: 10px; color: var(--cream-muted); margin-bottom: 4px;">Brand offers based on:</div>
+        <div id="goodMetrics" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+          <div class="brand-metric-good" style="opacity:0;transform:translateX(8px);transition:all 0.4s ease;font-size: 10px; color: var(--cream-dim); background: rgba(46,204,113,0.1); border-radius: 6px; padding: 4px 8px;">Real fan demographics</div>
+          <div class="brand-metric-good" style="opacity:0;transform:translateX(8px);transition:all 0.4s ease;font-size: 10px; color: var(--cream-dim); background: rgba(46,204,113,0.1); border-radius: 6px; padding: 4px 8px;">Engagement depth</div>
+          <div class="brand-metric-good" style="opacity:0;transform:translateX(8px);transition:all 0.4s ease;font-size: 10px; color: var(--cream-dim); background: rgba(46,204,113,0.1); border-radius: 6px; padding: 4px 8px;">Purchase behavior</div>
+        </div>
+        <div style="border-top: 1px solid rgba(46,204,113,0.15); padding-top: 10px;">
+          <div style="font-size: 9px; color: var(--cream-muted); margin-bottom: 2px;">BRAND DEAL OFFER</div>
+          <div id="goodDeal" style="font-family: var(--font-w); font-weight: 800; font-size: 28px; color: var(--green); opacity: 0; transition: all 0.5s ease;">$8,500</div>
+        </div>
+      </div>
     </div>
+
+    <div style="text-align:center;font-size: 12px; color: var(--cream-dim); line-height: 1.6;">First-party, consent-based fan data. Talent owns it. Brands license it. <span style="color: var(--green); font-weight: 600;">50/50 split.</span></div>
   </div>
 
   <!-- Section 8: The Pipeline -->
@@ -3051,6 +3081,43 @@ sections.forEach(sec => dotObserver.observe(sec));
   obs.observe(container);
   var rect = container.getBoundingClientRect();
   if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runCards();
+})();
+</script>
+
+<script>
+// Brand deal before/after animation
+(function() {
+  var wrap = document.getElementById('brandDealCompare');
+  if (!wrap) return;
+  var badMetrics = wrap.querySelectorAll('.brand-metric-bad');
+  var goodMetrics = wrap.querySelectorAll('.brand-metric-good');
+  var badDeal = document.getElementById('badDeal');
+  var goodDeal = document.getElementById('goodDeal');
+  var started = false;
+
+  function run() {
+    if (started) return;
+    started = true;
+    // Stagger bad metrics
+    badMetrics.forEach(function(el, i) {
+      setTimeout(function() { el.style.opacity = '1'; el.style.transform = 'translateX(0)'; }, 200 + i * 200);
+    });
+    // Show bad deal amount
+    setTimeout(function() { badDeal.style.opacity = '1'; }, 900);
+    // Stagger good metrics
+    goodMetrics.forEach(function(el, i) {
+      setTimeout(function() { el.style.opacity = '1'; el.style.transform = 'translateX(0)'; }, 1200 + i * 200);
+    });
+    // Show good deal amount
+    setTimeout(function() { goodDeal.style.opacity = '1'; }, 1900);
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) { if (entry.isIntersecting) { run(); obs.unobserve(entry.target); } });
+  }, {threshold: 0.3});
+  obs.observe(wrap);
+  var rect = wrap.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) run();
 })();
 </script>
 
