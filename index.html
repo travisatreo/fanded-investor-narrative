@@ -2259,11 +2259,11 @@ sections.forEach(sec => dotObserver.observe(sec));
   var started = false;
   var H = 65; // graph height (bottom y)
 
-  // Streaming: boom then crash, each cycle a different shape
+  // Streaming: small spike then crashes to nothing — reflects reality
   var streamCycles = [
-    [[0,H],[15,55],[30,40],[45,22],[55,10],[60,6],[65,10],[75,20],[85,35],[100,48],[115,55],[130,60],[140,H-2]],
-    [[0,H],[12,50],[25,35],[40,18],[50,8],[55,4],[60,8],[70,18],[85,32],[100,45],[120,55],[135,60],[140,H-1]],
-    [[0,H],[10,52],[22,38],[35,20],[48,10],[55,5],[58,3],[63,7],[75,15],[90,30],[105,44],[125,56],[140,H-2]],
+    [[0,H],[10,H-2],[20,H-4],[30,H-8],[40,H-14],[48,H-18],[52,H-18],[58,H-14],[65,H-8],[75,H-3],[85,H-1],[100,H],[140,H]],
+    [[0,H],[8,H-1],[18,H-5],[28,H-10],[38,H-16],[45,H-18],[50,H-17],[56,H-12],[64,H-6],[74,H-2],[88,H],[140,H]],
+    [[0,H],[12,H-3],[22,H-7],[32,H-12],[42,H-17],[48,H-19],[53,H-17],[60,H-10],[70,H-5],[82,H-1],[95,H],[140,H]],
   ];
 
   // Fan club: always climbs up-and-to-right. Each cycle climbs the full graph height,
