@@ -1852,50 +1852,36 @@ body {
   <!-- Section 8: The Pipeline -->
   <div class="section fade-in">
     <div class="section-label">THE PIPELINE</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 20px;">Built for music.<br><span style="color: var(--gold);">Pulling us everywhere.</span></h2>
+    <h2 class="headline" style="font-size: 20px; margin-bottom: 24px;">Built for music.<br><span style="color: var(--gold);">Pulling us everywhere.</span></h2>
 
-    <!-- Expanding rings animation -->
-    <div id="pipelineRings" style="position:relative;width:100%;height:320px;margin-bottom:16px;overflow:hidden;">
-      <!-- Center: Music -->
-      <div id="ringMusic" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:100px;height:100px;border-radius:50%;background:rgba(138,92,246,0.2);border:2px solid rgba(138,92,246,0.5);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:transform 0.5s ease;z-index:5;">
-        <div style="font-size:24px;">🎤</div>
-        <div style="font-family:var(--font-w);font-weight:700;font-size:10px;color:var(--cream);letter-spacing:1px;">MUSIC</div>
-      </div>
-      <!-- Ring 2: Actors -->
-      <div id="ringActors" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:180px;height:180px;border-radius:50%;border:1px solid rgba(212,175,55,0.25);background:rgba(212,175,55,0.05);transition:transform 0.5s ease;z-index:4;">
-        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);text-align:center;">
-          <div style="font-size:16px;">🎬</div>
-          <div style="font-family:var(--font-w);font-weight:700;font-size:8px;color:var(--gold);letter-spacing:1px;">ACTORS</div>
+    <!-- Horizontal expansion: started here → now here -->
+    <div id="pipelineExpand" style="display:flex;flex-direction:column;gap:0;">
+      <!-- Row: Started -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1.5px;color:var(--cream-muted);width:70px;flex-shrink:0;">STARTED</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(138,92,246,0.12);border:1px solid rgba(138,92,246,0.3);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);">🎤 Musicians</span>
         </div>
       </div>
-      <!-- Ring 3: Athletes -->
-      <div id="ringAthletes" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:250px;height:250px;border-radius:50%;border:1px solid rgba(77,199,77,0.2);background:rgba(77,199,77,0.03);transition:transform 0.5s ease;z-index:3;">
-        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);text-align:center;">
-          <div style="font-size:16px;">🏅</div>
-          <div style="font-family:var(--font-w);font-weight:700;font-size:8px;color:var(--green);letter-spacing:1px;">ATHLETES</div>
-        </div>
-        <div style="position:absolute;bottom:16px;right:20px;text-align:center;">
-          <div style="font-size:12px;">⛳</div>
-          <div style="font-family:var(--font-b);font-size:7px;color:var(--cream-muted);">Pro Golf</div>
-        </div>
-      </div>
-      <!-- Ring 4: Festivals + Orgs -->
-      <div id="ringFestivals" class="pipe-ring" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:310px;height:310px;border-radius:50%;border:1px solid rgba(0,163,255,0.15);background:rgba(0,163,255,0.02);transition:transform 0.5s ease;z-index:2;">
-        <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);text-align:center;">
-          <div style="font-size:16px;">🎪</div>
-          <div style="font-family:var(--font-w);font-weight:700;font-size:8px;color:var(--blue);letter-spacing:1px;">FESTIVALS</div>
-        </div>
-        <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);text-align:center;">
-          <div style="font-size:12px;">🎓</div>
-          <div style="font-family:var(--font-b);font-size:7px;color:var(--cream-muted);">Colleges</div>
-        </div>
-        <div style="position:absolute;top:50%;right:4px;transform:translateY(-50%);text-align:center;">
-          <div style="font-size:12px;">🏢</div>
-          <div style="font-family:var(--font-b);font-size:7px;color:var(--cream-muted);">Mgmt Cos</div>
+
+      <!-- Arrow -->
+      <div style="margin-left:35px;color:rgba(255,255,255,0.15);font-size:16px;margin-bottom:12px;">↓</div>
+
+      <!-- Row: Now -->
+      <div id="pipelineNow" style="display:flex;align-items:flex-start;gap:12px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1.5px;color:var(--green);width:70px;flex-shrink:0;padding-top:8px;">NOW</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(138,92,246,0.12);border:1px solid rgba(138,92,246,0.3);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎤 Musicians</span>
+          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎬 Actors</span>
+          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(77,199,77,0.1);border:1px solid rgba(77,199,77,0.25);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🏅 Athletes</span>
+          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(0,163,255,0.1);border:1px solid rgba(0,163,255,0.2);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎪 Festivals</span>
+          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🏢 Mgmt Cos</span>
+          <span class="pipe-pill" style="opacity:0;display:inline-flex;align-items:center;gap:4px;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.2);border-radius:20px;padding:6px 12px;font-size:12px;font-family:var(--font-w);font-weight:600;color:var(--cream);transition:opacity 0.4s ease;">🎓 Colleges</span>
         </div>
       </div>
     </div>
-    <div style="text-align:center;font-size:12px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Same problem. Same solution. Every vertical.</div>
+
+    <div style="margin-top:20px;font-size:13px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Same problem. Same solution. Every vertical.</div>
   </div>
 
   <!-- Section 8b: The Ask -->
@@ -1915,8 +1901,8 @@ body {
       <div class="timeline-node" id="askNode1" style="position:relative;margin-bottom:28px;opacity:0;transform:translateX(-10px);transition:all 0.5s ease;">
         <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--bg);z-index:2;"></div>
         <div style="font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:2px;color:var(--green);margin-bottom:4px;">IMMEDIATELY</div>
-        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Hire full-time CTO</div>
-        <div style="font-size:11px;color:var(--cream-muted);margin-top:2px;">Build the machine that serves the pipeline</div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Engineering team locked in</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:2px;">Full-time CTO + infra to serve the pipeline</div>
       </div>
 
       <!-- Milestone 2: 30 DAYS -->
@@ -1950,8 +1936,8 @@ body {
     <div id="whyNowCards" style="display:flex;flex-direction:column;gap:36px;padding:8px 0;">
       <!-- Statement 1 -->
       <div id="whyCard1" style="opacity:0;transform:translateX(-20px);transition:all 0.6s ease;">
-        <div style="font-family:var(--font-d);font-weight:900;font-size:28px;color:var(--cream);line-height:1.2;">The old model is <span style="color:var(--red);">dead.</span></div>
-        <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;line-height:1.6;">Streaming pays $0.003. Studio deals down 40%. Brand deals saturated. Talent has no direct revenue path.</div>
+        <div style="font-family:var(--font-d);font-weight:900;font-size:28px;color:var(--cream);line-height:1.2;"><span style="color:var(--red);">42,000 entertainment jobs</span> gone in 24 months.</div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;line-height:1.6;">Streaming pays $0.003. Studio deals down 40%. LA production days cut in half. The old model isn't shrinking — it's collapsing.</div>
       </div>
 
       <!-- Statement 2 -->
@@ -2934,34 +2920,35 @@ sections.forEach(sec => dotObserver.observe(sec));
 </style>
 
 <script>
-// Pipeline expanding rings animation
+// Pipeline pills stagger animation
 (function() {
-  var container = document.getElementById('pipelineRings');
+  var container = document.getElementById('pipelineExpand');
   if (!container) return;
-  var rings = ['ringMusic', 'ringActors', 'ringAthletes', 'ringFestivals'];
+  var pills = container.querySelectorAll('.pipe-pill');
   var started = false;
 
-  function runRings() {
+  function runPills() {
     started = true;
-    rings.forEach(function(id, i) {
-      setTimeout(function() {
-        var el = document.getElementById(id);
-        if (el) el.style.transform = 'translate(-50%,-50%) scale(1)';
-      }, 300 + i * 400);
-    });
+    for (var i = 0; i < pills.length; i++) {
+      (function(idx) {
+        setTimeout(function() {
+          pills[idx].style.opacity = '1';
+        }, 200 + idx * 200);
+      })(i);
+    }
   }
 
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting && !started) {
-        runRings();
+        runPills();
         obs.unobserve(entry.target);
       }
     });
   }, {threshold: 0.1});
   obs.observe(container);
   var rect = container.getBoundingClientRect();
-  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runRings();
+  if (rect.top < window.innerHeight && rect.bottom > 0 && !started) runPills();
 })();
 </script>
 
