@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fanded Deck Analytics</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #07070F; color: #F5F1EA; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; max-width: 900px; margin: 0 auto; }
+h1 { font-size: 24px; margin-bottom: 4px; }
+.subtitle { color: #6B6B8A; font-size: 14px; margin-bottom: 24px; }
+
+/* Auth */
+#authScreen { text-align: center; padding-top: 120px; }
+#authScreen input { background: #161624; border: 1px solid #1C1C2E; color: #F5F1EA; padding: 12px 16px; border-radius: 10px; font-size: 16px; width: 260px; }
+#authScreen button { background: #3BADE4; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; display: block; margin-left: auto; margin-right: auto; }
+#authScreen button:hover { background: #5BC0F0; }
+
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: #0F0F1C; border: 1px solid #1C1C2E; border-radius: 12px; padding: 16px; }
+.stat-num { font-size: 28px; font-weight: 800; color: #3BADE4; }
+.stat-label { font-size: 11px; color: #6B6B8A; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* Section heatmap */
+.heatmap { background: #0F0F1C; border: 1px solid #1C1C2E; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.heatmap h3 { font-size: 14px; color: #9999BB; margin-bottom: 16px; }
+.heat-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.heat-label { width: 140px; font-size: 12px; color: #9999BB; text-align: right; flex-shrink: 0; }
+.heat-bar-bg { flex: 1; height: 24px; background: rgba(255,255,255,0.03); border-radius: 6px; overflow: hidden; position: relative; }
+.heat-bar { height: 100%; border-radius: 6px; transition: width 0.6s ease; min-width: 2px; }
+.heat-time { font-size: 11px; color: #6B6B8A; width: 60px; text-align: right; flex-shrink: 0; }
+
+/* Sessions table */
+.sessions { background: #0F0F1C; border: 1px solid #1C1C2E; border-radius: 12px; padding: 20px; }
+.sessions h3 { font-size: 14px; color: #9999BB; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 10px; color: #6B6B8A; text-transform: uppercase; letter-spacing: 1px; padding: 8px 6px; border-bottom: 1px solid #1C1C2E; }
+td { padding: 10px 6px; font-size: 13px; color: #9999BB; border-bottom: 1px solid rgba(28,28,46,0.5); }
+tr:hover td { color: #F5F1EA; }
+.scroll-bar { display: inline-block; height: 4px; border-radius: 2px; background: #3BADE4; }
+.time-badge { background: rgba(59,173,228,0.12); color: #3BADE4; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.returning-badge { background: rgba(46,204,113,0.12); color: #2ECC71; padding: 2px 6px; border-radius: 20px; font-size: 10px; }
+.new-badge { background: rgba(231,76,60,0.1); color: #E74C3C; padding: 2px 6px; border-radius: 20px; font-size: 10px; }
+
+#loading { text-align: center; padding: 60px; color: #6B6B8A; }
+#dashboard { display: none; }
+.refresh-btn { background: rgba(59,173,228,0.1); border: 1px solid rgba(59,173,228,0.3); color: #3BADE4; padding: 6px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; float: right; }
+.refresh-btn:hover { background: rgba(59,173,228,0.2); }
+
+@media (max-width: 600px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .heat-label { width: 80px; font-size: 10px; }
+  table { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<div id="authScreen">
+  <h1 style="margin-bottom:16px;">Fanded Deck Analytics</h1>
+  <input type="password" id="keyInput" placeholder="Analytics key" onkeydown="if(event.key==='Enter')loadDashboard()">
+  <button onclick="loadDashboard()">View Analytics</button>
+</div>
+
+<div id="dashboard">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+    <div>
+      <h1>Deck Viewer Analytics</h1>
+      <div class="subtitle">fanded-investor-narrative.vercel.app</div>
+    </div>
+    <button class="refresh-btn" onclick="fetchData()">Refresh</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="totalViews">-</div><div class="stat-label">Total Views</div></div>
+    <div class="stat-card"><div class="stat-num" id="uniqueVisitors">-</div><div class="stat-label">Unique Visitors</div></div>
+    <div class="stat-card"><div class="stat-num" id="avgTime">-</div><div class="stat-label">Avg. Time (sec)</div></div>
+    <div class="stat-card"><div class="stat-num" id="avgScroll">-</div><div class="stat-label">Avg. Scroll %</div></div>
+  </div>
+
+  <div class="heatmap">
+    <h3>Section Engagement (avg time spent)</h3>
+    <div id="heatmapRows"></div>
+  </div>
+
+  <div class="sessions">
+    <h3>Recent Viewers</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Duration</th>
+          <th>Scroll</th>
+          <th>Sections</th>
+          <th>Type</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody id="sessionsBody"></tbody>
+    </table>
+  </div>
+
+  <div id="loading">Loading...</div>
+</div>
+
+<script>
+var analyticsKey = '';
+
+function loadDashboard() {
+  analyticsKey = document.getElementById('keyInput').value;
+  if (!analyticsKey) return;
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  fetchData();
+}
+
+function fetchData() {
+  document.getElementById('loading').style.display = 'block';
+  fetch('/api/track?key=' + encodeURIComponent(analyticsKey))
+    .then(function(r) {
+      if (!r.ok) throw new Error('Unauthorized');
+      return r.json();
+    })
+    .then(function(data) {
+      document.getElementById('loading').style.display = 'none';
+      renderDashboard(data);
+    })
+    .catch(function(err) {
+      document.getElementById('loading').textContent = 'Error: ' + err.message + '. Check your key.';
+    });
+}
+
+function renderDashboard(data) {
+  var sessions = data.sessions || [];
+  if (sessions.length === 0) {
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('loading').textContent = 'No views yet. Share your deck link and check back.';
+    return;
+  }
+
+  // Stats
+  var uniqueIds = {};
+  var totalTime = 0;
+  var totalScroll = 0;
+  var sectionTotals = {};
+  var sectionCounts = {};
+
+  sessions.forEach(function(s) {
+    uniqueIds[s.visitorId] = true;
+    totalTime += (s.totalTime || 0);
+    totalScroll += (s.maxScroll || 0);
+
+    // Aggregate section data
+    if (s.sections && typeof s.sections === 'object') {
+      Object.keys(s.sections).forEach(function(name) {
+        if (!sectionTotals[name]) { sectionTotals[name] = 0; sectionCounts[name] = 0; }
+        var t = s.sections[name];
+        var ms = (typeof t === 'object') ? (t.time || 0) : (t || 0);
+        sectionTotals[name] += ms;
+        sectionCounts[name]++;
+      });
+    }
+  });
+
+  document.getElementById('totalViews').textContent = data.count || sessions.length;
+  document.getElementById('uniqueVisitors').textContent = Object.keys(uniqueIds).length;
+  document.getElementById('avgTime').textContent = Math.round(totalTime / sessions.length);
+  document.getElementById('avgScroll').textContent = Math.round(totalScroll / sessions.length) + '%';
+
+  // Heatmap
+  var heatmapEl = document.getElementById('heatmapRows');
+  heatmapEl.innerHTML = '';
+
+  var sectionOrder = ['Founder Story', 'The Problem', 'What We Built First', 'The Solution', 'Traction', 'MAWD for Managers', 'How We Make Money', 'Long-Term Moat', 'Data Network', 'Pipeline', 'Why Now', 'TAM', 'The Ask', 'Team & Backers', 'Demo', 'Closing'];
+
+  var maxAvg = 0;
+  var sectionAvgs = {};
+  sectionOrder.forEach(function(name) {
+    var avg = sectionTotals[name] ? Math.round(sectionTotals[name] / sectionCounts[name] / 1000) : 0;
+    sectionAvgs[name] = avg;
+    if (avg > maxAvg) maxAvg = avg;
+  });
+
+  sectionOrder.forEach(function(name) {
+    var avg = sectionAvgs[name] || 0;
+    var pct = maxAvg > 0 ? Math.round((avg / maxAvg) * 100) : 0;
+
+    // Color gradient: cool blue → hot red
+    var hue = Math.max(0, 200 - (pct * 2));
+    var color = 'hsl(' + hue + ', 80%, 55%)';
+
+    var row = document.createElement('div');
+    row.className = 'heat-row';
+    row.innerHTML = '<div class="heat-label">' + name + '</div>' +
+      '<div class="heat-bar-bg"><div class="heat-bar" style="width:' + Math.max(pct, 2) + '%;background:' + color + ';"></div></div>' +
+      '<div class="heat-time">' + avg + 's avg</div>';
+    heatmapEl.appendChild(row);
+  });
+
+  // Sessions table
+  var tbody = document.getElementById('sessionsBody');
+  tbody.innerHTML = '';
+
+  sessions.slice(0, 50).forEach(function(s) {
+    var tr = document.createElement('tr');
+    var ts = s.timestamp ? new Date(s.timestamp) : new Date();
+    var timeStr = ts.toLocaleDateString('en-US', {month:'short', day:'numeric'}) + ' ' + ts.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+
+    var sectionCount = 0;
+    if (s.sections) {
+      sectionCount = typeof s.sections === 'number' ? s.sections : Object.keys(s.sections).length;
+    }
+
+    var typeBadge = s.returning ? '<span class="returning-badge">Return</span>' : '<span class="new-badge">New</span>';
+    var source = s.referer || 'direct';
+    if (source.length > 30) source = source.substring(0, 30) + '...';
+
+    tr.innerHTML = '<td>' + timeStr + '</td>' +
+      '<td><span class="time-badge">' + (s.totalTime || 0) + 's</span></td>' +
+      '<td><span class="scroll-bar" style="width:' + Math.max((s.maxScroll || 0) * 0.6, 4) + 'px;"></span> ' + (s.maxScroll || 0) + '%</td>' +
+      '<td>' + sectionCount + '</td>' +
+      '<td>' + typeBadge + '</td>' +
+      '<td style="font-size:11px;color:#6B6B8A;">' + source + '</td>';
+    tbody.appendChild(tr);
+  });
+}
+</script>
+</body>
+</html>
