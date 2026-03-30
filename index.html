@@ -1504,12 +1504,6 @@ body {
     }
   </style>
 
-  <!-- Moment: AAGC community meetup -->
-  <div class="moment-photo fade-in">
-    <img src="photos/IMG_0219_opt.jpg" alt="Asian American Girl Club community meetup at Venice Beach">
-    <div class="moment-caption">AAGC community meetup, Venice Beach, CA</div>
-  </div>
-
   <!-- Section: Fan Clubs Origin -->
   <div class="section fade-in" data-track="What We Built First">
     <div class="section-label">FANDED CLUBS — THE WEDGE</div>
@@ -1763,123 +1757,12 @@ body {
     </div>
   </div>
 
-  <!-- Section 4b: MAWD for Managers -->
-  <div class="section fade-in" data-track="MAWD for Managers">
-    <div class="section-label">FANDED OS FOR MANAGERS (ENTERPRISE)</div>
-    <h2 class="headline" style="font-size: 22px; margin-bottom: 20px;">One manager. Ten clients.<br><span style="color: var(--gold);">Fanded OS handles it.</span></h2>
-
-    <!-- Group Chat Chaos → Calm animation -->
-    <div id="mfmChaos" style="position:relative;width:100%;height:360px;margin:24px 0;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;">
-      <!-- Phase label -->
-      <div id="chaosLabel" style="position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);z-index:10;transition:all 0.8s ease;">10 CLIENTS MESSAGING AT ONCE</div>
-      <!-- Messages container -->
-      <div id="chaosMessages" style="position:absolute;inset:0;padding:36px 12px 12px;"></div>
-      <!-- MFM activation overlay -->
-      <div id="mfmActivate" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;z-index:20;transition:opacity 0.6s;pointer-events:none;">
-        <div style="background:rgba(245,166,35,0.12);border:1.5px solid var(--gold);border-radius:12px;padding:14px 28px;backdrop-filter:blur(8px);">
-          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--gold);letter-spacing:1px;">MFM ACTIVATED</div>
-        </div>
-      </div>
-      <!-- Sorted lanes (hidden initially) -->
-      <div id="chaosLanes" style="position:absolute;inset:0;padding:36px 12px 12px;opacity:0;transition:opacity 0.6s;display:flex;flex-direction:column;gap:6px;overflow:hidden;"></div>
-    </div>
-
-    <div style="background: var(--bg-card); border: 1px solid var(--gold); border-radius: var(--r); padding: 20px; margin-bottom: 20px;">
-      <div style="font-size: 13px; color: var(--cream-dim); line-height: 1.7; text-align: center;">Talent MAWD ↔ Manager MAWD. Always synced. Nothing missed.</div>
-    </div>
-
-    <!-- Before/After: Manager workflow -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
-      <!-- TODAY -->
-      <div style="background:rgba(231,76,60,0.04);border:1px solid rgba(231,76,60,0.15);border-radius:10px;padding:16px 12px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:1px;color:var(--red);margin-bottom:14px;">TODAY</div>
-        <!-- Manager -->
-        <div style="width:36px;height:36px;border-radius:50%;background:rgba(231,76,60,0.12);border:1.5px solid rgba(231,76,60,0.3);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:14px;">😰</span>
-        </div>
-        <div style="font-size:8px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;margin-bottom:12px;">MANAGER</div>
-        <!-- Tangled lines to artists -->
-        <svg width="100%" height="60" viewBox="0 0 160 60" style="margin-bottom:8px;">
-          <line x1="80" y1="0" x2="10" y2="55" stroke="rgba(231,76,60,0.25)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="28" y2="55" stroke="rgba(231,76,60,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="46" y2="55" stroke="rgba(231,76,60,0.3)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="64" y2="55" stroke="rgba(231,76,60,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="82" y2="55" stroke="rgba(231,76,60,0.25)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="100" y2="55" stroke="rgba(231,76,60,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="118" y2="55" stroke="rgba(231,76,60,0.3)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="136" y2="55" stroke="rgba(231,76,60,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="150" y2="55" stroke="rgba(231,76,60,0.25)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="54" y2="55" stroke="rgba(231,76,60,0.15)" stroke-width="1"/>
-          <!-- Cross-tangled lines for chaos -->
-          <line x1="10" y1="55" x2="46" y2="30" stroke="rgba(231,76,60,0.1)" stroke-width="0.5" stroke-dasharray="2,2"/>
-          <line x1="136" y1="55" x2="64" y2="25" stroke="rgba(231,76,60,0.1)" stroke-width="0.5" stroke-dasharray="2,2"/>
-          <line x1="28" y1="55" x2="118" y2="35" stroke="rgba(231,76,60,0.1)" stroke-width="0.5" stroke-dasharray="2,2"/>
-        </svg>
-        <!-- 10 artist dots -->
-        <div style="display:flex;justify-content:center;gap:3px;flex-wrap:wrap;">
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.25);display:flex;align-items:center;justify-content:center;font-size:6px;">🎤</div>
-        </div>
-        <div style="font-size:7.5px;color:rgba(231,76,60,0.5);margin-top:8px;font-family:var(--font-b);">10 artists texting, calling, emailing</div>
-      </div>
-
-      <!-- WITH MFM -->
-      <div style="background:rgba(77,199,77,0.04);border:1px solid rgba(77,199,77,0.15);border-radius:10px;padding:16px 12px;text-align:center;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:1px;color:#4DC74D;margin-bottom:14px;">WITH MFM</div>
-        <!-- Manager -->
-        <div style="width:36px;height:36px;border-radius:50%;background:rgba(77,199,77,0.12);border:1.5px solid rgba(77,199,77,0.3);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:14px;">😎</span>
-        </div>
-        <div style="font-size:8px;color:var(--cream-muted);font-family:var(--font-w);font-weight:600;margin-bottom:4px;">MANAGER</div>
-        <!-- Single clean line down to MFM -->
-        <svg width="100%" height="20" viewBox="0 0 160 20">
-          <line x1="80" y1="0" x2="80" y2="20" stroke="rgba(245,166,35,0.4)" stroke-width="1.5"/>
-        </svg>
-        <!-- MFM hub -->
-        <div style="width:40px;height:40px;border-radius:50%;background:rgba(245,166,35,0.12);border:1.5px solid rgba(245,166,35,0.4);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:8px;font-family:var(--font-w);font-weight:700;color:var(--gold);">MFM</span>
-        </div>
-        <!-- Clean parallel lines to MAWDs -->
-        <svg width="100%" height="30" viewBox="0 0 160 30" style="margin-bottom:4px;">
-          <line x1="80" y1="0" x2="10" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="28" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="46" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="64" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="82" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="100" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="118" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="136" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="150" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-          <line x1="80" y1="0" x2="54" y2="28" stroke="rgba(77,199,77,0.2)" stroke-width="1"/>
-        </svg>
-        <!-- 10 MAWD dots -->
-        <div style="display:flex;justify-content:center;gap:3px;flex-wrap:wrap;margin-bottom:4px;">
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-          <div style="width:14px;height:14px;border-radius:50%;background:rgba(77,199,77,0.12);border:1px solid rgba(77,199,77,0.25);display:flex;align-items:center;justify-content:center;font-size:5px;color:#4DC74D;font-weight:700;">M</div>
-        </div>
-        <div style="font-size:7px;color:rgba(77,199,77,0.5);font-family:var(--font-b);margin-bottom:6px;">10 MAWD agents, always synced</div>
-        <!-- Artists off to side, creating -->
-        <div style="display:flex;justify-content:center;gap:2px;opacity:0.4;">
-          <span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span><span style="font-size:6px;">🎤</span>
-        </div>
-        <div style="font-size:6.5px;color:rgba(255,255,255,0.25);font-family:var(--font-b);margin-top:2px;">artists stay creating</div>
-      </div>
+  <!-- Section 4b: MAWD for Managers (condensed) -->
+  <div class="section fade-in" data-track="MAWD for Managers" style="padding-top:24px;padding-bottom:24px;">
+    <div style="background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px;">ENTERPRISE: FANDED OS FOR MANAGERS</div>
+      <div style="font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--cream);line-height:1.3;margin-bottom:8px;">One manager. Ten clients. <span style="color:var(--gold);">Fanded OS handles it.</span></div>
+      <div style="font-size:13px;color:var(--cream-muted);line-height:1.6;">Talent MAWD ↔ Manager MAWD. Always synced. Nothing missed. $100/mo per seat.</div>
     </div>
 
   </div>
@@ -1939,50 +1822,7 @@ body {
     </div>
   </div>
 
-  <!-- Section 5: Architecture -->
-  <div class="section fade-in" data-track="Long-Term Moat">
-    <div class="section-label">THE LONG-TERM MOAT</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">Every day Fanded OS runs, MAWD gets smarter.<br>That can't be copied.</h2>
-
-    <!-- Diverging Lines: The Moat Chart -->
-    <div id="moatChart" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px 16px 16px;margin-bottom:16px;overflow:hidden;">
-      <div style="text-align:center;font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1px;color:var(--cream-muted);margin-bottom:12px;">INTELLIGENCE OVER TIME</div>
-      <svg id="moatSvg" viewBox="0 0 320 180" style="width:100%;height:auto;">
-        <!-- Grid lines -->
-        <line x1="40" y1="20" x2="40" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-        <line x1="40" y1="155" x2="310" y2="155" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        <!-- Y-axis labels -->
-        <text x="36" y="25" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Smart</text>
-        <text x="36" y="90" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="6" font-family="var(--font-b)"></text>
-        <text x="36" y="158" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Zero</text>
-        <!-- X-axis labels -->
-        <text x="50" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 1</text>
-        <text x="117" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 30</text>
-        <text x="185" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 90</text>
-        <text x="275" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 365</text>
-        <!-- The moat gap fill (animated) -->
-        <path id="moatGap" d="" fill="rgba(77,199,77,0.1)" stroke="none"/>
-        <!-- Your MAWD line (green, curves up) -->
-        <path id="moatLineGreen" d="M50,150" fill="none" stroke="#4DC74D" stroke-width="2" stroke-linecap="round"/>
-        <!-- Competitor line (gray, stays flat) -->
-        <path id="moatLineGray" d="M50,150" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>
-        <!-- Moat label (appears at end) -->
-        <text id="moatLabel" x="220" y="115" text-anchor="middle" fill="rgba(77,199,77,0.35)" font-size="7" font-family="var(--font-w)" font-weight="700" letter-spacing="2" opacity="0">THE MOAT</text>
-        <!-- Milestone dots on green line -->
-        <g id="moatDots"></g>
-        <!-- Legend -->
-        <line x1="50" y1="178" x2="64" y2="178" stroke="#4DC74D" stroke-width="2"/>
-        <text x="67" y="180" fill="rgba(255,255,255,0.35)" font-size="5.5" font-family="var(--font-b)">Your MAWD</text>
-        <line x1="130" y1="178" x2="144" y2="178" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <text x="147" y="180" fill="rgba(255,255,255,0.25)" font-size="5.5" font-family="var(--font-b)">Competitor starting today</text>
-      </svg>
-    </div>
-
-    <div style="text-align:center;font-size:12px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Our clients are already months ahead of anyone starting tomorrow.</div>
-    <div style="margin-top:12px;font-size:10px;color:var(--cream-muted);text-align:center;line-height:1.6;">AI models improve by power law with more user data. Accuracy gains of 23%+ with domain-specific fine-tuning. <a href="https://arxiv.org/abs/2208.08489" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Meta/AAAI Scaling Laws</a>, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12411786/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">JMIR AI Personalization</a></div>
-  </div>
-
-  <!-- Section 5b: The Data Network -->
+  <!-- Section 5: Data Network + Moat (merged) -->
   <div class="section fade-in" data-track="Data Network">
     <div class="section-label">AND THEN IT GETS BIGGER</div>
     <h2 class="headline" style="font-size: 20px; margin-bottom: 16px;">When talent owns their data,<br><span style="color: var(--green);">they stop getting underpaid.</span></h2>
@@ -2040,6 +1880,34 @@ body {
 
     <div style="text-align:center;font-size: 12px; color: var(--cream-dim); line-height: 1.6;">First-party, consent-based fan data. Talent owns it. Brands license it. <span style="color: var(--green); font-weight: 600;">50/50 split.</span></div>
     <div style="margin-top:8px;font-size:10px;color:var(--cream-muted);text-align:center;">Source: <a href="https://influencermarketinghub.com/micro-influencer-rates/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Influencer Marketing Hub 2026</a>, <a href="https://kalakaaar.com/blog/how-much-do-brand-deals-pay/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">Kalakaaar</a></div>
+
+    <!-- Moat chart (merged in) -->
+    <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);">
+      <h2 class="headline" style="font-size:18px;margin-bottom:16px;">And every day it runs, MAWD gets smarter. <span style="color:var(--green);">That can't be copied.</span></h2>
+      <div id="moatChart" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px 16px 16px;overflow:hidden;">
+        <div style="text-align:center;font-family:var(--font-w);font-weight:700;font-size:9px;letter-spacing:1px;color:var(--cream-muted);margin-bottom:12px;">INTELLIGENCE OVER TIME</div>
+        <svg id="moatSvg" viewBox="0 0 320 180" style="width:100%;height:auto;">
+          <line x1="40" y1="20" x2="40" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+          <line x1="40" y1="155" x2="310" y2="155" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <text x="36" y="25" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Smart</text>
+          <text x="36" y="158" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Zero</text>
+          <text x="50" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 1</text>
+          <text x="117" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 30</text>
+          <text x="185" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 90</text>
+          <text x="275" y="168" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="var(--font-b)">Day 365</text>
+          <path id="moatGap" d="" fill="rgba(77,199,77,0.1)" stroke="none"/>
+          <path id="moatLineGreen" d="M50,150" fill="none" stroke="#4DC74D" stroke-width="2" stroke-linecap="round"/>
+          <path id="moatLineGray" d="M50,150" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>
+          <text id="moatLabel" x="220" y="115" text-anchor="middle" fill="rgba(77,199,77,0.35)" font-size="7" font-family="var(--font-w)" font-weight="700" letter-spacing="2" opacity="0">THE MOAT</text>
+          <g id="moatDots"></g>
+          <line x1="50" y1="178" x2="64" y2="178" stroke="#4DC74D" stroke-width="2"/>
+          <text x="67" y="180" fill="rgba(255,255,255,0.35)" font-size="5.5" font-family="var(--font-b)">Your MAWD</text>
+          <line x1="130" y1="178" x2="144" y2="178" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="147" y="180" fill="rgba(255,255,255,0.25)" font-size="5.5" font-family="var(--font-b)">Competitor starting today</text>
+        </svg>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--cream);font-family:var(--font-w);font-weight:700;margin-top:12px;">Our clients are already months ahead of anyone starting tomorrow.</div>
+    </div>
   </div>
 
   <!-- Section 8: The Pipeline -->
