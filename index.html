@@ -1571,8 +1571,13 @@ body {
 
     <div class="body-text" style="margin-top: 16px;">Everything automated. Nothing missed.</div>
 
+    <!-- Cost savings headline -->
+    <div style="margin:28px 0 16px;text-align:center;">
+      <div style="font-family:var(--font-d);font-weight:900;font-size:20px;color:var(--cream);line-height:1.3;">Creators spend <span style="color:var(--red);">$60K/year</span> running their business.<br>MAWD does it for <span style="color:var(--green);">$360.</span></div>
+    </div>
+
     <!-- Cost savings comparison -->
-    <div style="display:flex;gap:10px;margin:24px 0;">
+    <div id="costCompare" style="display:flex;gap:10px;margin:16px 0;">
       <!-- Without MAWD -->
       <div style="flex:1;background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.15);border-radius:12px;padding:14px 12px;">
         <div style="font-size:8px;color:var(--red);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:10px;text-align:center;">WITHOUT MAWD</div>
@@ -1583,19 +1588,26 @@ body {
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--cream-muted);"><span>PR / marketing</span><span>$1,000</span></div>
         </div>
         <div style="border-top:1px solid rgba(231,76,60,0.15);padding-top:8px;text-align:center;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:24px;color:var(--red);">$5,000<span style="font-size:12px;font-weight:600;color:var(--cream-muted);">/mo</span></div>
+          <div id="costOld" style="font-family:var(--font-w);font-weight:800;font-size:24px;color:var(--red);position:relative;display:inline-block;">$5,000<span style="font-size:12px;font-weight:600;color:var(--cream-muted);">/mo</span>
+            <div id="costStrike" style="position:absolute;top:50%;left:-4px;right:-4px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.6s ease;"></div>
+          </div>
           <div style="font-size:9px;color:var(--cream-muted);margin-top:2px;">$60K/year</div>
         </div>
       </div>
       <!-- With MAWD -->
       <div style="flex:1;background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);border-radius:12px;padding:14px 12px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
         <div style="font-size:8px;color:var(--green);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:10px;">WITH MAWD</div>
-        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:var(--green);line-height:1;">$30</div>
+        <div id="costNew" style="font-family:var(--font-w);font-weight:800;font-size:48px;color:var(--green);line-height:1;opacity:0;transform:scale(0.8);transition:all 0.5s ease;">$30</div>
         <div style="font-size:12px;color:var(--cream-muted);margin-top:4px;">/month</div>
         <div style="font-size:10px;color:var(--cream-muted);margin-top:8px;">$360/year</div>
-        <div style="margin-top:12px;background:rgba(46,204,113,0.12);border-radius:20px;padding:4px 12px;">
-          <span style="font-family:var(--font-w);font-weight:700;font-size:11px;color:var(--green);">99% less</span>
-        </div>
+      </div>
+    </div>
+
+    <!-- Savings callout -->
+    <div id="savingsCallout" style="text-align:center;margin:16px 0 8px;opacity:0;transform:translateY(8px);transition:all 0.6s ease;">
+      <div style="display:inline-block;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.25);border-radius:10px;padding:12px 24px;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:32px;color:var(--green);line-height:1;">$59,640</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">saved per creator, per year</div>
       </div>
     </div>
     <div style="text-align:center;font-size:12px;color:var(--cream-dim);line-height:1.6;margin-bottom:8px;">Most creators can't afford any of this. MAWD gives them a team they never had.</div>
@@ -3203,6 +3215,34 @@ sections.forEach(sec => dotObserver.observe(sec));
     });
     // Show good deal amount
     setTimeout(function() { goodDeal.style.opacity = '1'; }, 1900);
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) { if (entry.isIntersecting) { run(); obs.unobserve(entry.target); } });
+  }, {threshold: 0.3});
+  obs.observe(wrap);
+  var rect = wrap.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom > 0) run();
+})();
+
+// Cost comparison animation — strikethrough + pop-in
+(function() {
+  var wrap = document.getElementById('costCompare');
+  if (!wrap) return;
+  var strike = document.getElementById('costStrike');
+  var costNew = document.getElementById('costNew');
+  var callout = document.getElementById('savingsCallout');
+  var started = false;
+
+  function run() {
+    if (started) return;
+    started = true;
+    // Strikethrough the $5,000
+    setTimeout(function() { if (strike) strike.style.transform = 'scaleX(1)'; }, 600);
+    // Pop in the $30
+    setTimeout(function() { if (costNew) { costNew.style.opacity = '1'; costNew.style.transform = 'scale(1)'; } }, 1000);
+    // Slide up the savings callout
+    setTimeout(function() { if (callout) { callout.style.opacity = '1'; callout.style.transform = 'translateY(0)'; } }, 1400);
   }
 
   var obs = new IntersectionObserver(function(entries) {
