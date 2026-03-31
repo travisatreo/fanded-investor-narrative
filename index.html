@@ -1856,55 +1856,33 @@ body {
   <!-- Section 7: Business Model -->
   <div class="section fade-in" data-track="The Business">
     <div class="section-label">THE BUSINESS</div>
-    <h2 class="headline" style="font-size: 20px; margin-bottom: 8px;">Three revenue layers.<br>Each one bigger than the last.</h2>
-    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 24px; font-style: italic;">Projected at 1,000 MAWD accounts</div>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 24px;">Three revenue layers.</h2>
 
-    <!-- Stacking Revenue Bars -->
-    <div id="revenueBars" style="display:flex;flex-direction:column;gap:18px;margin-bottom:24px;">
-
-      <!-- Layer 1: They pay for MAWD -->
-      <div class="rev-bar" id="revBar1" style="">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
-          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">They pay for MAWD</div>
-          <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--purple);">$30K<span style="font-size:11px;font-weight:600;color:var(--cream-muted);">/mo</span></div>
-        </div>
-        <div style="background:rgba(255,255,255,0.03);border-radius:6px;height:28px;width:100%;overflow:hidden;">
-          <div style="background:linear-gradient(90deg, rgba(138,92,246,0.5), rgba(138,92,246,0.15));border-radius:6px;height:100%;width:8%;transition:width 0.8s ease;" id="revBarFill1"></div>
-        </div>
-        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">$30/mo per talent · $100/mo per manager seat</div>
-      </div>
-
-      <!-- Layer 2: We take 10% of fan revenue -->
-      <div class="rev-bar" id="revBar2" style="">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
-          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">We take 10% of fan revenue</div>
-          <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--gold);">$100K<span style="font-size:11px;font-weight:600;color:var(--cream-muted);">/mo</span></div>
-        </div>
-        <div style="background:rgba(255,255,255,0.03);border-radius:6px;height:28px;width:100%;overflow:hidden;">
-          <div style="background:linear-gradient(90deg, rgba(212,175,55,0.5), rgba(212,175,55,0.15));border-radius:6px;height:100%;width:8%;transition:width 0.8s ease;" id="revBarFill2"></div>
-        </div>
-        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Every ticket, merch sale, and membership through Fanded</div>
-      </div>
-
-      <!-- Layer 3: Brands pay to reach their fans -->
-      <div class="rev-bar" id="revBar3" style="">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
-          <div style="font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Brands pay to reach their fans</div>
-          <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--green);">$300B<span style="font-size:11px;font-weight:600;color:var(--cream-muted);"> mkt</span></div>
-        </div>
-        <div style="background:rgba(255,255,255,0.03);border-radius:6px;height:28px;width:100%;overflow:hidden;">
-          <div style="background:linear-gradient(90deg, rgba(77,199,77,0.5), rgba(77,199,77,0.1));border-radius:6px;height:100%;width:8%;transition:width 0.8s ease;" id="revBarFill3"></div>
-        </div>
-        <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Consent-based data licensing · 50/50 split with talent</div>
-      </div>
-
+    <!-- Layer 1 -->
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:16px;color:var(--purple);margin-bottom:4px;">1. SaaS</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.5;">$30/mo per talent · $100/mo per manager seat</div>
     </div>
 
-    <!-- Total -->
-    <div id="revTotal" style="text-align:center;padding:16px;border-top:1px solid var(--border);">
-      <div style="font-size:11px;color:var(--cream-muted);margin-bottom:4px;">At 1,000 MAWD accounts</div>
-      <div style="font-family:var(--font-w);font-weight:800;font-size:32px;color:var(--green);">$1.56M ARR</div>
-      <div style="font-size:12px;color:var(--cream-muted);margin-top:4px;">Before data revenue even kicks in.</div>
+    <!-- Layer 2 -->
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:16px;color:var(--gold);margin-bottom:4px;">2. Take rate</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.5;">10% of every ticket, merch sale, and membership through Fanded</div>
+    </div>
+
+    <!-- Layer 3 -->
+    <div style="margin-bottom:28px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:16px;color:var(--green);margin-bottom:4px;">3. Data licensing</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.5;">Brands pay to reach fans · consent-based · 50/50 split with talent</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ARR projection — its own moment -->
+    <div style="text-align:center;padding:24px 0;">
+      <div style="font-size:12px;color:var(--cream-muted);margin-bottom:8px;">At 1,000 MAWD accounts</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:40px;color:var(--green);line-height:1;">$1.56M ARR</div>
+      <div style="font-size:12px;color:var(--cream-muted);margin-top:8px;">Before data revenue even kicks in.</div>
     </div>
   </div>
 
