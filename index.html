@@ -1305,8 +1305,9 @@ body {
     @keyframes ledgerScanline { 0% { left: -100%; } 100% { left: 100%; } }
     @keyframes ledgerPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(46,204,113,0.3); } 50% { box-shadow: 0 0 12px 4px rgba(46,204,113,0.15); } }
     @keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .ledger-row { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px; opacity:0; transform:translateX(-20px); transition: all 0.4s ease; background:rgba(0,0,0,0.15); margin-bottom:6px; }
-    .ledger-row.visible { opacity:1; transform:translateX(0); }
+    .ledger-row { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px; opacity:1; transform:translateX(0); background:rgba(0,0,0,0.15); margin-bottom:6px; }
+    .ledger-row.animate-ready { opacity:0; transform:translateX(-20px); transition: all 0.4s ease; }
+    .ledger-row.animate-ready.visible { opacity:1; transform:translateX(0); }
     .ledger-row .lr-input { flex:1; font-size:11px; color:var(--cream-muted); font-family:var(--font-b); white-space:nowrap; overflow:hidden; }
     .ledger-row .lr-arrow { color:var(--cream-dim); font-size:10px; flex-shrink:0; opacity:0; transition:opacity 0.3s 0.2s; }
     .ledger-row.visible .lr-arrow { opacity:1; }
@@ -1315,8 +1316,9 @@ body {
     .ledger-row .lr-check { width:16px; height:16px; border-radius:50%; background:rgba(46,204,113,0.15); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--green); opacity:0; transform:scale(0); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1) 0.6s; flex-shrink:0; }
     .ledger-row.visible .lr-check { opacity:1; transform:scale(1); }
     .ledger-stat { text-align:center; background:rgba(0,0,0,0.2); border-radius:10px; padding:12px 8px; }
-    .ledger-stat .ls-num { font-family:var(--font-w); font-weight:800; font-size:28px; line-height:1; opacity:0; transform:translateY(10px); transition:all 0.5s ease; }
-    .ledger-stat.visible .ls-num { opacity:1; transform:translateY(0); }
+    .ledger-stat .ls-num { font-family:var(--font-w); font-weight:800; font-size:28px; line-height:1; }
+    .ledger-stat.animate-ready .ls-num { opacity:0; transform:translateY(10px); transition:all 0.5s ease; }
+    .ledger-stat.animate-ready.visible .ls-num { opacity:1; transform:translateY(0); }
   </style>
   <div class="section fade-in" data-track="MAWD Works">
     <div class="section-label">MAWD WORKS</div>
@@ -1391,7 +1393,7 @@ body {
 
       <div style="text-align:center;">
         <div style="font-size:12px;color:var(--cream-muted);margin-bottom:8px;">Was paying a CPA <span style="color:var(--red);font-weight:700;text-decoration:line-through;">$4,110/yr</span></div>
-        <div id="ledgerROI" style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);border-radius:8px;padding:8px 20px;opacity:0;transform:scale(0.8);transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);">
+        <div id="ledgerROI" style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);border-radius:8px;padding:8px 20px;">
           <span style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--green);">137x ROI</span>
           <span style="font-size:11px;color:var(--cream-muted);margin-left:8px;">on $30/mo</span>
         </div>
@@ -2889,26 +2891,29 @@ sections.forEach(sec => dotObserver.observe(sec));
   var roi = document.getElementById('ledgerROI');
   var started = false;
 
+  // Hide rows first, then stagger them in
+  rows.forEach(function(row) { row.classList.add('animate-ready'); });
+
   function startFeed() {
     if (started) return;
     started = true;
     rows.forEach(function(row, i) {
       setTimeout(function() {
         row.classList.add('visible');
-      }, 600 + i * 350);
+      }, 300 + i * 350);
     });
-    // Scanline sweeps after all rows
-    setTimeout(function() {
-      if (scanline) scanline.style.animation = 'ledgerScanline 1.2s ease forwards';
-    }, 600 + rows.length * 350 + 200);
+    if (scanline) setTimeout(function() {
+      scanline.style.animation = 'ledgerScanline 1.2s ease forwards';
+    }, 300 + rows.length * 350 + 200);
   }
 
-  // Start on page load since this is the first section
-  window.addEventListener('load', function() {
+  // Fire on load + fallback
+  if (document.readyState === 'complete') {
     startFeed();
-  });
-  // Fallback: also start after 1.5s in case load event already fired
-  setTimeout(startFeed, 1500);
+  } else {
+    window.addEventListener('load', startFeed);
+  }
+  setTimeout(startFeed, 2000);
 
   // Count-up for proof stats
   var proofStarted = false;
