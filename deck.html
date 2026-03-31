@@ -219,8 +219,9 @@
   }
 
   @media print {
-    body { background: var(--bg); }
-    .slide { break-after: page; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    body { background: var(--bg) !important; }
+    .slide { break-after: page; break-inside: avoid; background: var(--bg) !important; margin: 0; }
   }
 
   /* Navigation hint for browser viewing */
