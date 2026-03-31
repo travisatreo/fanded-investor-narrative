@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @page { size: 1280px 720px; margin: 0; }
+  @page { size: landscape; margin: 0; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -220,17 +220,20 @@
 
   @media print {
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
-    html, body { background: var(--bg) !important; -webkit-print-color-adjust: exact !important; }
+    html, body { background: var(--bg) !important; margin: 0 !important; padding: 0 !important; }
     .slide {
+      width: 100vw !important;
+      height: 100vh !important;
       break-after: page;
       break-inside: avoid;
       background: var(--bg) !important;
-      margin: 0;
+      margin: 0 !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
-      /* Fallback: inset box-shadow forces dark bg even without "Background graphics" checkbox */
       box-shadow: inset 0 0 0 2000px #07070F !important;
     }
+    .slide::before { display: none !important; }
+    .slide::after { display: none !important; }
     .slide * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   }
 
