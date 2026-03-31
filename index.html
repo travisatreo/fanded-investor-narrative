@@ -2892,30 +2892,23 @@ sections.forEach(sec => dotObserver.observe(sec));
   function startFeed() {
     if (started) return;
     started = true;
-    // Small delay so page feels settled before animation starts
-    setTimeout(function() {
-      rows.forEach(function(row, i) {
-        setTimeout(function() {
-          row.classList.add('visible');
-        }, i * 350);
-      });
-      // Scanline sweeps after all rows
+    rows.forEach(function(row, i) {
       setTimeout(function() {
-        if (scanline) scanline.style.animation = 'ledgerScanline 1.2s ease forwards';
-      }, rows.length * 350 + 200);
-    }, 400);
+        row.classList.add('visible');
+      }, 600 + i * 350);
+    });
+    // Scanline sweeps after all rows
+    setTimeout(function() {
+      if (scanline) scanline.style.animation = 'ledgerScanline 1.2s ease forwards';
+    }, 600 + rows.length * 350 + 200);
   }
 
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) startFeed();
-    });
-  }, { threshold: 0.2 });
-  obs.observe(feed);
-
-  // Also check if already in viewport on load (first section)
-  var rect = feed.getBoundingClientRect();
-  if (rect.top < window.innerHeight && rect.bottom > 0) startFeed();
+  // Start on page load since this is the first section
+  window.addEventListener('load', function() {
+    startFeed();
+  });
+  // Fallback: also start after 1.5s in case load event already fired
+  setTimeout(startFeed, 1500);
 
   // Count-up for proof stats
   var proofStarted = false;
@@ -2948,17 +2941,13 @@ sections.forEach(sec => dotObserver.observe(sec));
           if (roi) { roi.style.opacity = '1'; roi.style.transform = 'scale(1)'; }
         }, stats.length * 250 + 400);
   }
+  // Use observer for proof stats since user scrolls to them
   var proofObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) startProof();
     });
-  }, { threshold: 0.3 });
-  if (proof) {
-    proofObs.observe(proof);
-    // Check if already visible on load
-    var proofRect = proof.getBoundingClientRect();
-    if (proofRect.top < window.innerHeight && proofRect.bottom > 0) startProof();
-  }
+  }, { threshold: 0.15 });
+  if (proof) proofObs.observe(proof);
 })();
 </script>
 
