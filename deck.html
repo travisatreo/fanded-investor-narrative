@@ -220,8 +220,18 @@
 
   @media print {
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
-    body { background: var(--bg) !important; }
-    .slide { break-after: page; break-inside: avoid; background: var(--bg) !important; margin: 0; }
+    html, body { background: var(--bg) !important; -webkit-print-color-adjust: exact !important; }
+    .slide {
+      break-after: page;
+      break-inside: avoid;
+      background: var(--bg) !important;
+      margin: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      /* Fallback: inset box-shadow forces dark bg even without "Background graphics" checkbox */
+      box-shadow: inset 0 0 0 2000px #07070F !important;
+    }
+    .slide * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   }
 
   /* Navigation hint for browser viewing */
@@ -410,8 +420,8 @@
       <div style="font-size:11px;color:var(--red);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:12px;">STREAMING REVENUE</div>
       <svg viewBox="0 0 280 100" style="width:100%;height:auto;">
         <defs><linearGradient id="redGradDeck" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E74C3C" stop-opacity="0.3"/><stop offset="100%" stop-color="#E74C3C" stop-opacity="0"/></linearGradient></defs>
-        <path d="M0,90 L20,85 40,70 60,40 80,15 100,10 120,12 140,25 160,50 180,65 200,80 220,88 240,92 260,94 280,95 L280,100 L0,100 Z" fill="url(#redGradDeck)"/>
-        <path d="M0,90 L20,85 40,70 60,40 80,15 100,10 120,12 140,25 160,50 180,65 200,80 220,88 240,92 260,94 280,95" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M0,88 L20,82 40,72 60,55 80,40 100,35 120,38 140,48 160,62 180,74 200,83 220,90 240,94 260,96 280,97 L280,100 L0,100 Z" fill="url(#redGradDeck)"/>
+        <path d="M0,88 L20,82 40,72 60,55 80,40 100,35 120,38 140,48 160,62 180,74 200,83 220,90 240,94 260,96 280,97" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
       <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;">Algorithm changes. Gone.</div>
     </div>
@@ -419,8 +429,8 @@
       <div style="font-size:11px;color:var(--green);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:12px;">FAN CLUB REVENUE</div>
       <svg viewBox="0 0 280 100" style="width:100%;height:auto;">
         <defs><linearGradient id="greenGradDeck" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2ECC71" stop-opacity="0.3"/><stop offset="100%" stop-color="#2ECC71" stop-opacity="0"/></linearGradient></defs>
-        <path d="M0,85 L20,80 40,72 60,65 80,58 100,52 120,47 140,43 160,40 180,38 200,36 220,35 240,34 260,33 280,32 L280,100 L0,100 Z" fill="url(#greenGradDeck)"/>
-        <path d="M0,85 L20,80 40,72 60,65 80,58 100,52 120,47 140,43 160,40 180,38 200,36 220,35 240,34 260,33 280,32" fill="none" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M0,92 L20,88 40,82 60,74 80,64 100,54 120,44 140,35 160,28 180,22 200,18 220,15 240,13 260,12 280,10 L280,100 L0,100 Z" fill="url(#greenGradDeck)"/>
+        <path d="M0,92 L20,88 40,82 60,74 80,64 100,54 120,44 140,35 160,28 180,22 200,18 220,15 240,13 260,12 280,10" fill="none" stroke="#2ECC71" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
       <div style="font-size:13px;color:var(--cream-muted);margin-top:8px;">14 months. Still subscribed.</div>
     </div>
