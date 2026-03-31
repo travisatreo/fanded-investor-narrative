@@ -1309,12 +1309,15 @@ body {
     .ledger-row.animate-ready { opacity:0; transform:translateX(-20px); transition: all 0.4s ease; }
     .ledger-row.animate-ready.visible { opacity:1; transform:translateX(0); }
     .ledger-row .lr-input { flex:1; font-size:11px; color:var(--cream-muted); font-family:var(--font-b); white-space:nowrap; overflow:hidden; }
-    .ledger-row .lr-arrow { color:var(--cream-dim); font-size:10px; flex-shrink:0; opacity:0; transition:opacity 0.3s 0.2s; }
-    .ledger-row.visible .lr-arrow { opacity:1; }
-    .ledger-row .lr-output { flex:1.2; font-size:10px; font-family:var(--font-w); font-weight:600; color:var(--green); opacity:0; transform:translateX(8px); transition: all 0.3s ease 0.4s; text-align:right; }
-    .ledger-row.visible .lr-output { opacity:1; transform:translateX(0); }
-    .ledger-row .lr-check { width:16px; height:16px; border-radius:50%; background:rgba(46,204,113,0.15); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--green); opacity:0; transform:scale(0); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1) 0.6s; flex-shrink:0; }
-    .ledger-row.visible .lr-check { opacity:1; transform:scale(1); }
+    .ledger-row .lr-arrow { color:var(--cream-dim); font-size:10px; flex-shrink:0; }
+    .ledger-row .lr-output { flex:1.2; font-size:10px; font-family:var(--font-w); font-weight:600; color:var(--green); text-align:right; }
+    .ledger-row .lr-check { width:16px; height:16px; border-radius:50%; background:rgba(46,204,113,0.15); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--green); flex-shrink:0; }
+    .ledger-row.animate-ready .lr-arrow { opacity:0; transition:opacity 0.3s 0.2s; }
+    .ledger-row.animate-ready.visible .lr-arrow { opacity:1; }
+    .ledger-row.animate-ready .lr-output { opacity:0; transform:translateX(8px); transition: all 0.3s ease 0.4s; }
+    .ledger-row.animate-ready.visible .lr-output { opacity:1; transform:translateX(0); }
+    .ledger-row.animate-ready .lr-check { opacity:0; transform:scale(0); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1) 0.6s; }
+    .ledger-row.animate-ready.visible .lr-check { opacity:1; transform:scale(1); }
     .ledger-stat { text-align:center; background:rgba(0,0,0,0.2); border-radius:10px; padding:12px 8px; }
     .ledger-stat .ls-num { font-family:var(--font-w); font-weight:800; font-size:28px; line-height:1; }
     .ledger-stat.animate-ready .ls-num { opacity:0; transform:translateY(10px); transition:all 0.5s ease; }
@@ -1378,15 +1381,15 @@ body {
 
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
         <div class="ledger-stat" id="lStat1">
-          <div class="ls-num" style="color:var(--cream);" data-target="24">0</div>
+          <div class="ls-num" style="color:var(--cream);" data-target="24">24</div>
           <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">statements</div>
         </div>
         <div class="ledger-stat" id="lStat2">
-          <div class="ls-num" style="color:var(--cream);" data-target="348">0</div>
+          <div class="ls-num" style="color:var(--cream);" data-target="348">348</div>
           <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">categorized</div>
         </div>
         <div class="ledger-stat" id="lStat3">
-          <div class="ls-num" style="color:var(--green);" data-target="1">0</div>
+          <div class="ls-num" style="color:var(--green);" data-target="1">1</div>
           <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">CPA-ready P&L</div>
         </div>
       </div>
