@@ -1635,121 +1635,124 @@ body {
   </div>
 
   <!-- Section 5b: LEDGER — Phase 1 Proof -->
+  <style>
+    @keyframes ledgerScanline { 0% { left: -100%; } 100% { left: 100%; } }
+    @keyframes ledgerPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(46,204,113,0.3); } 50% { box-shadow: 0 0 12px 4px rgba(46,204,113,0.15); } }
+    @keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .ledger-row { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px; opacity:0; transform:translateX(-20px); transition: all 0.4s ease; background:rgba(0,0,0,0.15); margin-bottom:6px; }
+    .ledger-row.visible { opacity:1; transform:translateX(0); }
+    .ledger-row .lr-input { flex:1; font-size:11px; color:var(--cream-muted); font-family:var(--font-b); white-space:nowrap; overflow:hidden; }
+    .ledger-row .lr-arrow { color:var(--cream-dim); font-size:10px; flex-shrink:0; opacity:0; transition:opacity 0.3s 0.2s; }
+    .ledger-row.visible .lr-arrow { opacity:1; }
+    .ledger-row .lr-output { flex:1.2; font-size:10px; font-family:var(--font-w); font-weight:600; color:var(--green); opacity:0; transform:translateX(8px); transition: all 0.3s ease 0.4s; text-align:right; }
+    .ledger-row.visible .lr-output { opacity:1; transform:translateX(0); }
+    .ledger-row .lr-check { width:16px; height:16px; border-radius:50%; background:rgba(46,204,113,0.15); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--green); opacity:0; transform:scale(0); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1) 0.6s; flex-shrink:0; }
+    .ledger-row.visible .lr-check { opacity:1; transform:scale(1); }
+    .ledger-stat { text-align:center; background:rgba(0,0,0,0.2); border-radius:10px; padding:12px 8px; }
+    .ledger-stat .ls-num { font-family:var(--font-w); font-weight:800; font-size:28px; line-height:1; opacity:0; transform:translateY(10px); transition:all 0.5s ease; }
+    .ledger-stat.visible .ls-num { opacity:1; transform:translateY(0); }
+  </style>
+
   <div class="section fade-in" data-track="Phase 1: LEDGER">
     <div class="section-label">PHASE 1: ALREADY WORKING</div>
 
-    <h2 class="headline" style="font-size: 22px; margin-bottom: 12px;">We started with what every creator hates most.<br><span style="color: var(--green);">Taxes.</span></h2>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 6px;">We started with what every creator hates most.<br><span style="color: var(--green);">Taxes.</span></h2>
+    <div style="text-align:center;font-size:12px;color:var(--cream-dim);margin-bottom:20px;">Meet <span style="color:var(--green);font-weight:700;">LEDGER</span> — the AI accountant trained on 1,500+ pages of talent tax law.</div>
 
-    <div class="body-text" style="margin-bottom: 16px; font-size: 14px;">MAWD's first agent — <span style="color: var(--green); font-weight: 700;">LEDGER</span> — is an AI accountant trained specifically for talent. Not generic QuickBooks categories. Talent-specific tax intelligence across <span style="color: var(--cream); font-weight: 600;">8 verticals.</span></div>
-
-    <!-- Verticals strip -->
-    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:20px;">
-      <span class="pill-green" style="font-size:10px;padding:4px 10px;border-radius:20px;">Musicians</span>
-      <span class="pill-blue" style="font-size:10px;padding:4px 10px;border-radius:20px;">Actors</span>
-      <span class="pill-gold" style="font-size:10px;padding:4px 10px;border-radius:20px;">Athletes</span>
-      <span class="pill-green" style="font-size:10px;padding:4px 10px;border-radius:20px;">YouTubers</span>
-      <span class="pill-blue" style="font-size:10px;padding:4px 10px;border-radius:20px;">Podcasters</span>
-      <span class="pill-gold" style="font-size:10px;padding:4px 10px;border-radius:20px;">Authors</span>
-      <span class="pill-green" style="font-size:10px;padding:4px 10px;border-radius:20px;">Comedians</span>
-      <span class="pill-blue" style="font-size:10px;padding:4px 10px;border-radius:20px;">Visual Artists</span>
+    <!-- Animated transaction classifier -->
+    <div id="ledgerFeed" style="background:rgba(255,255,255,0.02);border:1px solid rgba(46,204,113,0.12);border-radius:12px;padding:12px;margin-bottom:20px;position:relative;overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 4px;">
+        <div style="font-size:8px;font-family:var(--font-w);font-weight:700;letter-spacing:0.1em;color:var(--cream-dim);">TRANSACTION</div>
+        <div style="font-size:8px;font-family:var(--font-w);font-weight:700;letter-spacing:0.1em;color:var(--green);">LEDGER CLASSIFICATION</div>
+      </div>
+      <div class="ledger-row" id="lRow1">
+        <div class="lr-input">ASCAP — $2,340.00</div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-output">Performance Royalty · 1099-MISC</div>
+        <div class="lr-check">✓</div>
+      </div>
+      <div class="ledger-row" id="lRow2">
+        <div class="lr-input">SoundExchange — $891.50</div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-output">Digital Royalty · 50/45/5 split</div>
+        <div class="lr-check">✓</div>
+      </div>
+      <div class="ledger-row" id="lRow3">
+        <div class="lr-input">SAG-AFTRA — $4,200.00</div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-output">W-2 Session Fee · not 1099</div>
+        <div class="lr-check">✓</div>
+      </div>
+      <div class="ledger-row" id="lRow4">
+        <div class="lr-input">Pro Tools — $29.99/mo</div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-output">§179 Deduction · software</div>
+        <div class="lr-check">✓</div>
+      </div>
+      <div class="ledger-row" id="lRow5">
+        <div class="lr-input">Studio session — $8,500</div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-output">HITS Act · $150K deduction</div>
+        <div class="lr-check">✓</div>
+      </div>
+      <div class="ledger-row" id="lRow6">
+        <div class="lr-input">OH game check — $12,000</div>
+        <div class="lr-arrow">→</div>
+        <div class="lr-output">Jock Tax · multi-state filing</div>
+        <div class="lr-check">✓</div>
+      </div>
+      <!-- Scanline overlay -->
+      <div id="ledgerScanline" style="position:absolute;top:0;bottom:0;width:60%;background:linear-gradient(90deg,transparent,rgba(46,204,113,0.04),transparent);pointer-events:none;left:-100%;"></div>
     </div>
 
-    <!-- What LEDGER knows vs generic tools -->
-    <div style="display:flex;gap:10px;margin-bottom:20px;">
-      <!-- Generic tools -->
-      <div style="flex:1;background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.12);border-radius:12px;padding:14px 12px;">
-        <div style="font-size:8px;color:var(--red);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:10px;text-align:center;">QUICKBOOKS / KEEPER</div>
-        <div style="font-size:11px;color:var(--cream-muted);line-height:1.8;text-align:center;">
-          "Office Supplies"<br>
-          "Miscellaneous Income"<br>
-          "Professional Services"<br>
-          <span style="font-size:10px;color:var(--cream-dim);margin-top:6px;display:block;">No idea what a sync placement is</span>
-        </div>
-      </div>
-      <!-- MAWD LEDGER -->
-      <div style="flex:1;background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);border-radius:12px;padding:14px 12px;">
-        <div style="font-size:8px;color:var(--green);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:10px;text-align:center;">MAWD LEDGER</div>
-        <div style="font-size:11px;color:var(--cream);line-height:1.8;text-align:center;">
-          "Performance Royalty — BMI"<br>
-          "Streaming Revenue — Master"<br>
-          "HITS Act Eligible — $150K deduction"<br>
-          <span style="font-size:10px;color:var(--green);margin-top:6px;display:block;">Trained on 1,500+ pages of talent tax law</span>
-        </div>
-      </div>
-    </div>
+    <!-- Proof stats with count-up -->
+    <div id="ledgerProof" style="background:linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.03));border:1px solid rgba(46,204,113,0.25);border-radius:14px;padding:18px;margin-bottom:16px;">
+      <div style="font-family:var(--font-d);font-weight:700;font-size:16px;color:var(--cream);text-align:center;line-height:1.4;margin-bottom:14px;">Our CEO's 2025 S-Corp taxes. One session.</div>
 
-    <!-- What it actually knows -->
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:16px;margin-bottom:20px;">
-      <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:1px;color:var(--gold);margin-bottom:12px;text-align:center;">WHAT MAWD KNOWS THAT NO OTHER TOOL KNOWS</div>
-      <div id="ledgerKnowledge" style="font-size:12px;color:var(--cream-dim);line-height:2;text-align:center;">
-        <div class="ledger-item fade-in" style="margin-bottom:2px;">ASCAP payment → <span style="color:var(--cream);">Performance Royalty, 1099-MISC Box 2</span></div>
-        <div class="ledger-item fade-in" style="margin-bottom:2px;">SoundExchange payment → <span style="color:var(--cream);">Digital Performance Royalty, 50/45/5 split</span></div>
-        <div class="ledger-item fade-in" style="margin-bottom:2px;">SAG-AFTRA check → <span style="color:var(--cream);">W-2 session fee vs. residual (different treatment)</span></div>
-        <div class="ledger-item fade-in" style="margin-bottom:2px;">Athlete playing in Ohio → <span style="color:var(--cream);">Jock tax, duty-days formula, city filing required</span></div>
-        <div class="ledger-item fade-in" style="margin-bottom:2px;">Recording studio invoice → <span style="color:var(--cream);">HITS Act: $150K immediate deduction (new law, July 2025)</span></div>
-        <div class="ledger-item fade-in" style="margin-bottom:2px;">Pro Tools subscription → <span style="color:var(--cream);">Section 179, fully deductible business software</span></div>
-      </div>
-    </div>
-
-    <!-- Proof: We already did it -->
-    <div style="background:linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.03));border:1px solid rgba(46,204,113,0.25);border-radius:14px;padding:20px;margin-bottom:16px;">
-      <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:1.5px;color:var(--green);margin-bottom:12px;text-align:center;">WE ALREADY USED IT</div>
-      <div style="font-family:var(--font-d);font-weight:700;font-size:18px;color:var(--cream);text-align:center;line-height:1.4;margin-bottom:16px;">Our CEO's entire 2025 S-Corp tax prep.<br>Done in one session.</div>
-
-      <!-- The proof stats -->
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;">
-        <div style="text-align:center;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px 8px;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:24px;color:var(--cream);line-height:1;">24</div>
-          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">monthly statements<br>ingested</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+        <div class="ledger-stat" id="lStat1">
+          <div class="ls-num" style="color:var(--cream);" data-target="24">0</div>
+          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">statements</div>
         </div>
-        <div style="text-align:center;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px 8px;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:24px;color:var(--cream);line-height:1;">348</div>
-          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">transactions<br>auto-categorized</div>
+        <div class="ledger-stat" id="lStat2">
+          <div class="ls-num" style="color:var(--cream);" data-target="348">0</div>
+          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">categorized</div>
         </div>
-        <div style="text-align:center;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px 8px;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:24px;color:var(--green);line-height:1;">1</div>
-          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">CPA-ready P&L<br>generated</div>
+        <div class="ledger-stat" id="lStat3">
+          <div class="ls-num" style="color:var(--green);" data-target="1">0</div>
+          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">CPA-ready P&L</div>
         </div>
       </div>
 
-      <!-- The punchline -->
       <div style="text-align:center;">
-        <div style="font-size:13px;color:var(--cream-muted);margin-bottom:8px;">He was paying a CPA <span style="color:var(--red);font-weight:700;">$4,110/year</span> for this.</div>
-        <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);border-radius:8px;padding:8px 20px;">
+        <div style="font-size:12px;color:var(--cream-muted);margin-bottom:8px;">Was paying a CPA <span style="color:var(--red);font-weight:700;text-decoration:line-through;">$4,110/yr</span></div>
+        <div id="ledgerROI" style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);border-radius:8px;padding:8px 20px;opacity:0;transform:scale(0.8);transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);">
           <span style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--green);">137x ROI</span>
-          <span style="font-size:11px;color:var(--cream-muted);margin-left:8px;">on $30/month</span>
+          <span style="font-size:11px;color:var(--cream-muted);margin-left:8px;">on $30/mo</span>
         </div>
       </div>
     </div>
 
-    <!-- Phase roadmap -->
-    <div style="margin-top:20px;">
-      <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:1px;color:var(--cream-dim);margin-bottom:12px;text-align:center;">THE PLAYBOOK</div>
-      <div style="display:flex;gap:8px;">
-        <div style="flex:1;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.25);border-radius:10px;padding:12px 10px;text-align:center;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:13px;color:var(--green);margin-bottom:4px;">Phase 1</div>
-          <div style="font-size:10px;color:var(--cream);line-height:1.4;font-weight:600;">Taxes & bookkeeping</div>
-          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">The wedge. Get in the door.</div>
-          <div style="font-size:8px;color:var(--green);margin-top:6px;font-family:var(--font-w);font-weight:700;">LIVE NOW</div>
-        </div>
-        <div style="flex:1;background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.2);border-radius:10px;padding:12px 10px;text-align:center;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:13px;color:var(--blue);margin-bottom:4px;">Phase 2</div>
-          <div style="font-size:10px;color:var(--cream);line-height:1.4;font-weight:600;">Full 6-agent suite</div>
-          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">Fans, contracts, content, strategy.</div>
-          <div style="font-size:8px;color:var(--blue);margin-top:6px;font-family:var(--font-w);font-weight:700;">2026</div>
-        </div>
-        <div style="flex:1;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:12px 10px;text-align:center;">
-          <div style="font-family:var(--font-w);font-weight:800;font-size:13px;color:var(--gold);margin-bottom:4px;">Phase 3</div>
-          <div style="font-size:10px;color:var(--cream);line-height:1.4;font-weight:600;">Bank integrations</div>
-          <div style="font-size:9px;color:var(--cream-muted);margin-top:4px;">Auto-ingest. One-click filing.</div>
-          <div style="font-size:8px;color:var(--gold);margin-top:6px;font-family:var(--font-w);font-weight:700;">2027</div>
-        </div>
+    <!-- Phase roadmap — compact -->
+    <div style="display:flex;gap:6px;">
+      <div style="flex:1;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.25);border-radius:10px;padding:10px 8px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:12px;color:var(--green);">Phase 1</div>
+        <div style="font-size:9px;color:var(--cream);font-weight:600;margin-top:2px;">Taxes</div>
+        <div style="font-size:8px;color:var(--green);margin-top:4px;font-family:var(--font-w);font-weight:700;">LIVE</div>
+      </div>
+      <div style="flex:1;background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.2);border-radius:10px;padding:10px 8px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:12px;color:var(--blue);">Phase 2</div>
+        <div style="font-size:9px;color:var(--cream);font-weight:600;margin-top:2px;">Full 6-agent suite</div>
+        <div style="font-size:8px;color:var(--blue);margin-top:4px;font-family:var(--font-w);font-weight:700;">2026</div>
+      </div>
+      <div style="flex:1;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:10px 8px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:12px;color:var(--gold);">Phase 3</div>
+        <div style="font-size:9px;color:var(--cream);font-weight:600;margin-top:2px;">Bank integrations</div>
+        <div style="font-size:8px;color:var(--gold);margin-top:4px;font-family:var(--font-w);font-weight:700;">2027</div>
       </div>
     </div>
 
-    <div style="text-align:center;font-size:12px;color:var(--cream-dim);line-height:1.6;margin-top:16px;">Taxes get them in the door. Then MAWD becomes their entire team.</div>
-
-    <div class="divider" style="margin-top: 32px;"></div>
+    <div class="divider" style="margin-top: 28px;"></div>
   </div>
 
   <!-- Section 6: Traction -->
@@ -3504,6 +3507,71 @@ sections.forEach(sec => dotObserver.observe(sec));
       }
     } catch(e) {}
   }, 30000);
+})();
+</script>
+
+<!-- LEDGER feed animation -->
+<script>
+(function() {
+  var feed = document.getElementById('ledgerFeed');
+  if (!feed) return;
+  var rows = feed.querySelectorAll('.ledger-row');
+  var scanline = document.getElementById('ledgerScanline');
+  var proof = document.getElementById('ledgerProof');
+  var roi = document.getElementById('ledgerROI');
+  var started = false;
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !started) {
+        started = true;
+        // Stagger rows appearing
+        rows.forEach(function(row, i) {
+          setTimeout(function() {
+            row.classList.add('visible');
+          }, i * 350);
+        });
+        // Scanline sweeps after all rows
+        setTimeout(function() {
+          if (scanline) scanline.style.animation = 'ledgerScanline 1.2s ease forwards';
+        }, rows.length * 350 + 200);
+      }
+    });
+  }, { threshold: 0.2 });
+  obs.observe(feed);
+
+  // Count-up for proof stats
+  var proofStarted = false;
+  var proofObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !proofStarted) {
+        proofStarted = true;
+        var stats = proof.querySelectorAll('.ledger-stat');
+        stats.forEach(function(stat, i) {
+          setTimeout(function() {
+            stat.classList.add('visible');
+            var numEl = stat.querySelector('.ls-num');
+            var target = parseInt(numEl.dataset.target);
+            var duration = target > 100 ? 1200 : 600;
+            var start = performance.now();
+            function tick(now) {
+              var elapsed = now - start;
+              var progress = Math.min(elapsed / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              numEl.textContent = Math.round(eased * target);
+              if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          }, i * 250);
+        });
+        // ROI badge pops in after stats
+        setTimeout(function() {
+          if (roi) { roi.style.opacity = '1'; roi.style.transform = 'scale(1)'; }
+        }, stats.length * 250 + 400);
+      }
+    });
+  }, { threshold: 0.3 });
+  if (proof) proofObs.observe(proof);
 })();
 </script>
 
