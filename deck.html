@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fanded — Investor Deck</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #07070F;
+    --bg-card: #0F0F1C;
+    --cream: #F5F1EA;
+    --cream-dim: #9999BB;
+    --cream-muted: #6B6B8A;
+    --blue: #3BADE4;
+    --green: #2ECC71;
+    --red: #E74C3C;
+    --gold: #C9A84C;
+    --purple: #9B59B6;
+    --teal: #0D9488;
+    --pink: #EC4899;
+    --border: #1C1C2E;
+    --font-d: 'Playfair Display', Georgia, serif;
+    --font-b: 'DM Sans', -apple-system, sans-serif;
+    --font-w: 'Bricolage Grotesque', 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--font-b);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    background: var(--bg);
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green), var(--blue));
+    opacity: 0.4;
+  }
+
+  .slide-label {
+    font-family: var(--font-w);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: var(--font-d);
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-family: var(--font-w);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .body {
+    font-size: 18px;
+    color: var(--cream-dim);
+    line-height: 1.6;
+    max-width: 900px;
+  }
+
+  .body-sm {
+    font-size: 15px;
+    color: var(--cream-muted);
+    line-height: 1.5;
+  }
+
+  .big-number {
+    font-family: var(--font-w);
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--font-w);
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--cream-muted);
+  }
+
+  .person-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .person-photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .person-name {
+    font-family: var(--font-w);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--cream);
+  }
+
+  .person-title {
+    font-size: 13px;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+
+  .person-desc {
+    font-size: 13px;
+    color: var(--cream-muted);
+    line-height: 1.4;
+  }
+
+  .tx-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .tx-input { color: var(--cream-dim); flex: 1; font-family: var(--font-b); }
+  .tx-arrow { color: var(--cream-muted); font-size: 11px; }
+  .tx-output { color: var(--green); flex: 1; text-align: right; font-family: var(--font-w); font-weight: 600; font-size: 12px; }
+  .tx-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(46,204,113,0.15); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--green); }
+
+  .logo-text {
+    font-family: var(--font-w);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--cream-muted);
+    position: absolute;
+    bottom: 20px;
+    left: 80px;
+    letter-spacing: 1px;
+  }
+
+  .page-num {
+    font-size: 12px;
+    color: var(--cream-muted);
+    position: absolute;
+    bottom: 20px;
+    right: 80px;
+  }
+
+  @media print {
+    body { background: var(--bg); }
+    .slide { break-after: page; }
+  }
+
+  /* Navigation hint for browser viewing */
+  @media screen {
+    .slide { margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SLIDE 1: Title ============ -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+  <div style="margin-bottom: 24px;">
+    <img src="photos/fanded-logo.png" alt="Fanded" style="height: 48px; opacity: 0.9;" onerror="this.style.display='none'">
+  </div>
+  <h1 style="font-size: 64px; margin-bottom: 12px;">Fanded</h1>
+  <div style="font-family: var(--font-w); font-weight: 600; font-size: 22px; color: var(--cream-dim); margin-bottom: 40px;">The operating system for the talent economy.</div>
+  <div style="font-size: 15px; color: var(--cream-muted);">travis@fanded.com</div>
+  <div class="page-num">1</div>
+</div>
+
+<!-- ============ SLIDE 2: MAWD Works — Proof ============ -->
+<div class="slide">
+  <div class="slide-label">MAWD WORKS</div>
+  <h2>We started with what every creator hates most. <span style="color: var(--green);">Taxes.</span></h2>
+  <div class="body" style="margin-bottom: 24px;">Meet <span style="color:var(--green);font-weight:700;">MAWD</span> — the AI that already does taxes for talent. Trained on 1,500+ pages of tax law across 8 verticals.</div>
+
+  <div class="grid-2">
+    <!-- Transaction classifier -->
+    <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(46,204,113,0.12);border-radius:12px;padding:16px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;padding:0 4px;">
+        <div style="font-size:9px;font-family:var(--font-w);font-weight:700;letter-spacing:0.1em;color:var(--cream-dim);">TRANSACTION</div>
+        <div style="font-size:9px;font-family:var(--font-w);font-weight:700;letter-spacing:0.1em;color:var(--green);">MAWD CLASSIFICATION</div>
+      </div>
+      <div class="tx-row"><span class="tx-input">ASCAP — $2,340</span><span class="tx-arrow">&rarr;</span><span class="tx-output">Performance Royalty &middot; 1099-MISC</span><span class="tx-check">&check;</span></div>
+      <div class="tx-row"><span class="tx-input">SoundExchange — $891</span><span class="tx-arrow">&rarr;</span><span class="tx-output">Digital Royalty &middot; 50/45/5</span><span class="tx-check">&check;</span></div>
+      <div class="tx-row"><span class="tx-input">SAG-AFTRA — $4,200</span><span class="tx-arrow">&rarr;</span><span class="tx-output">W-2 Session Fee &middot; not 1099</span><span class="tx-check">&check;</span></div>
+      <div class="tx-row"><span class="tx-input">Pro Tools — $29.99/mo</span><span class="tx-arrow">&rarr;</span><span class="tx-output">&sect;179 Deduction &middot; software</span><span class="tx-check">&check;</span></div>
+      <div class="tx-row"><span class="tx-input">Studio session — $8,500</span><span class="tx-arrow">&rarr;</span><span class="tx-output">HITS Act &middot; $150K deduction</span><span class="tx-check">&check;</span></div>
+      <div class="tx-row"><span class="tx-input">OH game check — $12,000</span><span class="tx-arrow">&rarr;</span><span class="tx-output">Jock Tax &middot; multi-state</span><span class="tx-check">&check;</span></div>
+    </div>
+
+    <!-- Proof stats -->
+    <div>
+      <div style="background:linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.03));border:1px solid rgba(46,204,113,0.25);border-radius:14px;padding:28px 24px;text-align:center;">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:18px;color:var(--cream);margin-bottom:20px;">Our CEO's 2025 S-Corp taxes. One session.</div>
+        <div class="grid-3" style="gap:12px;margin-bottom:20px;">
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-num" style="font-size:36px;color:var(--cream);">24</div>
+            <div class="stat-label">statements</div>
+          </div>
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-num" style="font-size:36px;color:var(--cream);">348</div>
+            <div class="stat-label">categorized</div>
+          </div>
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-num" style="font-size:36px;color:var(--green);">1</div>
+            <div class="stat-label">CPA-ready P&L</div>
+          </div>
+        </div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-bottom:12px;">Was paying a CPA <span style="color:var(--red);font-weight:700;text-decoration:line-through;">$4,110/yr</span></div>
+        <div style="display:inline-block;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);border-radius:8px;padding:10px 24px;">
+          <span style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--green);">137x ROI</span>
+          <span style="font-size:13px;color:var(--cream-muted);margin-left:8px;">on $30/mo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">2</div>
+</div>
+
+<!-- ============ SLIDE 3: This Is Just The Start — 6 Agents ============ -->
+<div class="slide">
+  <div class="slide-label">THIS IS JUST THE START</div>
+  <h2>But taxes are just one agent. MAWD has <span style="color: var(--green);">six.</span></h2>
+  <div class="body" style="margin-bottom: 32px;">MAWD is the agentic chief of staff that runs the business so talent can do what they love.</div>
+
+  <div class="grid-3" style="gap: 16px; margin-bottom: 28px;">
+    <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--gold);margin-bottom:6px;">DOLLAR</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">CFO &middot; revenue &middot; cash flow &middot; deal economics</div>
+    </div>
+    <div style="background:rgba(155,89,182,0.08);border:1px solid rgba(155,89,182,0.2);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--purple);margin-bottom:6px;">PULSE</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">Fan intelligence &middot; CRM &middot; audience mapping</div>
+    </div>
+    <div style="background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.2);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--teal);margin-bottom:6px;">SCOUT</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">Contracts &middot; IP &middot; brand deals &middot; negotiations</div>
+    </div>
+    <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.2);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--blue);margin-bottom:6px;">COMPASS</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">Strategy &middot; booking &middot; touring &middot; scheduling</div>
+    </div>
+    <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.2);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--pink);margin-bottom:6px;">HYPE</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">Content &middot; social &middot; PR &middot; design</div>
+    </div>
+    <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.2);border-radius:12px;padding:20px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--green);margin-bottom:6px;">LEDGER</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">Bookkeeping &middot; taxes &middot; deductions &middot; filing</div>
+    </div>
+  </div>
+
+  <!-- Cost comparison -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:32px;">
+    <div style="text-align:center;">
+      <div style="font-size:13px;color:var(--red);font-family:var(--font-w);font-weight:700;margin-bottom:4px;">WITHOUT MAWD</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--red);text-decoration:line-through;">$8K&ndash;15K/mo</div>
+    </div>
+    <div style="font-size:32px;color:var(--cream-muted);">&rarr;</div>
+    <div style="text-align:center;">
+      <div style="font-size:13px;color:var(--green);font-family:var(--font-w);font-weight:700;margin-bottom:4px;">WITH MAWD</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:52px;color:var(--green);">$30/mo</div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">3</div>
+</div>
+
+<!-- ============ SLIDE 4: Why Now ============ -->
+<div class="slide">
+  <div class="slide-label">WHY NOW</div>
+  <h2>The entertainment industry is restructuring. <span style="color: var(--gold);">No one has built the new infrastructure.</span></h2>
+
+  <div style="display:flex;gap:20px;margin-top:20px;">
+    <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:28px;border-left:4px solid var(--red);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:52px;color:var(--red);line-height:1;">1.2M</div>
+      <div style="font-size:15px;color:var(--cream-muted);margin-top:8px;">jobs cut in 2025 &mdash; the most since 2020</div>
+    </div>
+    <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:28px;border-left:4px solid var(--red);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:52px;color:var(--red);line-height:1;">42K</div>
+      <div style="font-size:15px;color:var(--cream-muted);margin-top:8px;">entertainment jobs gone in 24 months</div>
+    </div>
+    <div style="flex:1;background:rgba(212,175,55,0.06);border-radius:12px;padding:28px;border-left:4px solid var(--gold);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:52px;color:var(--gold);line-height:1;">207M</div>
+      <div style="font-size:15px;color:var(--cream-muted);margin-top:8px;">creators &mdash; 99% don't have a manager or team</div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:20px;margin-top:20px;">
+    <div style="flex:1;background:rgba(46,204,113,0.06);border-radius:12px;padding:24px;border-left:4px solid var(--green);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--green);">Fans are spending more than ever.</div>
+    </div>
+    <div style="flex:1;background:rgba(59,173,228,0.06);border-radius:12px;padding:24px;border-left:4px solid var(--blue);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--cream);">Fanded means <span style="color:var(--blue);">one person = full company.</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;font-size:11px;color:var(--cream-muted);">Sources: CNBC, No Film School, DemandSage, inBeat</div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">4</div>
+</div>
+
+<!-- ============ SLIDE 5: I Lived This ============ -->
+<div class="slide">
+  <div class="slide-label">I LIVED THIS</div>
+  <div class="grid-2" style="align-items:center;">
+    <div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:18px;color:var(--cream);margin-bottom:4px;">Travis Atreo</div>
+      <div style="font-size:14px;color:var(--cream-muted);margin-bottom:20px;">Founder & CEO &middot; Artist &middot; Producer</div>
+      <div style="font-size:16px;color:var(--cream-dim);margin-bottom:20px;line-height:1.6;">400M+ streams. Taylor Swift, John Legend, and others reposted my covers.</div>
+      <h1 style="font-size:48px;margin-bottom:16px;">I was making <span style="color: var(--green);">$20K/month</span> from Spotify streams.</h1>
+      <div style="font-size:22px;color:var(--cream);font-family:var(--font-d);font-weight:700;">Then the algorithm changed. Gone.</div>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <img src="photos/IU7A1199.jpg" alt="Travis Atreo" style="height:420px;border-radius:16px;object-fit:cover;object-position:center 20%;">
+    </div>
+  </div>
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">5</div>
+</div>
+
+<!-- ============ SLIDE 6: The Platform ============ -->
+<div class="slide">
+  <div class="slide-label">THE PLATFORM</div>
+  <h2>We started with fan clubs.</h2>
+  <div class="body" style="margin-bottom: 28px;">Fans pay $10/mo to $1,000/yr to support talent directly.</div>
+
+  <div class="grid-2" style="align-items:start;">
+    <div>
+      <div style="background: rgba(77,199,77,0.06); border: 1px solid rgba(77,199,77,0.12); border-radius: 12px; padding: 24px; margin-bottom: 20px;">
+        <div style="font-size: 36px; font-family: var(--font-w); font-weight: 700; color: var(--green);">$15K+ in new revenue</div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;">Generated for our clients through Fanded fan clubs.</div>
+      </div>
+      <div class="body" style="margin-bottom:16px;">Then talent needed help managing it. So we built MAWD, an AI chief of staff to run their clubs for them.</div>
+      <div style="margin-top:20px;padding:20px;border:1px solid rgba(255,255,255,0.08);border-radius:12px;text-align:center;">
+        <div style="font-family:var(--font-d);font-weight:700;font-size:20px;color:var(--cream);line-height:1.3;">Clubs were the wedge. MAWD was the brain.<br><span style="color: var(--green);">Together, they're your agentic team.</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <!-- Streaming vs Fan Club -->
+      <div style="display:flex;gap:12px;">
+        <div style="flex:1;background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.15);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-size:10px;color:var(--red);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:12px;">STREAMING REVENUE</div>
+          <div style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--red);">Volatile</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:8px;">Algorithm changes. Gone.</div>
+        </div>
+        <div style="flex:1;background:rgba(77,199,77,0.06);border:1px solid rgba(77,199,77,0.15);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-size:10px;color:var(--green);font-family:var(--font-w);font-weight:700;letter-spacing:0.08em;margin-bottom:12px;">FAN CLUB REVENUE</div>
+          <div style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--green);">Recurring</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:8px;">14 months. Still subscribed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">6</div>
+</div>
+
+<!-- ============ SLIDE 7: Social Proof ============ -->
+<div class="slide">
+  <div class="slide-label">IT'S ALREADY WORKING</div>
+  <h2 style="font-size:32px;">Built for music. <span style="color: var(--gold);">Then everyone started calling.</span></h2>
+
+  <div class="grid-3" style="gap:20px;margin-top:8px;">
+    <!-- Anna -->
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <img src="photos/anna_opt.jpg" alt="Anna Akana" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+        <div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Anna Akana</div>
+          <div style="font-size:12px;color:var(--cream-muted);">Actress &middot; Filmmaker &middot; YouTuber</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
+        <span class="pill" style="background:rgba(155,89,182,0.15);color:var(--purple);">2.8M subscribers</span>
+        <span class="pill" style="background:rgba(212,175,55,0.15);color:var(--gold);">547M views</span>
+      </div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;flex:1;">9 platforms. Zero connection. MAWD unified them into one fan database.</div>
+      <div style="font-size:13px;color:var(--cream);font-style:italic;margin-top:12px;line-height:1.4;">"I need AI to do the boring stuff, not replace me, so I can keep creating."</div>
+    </div>
+
+    <!-- AAGC -->
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <img src="photos/aagc_opt.jpg" alt="AAGC" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+        <div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Asian American Girl Club</div>
+          <div style="font-size:12px;color:var(--cream-muted);">Brand &middot; Community &middot; E-commerce</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
+        <span class="pill" style="background:rgba(155,89,182,0.15);color:var(--purple);">500K+ community</span>
+        <span class="pill" style="background:rgba(212,175,55,0.15);color:var(--gold);">DTC brand</span>
+      </div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;flex:1;">Built a movement, needed a home for their most loyal fans. Fanded gave them recurring revenue and direct access.</div>
+    </div>
+
+    <!-- Manny -->
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <img src="photos/manny_opt.jpg" alt="Manny Jacinto" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+        <div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Manny Jacinto</div>
+          <div style="font-size:12px;color:var(--cream-muted);">Star Wars &middot; The Good Place</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
+        <span class="pill" style="background:rgba(155,89,182,0.15);color:var(--purple);">564K IG followers</span>
+        <span class="pill" style="background:rgba(46,204,113,0.15);color:var(--green);">200+ fans from 1 event</span>
+      </div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;flex:1;">564K followers, millions of global fans, zero of them in his own database. One event &rarr; 200+ real fan profiles with contact info.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:16px;margin-top:24px;">
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-num" style="color:var(--green);">100+</div>
+      <div class="stat-label">Fan clubs built</div>
+    </div>
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-num" style="color:var(--blue);">12</div>
+      <div class="stat-label">Live MAWDs</div>
+    </div>
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-num" style="color:var(--gold);">50K+</div>
+      <div class="stat-label">Data points</div>
+    </div>
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-num" style="color:var(--gold);">$15K</div>
+      <div class="stat-label">Early revenue</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px;font-size:14px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Zero paid marketing. They all found us.</div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">7</div>
+</div>
+
+<!-- ============ SLIDE 8: Waitlist ============ -->
+<div class="slide" style="justify-content:center;align-items:center;text-align:center;">
+  <div class="slide-label">PIPELINE</div>
+  <h2 style="font-size:36px;margin-bottom:32px;">The biggest pipeline we've ever had.</h2>
+
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:900px;">
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🎤 <strong>Darren Hayes</strong> &middot; Savage Garden &middot; 23M records</div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🎬 <strong>Colton Haynes</strong> &middot; Arrow &middot; Teen Wolf</div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🏅 <strong>Olympic Athletes</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">⛳ <strong>Pro Golfers</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🎬 <strong>Oscar-Winning Director</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🇵🇭 <strong>Biggest Filipino Talent Mgmt Co.</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🏢 <strong>Management Companies</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🎪 <strong>Festivals</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🎓 <strong>Colleges & Universities</strong></div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:14px;color:var(--cream);">🏛️ <strong>Organizations</strong></div>
+  </div>
+
+  <div style="font-size:15px;color:var(--cream-muted);margin-top:24px;">Same problem. Same solution. Every vertical.</div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">8</div>
+</div>
+
+<!-- ============ SLIDE 9: The Business ============ -->
+<div class="slide">
+  <div class="slide-label">THE BUSINESS</div>
+  <h2>Three revenue layers.</h2>
+
+  <div class="grid-3" style="margin-top:16px;margin-bottom:32px;">
+    <div style="background:rgba(155,89,182,0.06);border:1px solid rgba(155,89,182,0.2);border-radius:16px;padding:32px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--purple);margin-bottom:8px;">1. SaaS</div>
+      <div style="font-size:15px;color:var(--cream);line-height:1.5;margin-bottom:12px;">$30/mo per talent</div>
+      <div style="font-size:15px;color:var(--cream);line-height:1.5;">$100/mo per manager seat</div>
+    </div>
+    <div style="background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.2);border-radius:16px;padding:32px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--gold);margin-bottom:8px;">2. Take rate</div>
+      <div style="font-size:15px;color:var(--cream);line-height:1.5;">10% of every ticket, merch sale, and membership through Fanded</div>
+    </div>
+    <div style="background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.2);border-radius:16px;padding:32px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--green);margin-bottom:8px;">3. Data licensing</div>
+      <div style="font-size:15px;color:var(--cream);line-height:1.5;">Brands pay to reach fans &middot; consent-based &middot; 50/50 split with talent</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:32px;background:rgba(46,204,113,0.04);border:1px solid rgba(46,204,113,0.15);border-radius:16px;">
+    <div style="font-size:14px;color:var(--cream-muted);margin-bottom:8px;">At 1,000 MAWD accounts</div>
+    <div style="font-family:var(--font-w);font-weight:800;font-size:64px;color:var(--green);line-height:1;">$1.56M ARR</div>
+    <div style="font-size:15px;color:var(--cream-muted);margin-top:8px;">Before data revenue even kicks in.</div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">9</div>
+</div>
+
+<!-- ============ SLIDE 10: TAM ============ -->
+<div class="slide">
+  <div class="slide-label">TOTAL ADDRESSABLE MARKET</div>
+
+  <div style="display:flex;gap:24px;align-items:end;margin-top:20px;">
+    <!-- TAM -->
+    <div style="flex:1;text-align:center;">
+      <div style="background:linear-gradient(135deg, rgba(153,153,187,0.06), transparent);border:1px solid rgba(153,153,187,0.2);border-radius:16px;padding:40px 24px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:2px;color:rgba(153,153,187,0.6);margin-bottom:12px;">TAM</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:64px;color:var(--cream);line-height:1;">$300B+</div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:12px;">207M+ creators, artists, and athletes managing their business</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:8px;opacity:0.7;">207M creators &middot; 11M musicians &middot; 700K+ pro athletes &middot; 200K+ actors</div>
+      </div>
+    </div>
+    <!-- SAM -->
+    <div style="flex:0.8;text-align:center;">
+      <div style="background:linear-gradient(135deg, rgba(212,175,55,0.08), transparent);border:1px solid rgba(212,175,55,0.25);border-radius:16px;padding:36px 20px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:2px;color:rgba(212,175,55,0.7);margin-bottom:12px;">SAM</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:56px;color:var(--gold);line-height:1;">$65B</div>
+        <div style="font-size:14px;color:var(--cream-muted);margin-top:12px;">Music, film, sports, creators with dedicated fanbases</div>
+        <div style="font-size:11px;color:var(--cream-muted);margin-top:8px;opacity:0.7;">~12M talent with 10K+ fans</div>
+      </div>
+    </div>
+    <!-- SOM -->
+    <div style="flex:0.6;text-align:center;">
+      <div style="background:linear-gradient(135deg, rgba(46,204,113,0.1), transparent);border:1px solid rgba(46,204,113,0.3);border-radius:16px;padding:32px 16px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:2px;color:rgba(46,204,113,0.7);margin-bottom:12px;">SOM</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:48px;color:var(--green);line-height:1;">$2.4B</div>
+        <div style="font-size:12px;color:var(--cream-muted);margin-top:8px;">2M+ independent talent with no manager or team</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;font-size:11px;color:var(--cream-muted);text-align:center;">Sources: DemandSage, Chartmetric, Business Research Insights</div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">10</div>
+</div>
+
+<!-- ============ SLIDE 11: The Ask ============ -->
+<div class="slide" style="justify-content:center;">
+  <div class="slide-label">THE ASK</div>
+
+  <div class="grid-2" style="align-items:start;">
+    <div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:72px;color:var(--green);line-height:1;margin-bottom:8px;">$1,000,000</div>
+      <div style="font-family:var(--font-w);font-weight:600;font-size:20px;color:var(--cream-muted);margin-bottom:32px;">$15M post-money SAFE</div>
+
+      <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--gold);">THE BIGGEST PIPELINE WE'VE EVER HAD.</div>
+        <div style="font-size:14px;color:var(--cream-dim);margin-top:6px;">The money goes straight to engineering and onboarding.</div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Timeline -->
+      <div style="position:relative;padding-left:28px;">
+        <div style="position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(180deg, var(--green), var(--gold));"></div>
+
+        <div style="position:relative;margin-bottom:32px;">
+          <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--bg);"></div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:4px;">IMMEDIATELY</div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:17px;color:var(--cream);">Engineering team locked in</div>
+          <div style="font-size:13px;color:var(--cream-muted);margin-top:4px;">Full-time CTO + infra to serve the pipeline</div>
+        </div>
+
+        <div style="position:relative;margin-bottom:32px;">
+          <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid var(--bg);"></div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:2px;color:var(--blue);margin-bottom:4px;">30 DAYS</div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:17px;color:var(--cream);">Automate MAWD onboarding</div>
+          <div style="font-size:13px;color:var(--cream-muted);margin-top:4px;">The bottleneck between us and 100+ waiting talent</div>
+        </div>
+
+        <div style="position:relative;">
+          <div style="position:absolute;left:-22px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);"></div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">60 DAYS</div>
+          <div style="font-family:var(--font-w);font-weight:700;font-size:17px;color:var(--green);">100 MAWDs live</div>
+          <div style="font-size:13px;color:var(--cream-muted);margin-top:4px;">Connecting talent's existing databases: Shopify, email, SMS, tour data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">11</div>
+</div>
+
+<!-- ============ SLIDE 12: Team ============ -->
+<div class="slide">
+  <div class="slide-label">THE TEAM</div>
+
+  <div class="grid-2" style="gap:40px;margin-bottom:28px;">
+    <div>
+      <h3 style="margin-bottom:20px;">Leadership</h3>
+      <div class="person-row">
+        <img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" class="person-photo" style="object-position:center 25%;">
+        <div>
+          <div class="person-name">Travis Atreo</div>
+          <div class="person-title">Founder & CEO</div>
+          <div class="person-desc">400M streams. Taylor Swift, John Legend reposted his covers. Built Fanded after losing his income to an algorithm change. He is the market.</div>
+        </div>
+      </div>
+      <div class="person-row">
+        <img src="photos/kevin_opt.jpg" alt="Kevin Pamittan" class="person-photo" style="object-position:center 20%;">
+        <div>
+          <div class="person-name">Kevin Pamittan</div>
+          <div class="person-title">CTO</div>
+          <div class="person-desc">20+ years engineering leadership, 8+ years AI/ML. Weedmaps, Luxottica, Beachbody. Scaled $100M+ tech orgs. Artist.</div>
+        </div>
+      </div>
+      <div class="person-row">
+        <img src="photos/lewis.png" alt="Lewis Zhuo" class="person-photo" style="object-position:center 25%;">
+        <div>
+          <div class="person-name">Lewis Zhuo</div>
+          <div class="person-title">COO &middot; Head of Clubs</div>
+          <div class="person-desc">Ex-Apple & Tesla ops. Leads customer onboarding and retention. Automotive YouTube creator.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:20px;">Advisors</h3>
+      <div class="person-row">
+        <img src="photos/ted.png" alt="Ted Schilowitz" class="person-photo">
+        <div>
+          <div class="person-name">Ted Schilowitz</div>
+          <div class="person-desc">Creator of RED Camera &middot; Co-founder of G-Drive</div>
+        </div>
+      </div>
+      <div class="person-row">
+        <img src="photos/chris.jpg" alt="Dr. Chris Mattmann" class="person-photo">
+        <div>
+          <div class="person-name">Dr. Chris Mattmann</div>
+          <div class="person-desc">Chief Data & AI Officer, UCLA &middot; Former CTIO, NASA JPL</div>
+        </div>
+      </div>
+      <div class="person-row">
+        <img src="photos/eric.jpg" alt="Eric Toda" class="person-photo">
+        <div>
+          <div class="person-name">Eric Toda</div>
+          <div class="person-desc">Global Head of Social Marketing, Meta</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px;margin-bottom:16px;">Backed By</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--cream-dim);">Dave Lu &middot; Hyphen Capital</div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--cream-dim);">Daniel Lurie Family Office (Mayor of SF)</div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--cream-dim);">Jason Kwon &middot; CSO, OpenAI</div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--cream-dim);">Josh Cooley &middot; Oscar-winning Director, Toy Story 4</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">12</div>
+</div>
+
+<!-- ============ SLIDE 13: Closing ============ -->
+<div class="slide" style="justify-content:center;align-items:center;text-align:center;">
+  <h1 style="font-size:56px;max-width:800px;">The future of talent business runs on <span style="color: var(--green);">MAWD.</span></h1>
+  <div style="font-size:20px;color:var(--cream-dim);margin-top:16px;margin-bottom:40px;">We're not predicting this future. We're already living it.</div>
+  <div style="font-size:18px;color:var(--cream-muted);">travis@fanded.com</div>
+  <div style="margin-top:24px;">
+    <a href="https://fanded-demo-investor.vercel.app" style="display:inline-block;background:var(--green);color:var(--bg);font-family:var(--font-w);font-weight:700;font-size:16px;padding:14px 32px;border-radius:10px;text-decoration:none;">See MAWD Live &rarr;</a>
+  </div>
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">13</div>
+</div>
+
+</body>
+</html>
