@@ -157,8 +157,8 @@ function renderDashboard(data) {
       Object.keys(s.sections).forEach(function(name) {
         if (!sectionTotals[name]) { sectionTotals[name] = 0; sectionCounts[name] = 0; }
         var t = s.sections[name];
-        var ms = (typeof t === 'object') ? (t.time || 0) : (t || 0);
-        sectionTotals[name] += ms;
+        var sec = (typeof t === 'object') ? (t.seconds || 0) : (t || 0);
+        sectionTotals[name] += sec;
         sectionCounts[name]++;
       });
     }
@@ -173,12 +173,13 @@ function renderDashboard(data) {
   var heatmapEl = document.getElementById('heatmapRows');
   heatmapEl.innerHTML = '';
 
-  var sectionOrder = ['Founder Story', 'The Problem', 'What We Built First', 'The Solution', 'Traction', 'MAWD for Managers', 'How We Make Money', 'Long-Term Moat', 'Data Network', 'Pipeline', 'Why Now', 'TAM', 'The Ask', 'Team & Backers', 'Demo', 'Closing'];
+  // Build section order dynamically from the data
+  var sectionOrder = ['Title', 'MAWD WORKS', 'THIS IS JUST THE START', 'WHY NOW', 'I LIVED THIS', 'THE PLATFORM', 'IT\'S ALREADY WORKING', 'PIPELINE', 'THE BUSINESS', 'TOTAL ADDRESSABLE MARKET', 'THE ASK', 'THE TEAM', 'Closing'];
 
   var maxAvg = 0;
   var sectionAvgs = {};
   sectionOrder.forEach(function(name) {
-    var avg = sectionTotals[name] ? Math.round(sectionTotals[name] / sectionCounts[name] / 1000) : 0;
+    var avg = sectionTotals[name] ? Math.round(sectionTotals[name] / sectionCounts[name]) : 0;
     sectionAvgs[name] = avg;
     if (avg > maxAvg) maxAvg = avg;
   });

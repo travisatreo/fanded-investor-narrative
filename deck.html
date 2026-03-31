@@ -234,7 +234,7 @@
 <!-- ============ SLIDE 1: Title ============ -->
 <div class="slide" style="justify-content: center; align-items: center; text-align: center;">
   <div style="margin-bottom: 24px;">
-    <img src="photos/fanded-logo.png" alt="Fanded" style="height: 48px; opacity: 0.9;" onerror="this.style.display='none'">
+    <img src="photos/fanded-logo.png" alt="Fanded" style="height: 140px; opacity: 0.9;" onerror="this.style.display='none'">
   </div>
   <h1 style="font-size: 64px; margin-bottom: 12px;">Fanded</h1>
   <div style="font-family: var(--font-w); font-weight: 600; font-size: 22px; color: var(--cream-dim); margin-bottom: 40px;">The agentic team for talent and creators.</div>
@@ -760,6 +760,134 @@
   <div class="logo-text">FANDED</div>
   <div class="page-num">13</div>
 </div>
+
+<!-- Download button (hidden when printing) -->
+<div id="downloadBtn" style="position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:8px;">
+  <button onclick="window.print()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:var(--font-w);font-weight:600;font-size:13px;cursor:pointer;backdrop-filter:blur(10px);">
+    ↓ Download PDF
+  </button>
+</div>
+<style>
+  @media print { #downloadBtn { display: none !important; } }
+  #downloadBtn button:hover { background: rgba(255,255,255,0.15); }
+</style>
+
+<!-- Analytics tracking -->
+<script>
+(function() {
+  // Unique visitor ID (persists across sessions)
+  var vid = localStorage.getItem('fanded_vid');
+  if (!vid) {
+    vid = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
+    localStorage.setItem('fanded_vid', vid);
+  }
+  var returning = !!localStorage.getItem('fanded_visited');
+  localStorage.setItem('fanded_visited', '1');
+
+  var startTime = Date.now();
+  var slides = document.querySelectorAll('.slide');
+  var slideData = {};
+  var currentSlide = null;
+  var currentSlideStart = null;
+  var maxScroll = 0;
+
+  // Initialize slide tracking
+  slides.forEach(function(slide, i) {
+    var label = slide.querySelector('.slide-label');
+    var name = label ? label.textContent.trim() : ('Slide ' + (i + 1));
+    if (i === 0) name = 'Title';
+    if (i === slides.length - 1) name = 'Closing';
+    slide.dataset.slideName = name;
+    slide.dataset.slideIndex = i;
+    slideData[name] = { time: 0, views: 0 };
+  });
+
+  // Track which slide is visible
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        var name = entry.target.dataset.slideName;
+        if (currentSlide && currentSlide !== name) {
+          // End timing for previous slide
+          slideData[currentSlide].time += Date.now() - currentSlideStart;
+        }
+        currentSlide = name;
+        currentSlideStart = Date.now();
+        slideData[name].views++;
+
+        // Track max scroll
+        var idx = parseInt(entry.target.dataset.slideIndex);
+        var pct = Math.round(((idx + 1) / slides.length) * 100);
+        if (pct > maxScroll) maxScroll = pct;
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(function(s) { observer.observe(s); });
+
+  // Build payload
+  function getPayload() {
+    // Close current slide timing
+    if (currentSlide && currentSlideStart) {
+      slideData[currentSlide].time += Date.now() - currentSlideStart;
+      currentSlideStart = Date.now(); // reset for next heartbeat
+    }
+
+    // Convert times to seconds
+    var sections = {};
+    Object.keys(slideData).forEach(function(k) {
+      sections[k] = {
+        seconds: Math.round(slideData[k].time / 1000),
+        views: slideData[k].views
+      };
+    });
+
+    return {
+      visitorId: vid,
+      returning: returning,
+      totalTime: Math.round((Date.now() - startTime) / 1000),
+      maxScroll: maxScroll,
+      sections: sections,
+      screenWidth: screen.width,
+      screenHeight: screen.height,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  // Send beacon on unload
+  function send() {
+    var data = getPayload();
+    try {
+      navigator.sendBeacon('/api/track', JSON.stringify(data));
+    } catch(e) {
+      // Fallback
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/track', false);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(data));
+    }
+  }
+
+  // Heartbeat every 30s (catches long sessions)
+  setInterval(function() {
+    try {
+      var data = getPayload();
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        keepalive: true
+      }).catch(function(){});
+    } catch(e) {}
+  }, 30000);
+
+  // Send on page leave
+  window.addEventListener('beforeunload', send);
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') send();
+  });
+})();
+</script>
 
 </body>
 </html>
