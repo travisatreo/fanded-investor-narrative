@@ -1304,6 +1304,164 @@ body {
     <div class="confidential">Investor Briefing - Confidential</div>
   </div>
 
+
+  <!-- Founder photo -->
+  <div class="moment-photo fade-in" style="margin-top: 24px; margin-bottom: 0;">
+    <img src="photos/IU7A1199.jpg" alt="Travis Atreo" style="height: 320px; object-position: center 20%;">
+  </div>
+  <!-- Section 0: Founder Story -->
+  <div class="section fade-in" data-track="I Lived This" style="padding-top: 12px;">
+    <div style="font-family: var(--font-w); font-weight: 700; font-size: 20px; color: var(--cream); margin-bottom: 4px;">Travis Atreo</div>
+    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 16px;">Founder & CEO · Artist · Producer</div>
+    <div class="body-text" style="margin-bottom: 12px; font-size: 15px; color: var(--cream-dim); line-height: 1.7;">400M+ streams. Taylor Swift, John Legend, and others reposted my covers.</div>
+    <h1 class="headline opening-headline" style="font-size: 32px; line-height: 1.2;">I was making <span style="color: var(--green);">$20K/month</span><br>from Spotify streams.</h1>
+    <div class="body-text" style="margin-top: 16px; font-size: 17px; color: var(--cream); line-height: 1.6;">Then the algorithm changed. Gone.</div>
+
+    <!-- Animated Creator Lifecycle Chart -->
+    <div id="lifecycleChart" style="margin-top: 20px; background: linear-gradient(180deg, rgba(15,15,28,1) 0%, rgba(60,40,100,0.3) 100%); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r-sm); padding: 20px 12px 12px; overflow: hidden;">
+      <div style="text-align:center;font-family:var(--font-w);font-weight:700;font-size:13px;color:var(--cream);margin-bottom:16px;">The Life Cycle of a Social Media Creator</div>
+      <svg id="lifecycleSvg" viewBox="0 0 340 200" style="width:100%;height:auto;">
+        <!-- Grid lines -->
+        <line x1="40" y1="10" x2="40" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="40" y1="170" x2="330" y2="170" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        <!-- Y-axis labels -->
+        <text x="36" y="14" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">5</text>
+        <text x="36" y="46" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">4</text>
+        <text x="36" y="78" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">3</text>
+        <text x="36" y="110" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">2</text>
+        <text x="36" y="142" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">1</text>
+        <text x="36" y="173" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">0</text>
+        <!-- Y-axis title -->
+        <text x="8" y="100" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="var(--font-b)" transform="rotate(-90,8,100)">Relevance</text>
+        <!-- X-axis labels -->
+        <text x="40" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">0</text>
+        <text x="98" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">2</text>
+        <text x="156" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">4</text>
+        <text x="214" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">6</text>
+        <text x="272" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">8</text>
+        <text x="330" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">10</text>
+        <!-- X-axis title -->
+        <text x="185" y="196" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="var(--font-b)">Time (Years)</text>
+        <!-- Gradient fill -->
+        <defs>
+          <linearGradient id="lcGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E74C3C" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#E74C3C" stop-opacity="0.05"/>
+          </linearGradient>
+          <clipPath id="lcClip">
+            <rect id="lcClipRect" x="40" y="0" width="0" height="200"/>
+          </clipPath>
+        </defs>
+        <!-- Area fill (clipped for animation) -->
+        <path d="M40,170 L40,138 C55,130 70,105 98,42 C110,18 125,10 156,10 C175,12 195,30 214,74 C230,105 250,120 272,138 C290,152 310,162 330,170 Z" fill="url(#lcGrad)" clip-path="url(#lcClip)"/>
+        <!-- Line (clipped for animation) -->
+        <path d="M40,138 C55,130 70,105 98,42 C110,18 125,10 156,10 C175,12 195,30 214,74 C230,105 250,120 272,138 C290,152 310,162 330,170" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round" clip-path="url(#lcClip)"/>
+        <!-- Phase labels (appear as line reaches them) -->
+        <g id="lcLabel1" opacity="0">
+          <text x="60" y="150" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Discovery</text>
+          <text x="60" y="158" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(New and Exciting)</text>
+        </g>
+        <g id="lcLabel2" opacity="0">
+          <text x="78" y="32" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Hypergrowth</text>
+          <text x="78" y="40" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Algorithm)</text>
+        </g>
+        <g id="lcLabel3" opacity="0">
+          <text x="155" y="22" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Plateau</text>
+          <text x="155" y="30" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Organic Reach dies)</text>
+        </g>
+        <g id="lcLabel4" opacity="0">
+          <text x="228" y="118" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Burnout</text>
+          <text x="228" y="126" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Mental Health)</text>
+        </g>
+        <g id="lcLabel5" opacity="0">
+          <text x="290" y="148" fill="var(--red)" font-size="7" font-family="var(--font-w)" font-weight="700">Exit/Quit</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="divider"></div>
+  </div>
+
+  <!-- Section: Fan Clubs Origin -->
+  <div class="section fade-in" data-track="Clubs Work">
+    <div class="section-label">CLUBS WORK</div>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">So we built fan clubs. <span style="color: var(--green);">Fans pay. They don't stop.</span></h2>
+    <div class="body-text" style="margin-bottom: 12px;">Fans pay $10/mo to $1,000/yr to support talent directly.</div>
+
+    <!-- Side-by-side: Streaming vs Fan Club revenue -->
+    <div id="revenueCompare" style="display: flex; gap: 10px; margin: 24px 0;">
+      <!-- Streaming revenue (volatile) -->
+      <div style="flex: 1; background: rgba(231,76,60,0.06); border: 1px solid rgba(231,76,60,0.15); border-radius: 12px; padding: 14px 12px 10px; text-align: center;">
+        <div style="font-size: 8px; color: var(--red); font-family: var(--font-w); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px;">STREAMING REVENUE</div>
+        <svg viewBox="0 0 140 70" style="width: 100%; height: auto;">
+          <path id="streamPath" d="M 0 65" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" opacity="0"/>
+          <path id="streamFill" d="M 0 65" fill="url(#redGrad)" opacity="0"/>
+          <defs><linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E74C3C" stop-opacity="0.3"/><stop offset="100%" stop-color="#E74C3C" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+        <div id="streamLabel" style="font-size: 9px; color: var(--cream-muted); font-family: var(--font-b); margin-top: 4px;">algorithm changes. gone.</div>
+      </div>
+      <!-- Fan club revenue (steady) -->
+      <div style="flex: 1; background: rgba(77,199,77,0.06); border: 1px solid rgba(77,199,77,0.15); border-radius: 12px; padding: 14px 12px 10px; text-align: center;">
+        <div style="font-size: 8px; color: var(--green); font-family: var(--font-w); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px;">FAN CLUB REVENUE</div>
+        <svg viewBox="0 0 140 70" style="width: 100%; height: auto;">
+          <path id="clubPath" d="M 0 65" fill="none" stroke="#4DC74D" stroke-width="2" stroke-linecap="round" opacity="0"/>
+          <path id="clubFill" d="M 0 65" fill="url(#greenGrad)" opacity="0"/>
+          <defs><linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DC74D" stop-opacity="0.3"/><stop offset="100%" stop-color="#4DC74D" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+        <div id="clubLabel" style="font-size: 9px; color: var(--cream-muted); font-family: var(--font-b); margin-top: 4px;">14 months. still subscribed.</div>
+      </div>
+    </div>
+
+    <div style="background: rgba(77,199,77,0.06); border: 1px solid rgba(77,199,77,0.12); border-radius: 10px; padding: 16px; margin-bottom: 20px;">
+      <div style="font-size: 32px; font-family: var(--font-w); font-weight: 800; color: var(--green); margin-bottom: 4px;">7,000+ fans</div>
+      <div style="font-size: 12px; color: var(--cream-muted); margin-bottom: 12px;">on Fanded that talent uses to reach their audience</div>
+      <div style="font-size: 24px; font-family: var(--font-w); font-weight: 700; color: var(--green);">$15K+ in new revenue</div>
+    </div>
+
+    <div class="body-text" style="margin-bottom: 12px;">Then talent needed help managing it. So we built MAWD, an AI chief of staff to run their clubs for them.</div>
+
+    <!-- Terminal boot sequence: MAWD connecting platforms -->
+    <div id="terminalBoot" style="margin: 24px 0; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.9; overflow: hidden; height: 310px;">
+      <div style="display:flex;gap:5px;margin-bottom:12px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+      </div>
+      <div id="termLines"></div>
+    </div>
+
+    <div class="body-text" style="margin-bottom: 12px;">To understand the talent, we built MAWD to ingest their data sources. MAWD found <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">20% new revenue</span> talent didn't know existed.</div>
+    <div style="margin: 40px 0 0; padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); text-align: center;">
+      <h2 class="headline" style="font-size: 26px; line-height: 1.3; color: var(--cream); margin: 0;">Paying fans who haven't stopped supporting their artists <span style="color: var(--green);">in over a year.</span></h2>
+    </div>
+    <div class="divider" style="margin-top: 40px;"></div>
+  </div>
+
+
+  <!-- Section: The Discovery -->
+  <div class="section fade-in" data-track="The Discovery">
+    <div class="section-label">THE DISCOVERY</div>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 12px; line-height: 1.3;">We built AI to help talent run their clubs. <span style="color: var(--gold);">Then we realized the problem was so much deeper.</span></h2>
+    <div class="body-text" style="margin-bottom: 24px; font-size: 15px;">Artists didn't just need help with their club. They needed help running their entire business. The club was just the front door.</div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+      <div style="background:rgba(59,173,228,0.06);border:1px solid rgba(59,173,228,0.2);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--blue);margin-bottom:6px;">THE CLUB</div>
+        <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">The direct fan relationship.<br>Recurring revenue. Real data.</div>
+      </div>
+      <div style="text-align:center;font-size:20px;color:rgba(255,255,255,0.15);">▼</div>
+      <div style="background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.2);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--green);margin-bottom:6px;">MAWD</div>
+        <div style="font-size:13px;color:var(--cream-dim);line-height:1.5;">The AI operating system that runs everything around the club.<br>Finances. Fans. Brand deals. Strategy. Content.</div>
+      </div>
+    </div>
+
+    <div style="padding:20px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:12px;text-align:center;">
+      <div style="font-family:var(--font-d);font-weight:700;font-size:18px;color:var(--cream);line-height:1.4;">Not a pivot. An evolution. <span style="color:var(--gold);">The opportunity is ten times bigger than we thought.</span></div>
+    </div>
+    <div class="divider" style="margin-top: 28px;"></div>
+  </div>
+
   <!-- Section 1: MAWD Works -->
   <style>
     @keyframes ledgerScanline { 0% { left: -100%; } 100% { left: 100%; } }
@@ -1429,6 +1587,7 @@ body {
     <div class="divider" style="margin-top: 28px;"></div>
   </div>
 
+
   <!-- Section 4: The Solution -->
   <div class="section fade-in" data-track="This Is Just The Start">
     <div class="section-label">THIS IS JUST THE START</div>
@@ -1504,166 +1663,6 @@ body {
         Shopify
       </div>
     </div>
-  </div>
-
-  <!-- Section: The Shift — industry restructuring stats up top -->
-  <div class="section fade-in" data-track="Why Now" style="padding-bottom: 0;">
-    <div class="section-label">WHY NOW</div>
-    <h2 class="headline" style="font-size: 22px; margin-bottom: 24px; line-height: 1.3;">The entertainment industry is restructuring.<br><span style="color: var(--gold);">No one has built the new infrastructure.</span></h2>
-
-    <!-- Accent bar stat cards -->
-    <div id="shiftCards" style="display:flex;flex-direction:column;gap:10px;padding:8px 0;">
-      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(231,76,60,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--red);">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--red);line-height:1;white-space:nowrap;">1.2M</div>
-        <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;">jobs cut in 2025 — the most since 2020</div>
-      </div>
-      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(231,76,60,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--red);">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--red);line-height:1;white-space:nowrap;">42K</div>
-        <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;">entertainment jobs gone in 24 months</div>
-      </div>
-      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(212,175,55,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--gold);">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--gold);line-height:1;white-space:nowrap;">207M</div>
-        <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;">creators — 99% don't have a manager or team</div>
-      </div>
-      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(46,204,113,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--green);">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--green);line-height:1.2;">Fans are spending more than ever.</div>
-      </div>
-      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(59,173,228,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--blue);">
-        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--cream);line-height:1.2;">Fanded means <span style="color:var(--blue);">one person = full company.</span></div>
-      </div>
-    </div>
-    <div style="margin-top:20px;font-size:10px;color:var(--cream-muted);line-height:1.8;">Sources: <a href="https://www.cnbc.com/2025/02/01/job-cuts-2025.html" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">CNBC</a>, <a href="https://nofilmschool.com/entertainment-industry-job-losses" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">No Film School</a>, <a href="https://www.demandsage.com/creator-economy-statistics/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">DemandSage</a>, <a href="https://inbeat.agency/blog/creator-economy-statistics" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">inBeat</a></div>
-    <div class="divider" style="margin-top: 24px;"></div>
-  </div>
-
-  <!-- Founder photo -->
-  <div class="moment-photo fade-in" style="margin-top: 24px; margin-bottom: 0;">
-    <img src="photos/IU7A1199.jpg" alt="Travis Atreo" style="height: 320px; object-position: center 20%;">
-  </div>
-  <!-- Section 0: Founder Story -->
-  <div class="section fade-in" data-track="I Lived This" style="padding-top: 12px;">
-    <div style="font-family: var(--font-w); font-weight: 700; font-size: 20px; color: var(--cream); margin-bottom: 4px;">Travis Atreo</div>
-    <div style="font-size: 13px; color: var(--cream-muted); margin-bottom: 16px;">Founder & CEO · Artist · Producer</div>
-    <div class="body-text" style="margin-bottom: 12px; font-size: 15px; color: var(--cream-dim); line-height: 1.7;">400M+ streams. Taylor Swift, John Legend, and others reposted my covers.</div>
-    <h1 class="headline opening-headline" style="font-size: 32px; line-height: 1.2;">I was making <span style="color: var(--green);">$20K/month</span><br>from Spotify streams.</h1>
-    <div class="body-text" style="margin-top: 16px; font-size: 17px; color: var(--cream); line-height: 1.6;">Then the algorithm changed. Gone.</div>
-
-    <!-- Animated Creator Lifecycle Chart -->
-    <div id="lifecycleChart" style="margin-top: 20px; background: linear-gradient(180deg, rgba(15,15,28,1) 0%, rgba(60,40,100,0.3) 100%); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r-sm); padding: 20px 12px 12px; overflow: hidden;">
-      <div style="text-align:center;font-family:var(--font-w);font-weight:700;font-size:13px;color:var(--cream);margin-bottom:16px;">The Life Cycle of a Social Media Creator</div>
-      <svg id="lifecycleSvg" viewBox="0 0 340 200" style="width:100%;height:auto;">
-        <!-- Grid lines -->
-        <line x1="40" y1="10" x2="40" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-        <line x1="40" y1="170" x2="330" y2="170" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        <!-- Y-axis labels -->
-        <text x="36" y="14" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">5</text>
-        <text x="36" y="46" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">4</text>
-        <text x="36" y="78" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">3</text>
-        <text x="36" y="110" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">2</text>
-        <text x="36" y="142" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="7" font-family="var(--font-b)">1</text>
-        <text x="36" y="173" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">0</text>
-        <!-- Y-axis title -->
-        <text x="8" y="100" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="var(--font-b)" transform="rotate(-90,8,100)">Relevance</text>
-        <!-- X-axis labels -->
-        <text x="40" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">0</text>
-        <text x="98" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">2</text>
-        <text x="156" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">4</text>
-        <text x="214" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">6</text>
-        <text x="272" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">8</text>
-        <text x="330" y="183" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="var(--font-b)">10</text>
-        <!-- X-axis title -->
-        <text x="185" y="196" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="var(--font-b)">Time (Years)</text>
-        <!-- Gradient fill -->
-        <defs>
-          <linearGradient id="lcGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#E74C3C" stop-opacity="0.6"/>
-            <stop offset="100%" stop-color="#E74C3C" stop-opacity="0.05"/>
-          </linearGradient>
-          <clipPath id="lcClip">
-            <rect id="lcClipRect" x="40" y="0" width="0" height="200"/>
-          </clipPath>
-        </defs>
-        <!-- Area fill (clipped for animation) -->
-        <path d="M40,170 L40,138 C55,130 70,105 98,42 C110,18 125,10 156,10 C175,12 195,30 214,74 C230,105 250,120 272,138 C290,152 310,162 330,170 Z" fill="url(#lcGrad)" clip-path="url(#lcClip)"/>
-        <!-- Line (clipped for animation) -->
-        <path d="M40,138 C55,130 70,105 98,42 C110,18 125,10 156,10 C175,12 195,30 214,74 C230,105 250,120 272,138 C290,152 310,162 330,170" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round" clip-path="url(#lcClip)"/>
-        <!-- Phase labels (appear as line reaches them) -->
-        <g id="lcLabel1" opacity="0">
-          <text x="60" y="150" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Discovery</text>
-          <text x="60" y="158" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(New and Exciting)</text>
-        </g>
-        <g id="lcLabel2" opacity="0">
-          <text x="78" y="32" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Hypergrowth</text>
-          <text x="78" y="40" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Algorithm)</text>
-        </g>
-        <g id="lcLabel3" opacity="0">
-          <text x="155" y="22" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Plateau</text>
-          <text x="155" y="30" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Organic Reach dies)</text>
-        </g>
-        <g id="lcLabel4" opacity="0">
-          <text x="228" y="118" fill="#fff" font-size="7" font-family="var(--font-w)" font-weight="700">Burnout</text>
-          <text x="228" y="126" fill="rgba(255,255,255,0.5)" font-size="5.5" font-family="var(--font-b)">(Mental Health)</text>
-        </g>
-        <g id="lcLabel5" opacity="0">
-          <text x="290" y="148" fill="var(--red)" font-size="7" font-family="var(--font-w)" font-weight="700">Exit/Quit</text>
-        </g>
-      </svg>
-    </div>
-
-    <div class="divider"></div>
-  </div>
-
-  <!-- Section: Fan Clubs Origin -->
-  <div class="section fade-in" data-track="The Platform">
-    <div class="section-label">THE PLATFORM</div>
-    <h2 class="headline" style="font-size: 22px; margin-bottom: 16px;">We started with fan clubs.</h2>
-    <div class="body-text" style="margin-bottom: 12px;">Fans pay $10/mo to $1,000/yr to support talent directly.</div>
-
-    <!-- Side-by-side: Streaming vs Fan Club revenue -->
-    <div id="revenueCompare" style="display: flex; gap: 10px; margin: 24px 0;">
-      <!-- Streaming revenue (volatile) -->
-      <div style="flex: 1; background: rgba(231,76,60,0.06); border: 1px solid rgba(231,76,60,0.15); border-radius: 12px; padding: 14px 12px 10px; text-align: center;">
-        <div style="font-size: 8px; color: var(--red); font-family: var(--font-w); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px;">STREAMING REVENUE</div>
-        <svg viewBox="0 0 140 70" style="width: 100%; height: auto;">
-          <path id="streamPath" d="M 0 65" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" opacity="0"/>
-          <path id="streamFill" d="M 0 65" fill="url(#redGrad)" opacity="0"/>
-          <defs><linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E74C3C" stop-opacity="0.3"/><stop offset="100%" stop-color="#E74C3C" stop-opacity="0"/></linearGradient></defs>
-        </svg>
-        <div id="streamLabel" style="font-size: 9px; color: var(--cream-muted); font-family: var(--font-b); margin-top: 4px;">algorithm changes. gone.</div>
-      </div>
-      <!-- Fan club revenue (steady) -->
-      <div style="flex: 1; background: rgba(77,199,77,0.06); border: 1px solid rgba(77,199,77,0.15); border-radius: 12px; padding: 14px 12px 10px; text-align: center;">
-        <div style="font-size: 8px; color: var(--green); font-family: var(--font-w); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px;">FAN CLUB REVENUE</div>
-        <svg viewBox="0 0 140 70" style="width: 100%; height: auto;">
-          <path id="clubPath" d="M 0 65" fill="none" stroke="#4DC74D" stroke-width="2" stroke-linecap="round" opacity="0"/>
-          <path id="clubFill" d="M 0 65" fill="url(#greenGrad)" opacity="0"/>
-          <defs><linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4DC74D" stop-opacity="0.3"/><stop offset="100%" stop-color="#4DC74D" stop-opacity="0"/></linearGradient></defs>
-        </svg>
-        <div id="clubLabel" style="font-size: 9px; color: var(--cream-muted); font-family: var(--font-b); margin-top: 4px;">14 months. still subscribed.</div>
-      </div>
-    </div>
-
-    <div style="background: rgba(77,199,77,0.06); border: 1px solid rgba(77,199,77,0.12); border-radius: 10px; padding: 16px; margin-bottom: 20px;">
-      <div style="font-size: 28px; font-family: var(--font-w); font-weight: 700; color: var(--green);">$15K+ in new revenue</div>
-    </div>
-
-    <div class="body-text" style="margin-bottom: 12px;">Then talent needed help managing it. So we built MAWD, an AI chief of staff to run their clubs for them.</div>
-
-    <!-- Terminal boot sequence: MAWD connecting platforms -->
-    <div id="terminalBoot" style="margin: 24px 0; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11.5px; line-height: 1.9; overflow: hidden; height: 310px;">
-      <div style="display:flex;gap:5px;margin-bottom:12px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
-        <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
-        <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
-      </div>
-      <div id="termLines"></div>
-    </div>
-
-    <div class="body-text" style="margin-bottom: 12px;">To understand the talent, we built MAWD to ingest their data sources. MAWD found <span style="color: var(--green); font-family: var(--font-w); font-weight: 700;">20% new revenue</span> talent didn't know existed.</div>
-    <div style="margin: 40px 0 0; padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); text-align: center;">
-      <h2 class="headline" style="font-size: 26px; line-height: 1.3; color: var(--cream); margin: 0;">Clubs are the fan database. MAWD is your chief of staff.<br><span style="color: var(--green);">Together, they're your agentic team.</span></h2>
-    </div>
-    <div class="divider" style="margin-top: 40px;"></div>
   </div>
 
   <!-- Section 6: Traction -->
@@ -1761,7 +1760,7 @@ body {
 
     <!-- AAGC Community -->
     <div class="moment-photo fade-in">
-      <img src="photos/aagc-community_opt.jpg" alt="Asian American Girl Club community" style="height: 240px; object-position: center center;">
+      <img src="photos/aagc_opt.jpg" alt="Asian American Girl Club" style="height: 240px; object-position: center center;">
       <div class="moment-caption">Asian American Girl Club — community-powered brand</div>
     </div>
 
@@ -1803,6 +1802,29 @@ body {
         <span class="pill pill-green">Fan database: started at zero</span>
       </div>
       <div class="talent-body">564K followers, millions of global fans, zero of them in his own database. One event → 200+ real fan profiles with contact info.</div>
+    </div>
+
+    <!-- Ted Schilowitz on stage -->
+    <div class="moment-photo fade-in">
+      <img src="photos/Ted2.png" alt="Ted Schilowitz speaking at American Film Market" style="height: 240px; object-position: center 20%;">
+      <div class="moment-caption">Ted Schilowitz – American Film Market Keynote</div>
+    </div>
+
+    <!-- Ted Schilowitz - Professional Speaker -->
+    <div class="talent-card fade-in" style="margin-top: 20px;">
+      <div class="talent-header">
+        <img src="photos/ted.png" alt="Ted Schilowitz" class="talent-photo">
+        <div>
+          <div class="talent-name">Ted Schilowitz</div>
+          <div class="talent-role">Professional Speaker · Futurist · Former Futurist-in-Residence, Paramount</div>
+        </div>
+      </div>
+      <div class="talent-pills">
+        <span class="pill pill-purple">Global keynote circuit</span>
+        <span class="pill pill-gold">Accountant + management fees</span>
+        <span class="pill pill-green">Ready for MAWD</span>
+      </div>
+      <div class="talent-body">"I have accountant fees and management fees that eat up a healthy chunk of my profit as a speaker, and the MAWD system works better to manage my online profile, land gigs, and lower my monthly accounting costs."</div>
     </div>
 
     <!-- Pipeline (merged) -->
@@ -1852,9 +1874,43 @@ body {
 
     <div id="pipelinePunch" style="text-align:center;">
       <div style="font-size:14px;color:var(--cream);font-family:var(--font-w);font-weight:700;">Zero paid marketing. They all found us.</div>
-      <div style="font-size:11px;color:var(--cream-muted);margin-top:4px;">Same problem. Same solution. Every vertical.</div>
+      <div style="display:inline-block;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.2);border-radius:10px;padding:12px 24px;margin-top:12px;">
+        <span style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--green);">20M+</span>
+        <span style="font-size:13px;color:var(--cream-dim);margin-left:8px;">combined fans across our waitlist</span>
+      </div>
+      <div style="font-size:11px;color:var(--cream-muted);margin-top:8px;">Same problem. Same solution. Every vertical.</div>
     </div>
     </div>
+  </div>
+
+  <!-- Section: The Shift — industry restructuring stats up top -->
+  <div class="section fade-in" data-track="Why Now" style="padding-bottom: 0;">
+    <div class="section-label">WHY NOW</div>
+    <h2 class="headline" style="font-size: 22px; margin-bottom: 24px; line-height: 1.3;">The entertainment industry is restructuring.<br><span style="color: var(--gold);">No one has built the new infrastructure.</span></h2>
+
+    <!-- Accent bar stat cards -->
+    <div id="shiftCards" style="display:flex;flex-direction:column;gap:10px;padding:8px 0;">
+      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(231,76,60,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--red);">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--red);line-height:1;white-space:nowrap;">1.2M</div>
+        <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;">jobs cut in 2025 — the most since 2020</div>
+      </div>
+      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(231,76,60,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--red);">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--red);line-height:1;white-space:nowrap;">42K</div>
+        <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;">entertainment jobs gone in 24 months</div>
+      </div>
+      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(212,175,55,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--gold);">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:36px;color:var(--gold);line-height:1;white-space:nowrap;">207M</div>
+        <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;">creators — 99% don't have a manager or team</div>
+      </div>
+      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(46,204,113,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--green);">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--green);line-height:1.2;">Fans are spending more than ever.</div>
+      </div>
+      <div class="shift-stat" style="display:flex;align-items:center;gap:14px;background:rgba(59,173,228,0.06);border-radius:10px;padding:16px;border-left:4px solid var(--blue);">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--cream);line-height:1.2;">Fanded means <span style="color:var(--blue);">one person = full company.</span></div>
+      </div>
+    </div>
+    <div style="margin-top:20px;font-size:10px;color:var(--cream-muted);line-height:1.8;">Sources: <a href="https://www.cnbc.com/2025/02/01/job-cuts-2025.html" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">CNBC</a>, <a href="https://nofilmschool.com/entertainment-industry-job-losses" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">No Film School</a>, <a href="https://www.demandsage.com/creator-economy-statistics/" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">DemandSage</a>, <a href="https://inbeat.agency/blog/creator-economy-statistics" target="_blank" rel="noopener" style="color:var(--cream-muted);text-decoration:underline;">inBeat</a></div>
+    <div class="divider" style="margin-top: 24px;"></div>
   </div>
 
   <!-- Section 7: Business Model -->
@@ -2088,6 +2144,38 @@ document.querySelectorAll('.fade-in').forEach(el => {
     });
   }
 });
+
+// Fallback scroll listener — ensures sections reveal even if IntersectionObserver misses
+function revealOnScroll() {
+  document.querySelectorAll('.fade-in.animate-ready:not(.visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 1.2 && rect.bottom > -200) {
+      el.classList.add('visible');
+      el.querySelectorAll('[data-count]').forEach(c => {
+        if (!c.dataset.counted) { c.dataset.counted = 'true'; animateCount(c); }
+      });
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll, { passive: true });
+// Run on load after delays
+setTimeout(revealOnScroll, 300);
+setTimeout(revealOnScroll, 1000);
+
+// Nuclear fallback — if after 3s sections are still hidden, force reveal all
+setTimeout(function() {
+  var hidden = document.querySelectorAll('.fade-in.animate-ready:not(.visible)');
+  if (hidden.length > 5) {
+    hidden.forEach(function(el, i) {
+      setTimeout(function() {
+        el.classList.add('visible');
+        el.querySelectorAll('[data-count]').forEach(function(c) {
+          if (!c.dataset.counted) { c.dataset.counted = 'true'; animateCount(c); }
+        });
+      }, i * 150);
+    });
+  }
+}, 3000);
 
 // Count-up animation
 function animateCount(el) {
