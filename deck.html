@@ -147,9 +147,9 @@
     #downloadBtn { display: none !important; }
   }
 
-  /* Landscape mobile: scale slides to fit viewport, keep slide deck behavior */
+  /* Landscape mobile: zoom slides to fit viewport, keep slide deck behavior */
   @media screen and (max-height: 500px) and (orientation: landscape) {
-    html, body { overflow: hidden; height: 100%; }
+    html, body { overflow: hidden; height: 100%; -webkit-overflow-scrolling: auto; }
     #deck { position: relative; width: 100%; height: 100%; overflow: hidden; }
     .slide {
       position: absolute;
@@ -157,8 +157,6 @@
       width: 1280px;
       height: 720px;
       min-height: 720px;
-      transform-origin: top left;
-      transform: scale(var(--ls-scale, 0.52));
       overflow: hidden;
     }
     .slide.active {
@@ -167,8 +165,11 @@
       pointer-events: auto;
       z-index: 10;
     }
-    .deck-nav { display: flex !important; }
-    .deck-counter { display: block !important; }
+    .deck-nav { display: flex !important; zoom: 1 !important; position: fixed; }
+    .deck-nav.prev { left: 8px; }
+    .deck-nav.next { right: 8px; }
+    .deck-counter { display: block !important; zoom: 1 !important; position: fixed; }
+    #downloadBtn { zoom: 1 !important; }
   }
 
   .slide-label {
@@ -1132,24 +1133,80 @@ function printDeck() {
   var nextBtn = document.getElementById('navNext');
 
   // Check if we're in mobile portrait mode (scroll fallback)
-  // Landscape mobile uses classic slide deck with scaling
+  // Landscape mobile uses classic slide deck with zoom
+  function isLandscapeMobile() {
+    return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+  }
   function isMobile() {
-    return window.innerWidth <= 768 && !(window.innerHeight <= 500 && window.innerWidth > window.innerHeight);
+    return window.innerWidth <= 768 && !isLandscapeMobile();
   }
 
-  // Set landscape scale variable
-  function setLandscapeScale() {
-    if (window.innerHeight <= 500 && window.innerWidth > window.innerHeight) {
+  // Apply zoom to slides in landscape mode and reinitialize deck
+  var lastWasLandscape = isLandscapeMobile();
+  var lastWasPortraitMobile = isMobile();
+
+  function setLandscapeZoom() {
+    var isLandscape = isLandscapeMobile();
+    var allSlides = document.querySelectorAll('.slide');
+    if (isLandscape) {
       var scaleX = window.innerWidth / 1280;
       var scaleY = window.innerHeight / 720;
-      var s = Math.min(scaleX, scaleY);
-      document.documentElement.style.setProperty('--ls-scale', s);
+      var z = Math.min(scaleX, scaleY);
+      allSlides.forEach(function(s) { s.style.zoom = z; });
+      // If we just rotated INTO landscape, reset to slide 0 and fix layout
+      if (!lastWasLandscape) {
+        window.scrollTo(0, 0);
+        document.body.style.overflow = 'hidden';
+        document.body.style.height = '100%';
+        document.documentElement.style.overflow = 'hidden';
+        document.documentElement.style.height = '100%';
+        var deck = document.getElementById('deck');
+        if (deck) { deck.style.position = 'relative'; deck.style.height = '100%'; deck.style.overflow = 'hidden'; }
+        allSlides.forEach(function(s) {
+          if (!s.dataset.appendix) {
+            s.style.position = 'absolute';
+            s.style.width = '1280px';
+            s.style.height = '720px';
+            s.style.minHeight = '720px';
+          }
+        });
+        goTo(0);
+      }
+    } else {
+      allSlides.forEach(function(s) { s.style.zoom = ''; });
+      // If we just rotated OUT of landscape into portrait mobile, fix scroll mode
+      if (lastWasLandscape && window.innerWidth <= 768) {
+        document.body.style.overflow = '';
+        document.body.style.height = '';
+        document.documentElement.style.overflow = '';
+        document.documentElement.style.height = '';
+        var deck = document.getElementById('deck');
+        if (deck) { deck.style.position = ''; deck.style.height = ''; deck.style.overflow = ''; }
+        allSlides.forEach(function(s) {
+          if (!s.dataset.appendix) {
+            s.style.position = '';
+            s.style.width = '';
+            s.style.height = '';
+            s.style.minHeight = '';
+            s.style.visibility = 'visible';
+            s.style.opacity = '1';
+          }
+        });
+      }
     }
+    lastWasLandscape = isLandscape;
+    lastWasPortraitMobile = isMobile();
   }
-  setLandscapeScale();
-  window.addEventListener('resize', setLandscapeScale);
+  setLandscapeZoom();
+  window.addEventListener('resize', setLandscapeZoom);
+  // Safari iOS: orientationchange fires before dimensions update, so poll until they do
   window.addEventListener('orientationchange', function() {
-    setTimeout(setLandscapeScale, 200);
+    var checks = 0;
+    var poll = setInterval(function() {
+      checks++;
+      setLandscapeZoom();
+      if (checks > 10) clearInterval(poll);
+    }, 100);
   });
 
   function goTo(idx) {
