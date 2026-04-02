@@ -154,10 +154,23 @@
   /* Mobile overrides */
   @media screen and (max-width: 768px) {
     .slide {
-      padding: 32px 24px;
+      padding: 0 !important;
+    }
+    .slide-inner-mobile {
+      width: 1280px;
+      height: 720px;
+      padding: 48px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
     }
     .deck-nav { display: none; }
-    .deck-counter { bottom: 12px; font-size: 12px; }
+    .deck-counter { bottom: 8px; font-size: 11px; }
+    #downloadBtn { display: none !important; }
   }
 
   .slide-label {
@@ -1085,23 +1098,36 @@
   var current = 0;
   var isAnimating = false;
 
-  // Desktop: scale slides to fit viewport
-  function scaleSlides() {
-    if (window.innerWidth <= 768) return;
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
-    var scaleX = vw / 1280;
-    var scaleY = vh / 720;
+  // Mobile: wrap slide content in a scaled container
+  function setupMobileScaling() {
+    if (window.innerWidth > 768) return;
+    var scaleX = window.innerWidth / 1280;
+    var scaleY = window.innerHeight / 720;
     var scale = Math.min(scaleX, scaleY);
+
     slides.forEach(function(s) {
+      if (s.querySelector('.slide-inner-mobile')) return; // already wrapped
+      var wrapper = document.createElement('div');
+      wrapper.className = 'slide-inner-mobile';
+      wrapper.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+      // Copy inline justify-content and align-items from slide
+      var cs = s.style;
+      if (cs.justifyContent) wrapper.style.justifyContent = cs.justifyContent;
+      if (cs.alignItems) wrapper.style.alignItems = cs.alignItems;
+      if (cs.textAlign) wrapper.style.textAlign = cs.textAlign;
+      // Move all children into wrapper
+      while (s.firstChild) {
+        wrapper.appendChild(s.firstChild);
+      }
+      s.appendChild(wrapper);
+      // Center the scaled wrapper
       s.style.display = 'flex';
       s.style.alignItems = 'center';
       s.style.justifyContent = 'center';
-      // Scale internal content via a wrapper approach using transform
-      var children = s.children;
-      // We'll use a CSS transform on the slide's content area
+      s.style.overflow = 'hidden';
     });
   }
+  setupMobileScaling();
 
   function goTo(index, instant) {
     if (index < 0 || index >= total || (isAnimating && !instant)) return;
