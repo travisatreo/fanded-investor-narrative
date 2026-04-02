@@ -333,8 +333,15 @@
       print-color-adjust: exact !important;
       color-adjust: exact !important;
     }
-    html, body {
-      width: 13.333in !important;
+    html {
+      width: 100% !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #07070F !important;
+    }
+    body {
+      width: 100% !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
@@ -343,50 +350,49 @@
     }
     #deck {
       position: static !important;
-      width: 13.333in !important;
+      display: block !important;
+      width: 100% !important;
       height: auto !important;
     }
     .slide {
-      position: static !important;
+      position: relative !important;
       visibility: visible !important;
       opacity: 1 !important;
       pointer-events: auto !important;
       zoom: 1 !important;
-      width: 13.333in !important;
-      height: 7.5in !important;
-      min-height: 7.5in !important;
-      max-height: 7.5in !important;
-      padding: 0.5in 0.75in !important;
+      width: 100% !important;
+      height: 100vh !important;
+      min-height: 0 !important;
+      max-height: 100vh !important;
+      padding: 48px 72px !important;
       margin: 0 !important;
       background: #07070F !important;
       overflow: hidden !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
-      page-break-after: always;
-      page-break-inside: avoid;
-      break-after: page;
-      break-inside: avoid;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
-    .slide:last-child {
-      page-break-after: auto;
+    .slide + .slide {
+      break-before: page !important;
+      page-break-before: always !important;
     }
     .slide[data-appendix] { display: none !important; }
     .slide::before, .slide::after { display: none !important; }
     .deck-nav, .deck-counter, #downloadBtn { display: none !important; }
 
-    /* Show watermark and page numbers */
     .logo-text {
       display: block !important;
       position: absolute !important;
-      bottom: 0.25in !important;
-      left: 0.75in !important;
+      bottom: 20px !important;
+      left: 72px !important;
     }
     .page-num {
       display: block !important;
       position: absolute !important;
-      bottom: 0.25in !important;
-      right: 0.75in !important;
+      bottom: 20px !important;
+      right: 72px !important;
     }
   }
 </style>
@@ -1072,10 +1078,33 @@
 
 <!-- Download button -->
 <div id="downloadBtn" style="position:fixed;top:20px;right:20px;z-index:300;display:flex;gap:8px;">
-  <button onclick="window.print()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:var(--font-w);font-weight:600;font-size:13px;cursor:pointer;backdrop-filter:blur(10px);">
+  <button onclick="printDeck()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:var(--font-w);font-weight:600;font-size:13px;cursor:pointer;backdrop-filter:blur(10px);">
     ↓ Download PDF
   </button>
 </div>
+<script>
+function printDeck() {
+  // Make all slides visible and static for printing
+  var slides = document.querySelectorAll('.slide');
+  slides.forEach(function(s) {
+    if (!s.dataset.appendix) {
+      s.style.position = 'relative';
+      s.style.visibility = 'visible';
+      s.style.opacity = '1';
+    }
+  });
+  document.body.style.overflow = 'visible';
+  document.body.style.height = 'auto';
+  document.getElementById('deck').style.position = 'static';
+  document.getElementById('deck').style.height = 'auto';
+
+  setTimeout(function() {
+    window.print();
+    // Restore after print
+    setTimeout(function() { location.reload(); }, 500);
+  }, 100);
+}
+</script>
 <style>
   @media print { #downloadBtn { display: none !important; } .deck-nav, .deck-counter { display: none !important; } }
   #downloadBtn button:hover { background: rgba(255,255,255,0.15); }
