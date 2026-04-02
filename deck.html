@@ -105,33 +105,34 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 200;
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(7,7,15,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(7,7,15,0.7);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: var(--cream-muted);
-    font-size: 20px;
+    color: var(--cream);
+    font-size: 22px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.2s, background 0.2s;
-    opacity: 0;
+    transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+    opacity: 0.7;
   }
 
   .deck-viewport:hover .deck-nav,
   .deck-nav:focus { opacity: 1; }
 
   .deck-nav:hover {
-    background: rgba(255,255,255,0.08);
-    color: var(--cream);
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
   }
 
-  .deck-nav.prev { left: 16px; }
-  .deck-nav.next { right: 16px; }
+  .deck-nav.prev { left: 20px; }
+  .deck-nav.next { right: 20px; }
   .deck-nav.hidden { pointer-events: none; opacity: 0 !important; }
 
   /* Slide counter */
@@ -414,10 +415,10 @@
 </div>
 
 <!-- ============ SLIDE 4: Audience ============ -->
-<div class="slide" style="justify-content:flex-start;padding-top:48px;">
+<div class="slide" style="justify-content:center;">
   <div class="slide-label">AUDIENCE</div>
   <h2 style="font-size:32px;margin-bottom:6px;">Every creator has an audience.<br><span style="color: var(--green);">None of them have a way to manage it.</span></h2>
-  <div class="body" style="margin-bottom:20px;font-size:15px;">Streaming listeners. Email subscribers. Event attendees. Paying members. All scattered across platforms, none of it connected. MAWD gives talent one place to manage their entire audience &mdash; free and paying &mdash; for the first time.</div>
+  <div class="body" style="margin-bottom:20px;font-size:15px;">Streaming listeners. Email subscribers. Event attendees. Paying members. All scattered across platforms, none of it connected. MAWD manages their entire audience for them &mdash; free and paying &mdash; for the first time.</div>
 
   <!-- Charts row -->
   <div style="display:flex;gap:16px;margin-bottom:18px;">
@@ -467,7 +468,7 @@
 
 
 <!-- ============ SLIDE 5: MAWD — The Solution ============ -->
-<div class="slide" style="justify-content:flex-start;padding-top:48px;">
+<div class="slide" style="justify-content:center;">
   <div class="slide-label">THE SOLUTION</div>
   <h2 style="font-size:36px;margin-bottom:4px;">Meet <span style="color: var(--green);">MAWD.</span> Six specialist agents. One chief of staff. <span style="color: var(--green);">$30/month.</span></h2>
   <div class="body" style="margin-bottom:20px;font-size:16px;">MAWD is the agentic team that replaces the manager, accountant, publicist, and booking agent talent can't afford. Each agent has its own memory and database &mdash; nothing gets lost.</div>
@@ -611,7 +612,7 @@
 </div>
 
 <!-- ============ SLIDE 7: Hub & Spoke — Distribution ============ -->
-<div class="slide" style="justify-content:flex-start;padding-top:48px;">
+<div class="slide" style="justify-content:center;">
   <div class="slide-label">DISTRIBUTION</div>
   <h2 style="font-size:34px;margin-bottom:6px;">One hub brings an entire roster of MAWDs. <span style="color: var(--green);">No sales team needed.</span></h2>
   <div class="body" style="margin-bottom:24px;font-size:16px;">Fanded scales through hubs &mdash; organizations that already aggregate talent. One relationship unlocks dozens or hundreds of MAWD accounts.</div>
@@ -694,7 +695,7 @@
 </div>
 
 <!-- ============ SLIDE 9: Pipeline & Why Now ============ -->
-<div class="slide" style="justify-content:flex-start;padding-top:48px;">
+<div class="slide" style="justify-content:center;">
   <div class="slide-label">PIPELINE &amp; WHY NOW</div>
   <h2 style="font-size:34px;margin-bottom:16px;">The biggest pipeline we've ever had &mdash; <span style="color: var(--gold);">and the timing is now.</span></h2>
 
