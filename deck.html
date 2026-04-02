@@ -151,21 +151,28 @@
     pointer-events: none;
   }
 
-  /* Mobile overrides */
+  /* Mobile overrides — portrait */
   @media screen and (max-width: 768px) {
-    .slide {
-      padding: 0 !important;
-    }
+    .slide { padding: 0 !important; }
     .slide-inner-mobile {
-      width: 1280px;
-      height: 720px;
+      width: 1280px; height: 720px;
       padding: 48px 72px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      display: flex; flex-direction: column; justify-content: center;
+      position: absolute; top: 50%; left: 50%;
+      transform-origin: center center;
+    }
+    .deck-nav { display: none; }
+    .deck-counter { bottom: 8px; font-size: 11px; }
+    #downloadBtn { display: none !important; }
+  }
+  /* Mobile overrides — landscape (short viewport, e.g. phone rotated) */
+  @media screen and (max-height: 500px) and (max-width: 1024px) {
+    .slide { padding: 0 !important; }
+    .slide-inner-mobile {
+      width: 1280px; height: 720px;
+      padding: 48px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: absolute; top: 50%; left: 50%;
       transform-origin: center center;
     }
     .deck-nav { display: none; }
@@ -390,20 +397,20 @@
 
 <!-- ============ SLIDE 1: Manifesto ============ -->
 <div class="slide" style="justify-content: center; align-items: center; text-align: center;">
-  <div style="max-width: 820px; line-height: 1.8;">
-    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); line-height: 1.7; margin-bottom: 28px;">Every middleman in entertainment &mdash; labels, studios, agencies, networks, publishers &mdash; built their power on one thing. Controlling access between talent and audience.</div>
+  <div style="max-width: 780px;">
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 15px; color: rgba(232,213,181,0.45); line-height: 1.7; margin-bottom: 20px; letter-spacing: 0.2px;">Every middleman in entertainment &mdash; labels, studios, agencies, networks, publishers &mdash;<br>built their power on one thing. Controlling access between talent and audience.</div>
 
-    <div style="font-family: var(--font-d); font-weight: 700; font-size: 36px; color: var(--gold); margin-bottom: 28px;">That access is now free.</div>
+    <div style="font-family: var(--font-d); font-weight: 700; font-size: 34px; color: var(--gold); margin-bottom: 20px;">That access is now free.</div>
 
-    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); line-height: 1.7; margin-bottom: 28px;">The leverage is gone. The monopoly is over. And none of them have an answer for it.</div>
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 15px; color: rgba(232,213,181,0.45); line-height: 1.7; margin-bottom: 24px;">The leverage is gone. The monopoly is over.<br>And none of them have an answer for it.</div>
 
-    <div style="font-family: var(--font-d); font-weight: 700; font-size: 48px; color: var(--cream); margin-bottom: 28px;">Fanded is the answer.</div>
+    <div style="font-family: var(--font-d); font-weight: 700; font-size: 42px; color: var(--cream); margin-bottom: 20px;">Fanded is the answer.</div>
 
-    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); line-height: 1.9; margin-bottom: 28px;">Agentic AI that turns every musician into their own label.<br>Every filmmaker into their own studio.<br>Every athlete into their own agency.<br>Every creator into their own everything.</div>
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 16px; color: var(--cream-dim); line-height: 2; margin-bottom: 24px;">Agentic AI that turns every musician into their own label.<br>Every filmmaker into their own studio.<br>Every athlete into their own agency.<br>Every creator into their own everything.</div>
 
-    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); margin-bottom: 16px;">We're not disrupting entertainment.</div>
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 14px; color: rgba(232,213,181,0.35); margin-bottom: 12px; letter-spacing: 0.5px;">We're not disrupting entertainment.</div>
 
-    <div style="font-family: var(--font-d); font-weight: 700; font-size: 48px; color: var(--gold);">We're replacing it.</div>
+    <div style="font-family: var(--font-d); font-weight: 700; font-size: 42px; color: var(--gold);">We're replacing it.</div>
   </div>
 </div>
 
@@ -1118,8 +1125,16 @@
   var isAnimating = false;
 
   // Mobile: wrap slide content in a scaled container
+  function isMobileDevice() {
+    // Portrait phone
+    if (window.innerWidth <= 768) return true;
+    // Landscape phone (short viewport + not a wide desktop)
+    if (window.innerHeight <= 500 && window.innerWidth <= 1024) return true;
+    return false;
+  }
+
   function setupMobileScaling() {
-    if (window.innerWidth > 768) return;
+    if (!isMobileDevice()) return;
     var scaleX = window.innerWidth / 1280;
     var scaleY = window.innerHeight / 720;
     var scale = Math.min(scaleX, scaleY);
@@ -1146,6 +1161,23 @@
       s.style.overflow = 'hidden';
     });
   }
+
+  // Re-scale on orientation change
+  window.addEventListener('orientationchange', function() {
+    setTimeout(function() { location.reload(); }, 300);
+  });
+  window.addEventListener('resize', function() {
+    // If mobile wrappers exist, update their scale
+    if (!isMobileDevice()) return;
+    var scaleX = window.innerWidth / 1280;
+    var scaleY = window.innerHeight / 720;
+    var scale = Math.min(scaleX, scaleY);
+    var wrappers = document.querySelectorAll('.slide-inner-mobile');
+    wrappers.forEach(function(w) {
+      w.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+    });
+  });
+
   setupMobileScaling();
 
   function goTo(index, instant) {
