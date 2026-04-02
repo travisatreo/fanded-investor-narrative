@@ -340,7 +340,7 @@
   }
 
   @page {
-    size: 1280px 720px;
+    size: landscape;
     margin: 0;
   }
   @media print {
@@ -350,7 +350,7 @@
       color-adjust: exact !important;
     }
     html {
-      width: 1280px !important;
+      width: 100% !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
@@ -358,7 +358,7 @@
       overflow: visible !important;
     }
     body {
-      width: 1280px !important;
+      width: 100% !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
@@ -368,7 +368,7 @@
     #deck {
       position: static !important;
       display: block !important;
-      width: 1280px !important;
+      width: 100% !important;
       height: auto !important;
       zoom: 1 !important;
       margin: 0 !important;
@@ -381,10 +381,10 @@
       pointer-events: auto !important;
       zoom: 1 !important;
       transform: none !important;
-      width: 1280px !important;
-      height: 720px !important;
-      min-height: 720px !important;
-      max-height: 720px !important;
+      width: 100% !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      max-height: 100vh !important;
       padding: 48px 72px !important;
       margin: 0 !important;
       background: #07070F !important;
@@ -1098,7 +1098,7 @@ function printDeck() {
   deck.style.marginTop = '0';
   deck.style.position = 'static';
   deck.style.height = 'auto';
-  deck.style.width = '1280px';
+  deck.style.width = '100%';
   deck.style.transform = 'none';
 
   // Make all slides visible and static for printing
@@ -1110,8 +1110,8 @@ function printDeck() {
       s.style.opacity = '1';
       s.style.zoom = '1';
       s.style.transform = 'none';
-      s.style.width = '1280px';
-      s.style.height = '720px';
+      s.style.width = '100%';
+      s.style.height = '100vh';
     }
   });
   document.body.style.overflow = 'visible';
