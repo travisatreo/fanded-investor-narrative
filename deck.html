@@ -339,6 +339,10 @@
     display: none;
   }
 
+  @page {
+    size: 1280px 720px;
+    margin: 0;
+  }
   @media print {
     *, *::before, *::after {
       -webkit-print-color-adjust: exact !important;
@@ -346,14 +350,15 @@
       color-adjust: exact !important;
     }
     html {
-      width: 100% !important;
+      width: 1280px !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
       background: #07070F !important;
+      overflow: visible !important;
     }
     body {
-      width: 100% !important;
+      width: 1280px !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
@@ -363,8 +368,11 @@
     #deck {
       position: static !important;
       display: block !important;
-      width: 100% !important;
+      width: 1280px !important;
       height: auto !important;
+      zoom: 1 !important;
+      margin: 0 !important;
+      transform: none !important;
     }
     .slide {
       position: relative !important;
@@ -372,10 +380,11 @@
       opacity: 1 !important;
       pointer-events: auto !important;
       zoom: 1 !important;
-      width: 100% !important;
-      height: 100vh !important;
-      min-height: 0 !important;
-      max-height: 100vh !important;
+      transform: none !important;
+      width: 1280px !important;
+      height: 720px !important;
+      min-height: 720px !important;
+      max-height: 720px !important;
       padding: 48px 72px !important;
       margin: 0 !important;
       background: #07070F !important;
@@ -385,10 +394,9 @@
       justify-content: center !important;
       break-inside: avoid !important;
       page-break-inside: avoid !important;
-    }
-    .slide + .slide {
-      break-before: page !important;
-      page-break-before: always !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      box-sizing: border-box !important;
     }
     .slide[data-appendix] { display: none !important; }
     .slide::before, .slide::after { display: none !important; }
@@ -1083,6 +1091,16 @@
 </div>
 <script>
 function printDeck() {
+  // Clear any landscape zoom/margin before printing
+  var deck = document.getElementById('deck');
+  deck.style.zoom = '1';
+  deck.style.marginLeft = '0';
+  deck.style.marginTop = '0';
+  deck.style.position = 'static';
+  deck.style.height = 'auto';
+  deck.style.width = '1280px';
+  deck.style.transform = 'none';
+
   // Make all slides visible and static for printing
   var slides = document.querySelectorAll('.slide');
   slides.forEach(function(s) {
@@ -1090,12 +1108,16 @@ function printDeck() {
       s.style.position = 'relative';
       s.style.visibility = 'visible';
       s.style.opacity = '1';
+      s.style.zoom = '1';
+      s.style.transform = 'none';
+      s.style.width = '1280px';
+      s.style.height = '720px';
     }
   });
   document.body.style.overflow = 'visible';
   document.body.style.height = 'auto';
-  document.getElementById('deck').style.position = 'static';
-  document.getElementById('deck').style.height = 'auto';
+  document.documentElement.style.overflow = 'visible';
+  document.documentElement.style.height = 'auto';
 
   setTimeout(function() {
     window.print();
