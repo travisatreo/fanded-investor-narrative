@@ -86,10 +86,9 @@
   .slide::before {
     content: '';
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--green), var(--blue));
-    opacity: 0.4;
+    bottom: 0; left: 48px; right: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
   }
 
   /* Hide download button on mobile */
@@ -237,22 +236,16 @@
   .tx-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(46,204,113,0.15); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--green); }
 
   .logo-text {
-    font-family: var(--font-w);
-    font-weight: 800;
-    font-size: 14px;
-    color: var(--cream-muted);
-    position: absolute;
-    bottom: 20px;
-    left: 80px;
-    letter-spacing: 1px;
+    display: none; /* Remove watermarks in scroll mode */
   }
 
   .page-num {
-    font-size: 12px;
-    color: var(--cream-muted);
-    position: absolute;
-    bottom: 20px;
-    right: 80px;
+    display: none; /* Remove page numbers in scroll mode */
+  }
+
+  /* Hide appendix from normal scroll */
+  .slide[data-appendix] {
+    display: none;
   }
 
   @page {
@@ -284,6 +277,8 @@
     .slide[data-appendix] { display: none !important; }
     .slide::before, .slide::after { display: none !important; }
     .slide * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .logo-text { display: block !important; font-family: var(--font-w); font-weight: 800; font-size: 14px; color: #6B6B8A; position: absolute; bottom: 20px; left: 80px; letter-spacing: 1px; }
+    .page-num { display: block !important; font-size: 12px; color: #6B6B8A; position: absolute; bottom: 20px; right: 80px; }
     #downloadBtn { display: none !important; }
   }
 </style>
@@ -295,21 +290,16 @@
 <!-- ============ SLIDE 1: Manifesto ============ -->
 <div class="slide" style="justify-content: center; align-items: center; text-align: center; background: var(--bg);">
   <div style="max-width: 1100px; position: relative; z-index: 1;">
+    <div style="margin-bottom: 40px;">
+      <img src="photos/fanded-logo.png" alt="Fanded" style="height: 64px; opacity: 0.7;" onerror="this.style.display='none'">
+    </div>
     <div style="font-family: var(--font-d); font-weight: 900; font-size: 72px; color: var(--cream); line-height: 1.15; margin-bottom: 24px;">The entertainment industry collapsed twenty years ago.</div>
     <div style="font-family: var(--font-d); font-weight: 900; font-size: 72px; color: var(--blue); line-height: 1.15;">Fanded is the answer.</div>
+    <div style="font-family: var(--font-w); font-weight: 500; font-size: 18px; color: var(--cream-muted); margin-top: 32px;">The AI team for every creator, athlete, and artist.</div>
   </div>
 </div>
 
-<!-- ============ SLIDE 2: Title ============ -->
-<div class="slide" style="justify-content: center; align-items: center; text-align: center;">
-  <div style="margin-bottom: 24px;">
-    <img src="photos/fanded-logo.png" alt="Fanded" style="height: 140px; opacity: 0.9;" onerror="this.style.display='none'">
-  </div>
-  <h1 style="font-size: 64px; margin-bottom: 12px;">Fanded</h1>
-  <div style="font-family: var(--font-w); font-weight: 600; font-size: 22px; color: var(--cream-dim); margin-bottom: 40px;">The AI team for every creator, athlete, and artist.</div>
-  <div style="font-size: 15px; color: var(--cream-muted);">travis@fanded.com</div>
-  <div class="page-num">2</div>
-</div>
+<!-- Title slide removed — manifesto already names Fanded and opens stronger -->
 
 <!-- ============ SLIDE 3: Founder Story ============ -->
 <div class="slide">
@@ -653,28 +643,17 @@
   </div>
 
   <!-- Stats row -->
-  <div style="display:flex;gap:16px;margin-bottom:16px;">
+  <div style="display:flex;gap:16px;">
     <div style="flex:1;background:rgba(46,204,113,0.04);border:1px solid rgba(46,204,113,0.15);border-radius:14px;padding:20px;text-align:center;">
       <div style="font-size:12px;color:var(--cream-muted);margin-bottom:6px;">One hub relationship =</div>
       <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--green);line-height:1;">10&ndash;500</div>
       <div style="font-size:13px;color:var(--cream-dim);margin-top:4px;">MAWD accounts</div>
     </div>
-    <div style="flex:1;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.2);border-radius:14px;padding:20px;text-align:center;">
-      <div style="font-size:12px;color:var(--cream-muted);margin-bottom:6px;">Pipeline reach</div>
-      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--green);line-height:1;">20M+</div>
-      <div style="font-size:13px;color:var(--cream-dim);margin-top:4px;">combined fandom in pipeline</div>
+    <div style="flex:1;background:rgba(46,204,113,0.04);border:1px solid rgba(46,204,113,0.15);border-radius:14px;padding:20px;text-align:center;">
+      <div style="font-size:12px;color:var(--cream-muted);margin-bottom:6px;">Cost to acquire</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--green);line-height:1;">$0</div>
+      <div style="font-size:13px;color:var(--cream-dim);margin-top:4px;">no paid marketing &mdash; all inbound</div>
     </div>
-  </div>
-
-  <!-- Pipeline names -->
-  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">🎤 <strong>Darren Hayes</strong> &middot; 23M records</div>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">🎬 <strong>Colton Haynes</strong> &middot; Arrow</div>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">🏅 <strong>Olympic Athletes</strong></div>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">⛳ <strong>Pro Golfers</strong></div>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">🎬 <strong>Oscar-Winning Director</strong></div>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">🇵🇭 <strong>Top PH Talent Mgmt Co.</strong></div>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:40px;padding:8px 16px;font-size:13px;color:var(--cream);">🎪 <strong>Festivals</strong></div>
   </div>
 
   <div class="logo-text">FANDED</div>
