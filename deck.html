@@ -147,10 +147,14 @@
     #downloadBtn { display: none !important; }
   }
 
-  /* Landscape mobile: zoom slides to fit viewport, keep slide deck behavior */
+  /* Landscape mobile: zoom the deck container, keep nav outside zoom context */
   @media screen and (max-height: 500px) and (orientation: landscape) {
-    html, body { overflow: hidden; height: 100%; -webkit-overflow-scrolling: auto; }
-    #deck { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    html, body { overflow: hidden; height: 100vh; }
+    #deck {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+    }
     .slide {
       position: absolute;
       top: 0; left: 0;
@@ -165,11 +169,11 @@
       pointer-events: auto;
       z-index: 10;
     }
-    .deck-nav { display: flex !important; zoom: 1 !important; position: fixed; }
+    .deck-nav { display: flex !important; position: fixed; z-index: 200; }
     .deck-nav.prev { left: 8px; }
     .deck-nav.next { right: 8px; }
-    .deck-counter { display: block !important; zoom: 1 !important; position: fixed; }
-    #downloadBtn { zoom: 1 !important; }
+    .deck-counter { display: block !important; position: fixed; z-index: 200; }
+    #downloadBtn { z-index: 300; }
   }
 
   .slide-label {
@@ -1152,37 +1156,36 @@ function printDeck() {
       var scaleX = window.innerWidth / 1280;
       var scaleY = window.innerHeight / 720;
       var z = Math.min(scaleX, scaleY);
-      // Center slides: calculate offset for zoomed slide within viewport
-      var renderedWidth = 1280 * z;
-      var renderedHeight = 720 * z;
-      var offsetLeft = Math.max(0, (window.innerWidth - renderedWidth) / 2);
-      var offsetTop = Math.max(0, (window.innerHeight - renderedHeight) / 2);
+      // Zoom the #deck container and center it with margin
+      var deck = document.getElementById('deck');
+      deck.style.zoom = z;
+      var renderedW = 1280 * z;
+      var renderedH = 720 * z;
+      var marginLeft = Math.max(0, (window.innerWidth - renderedW) / 2);
+      var marginTop = Math.max(0, (window.innerHeight - renderedH) / 2);
+      deck.style.marginLeft = marginLeft + 'px';
+      deck.style.marginTop = marginTop + 'px';
+      // Clear any per-slide transforms
       allSlides.forEach(function(s) {
-        s.style.zoom = z;
-        s.style.left = (offsetLeft / z) + 'px';
-        s.style.top = (offsetTop / z) + 'px';
+        s.style.transform = '';
+        s.style.left = '';
+        s.style.top = '';
       });
-      // If we just rotated INTO landscape, reset to slide 0 and fix layout
+      // If we just rotated INTO landscape, reset to slide 0
       if (!lastWasLandscape) {
         window.scrollTo(0, 0);
         document.body.style.overflow = 'hidden';
-        document.body.style.height = '100%';
+        document.body.style.height = '100vh';
         document.documentElement.style.overflow = 'hidden';
-        document.documentElement.style.height = '100%';
-        var deck = document.getElementById('deck');
-        if (deck) { deck.style.position = 'relative'; deck.style.height = '100%'; deck.style.overflow = 'hidden'; }
-        allSlides.forEach(function(s) {
-          if (!s.dataset.appendix) {
-            s.style.position = 'absolute';
-            s.style.width = '1280px';
-            s.style.height = '720px';
-            s.style.minHeight = '720px';
-          }
-        });
+        document.documentElement.style.height = '100vh';
         goTo(0);
       }
     } else {
-      allSlides.forEach(function(s) { s.style.zoom = ''; s.style.left = ''; s.style.top = ''; });
+      var deck = document.getElementById('deck');
+      deck.style.zoom = '';
+      deck.style.marginLeft = '';
+      deck.style.marginTop = '';
+      allSlides.forEach(function(s) { s.style.transform = ''; s.style.left = ''; s.style.top = ''; });
       // If we just rotated OUT of landscape into portrait mobile, fix scroll mode
       if (lastWasLandscape && window.innerWidth <= 768) {
         document.body.style.overflow = '';
