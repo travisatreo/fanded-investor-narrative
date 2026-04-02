@@ -61,6 +61,9 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
   }
 
   .deck-track {
@@ -78,7 +81,7 @@
     width: 100vw;
     height: 100vh;
     min-width: 100vw;
-    padding: 60px 80px;
+    padding: 48px 72px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,8 +90,6 @@
     background: var(--bg);
     page-break-after: always;
   }
-
-  /* Desktop: keep slide padding and centering */
 
   .slide::before {
     content: '';
@@ -317,28 +318,37 @@
     right: 80px;
   }
 
+  @page {
+    size: 1280px 720px;
+    margin: 0;
+  }
+
   @media print {
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
-    html, body { background: var(--bg) !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; height: auto !important; position: static !important; }
-    .deck-viewport { position: static !important; overflow: visible !important; }
-    .deck-track { display: block !important; transform: none !important; transition: none !important; }
+    html, body { background: var(--bg) !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; height: auto !important; position: static !important; width: 1280px !important; }
+    .deck-viewport { position: static !important; overflow: visible !important; display: block !important; width: 1280px !important; height: auto !important; background: none !important; }
+    .deck-track { display: block !important; transform: none !important; transition: none !important; width: 1280px !important; height: auto !important; }
     .slide {
       width: 1280px !important;
       height: 720px !important;
       min-width: 1280px !important;
+      max-height: 720px !important;
       break-after: page;
       break-inside: avoid;
       background: var(--bg) !important;
       margin: 0 !important;
-      padding: 60px 80px !important;
+      padding: 48px 72px !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
       box-shadow: inset 0 0 0 2000px #07070F !important;
+      font-size: 16px !important;
     }
+    .slide[data-appendix] { display: none !important; } /* Hide appendix from PDF */
     .slide::before { display: none !important; }
     .slide::after { display: none !important; }
     .slide * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     .deck-nav, .deck-counter, #downloadBtn { display: none !important; }
+    .logo-text, .page-num { display: none !important; } /* Clean PDF without page furniture */
   }
 </style>
 </head>
