@@ -147,21 +147,28 @@
     #downloadBtn { display: none !important; }
   }
 
-  /* Landscape mobile: scroll fallback */
+  /* Landscape mobile: scale slides to fit viewport, keep slide deck behavior */
   @media screen and (max-height: 500px) and (orientation: landscape) {
-    html, body { overflow: auto; height: auto; }
-    #deck { position: static; width: auto; height: auto; }
+    html, body { overflow: hidden; height: 100%; }
+    #deck { position: relative; width: 100%; height: 100%; overflow: hidden; }
     .slide {
-      position: static;
+      position: absolute;
+      top: 0; left: 0;
+      width: 1280px;
+      height: 720px;
+      min-height: 720px;
+      transform-origin: top left;
+      transform: scale(var(--ls-scale, 0.52));
+      overflow: hidden;
+    }
+    .slide.active {
       visibility: visible;
       opacity: 1;
       pointer-events: auto;
-      width: 100%;
-      min-height: 100vh;
-      zoom: 0.45;
+      z-index: 10;
     }
-    .deck-nav, .deck-counter { display: none !important; }
-    #downloadBtn { display: none !important; }
+    .deck-nav { display: flex !important; }
+    .deck-counter { display: block !important; }
   }
 
   .slide-label {
@@ -1124,10 +1131,26 @@ function printDeck() {
   var prevBtn = document.getElementById('navPrev');
   var nextBtn = document.getElementById('navNext');
 
-  // Check if we're in mobile mode (scroll fallback)
+  // Check if we're in mobile portrait mode (scroll fallback)
+  // Landscape mobile uses classic slide deck with scaling
   function isMobile() {
-    return window.innerWidth <= 768 || (window.innerHeight <= 500 && window.innerWidth > window.innerHeight);
+    return window.innerWidth <= 768 && !(window.innerHeight <= 500 && window.innerWidth > window.innerHeight);
   }
+
+  // Set landscape scale variable
+  function setLandscapeScale() {
+    if (window.innerHeight <= 500 && window.innerWidth > window.innerHeight) {
+      var scaleX = window.innerWidth / 1280;
+      var scaleY = window.innerHeight / 720;
+      var s = Math.min(scaleX, scaleY);
+      document.documentElement.style.setProperty('--ls-scale', s);
+    }
+  }
+  setLandscapeScale();
+  window.addEventListener('resize', setLandscapeScale);
+  window.addEventListener('orientationchange', function() {
+    setTimeout(setLandscapeScale, 200);
+  });
 
   function goTo(idx) {
     if (idx < 0 || idx >= total) return;
