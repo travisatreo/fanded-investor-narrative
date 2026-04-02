@@ -44,55 +44,120 @@
 
   html, body {
     margin: 0;
+    height: 100%;
+    overflow: hidden;
     background: var(--bg);
     color: var(--cream);
     font-family: var(--font-b);
     -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
+  }
+
+  /* Classic slide deck: one slide visible at a time */
+  #deck {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
   }
 
   .slide {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
     padding: 48px 72px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
     overflow: hidden;
     background: var(--bg);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
     page-break-after: always;
   }
 
-  /* Mobile: use zoom to scale everything proportionally */
+  .slide.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+  }
+
+  /* Nav arrows */
+  .deck-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(7,7,15,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--cream);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.2s, background 0.2s;
+  }
+  .deck-nav:hover { opacity: 1; background: rgba(255,255,255,0.1); }
+  .deck-nav.prev { left: 16px; }
+  .deck-nav.next { right: 16px; }
+  .deck-nav.hidden { opacity: 0 !important; pointer-events: none; }
+
+  /* Slide counter */
+  .deck-counter {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    font-family: var(--font-w);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--cream-muted);
+    letter-spacing: 1px;
+  }
+
+  /* Mobile: scroll fallback */
   @media screen and (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    #deck { position: static; width: auto; height: auto; }
     .slide {
+      position: static;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
       zoom: 0.5;
-      min-height: 200vh;
-      min-height: 200dvh;
     }
+    .deck-nav, .deck-counter { display: none !important; }
+    #downloadBtn { display: none !important; }
   }
 
-  /* Landscape phones */
+  /* Landscape mobile: scroll fallback */
   @media screen and (max-height: 500px) and (orientation: landscape) {
+    html, body { overflow: auto; height: auto; }
+    #deck { position: static; width: auto; height: auto; }
     .slide {
+      position: static;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      width: 100%;
+      min-height: 100vh;
       zoom: 0.45;
-      min-height: calc(100vh / 0.45);
-      min-height: calc(100dvh / 0.45);
     }
-  }
-
-  .slide::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 48px; right: 48px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-  }
-
-  /* Hide download button on mobile */
-  @media screen and (max-width: 768px) {
+    .deck-nav, .deck-counter { display: none !important; }
     #downloadBtn { display: none !important; }
   }
 
@@ -236,21 +301,27 @@
   .tx-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(46,204,113,0.15); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--green); }
 
   .logo-text {
-    display: none; /* Remove watermarks in scroll mode */
+    font-family: var(--font-w);
+    font-weight: 800;
+    font-size: 14px;
+    color: rgba(107,107,138,0.5);
+    position: absolute;
+    bottom: 20px;
+    left: 72px;
+    letter-spacing: 1px;
   }
 
   .page-num {
-    display: none; /* Remove page numbers in scroll mode */
+    font-size: 12px;
+    color: rgba(107,107,138,0.5);
+    position: absolute;
+    bottom: 20px;
+    right: 72px;
   }
 
-  /* Hide appendix from normal scroll */
+  /* Hide appendix by default */
   .slide[data-appendix] {
     display: none;
-  }
-
-  @page {
-    size: landscape;
-    margin: 0;
   }
 
   @media print {
@@ -259,7 +330,6 @@
       print-color-adjust: exact !important;
       color-adjust: exact !important;
     }
-
     html, body {
       width: 100% !important;
       height: auto !important;
@@ -268,14 +338,16 @@
       overflow: visible !important;
       background: #07070F !important;
     }
-
     #deck {
-      display: block !important;
+      position: static !important;
       width: auto !important;
       height: auto !important;
     }
-
     .slide {
+      position: static !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
       zoom: 1 !important;
       width: 100vw !important;
       height: 100vh !important;
@@ -285,40 +357,14 @@
       margin: 0 !important;
       background: #07070F !important;
       overflow: hidden !important;
-      position: relative !important;
       display: flex !important;
       flex-direction: column !important;
       page-break-after: always;
-      page-break-inside: avoid;
       break-after: page;
       break-inside: avoid;
     }
-
-    /* Hide appendix, dividers, download button */
     .slide[data-appendix] { display: none !important; }
-    .slide::before, .slide::after { display: none !important; }
-    #downloadBtn { display: none !important; }
-
-    /* Show watermark and page numbers in PDF */
-    .logo-text {
-      display: block !important;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 800;
-      font-size: 14px;
-      color: #6B6B8A !important;
-      position: absolute;
-      bottom: 20px;
-      left: 72px;
-      letter-spacing: 1px;
-    }
-    .page-num {
-      display: block !important;
-      font-size: 12px;
-      color: #6B6B8A !important;
-      position: absolute;
-      bottom: 20px;
-      right: 72px;
-    }
+    .deck-nav, .deck-counter, #downloadBtn { display: none !important; }
   }
 </style>
 </head>
@@ -996,24 +1042,85 @@
 
 </div><!-- /deck -->
 
-<!-- Download button (hidden when printing) -->
+<!-- Nav arrows -->
+<button class="deck-nav prev hidden" id="navPrev" aria-label="Previous slide">&#8249;</button>
+<button class="deck-nav next" id="navNext" aria-label="Next slide">&#8250;</button>
+<div class="deck-counter" id="deckCounter">1 / 13</div>
+
+<!-- Download button -->
 <div id="downloadBtn" style="position:fixed;top:20px;right:20px;z-index:300;display:flex;gap:8px;">
   <button onclick="window.print()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--cream);padding:10px 18px;border-radius:8px;font-family:var(--font-w);font-weight:600;font-size:13px;cursor:pointer;backdrop-filter:blur(10px);">
     ↓ Download PDF
   </button>
 </div>
 <style>
-  @media print { #downloadBtn { display: none !important; } }
+  @media print { #downloadBtn { display: none !important; } .deck-nav, .deck-counter { display: none !important; } }
   #downloadBtn button:hover { background: rgba(255,255,255,0.15); }
 </style>
 
-<!-- Analytics -->
+<!-- Slide Deck Engine + Analytics -->
 <script>
 (function() {
-  var slides = document.querySelectorAll('.slide');
+  // Get all visible slides (exclude appendix)
+  var allSlides = document.querySelectorAll('.slide');
+  var slides = [];
+  allSlides.forEach(function(s) {
+    if (!s.dataset.appendix) slides.push(s);
+  });
   var total = slides.length;
+  var current = 0;
 
-  // ---- Analytics (scroll-based tracking) ----
+  var counter = document.getElementById('deckCounter');
+  var prevBtn = document.getElementById('navPrev');
+  var nextBtn = document.getElementById('navNext');
+
+  // Check if we're in mobile mode (scroll fallback)
+  function isMobile() {
+    return window.innerWidth <= 768 || (window.innerHeight <= 500 && window.innerWidth > window.innerHeight);
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.classList.toggle('hidden', current === 0);
+    nextBtn.classList.toggle('hidden', current === total - 1);
+    trackSlide(current);
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (isMobile()) return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+  });
+
+  // Click navigation
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  // Mouse wheel navigation (desktop)
+  var wheelTimer = null;
+  document.addEventListener('wheel', function(e) {
+    if (isMobile()) return;
+    e.preventDefault();
+    if (wheelTimer) return;
+    wheelTimer = setTimeout(function() { wheelTimer = null; }, 500);
+    if (e.deltaY > 0) next();
+    else if (e.deltaY < 0) prev();
+  }, { passive: false });
+
+  // Initialize: show first slide
+  if (!isMobile()) {
+    goTo(0);
+  }
+
+  // ---- Analytics ----
   var vid = localStorage.getItem('fanded_vid');
   if (!vid) {
     vid = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
@@ -1048,17 +1155,18 @@
     if (idx > maxSlideReached) maxSlideReached = idx;
   }
 
-  // Track which slide is in view on scroll
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var idx = Array.prototype.indexOf.call(slides, entry.target);
-        if (idx >= 0) trackSlide(idx);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  slides.forEach(function(s) { observer.observe(s); });
+  // Mobile: use scroll observer
+  if (isMobile()) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var idx = slides.indexOf(entry.target);
+          if (idx >= 0) trackSlide(idx);
+        }
+      });
+    }, { threshold: 0.5 });
+    slides.forEach(function(s) { observer.observe(s); });
+  }
 
   function getPayload() {
     if (currentSlideName && currentSlideStart) {
