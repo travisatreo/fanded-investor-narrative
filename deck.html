@@ -49,9 +49,10 @@
     color: var(--cream);
     font-family: var(--font-b);
     -webkit-font-smoothing: antialiased;
-    touch-action: pan-x pan-y;
+    touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
 
   /* Slide wrapper for horizontal swipe */
@@ -59,11 +60,17 @@
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
+    height: 100vh; /* fallback */
     overflow: hidden;
     background: #000;
     display: flex;
     align-items: center;
+  }
+
+  @supports (height: 100dvh) {
+    .deck-viewport { height: 100dvh; }
+    .slide { height: 100dvh; }
   }
 
   .deck-track {
@@ -85,6 +92,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: relative;
     overflow: hidden;
     background: var(--bg);
@@ -151,31 +159,22 @@
     pointer-events: none;
   }
 
-  /* Mobile overrides — portrait phones */
-  @media screen and (max-width: 768px) {
-    .slide { padding: 0 !important; }
-    .slide-inner-mobile {
-      width: 1280px; height: 720px;
-      padding: 48px 72px;
-      display: flex; flex-direction: column; justify-content: center;
-      position: absolute; top: 50%; left: 50%;
-      transform-origin: center center;
+  /* Mobile: scale slide content to fit small screens */
+  @media screen and (max-width: 768px), screen and (max-height: 500px) {
+    .slide {
+      padding: 0 !important;
     }
-    .deck-nav { display: none; }
-    .deck-counter { bottom: 8px; font-size: 11px; }
-    #downloadBtn { display: none !important; }
-  }
-  /* Mobile overrides — landscape (any short viewport under 600px tall) */
-  @media screen and (max-height: 600px) and (orientation: landscape) {
-    .slide { padding: 0 !important; }
-    .slide-inner-mobile {
-      width: 1280px; height: 720px;
+    .slide-scaler {
+      width: 1280px;
+      height: 720px;
       padding: 48px 72px;
-      display: flex; flex-direction: column; justify-content: center;
-      position: absolute; top: 50%; left: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       transform-origin: center center;
+      /* Scale set by JS based on actual viewport */
     }
-    .deck-nav { display: none; }
+    .deck-nav { display: none !important; }
     .deck-counter { bottom: 8px; font-size: 11px; }
     #downloadBtn { display: none !important; }
   }
@@ -1113,63 +1112,60 @@
   var current = 0;
   var isAnimating = false;
 
-  // Mobile: wrap slide content in a scaled container
-  function isMobileDevice() {
-    // Portrait phone
-    if (window.innerWidth <= 768) return true;
-    // Landscape: any viewport shorter than 600px (no desktop monitor is this short)
-    if (window.innerHeight <= 600 && window.innerWidth > window.innerHeight) return true;
-    // Touch device fallback
-    if ('ontouchstart' in window && (window.innerWidth <= 1400 || window.innerHeight <= 700)) return true;
-    return false;
+  // Mobile scaling — wraps each slide's content in a 1280×720 box and scales to fit
+  function needsScaling() {
+    return window.innerWidth <= 768 || window.innerHeight <= 500;
   }
 
-  function setupMobileScaling() {
-    if (!isMobileDevice()) return;
-    var scaleX = window.innerWidth / 1280;
-    var scaleY = window.innerHeight / 720;
+  function applyMobileScaling() {
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    var scaleX = vw / 1280;
+    var scaleY = vh / 720;
     var scale = Math.min(scaleX, scaleY);
 
     slides.forEach(function(s) {
-      if (s.querySelector('.slide-inner-mobile')) return; // already wrapped
-      var wrapper = document.createElement('div');
-      wrapper.className = 'slide-inner-mobile';
-      wrapper.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
-      // Copy inline justify-content and align-items from slide
-      var cs = s.style;
-      if (cs.justifyContent) wrapper.style.justifyContent = cs.justifyContent;
-      if (cs.alignItems) wrapper.style.alignItems = cs.alignItems;
-      if (cs.textAlign) wrapper.style.textAlign = cs.textAlign;
-      // Move all children into wrapper
-      while (s.firstChild) {
-        wrapper.appendChild(s.firstChild);
+      var wrapper = s.querySelector('.slide-scaler');
+      if (!wrapper) {
+        // First time: wrap all children
+        wrapper = document.createElement('div');
+        wrapper.className = 'slide-scaler';
+        // Copy alignment from slide
+        var cs = s.style;
+        if (cs.justifyContent) wrapper.style.justifyContent = cs.justifyContent;
+        if (cs.alignItems) wrapper.style.alignItems = cs.alignItems;
+        if (cs.textAlign) wrapper.style.textAlign = cs.textAlign;
+        while (s.firstChild) wrapper.appendChild(s.firstChild);
+        s.appendChild(wrapper);
       }
-      s.appendChild(wrapper);
-      // Center the scaled wrapper
-      s.style.display = 'flex';
-      s.style.alignItems = 'center';
-      s.style.justifyContent = 'center';
-      s.style.overflow = 'hidden';
+      wrapper.style.transform = 'scale(' + scale + ')';
     });
   }
 
-  // Re-scale on orientation change
-  window.addEventListener('orientationchange', function() {
-    setTimeout(function() { location.reload(); }, 300);
-  });
-  window.addEventListener('resize', function() {
-    // If mobile wrappers exist, update their scale
-    if (!isMobileDevice()) return;
-    var scaleX = window.innerWidth / 1280;
-    var scaleY = window.innerHeight / 720;
-    var scale = Math.min(scaleX, scaleY);
-    var wrappers = document.querySelectorAll('.slide-inner-mobile');
-    wrappers.forEach(function(w) {
-      w.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+  function removeMobileScaling() {
+    slides.forEach(function(s) {
+      var wrapper = s.querySelector('.slide-scaler');
+      if (wrapper) {
+        while (wrapper.firstChild) s.appendChild(wrapper.firstChild);
+        wrapper.remove();
+      }
     });
-  });
+  }
 
-  setupMobileScaling();
+  if (needsScaling()) applyMobileScaling();
+
+  // Handle orientation changes and resizes
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (needsScaling()) {
+        applyMobileScaling();
+      } else {
+        removeMobileScaling();
+      }
+    }, 150);
+  });
 
   function goTo(index, instant) {
     if (index < 0 || index >= total || (isAnimating && !instant)) return;
@@ -1214,38 +1210,25 @@
   var touchDecided = false;
 
   document.addEventListener('touchstart', function(e) {
+    e.preventDefault();
     if (isAnimating) return;
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
     touchDeltaX = 0;
-    isSwiping = false;
-    touchDecided = false;
-  }, { passive: true });
-
-  document.addEventListener('touchmove', function(e) {
-    if (isAnimating) return;
-    var dx = e.touches[0].clientX - touchStartX;
-    var dy = e.touches[0].clientY - touchStartY;
-
-    // First significant movement decides: horizontal swipe or vertical scroll
-    if (!touchDecided && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-      touchDecided = true;
-      isSwiping = Math.abs(dx) >= Math.abs(dy);
-    }
-
-    if (!touchDecided) return;
-
-    if (isSwiping) {
-      e.preventDefault();
-      touchDeltaX = dx;
-      var offset = -(current * window.innerWidth) + touchDeltaX * 0.4;
-      track.classList.add('no-transition');
-      track.style.transform = 'translateX(' + offset + 'px)';
-    }
   }, { passive: false });
 
-  document.addEventListener('touchend', function() {
-    if (!isSwiping) { touchDeltaX = 0; isSwiping = false; touchDecided = false; return; }
+  document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (isAnimating) return;
+    var dx = e.touches[0].clientX - touchStartX;
+    touchDeltaX = dx;
+    var offset = -(current * window.innerWidth) + touchDeltaX * 0.4;
+    track.classList.add('no-transition');
+    track.style.transform = 'translateX(' + offset + 'px)';
+  }, { passive: false });
+
+  document.addEventListener('touchend', function(e) {
+    e.preventDefault();
     track.classList.remove('no-transition');
 
     if (touchDeltaX < -40) next();
@@ -1253,9 +1236,7 @@
     else goTo(current);
 
     touchDeltaX = 0;
-    isSwiping = false;
-    touchDecided = false;
-  }, { passive: true });
+  }, { passive: false });
 
   // Initialize
   goTo(0, true);
