@@ -450,57 +450,49 @@
 <!-- ============ SLIDE 3: The Pain ============ -->
 <div class="slide" style="justify-content:center;">
   <div class="slide-label">THE PAIN</div>
-  <h2 style="font-size:42px;max-width:1000px;">207 million creators, athletes, actors, and musicians are running businesses alone.</h2>
-  <div class="body" style="margin-top:12px;margin-bottom:28px;font-size:17px;max-width:900px;">No manager. No accountant. No publicist. No booking agent. They do everything themselves &mdash; or they don't do it at all.</div>
+  <h2 style="font-size:38px;max-width:1000px;margin-bottom:8px;">207 million creators, athletes, actors, and musicians are running businesses alone.</h2>
+  <div class="body" style="margin-bottom:16px;font-size:15px;max-width:900px;">No manager. No accountant. No publicist. No booking agent. They do everything themselves &mdash; or they don't do it at all.</div>
 
-  <div style="display:flex;gap:16px;margin-bottom:24px;">
-    <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:24px;border-left:4px solid var(--red);">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--red);line-height:1;">99%</div>
-      <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;">of creators have no manager or team</div>
+  <!-- Two-column layout: stats left, lifecycle right -->
+  <div style="display:flex;gap:20px;align-items:stretch;">
+    <!-- Left: stat cards stacked -->
+    <div style="display:flex;flex-direction:column;gap:10px;width:340px;flex-shrink:0;">
+      <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:16px 20px;border-left:4px solid var(--red);display:flex;align-items:center;gap:16px;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:40px;color:var(--red);line-height:1;white-space:nowrap;">99%</div>
+        <div style="font-size:13px;color:var(--cream-muted);">of creators have no manager or team</div>
+      </div>
+      <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:16px 20px;border-left:4px solid var(--red);display:flex;align-items:center;gap:16px;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:32px;color:var(--red);line-height:1;white-space:nowrap;">$8&ndash;15K/mo</div>
+        <div style="font-size:13px;color:var(--cream-muted);">to hire a real team</div>
+      </div>
+      <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:16px 20px;border-left:4px solid var(--red);display:flex;align-items:center;gap:16px;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:40px;color:var(--red);line-height:1;white-space:nowrap;">42K</div>
+        <div style="font-size:13px;color:var(--cream-muted);">entertainment jobs cut in 24 months</div>
+      </div>
     </div>
-    <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:24px;border-left:4px solid var(--red);">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--red);line-height:1;">$8&ndash;15K/mo</div>
-      <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;">to hire a real team &mdash; manager, publicist, accountant, booking agent</div>
-    </div>
-    <div style="flex:1;background:rgba(231,76,60,0.06);border-radius:12px;padding:24px;border-left:4px solid var(--red);">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--red);line-height:1;">42K</div>
-      <div style="font-size:14px;color:var(--cream-muted);margin-top:8px;">entertainment jobs cut in 24 months &mdash; even the infrastructure is disappearing</div>
-    </div>
-  </div>
 
-  <!-- Lifecycle graph -->
-  <div style="background:rgba(231,76,60,0.04);border:1px solid rgba(231,76,60,0.15);border-radius:16px;padding:20px 28px 16px;">
-    <div style="font-family:var(--font-w);font-weight:700;font-size:13px;letter-spacing:1px;color:var(--cream-muted);margin-bottom:12px;text-align:center;">THE LIFECYCLE OF A PLATFORM-DEPENDENT CREATOR</div>
-    <svg viewBox="0 0 900 200" style="width:100%;height:auto;">
-      <defs>
-        <linearGradient id="lifecycleGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#E74C3C" stop-opacity="0.35"/>
-          <stop offset="100%" stop-color="#E74C3C" stop-opacity="0.02"/>
-        </linearGradient>
-      </defs>
-      <!-- Grid lines -->
-      <line x1="60" y1="180" x2="860" y2="180" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-      <line x1="60" y1="140" x2="860" y2="140" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-      <line x1="60" y1="100" x2="860" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-      <line x1="60" y1="60" x2="860" y2="60" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-      <!-- Axis label -->
-      <text x="30" y="120" fill="rgba(255,255,255,0.25)" font-size="11" font-family="var(--font-w)" text-anchor="middle" transform="rotate(-90,30,120)">Relevance</text>
-      <text x="460" y="198" fill="rgba(255,255,255,0.25)" font-size="11" font-family="var(--font-w)" text-anchor="middle">Time (Years)</text>
-      <!-- Fill -->
-      <path d="M80,170 C120,168 160,150 220,100 C280,50 320,32 380,28 C440,24 480,26 520,40 C560,54 620,90 680,130 C740,160 800,175 850,180 L850,180 L80,180 Z" fill="url(#lifecycleGrad)"/>
-      <!-- Line -->
-      <path d="M80,170 C120,168 160,150 220,100 C280,50 320,32 380,28 C440,24 480,26 520,40 C560,54 620,90 680,130 C740,160 800,175 850,180" fill="none" stroke="#E74C3C" stroke-width="3" stroke-linecap="round"/>
-      <!-- Labels -->
-      <text x="100" y="164" fill="#E8D5B5" font-size="12" font-weight="700" font-family="var(--font-w)">Discovery</text>
-      <text x="100" y="176" fill="rgba(255,255,255,0.35)" font-size="9" font-family="var(--font-w)">(New &amp; Exciting)</text>
-      <text x="215" y="80" fill="#E8D5B5" font-size="12" font-weight="700" font-family="var(--font-w)">Hypergrowth</text>
-      <text x="215" y="92" fill="rgba(255,255,255,0.35)" font-size="9" font-family="var(--font-w)">(Algorithm)</text>
-      <text x="420" y="22" fill="#E8D5B5" font-size="12" font-weight="700" font-family="var(--font-w)">Plateau</text>
-      <text x="420" y="34" fill="rgba(255,255,255,0.35)" font-size="9" font-family="var(--font-w)">(Organic Reach Dies)</text>
-      <text x="640" y="115" fill="#E8D5B5" font-size="12" font-weight="700" font-family="var(--font-w)">Burnout</text>
-      <text x="640" y="127" fill="rgba(255,255,255,0.35)" font-size="9" font-family="var(--font-w)">(Mental Health)</text>
-      <text x="810" y="168" fill="#E74C3C" font-size="13" font-weight="800" font-family="var(--font-w)">Exit/Quit</text>
-    </svg>
+    <!-- Right: lifecycle graph -->
+    <div style="flex:1;background:rgba(231,76,60,0.04);border:1px solid rgba(231,76,60,0.15);border-radius:16px;padding:16px 20px 12px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:1px;color:var(--cream-muted);margin-bottom:8px;text-align:center;">THE LIFECYCLE OF A PLATFORM-DEPENDENT CREATOR</div>
+      <svg viewBox="0 0 700 180" style="width:100%;height:auto;">
+        <defs>
+          <linearGradient id="lifecycleGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E74C3C" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#E74C3C" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+        <line x1="40" y1="160" x2="670" y2="160" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <text x="20" y="95" fill="rgba(255,255,255,0.2)" font-size="9" font-family="var(--font-w)" text-anchor="middle" transform="rotate(-90,20,95)">Relevance</text>
+        <text x="355" y="178" fill="rgba(255,255,255,0.2)" font-size="9" font-family="var(--font-w)" text-anchor="middle">Time (Years)</text>
+        <path d="M50,155 C90,150 130,130 180,85 C230,40 260,25 310,22 C360,19 390,22 420,35 C450,48 500,80 550,115 C600,142 640,155 670,160 L670,160 L50,160 Z" fill="url(#lifecycleGrad)"/>
+        <path d="M50,155 C90,150 130,130 180,85 C230,40 260,25 310,22 C360,19 390,22 420,35 C450,48 500,80 550,115 C600,142 640,155 670,160" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="70" y="148" fill="#E8D5B5" font-size="11" font-weight="700" font-family="var(--font-w)">Discovery</text>
+        <text x="175" y="68" fill="#E8D5B5" font-size="11" font-weight="700" font-family="var(--font-w)">Hypergrowth</text>
+        <text x="340" y="16" fill="#E8D5B5" font-size="11" font-weight="700" font-family="var(--font-w)">Plateau</text>
+        <text x="520" y="100" fill="#E8D5B5" font-size="11" font-weight="700" font-family="var(--font-w)">Burnout</text>
+        <text x="630" y="148" fill="#E74C3C" font-size="12" font-weight="800" font-family="var(--font-w)">Exit/Quit</text>
+      </svg>
+    </div>
   </div>
 
   <div class="logo-text">FANDED</div>
