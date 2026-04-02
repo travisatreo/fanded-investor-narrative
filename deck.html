@@ -1152,7 +1152,16 @@ function printDeck() {
       var scaleX = window.innerWidth / 1280;
       var scaleY = window.innerHeight / 720;
       var z = Math.min(scaleX, scaleY);
-      allSlides.forEach(function(s) { s.style.zoom = z; });
+      // Center slides: calculate offset for zoomed slide within viewport
+      var renderedWidth = 1280 * z;
+      var renderedHeight = 720 * z;
+      var offsetLeft = Math.max(0, (window.innerWidth - renderedWidth) / 2);
+      var offsetTop = Math.max(0, (window.innerHeight - renderedHeight) / 2);
+      allSlides.forEach(function(s) {
+        s.style.zoom = z;
+        s.style.left = (offsetLeft / z) + 'px';
+        s.style.top = (offsetTop / z) + 'px';
+      });
       // If we just rotated INTO landscape, reset to slide 0 and fix layout
       if (!lastWasLandscape) {
         window.scrollTo(0, 0);
@@ -1173,7 +1182,7 @@ function printDeck() {
         goTo(0);
       }
     } else {
-      allSlides.forEach(function(s) { s.style.zoom = ''; });
+      allSlides.forEach(function(s) { s.style.zoom = ''; s.style.left = ''; s.style.top = ''; });
       // If we just rotated OUT of landscape into portrait mobile, fix scroll mode
       if (lastWasLandscape && window.innerWidth <= 768) {
         document.body.style.overflow = '';
