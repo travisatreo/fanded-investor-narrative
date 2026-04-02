@@ -1223,14 +1223,14 @@ function printDeck() {
         s.style.left = '';
         s.style.top = '';
       });
-      // If we just rotated INTO landscape, reset to slide 0
+      // If we just rotated INTO landscape, lock scroll and restore current slide
       if (!lastWasLandscape) {
         window.scrollTo(0, 0);
         document.body.style.overflow = 'hidden';
         document.body.style.height = '100vh';
         document.documentElement.style.overflow = 'hidden';
         document.documentElement.style.height = '100vh';
-        goTo(0);
+        goTo(current);
       }
     } else {
       var deck = document.getElementById('deck');
