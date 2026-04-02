@@ -65,9 +65,21 @@
     page-break-after: always;
   }
 
+  /* Mobile: use zoom to scale everything proportionally */
   @media screen and (max-width: 768px) {
     .slide {
-      padding: 32px 24px;
+      zoom: 0.5;
+      min-height: 200vh;
+      min-height: 200dvh;
+    }
+  }
+
+  /* Landscape phones */
+  @media screen and (max-height: 500px) and (orientation: landscape) {
+    .slide {
+      zoom: 0.45;
+      min-height: calc(100vh / 0.45);
+      min-height: calc(100dvh / 0.45);
     }
   }
 
@@ -254,16 +266,20 @@
       background: #07070F !important;
       margin: 0 !important;
       padding: 0 !important;
+      overflow: visible !important;
     }
     .slide {
+      zoom: 1 !important;
       width: 100vw !important;
       height: 100vh !important;
+      min-height: 100vh !important;
       max-height: 100vh !important;
       break-after: page;
       break-inside: avoid;
       background: #07070F !important;
       margin: 0 !important;
       padding: 48px 72px !important;
+      overflow: hidden !important;
     }
     .slide[data-appendix] { display: none !important; }
     .slide::before, .slide::after { display: none !important; }
