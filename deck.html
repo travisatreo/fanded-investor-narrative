@@ -388,7 +388,26 @@
 <div class="deck-viewport" id="deckViewport">
 <div class="deck-track" id="deckTrack">
 
-<!-- ============ SLIDE 1: Title ============ -->
+<!-- ============ SLIDE 1: Manifesto ============ -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+  <div style="max-width: 820px; line-height: 1.8;">
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); line-height: 1.7; margin-bottom: 28px;">Every middleman in entertainment &mdash; labels, studios, agencies, networks, publishers &mdash; built their power on one thing. Controlling access between talent and audience.</div>
+
+    <div style="font-family: var(--font-d); font-weight: 700; font-size: 36px; color: var(--gold); margin-bottom: 28px;">That access is now free.</div>
+
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); line-height: 1.7; margin-bottom: 28px;">The leverage is gone. The monopoly is over. And none of them have an answer for it.</div>
+
+    <div style="font-family: var(--font-d); font-weight: 700; font-size: 48px; color: var(--cream); margin-bottom: 28px;">Fanded is the answer.</div>
+
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); line-height: 1.9; margin-bottom: 28px;">Agentic AI that turns every musician into their own label.<br>Every filmmaker into their own studio.<br>Every athlete into their own agency.<br>Every creator into their own everything.</div>
+
+    <div style="font-family: var(--font-w); font-weight: 400; font-size: 17px; color: var(--cream-dim); margin-bottom: 16px;">We're not disrupting entertainment.</div>
+
+    <div style="font-family: var(--font-d); font-weight: 700; font-size: 48px; color: var(--gold);">We're replacing it.</div>
+  </div>
+</div>
+
+<!-- ============ SLIDE 2: Title ============ -->
 <div class="slide" style="justify-content: center; align-items: center; text-align: center;">
   <div style="margin-bottom: 24px;">
     <img src="photos/fanded-logo.png" alt="Fanded" style="height: 140px; opacity: 0.9;" onerror="this.style.display='none'">
@@ -396,10 +415,10 @@
   <h1 style="font-size: 64px; margin-bottom: 12px;">Fanded</h1>
   <div style="font-family: var(--font-w); font-weight: 600; font-size: 22px; color: var(--cream-dim); margin-bottom: 40px;">The AI team for every creator, athlete, and artist.</div>
   <div style="font-size: 15px; color: var(--cream-muted);">travis@fanded.com</div>
-  <div class="page-num">1</div>
+  <div class="page-num">2</div>
 </div>
 
-<!-- ============ SLIDE 2: Founder Story ============ -->
+<!-- ============ SLIDE 3: Founder Story ============ -->
 <div class="slide">
   <div class="slide-label">I LIVED THIS</div>
   <div class="grid-2" style="align-items:center;">
@@ -1072,7 +1091,7 @@
 <button class="deck-nav next" id="navNext" aria-label="Next slide">&#8250;</button>
 
 <!-- Slide counter -->
-<div class="deck-counter" id="deckCounter">1 / 13</div>
+<div class="deck-counter" id="deckCounter">1 / 14</div>
 
 <!-- Download button (hidden when printing) -->
 <div id="downloadBtn" style="position:fixed;top:20px;right:20px;z-index:300;display:flex;gap:8px;">
@@ -1094,7 +1113,7 @@
   var prevBtn = document.getElementById('navPrev');
   var nextBtn = document.getElementById('navNext');
   var total = slides.length;
-  var mainTotal = 13; // Hide appendix slides from counter
+  var mainTotal = 14; // Hide appendix slides from counter
   var current = 0;
   var isAnimating = false;
 
