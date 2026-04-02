@@ -151,7 +151,7 @@
     pointer-events: none;
   }
 
-  /* Mobile overrides — portrait */
+  /* Mobile overrides — portrait phones */
   @media screen and (max-width: 768px) {
     .slide { padding: 0 !important; }
     .slide-inner-mobile {
@@ -165,8 +165,8 @@
     .deck-counter { bottom: 8px; font-size: 11px; }
     #downloadBtn { display: none !important; }
   }
-  /* Mobile overrides — landscape (short viewport, e.g. phone rotated) */
-  @media screen and (max-height: 500px) and (max-width: 1024px) {
+  /* Mobile overrides — landscape (any short viewport under 600px tall) */
+  @media screen and (max-height: 600px) and (orientation: landscape) {
     .slide { padding: 0 !important; }
     .slide-inner-mobile {
       width: 1280px; height: 720px;
@@ -1145,8 +1145,10 @@
   function isMobileDevice() {
     // Portrait phone
     if (window.innerWidth <= 768) return true;
-    // Landscape phone (short viewport + not a wide desktop)
-    if (window.innerHeight <= 500 && window.innerWidth <= 1024) return true;
+    // Landscape: any viewport shorter than 600px (no desktop monitor is this short)
+    if (window.innerHeight <= 600 && window.innerWidth > window.innerHeight) return true;
+    // Touch device fallback
+    if ('ontouchstart' in window && (window.innerWidth <= 1400 || window.innerHeight <= 700)) return true;
     return false;
   }
 
