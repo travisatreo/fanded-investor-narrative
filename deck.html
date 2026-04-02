@@ -43,60 +43,32 @@
   }
 
   html, body {
-    height: 100%;
-    overflow: hidden;
+    margin: 0;
     background: var(--bg);
     color: var(--cream);
     font-family: var(--font-b);
     -webkit-font-smoothing: antialiased;
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-  }
-
-  /* Slide wrapper for horizontal swipe */
-  .deck-viewport {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100dvh;
-    height: 100vh; /* fallback */
-    overflow: hidden;
-    background: #000;
-    display: flex;
-    align-items: center;
-  }
-
-  @supports (height: 100dvh) {
-    .deck-viewport { height: 100dvh; }
-    .slide { height: 100dvh; }
-  }
-
-  .deck-track {
-    display: flex;
-    height: 100%;
-    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-  }
-
-  .deck-track.no-transition {
-    transition: none;
+    scroll-behavior: smooth;
   }
 
   .slide {
-    width: 100vw;
-    height: 100vh;
-    min-width: 100vw;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding: 48px 72px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     position: relative;
     overflow: hidden;
     background: var(--bg);
     page-break-after: always;
+  }
+
+  @media screen and (max-width: 768px) {
+    .slide {
+      padding: 32px 24px;
+    }
   }
 
   .slide::before {
@@ -108,74 +80,8 @@
     opacity: 0.4;
   }
 
-  /* Nav arrows */
-  .deck-nav {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 200;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(7,7,15,0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: var(--cream);
-    font-size: 22px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s, background 0.2s, border-color 0.2s;
-    opacity: 0.7;
-  }
-
-  .deck-viewport:hover .deck-nav,
-  .deck-nav:focus { opacity: 1; }
-
-  .deck-nav:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.3);
-    color: #fff;
-  }
-
-  .deck-nav.prev { left: 20px; }
-  .deck-nav.next { right: 20px; }
-  .deck-nav.hidden { pointer-events: none; opacity: 0 !important; }
-
-  /* Slide counter */
-  .deck-counter {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 200;
-    font-family: var(--font-w);
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--cream-muted);
-    letter-spacing: 1px;
-    pointer-events: none;
-  }
-
-  /* Mobile: scale slide content to fit small screens */
-  @media screen and (max-width: 768px), screen and (max-height: 500px) {
-    .slide {
-      padding: 0 !important;
-    }
-    .slide-scaler {
-      width: 1280px;
-      height: 720px;
-      padding: 48px 72px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transform-origin: center center;
-      /* Scale set by JS based on actual viewport */
-    }
-    .deck-nav { display: none !important; }
-    .deck-counter { bottom: 8px; font-size: 11px; }
+  /* Hide download button on mobile */
+  @media screen and (max-width: 768px) {
     #downloadBtn { display: none !important; }
   }
 
@@ -348,51 +254,27 @@
       background: #07070F !important;
       margin: 0 !important;
       padding: 0 !important;
-      overflow: visible !important;
-      height: auto !important;
-      width: auto !important;
-      position: static !important;
-    }
-    .deck-viewport {
-      position: static !important;
-      overflow: visible !important;
-      display: block !important;
-      width: auto !important;
-      height: auto !important;
-      background: none !important;
-    }
-    .deck-track {
-      display: block !important;
-      transform: none !important;
-      transition: none !important;
-      width: auto !important;
-      height: auto !important;
     }
     .slide {
       width: 100vw !important;
       height: 100vh !important;
-      min-width: 100vw !important;
       max-height: 100vh !important;
       break-after: page;
       break-inside: avoid;
       background: #07070F !important;
       margin: 0 !important;
       padding: 48px 72px !important;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
     }
     .slide[data-appendix] { display: none !important; }
-    .slide::before { display: none !important; }
-    .slide::after { display: none !important; }
+    .slide::before, .slide::after { display: none !important; }
     .slide * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    .deck-nav, .deck-counter, #downloadBtn { display: none !important; }
+    #downloadBtn { display: none !important; }
   }
 </style>
 </head>
 <body>
 
-<div class="deck-viewport" id="deckViewport">
-<div class="deck-track" id="deckTrack">
+<div id="deck">
 
 <!-- ============ SLIDE 1: Manifesto ============ -->
 <div class="slide" style="justify-content: center; align-items: center; text-align: center; background: var(--bg);">
@@ -1078,15 +960,7 @@
   <div class="page-num" style="color:var(--cream-muted);">appendix</div>
 </div>
 
-</div><!-- /deck-track -->
-</div><!-- /deck-viewport -->
-
-<!-- Nav arrows -->
-<button class="deck-nav prev hidden" id="navPrev" aria-label="Previous slide">&#8249;</button>
-<button class="deck-nav next" id="navNext" aria-label="Next slide">&#8250;</button>
-
-<!-- Slide counter -->
-<div class="deck-counter" id="deckCounter">1 / 14</div>
+</div><!-- /deck -->
 
 <!-- Download button (hidden when printing) -->
 <div id="downloadBtn" style="position:fixed;top:20px;right:20px;z-index:300;display:flex;gap:8px;">
@@ -1099,149 +973,13 @@
   #downloadBtn button:hover { background: rgba(255,255,255,0.15); }
 </style>
 
-<!-- Deck navigation + Analytics -->
+<!-- Analytics -->
 <script>
 (function() {
-  var track = document.getElementById('deckTrack');
   var slides = document.querySelectorAll('.slide');
-  var counter = document.getElementById('deckCounter');
-  var prevBtn = document.getElementById('navPrev');
-  var nextBtn = document.getElementById('navNext');
   var total = slides.length;
-  var mainTotal = 14; // Hide appendix slides from counter
-  var current = 0;
-  var isAnimating = false;
 
-  // Mobile scaling — wraps each slide's content in a 1280×720 box and scales to fit
-  function needsScaling() {
-    return window.innerWidth <= 768 || window.innerHeight <= 500;
-  }
-
-  function applyMobileScaling() {
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
-    var scaleX = vw / 1280;
-    var scaleY = vh / 720;
-    var scale = Math.min(scaleX, scaleY);
-
-    slides.forEach(function(s) {
-      var wrapper = s.querySelector('.slide-scaler');
-      if (!wrapper) {
-        // First time: wrap all children
-        wrapper = document.createElement('div');
-        wrapper.className = 'slide-scaler';
-        // Copy alignment from slide
-        var cs = s.style;
-        if (cs.justifyContent) wrapper.style.justifyContent = cs.justifyContent;
-        if (cs.alignItems) wrapper.style.alignItems = cs.alignItems;
-        if (cs.textAlign) wrapper.style.textAlign = cs.textAlign;
-        while (s.firstChild) wrapper.appendChild(s.firstChild);
-        s.appendChild(wrapper);
-      }
-      wrapper.style.transform = 'scale(' + scale + ')';
-    });
-  }
-
-  function removeMobileScaling() {
-    slides.forEach(function(s) {
-      var wrapper = s.querySelector('.slide-scaler');
-      if (wrapper) {
-        while (wrapper.firstChild) s.appendChild(wrapper.firstChild);
-        wrapper.remove();
-      }
-    });
-  }
-
-  if (needsScaling()) applyMobileScaling();
-
-  // Handle orientation changes and resizes
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-      if (needsScaling()) {
-        applyMobileScaling();
-      } else {
-        removeMobileScaling();
-      }
-    }, 150);
-  });
-
-  function goTo(index, instant) {
-    if (index < 0 || index >= total || (isAnimating && !instant)) return;
-    if (instant) track.classList.add('no-transition');
-    else { track.classList.remove('no-transition'); isAnimating = true; }
-
-    current = index;
-    track.style.transform = 'translateX(-' + (current * 100) + 'vw)';
-    counter.textContent = current < mainTotal ? (current + 1) + ' / ' + mainTotal : 'appendix';
-
-    prevBtn.classList.toggle('hidden', current === 0);
-    nextBtn.classList.toggle('hidden', current === total - 1);
-
-    if (!instant) {
-      setTimeout(function() { isAnimating = false; }, 420);
-    } else {
-      requestAnimationFrame(function() { track.classList.remove('no-transition'); });
-    }
-
-    // Track for analytics
-    trackSlide(current);
-  }
-
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
-
-  // Arrow keys
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-  });
-
-  // Nav buttons
-  prevBtn.addEventListener('click', prev);
-  nextBtn.addEventListener('click', next);
-
-  // Touch/swipe
-  var touchStartX = 0;
-  var touchStartY = 0;
-  var touchDeltaX = 0;
-  var isSwiping = false;
-  var touchDecided = false;
-
-  document.addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    if (isAnimating) return;
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    touchDeltaX = 0;
-  }, { passive: false });
-
-  document.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-    if (isAnimating) return;
-    var dx = e.touches[0].clientX - touchStartX;
-    touchDeltaX = dx;
-    var offset = -(current * window.innerWidth) + touchDeltaX * 0.4;
-    track.classList.add('no-transition');
-    track.style.transform = 'translateX(' + offset + 'px)';
-  }, { passive: false });
-
-  document.addEventListener('touchend', function(e) {
-    e.preventDefault();
-    track.classList.remove('no-transition');
-
-    if (touchDeltaX < -40) next();
-    else if (touchDeltaX > 40) prev();
-    else goTo(current);
-
-    touchDeltaX = 0;
-  }, { passive: false });
-
-  // Initialize
-  goTo(0, true);
-
-  // ---- Analytics (same tracking, adapted for swipe) ----
+  // ---- Analytics (scroll-based tracking) ----
   var vid = localStorage.getItem('fanded_vid');
   if (!vid) {
     vid = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2,6);
@@ -1259,7 +997,7 @@
   slides.forEach(function(slide, i) {
     var label = slide.querySelector('.slide-label');
     var name = label ? label.textContent.trim() : ('Slide ' + (i + 1));
-    if (i === 0) name = 'Title';
+    if (i === 0) name = 'Manifesto';
     if (i === slides.length - 1) name = 'Closing';
     slide.dataset.slideName = name;
     slideData[name] = { time: 0, views: 0 };
@@ -1275,6 +1013,18 @@
     slideData[name].views++;
     if (idx > maxSlideReached) maxSlideReached = idx;
   }
+
+  // Track which slide is in view on scroll
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = Array.prototype.indexOf.call(slides, entry.target);
+        if (idx >= 0) trackSlide(idx);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(function(s) { observer.observe(s); });
 
   function getPayload() {
     if (currentSlideName && currentSlideStart) {
@@ -1308,7 +1058,6 @@
   window.addEventListener('beforeunload', send);
   document.addEventListener('visibilitychange', function() { if (document.visibilityState === 'hidden') send(); });
 
-  // Track first slide
   trackSlide(0);
 })();
 </script>
