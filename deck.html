@@ -20,7 +20,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @page { size: landscape; margin: 0; }
+  @page {
+    size: 13.333in 7.5in;
+    margin: 0;
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -331,7 +334,7 @@
       color-adjust: exact !important;
     }
     html, body {
-      width: 100% !important;
+      width: 13.333in !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
@@ -340,7 +343,7 @@
     }
     #deck {
       position: static !important;
-      width: auto !important;
+      width: 13.333in !important;
       height: auto !important;
     }
     .slide {
@@ -349,22 +352,42 @@
       opacity: 1 !important;
       pointer-events: auto !important;
       zoom: 1 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      min-height: 100vh !important;
-      max-height: 100vh !important;
-      padding: 48px 72px !important;
+      width: 13.333in !important;
+      height: 7.5in !important;
+      min-height: 7.5in !important;
+      max-height: 7.5in !important;
+      padding: 0.5in 0.75in !important;
       margin: 0 !important;
       background: #07070F !important;
       overflow: hidden !important;
       display: flex !important;
       flex-direction: column !important;
+      justify-content: center !important;
       page-break-after: always;
+      page-break-inside: avoid;
       break-after: page;
       break-inside: avoid;
     }
+    .slide:last-child {
+      page-break-after: auto;
+    }
     .slide[data-appendix] { display: none !important; }
+    .slide::before, .slide::after { display: none !important; }
     .deck-nav, .deck-counter, #downloadBtn { display: none !important; }
+
+    /* Show watermark and page numbers */
+    .logo-text {
+      display: block !important;
+      position: absolute !important;
+      bottom: 0.25in !important;
+      left: 0.75in !important;
+    }
+    .page-num {
+      display: block !important;
+      position: absolute !important;
+      bottom: 0.25in !important;
+      right: 0.75in !important;
+    }
   }
 </style>
 </head>
