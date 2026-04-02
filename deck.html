@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @page { size: 13.333in 7.5in; margin: 0; }
+  @page { size: landscape; margin: 0; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -254,32 +254,71 @@
   }
 
   @media print {
-    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
     html, body {
-      background: #07070F !important;
+      width: 100% !important;
+      height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
       overflow: visible !important;
+      background: #07070F !important;
     }
+
+    #deck {
+      display: block !important;
+      width: auto !important;
+      height: auto !important;
+    }
+
     .slide {
       zoom: 1 !important;
       width: 100vw !important;
       height: 100vh !important;
       min-height: 100vh !important;
       max-height: 100vh !important;
+      padding: 48px 72px !important;
+      margin: 0 !important;
+      background: #07070F !important;
+      overflow: hidden !important;
+      position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
+      page-break-after: always;
+      page-break-inside: avoid;
       break-after: page;
       break-inside: avoid;
-      background: #07070F !important;
-      margin: 0 !important;
-      padding: 48px 72px !important;
-      overflow: hidden !important;
     }
+
+    /* Hide appendix, dividers, download button */
     .slide[data-appendix] { display: none !important; }
     .slide::before, .slide::after { display: none !important; }
-    .slide * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    .logo-text { display: block !important; font-family: var(--font-w); font-weight: 800; font-size: 14px; color: #6B6B8A; position: absolute; bottom: 20px; left: 80px; letter-spacing: 1px; }
-    .page-num { display: block !important; font-size: 12px; color: #6B6B8A; position: absolute; bottom: 20px; right: 80px; }
     #downloadBtn { display: none !important; }
+
+    /* Show watermark and page numbers in PDF */
+    .logo-text {
+      display: block !important;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      color: #6B6B8A !important;
+      position: absolute;
+      bottom: 20px;
+      left: 72px;
+      letter-spacing: 1px;
+    }
+    .page-num {
+      display: block !important;
+      font-size: 12px;
+      color: #6B6B8A !important;
+      position: absolute;
+      bottom: 20px;
+      right: 72px;
+    }
   }
 </style>
 </head>
