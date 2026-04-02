@@ -342,12 +342,13 @@
     }
     :root {
       --cream: #FFFFFF !important;
-      --cream-dim: #C8C8E0 !important;
-      --cream-muted: #9898B8 !important;
-      --blue: #4DC4FF !important;
-      --green: #3DE882 !important;
-      --red: #FF5A4A !important;
-      --gold: #E0BC55 !important;
+      --cream-dim: #E0E0F0 !important;
+      --cream-muted: #C0C0D8 !important;
+      --blue: #5CCFFF !important;
+      --green: #4DF892 !important;
+      --red: #FF6B5A !important;
+      --gold: #F0D060 !important;
+      --bg: #07070F !important;
     }
     html, body {
       width: 11in !important;
@@ -407,6 +408,30 @@
       position: absolute !important;
       bottom: 0.25in !important;
       right: 0.75in !important;
+      color: #9898B8 !important;
+    }
+    .logo-text {
+      color: #9898B8 !important;
+    }
+
+    /* Boost card borders and backgrounds for print */
+    .slide [style*="rgba(255,255,255,0.0"] {
+      border-color: rgba(255,255,255,0.25) !important;
+    }
+    .stat-card, .card, [style*="border:1px solid rgba"] {
+      border-color: rgba(255,255,255,0.2) !important;
+    }
+    /* Boost all low-opacity elements */
+    [style*="opacity:0.6"], [style*="opacity:0.5"], [style*="opacity: 0.6"], [style*="opacity: 0.5"] {
+      opacity: 0.85 !important;
+    }
+    [style*="opacity:0.7"], [style*="opacity: 0.7"] {
+      opacity: 1 !important;
+    }
+    /* Make slide labels brighter */
+    .slide-label {
+      color: var(--gold) !important;
+      opacity: 1 !important;
     }
   }
 </style>
