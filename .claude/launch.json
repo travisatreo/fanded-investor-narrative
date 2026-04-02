@@ -4,8 +4,9 @@
     {
       "name": "investor-narrative",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "3456"],
-      "port": 3456
+      "runtimeArgs": ["serve", "-l", "3457"],
+      "port": 3457,
+      "autoPort": false
     }
   ]
 }
