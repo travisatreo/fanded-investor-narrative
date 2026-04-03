@@ -131,8 +131,9 @@
     letter-spacing: 1px;
   }
 
-  /* Mobile portrait: show rotate prompt */
-  @media screen and (max-width: 768px) and (orientation: portrait) {
+  /* Mobile/tablet portrait: show rotate prompt */
+  @media screen and (max-width: 768px) and (orientation: portrait),
+         screen and (hover: none) and (pointer: coarse) and (orientation: portrait) {
     html, body { overflow: hidden; height: 100vh; background: #07070F; }
     #deck { display: none !important; }
     .deck-nav, .deck-counter { display: none !important; }
@@ -140,9 +141,10 @@
     #rotatePrompt { display: flex !important; }
   }
 
-  /* Landscape mobile: zoom the deck container, keep nav outside zoom context */
-  @media screen and (max-height: 500px) and (orientation: landscape) {
-    html, body { overflow: hidden; height: 100vh; }
+  /* Touch device landscape: zoom the deck container, keep nav outside zoom context */
+  @media screen and (max-height: 500px) and (orientation: landscape),
+         screen and (hover: none) and (pointer: coarse) and (orientation: landscape) {
+    html, body { overflow: hidden; height: 100vh; height: 100dvh; }
     #deck {
       position: relative;
       width: 1280px;
@@ -1192,11 +1194,16 @@ function printDeck() {
 
   // Check if we're in mobile portrait mode (scroll fallback)
   // Landscape mobile uses classic slide deck with zoom
+  var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
   function isLandscapeMobile() {
-    return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+    var smallLandscape = window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+    var touchLandscape = isTouch && window.innerWidth > window.innerHeight;
+    return smallLandscape || touchLandscape;
   }
   function isMobile() {
-    return window.innerWidth <= 768 && !isLandscapeMobile();
+    var smallPortrait = window.innerWidth <= 768 && !isLandscapeMobile();
+    var touchPortrait = isTouch && window.innerHeight > window.innerWidth;
+    return smallPortrait || touchPortrait;
   }
 
   // Apply zoom to slides in landscape mode and reinitialize deck
