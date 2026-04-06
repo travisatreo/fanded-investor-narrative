@@ -1271,12 +1271,9 @@
   <div class="body" style="margin-bottom:24px;font-size:22px;">A competitor starting today has zero creator data. <span style="color:var(--green);">We already have real professionals generating it.</span></div>
 
   <!-- Compound curve chart -->
-  <div style="position:relative;width:100%;max-width:800px;height:300px;margin-bottom:20px;">
-    <!-- Y-axis label -->
-    <div style="position:absolute;left:-8px;top:50%;transform:rotate(-90deg) translateX(50%);font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:var(--cream-muted);text-transform:uppercase;white-space:nowrap;">MAWD Intelligence</div>
-
+  <div style="position:relative;width:100%;height:300px;margin-bottom:20px;">
     <!-- Grid lines -->
-    <svg style="position:absolute;left:40px;top:0;width:calc(100% - 40px);height:100%;" preserveAspectRatio="none">
+    <svg style="position:absolute;left:0;top:0;width:100%;height:100%;" preserveAspectRatio="none">
       <line x1="0" y1="25%" x2="100%" y2="25%" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
       <line x1="0" y1="50%" x2="100%" y2="50%" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
       <line x1="0" y1="75%" x2="100%" y2="75%" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
@@ -1285,7 +1282,7 @@
     </svg>
 
     <!-- The compound curve — animated -->
-    <svg style="position:absolute;left:40px;top:0;width:calc(100% - 40px);height:100%;" viewBox="0 0 800 300" preserveAspectRatio="none">
+    <svg style="position:absolute;left:0;top:0;width:100%;height:100%;" viewBox="0 0 800 300" preserveAspectRatio="none">
       <!-- Filled area under curve -->
       <path d="M0,300 L0,290 C80,288 160,282 240,270 C320,255 400,228 480,185 C560,130 640,65 720,15 L720,15 L800,0 L800,300 Z"
             fill="url(#moatGradient)" opacity="0" style="animation:moatFillIn 2.5s ease-out 0.5s forwards;">
@@ -1304,22 +1301,22 @@
     </svg>
 
     <!-- Milestone markers on the curve -->
-    <div style="position:absolute;left:calc(40px + 0%);bottom:10px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 1s both;">
+    <div style="position:absolute;left:0%;bottom:10px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 1s both;">
       <div style="width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--bg);margin:0 auto 6px;"></div>
       <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--green);">Today</div>
       <div style="font-size:14px;color:var(--cream-muted);white-space:nowrap;">150 clubs</div>
     </div>
-    <div style="position:absolute;left:calc(40px + 30%);bottom:38px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 1.5s both;">
+    <div style="position:absolute;left:30%;bottom:38px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 1.5s both;">
       <div style="width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);margin:0 auto 6px;"></div>
       <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--gold);">6 months</div>
       <div style="font-size:14px;color:var(--cream-muted);white-space:nowrap;">500 MAWDs</div>
     </div>
-    <div style="position:absolute;left:calc(40px + 60%);bottom:115px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 2s both;">
+    <div style="position:absolute;left:60%;bottom:115px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 2s both;">
       <div style="width:12px;height:12px;border-radius:50%;background:var(--purple);border:2px solid var(--bg);margin:0 auto 6px;"></div>
       <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--purple);">1 year</div>
       <div style="font-size:14px;color:var(--cream-muted);white-space:nowrap;">2,000 MAWDs</div>
     </div>
-    <div style="position:absolute;left:calc(40px + 90%);bottom:250px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 2.5s both;">
+    <div style="position:absolute;left:90%;bottom:250px;text-align:center;transform:translateX(-50%);animation:fadeIn 0.5s ease-out 2.5s both;">
       <div style="width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--bg);margin:0 auto 6px;box-shadow:0 0 12px rgba(46,204,113,0.4);"></div>
       <div style="font-family:var(--font-w);font-weight:800;font-size:16px;color:var(--green);">2 years</div>
       <div style="font-size:14px;color:var(--cream-muted);white-space:nowrap;">10K MAWDs</div>
