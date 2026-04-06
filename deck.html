@@ -880,6 +880,37 @@
     25% { transform: rotate(-90deg); }
     50%, 75% { transform: rotate(-90deg); }
   }
+
+  /* Moat slide animations */
+  @keyframes moatExpand {
+    0% { transform: translate(-50%,-50%) scale(0.3); opacity: 0; }
+    60% { opacity: 1; }
+    100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  }
+  @keyframes moatPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(46,204,113,0.1), 0 0 60px rgba(46,204,113,0.05); }
+    50% { box-shadow: 0 0 30px rgba(46,204,113,0.2), 0 0 80px rgba(46,204,113,0.1); }
+  }
+  @keyframes moatOrbit1 {
+    0% { transform: rotate(0deg); opacity: 1; }
+    100% { transform: rotate(360deg); opacity: 1; }
+  }
+  @keyframes moatOrbit2 {
+    0% { transform: rotate(120deg); opacity: 1; }
+    100% { transform: rotate(480deg); opacity: 1; }
+  }
+  @keyframes moatOrbit3 {
+    0% { transform: rotate(200deg); opacity: 1; }
+    100% { transform: rotate(560deg); opacity: 1; }
+  }
+  @keyframes moatOrbit4 {
+    0% { transform: rotate(60deg); opacity: 1; }
+    100% { transform: rotate(420deg); opacity: 1; }
+  }
+  @keyframes moatOrbit5 {
+    0% { transform: rotate(280deg); opacity: 1; }
+    100% { transform: rotate(640deg); opacity: 1; }
+  }
 </style>
 
 <div id="deck">
@@ -1300,7 +1331,7 @@
   <div style="display:flex;gap:20px;margin-top:32px;">
     <div style="flex:1;background:rgba(46,204,113,0.06);border:2px solid rgba(46,204,113,0.25);border-radius:18px;padding:40px 24px;text-align:center;">
       <div style="font-family:var(--font-w);font-weight:900;font-size:80px;color:var(--green);line-height:1;letter-spacing:-3px;">150</div>
-      <div style="font-size:18px;color:var(--cream-muted);margin-top:12px;">MAWDs live</div>
+      <div style="font-size:18px;color:var(--cream-muted);margin-top:12px;">fan clubs launched</div>
     </div>
     <div style="flex:1;background:rgba(212,175,55,0.06);border:2px solid rgba(212,175,55,0.25);border-radius:18px;padding:40px 24px;text-align:center;">
       <div style="font-family:var(--font-w);font-weight:900;font-size:80px;color:var(--gold);line-height:1;letter-spacing:-3px;">200+</div>
@@ -1314,6 +1345,86 @@
 
   <div class="logo-text">FANDED</div>
   <div class="page-num">9</div>
+</div>
+
+<!-- ============ SLIDE: The Moat ============ -->
+<div class="slide" style="justify-content:center;align-items:center;">
+  <div class="slide-label">THE MOAT</div>
+  <h2 style="font-size:36px;margin-bottom:6px;">Every creator makes MAWD smarter. <span style="color:var(--green);">For everyone.</span></h2>
+  <div class="body" style="margin-bottom:32px;font-size:18px;max-width:700px;text-align:center;">The more creators run their business through MAWD, the more data it learns from &mdash; and the harder it is for anyone to catch up.</div>
+
+  <!-- Animated moat visualization -->
+  <div style="position:relative;width:100%;max-width:760px;height:340px;">
+
+    <!-- Concentric rings that grow — the moat expanding -->
+    <div class="moat-ring moat-ring-4" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:320px;height:320px;border-radius:50%;border:2px solid rgba(46,204,113,0.08);animation:moatExpand 3s ease-out forwards;opacity:0;animation-delay:1.2s;"></div>
+    <div class="moat-ring moat-ring-3" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:260px;height:260px;border-radius:50%;border:2px solid rgba(46,204,113,0.12);animation:moatExpand 2.5s ease-out forwards;opacity:0;animation-delay:0.8s;"></div>
+    <div class="moat-ring moat-ring-2" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;border:2px solid rgba(46,204,113,0.18);animation:moatExpand 2s ease-out forwards;opacity:0;animation-delay:0.4s;"></div>
+    <div class="moat-ring moat-ring-1" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;border:2px solid rgba(46,204,113,0.25);animation:moatExpand 1.5s ease-out forwards;opacity:0;"></div>
+
+    <!-- Center hub — MAWD -->
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100px;height:100px;border-radius:50%;background:rgba(46,204,113,0.12);border:3px solid var(--green);display:flex;align-items:center;justify-content:center;z-index:10;animation:moatPulse 2s ease-in-out infinite;">
+      <div style="font-family:var(--font-w);font-weight:900;font-size:18px;color:var(--green);letter-spacing:2px;">MAWD</div>
+    </div>
+
+    <!-- Creator nodes orbiting at different rings -->
+    <div class="moat-node" style="position:absolute;left:50%;top:50%;animation:moatOrbit1 12s linear infinite;opacity:0;animation-delay:0.6s;">
+      <div style="transform:translate(70px,-8px);width:36px;height:36px;border-radius:50%;background:rgba(155,89,182,0.15);border:2px solid var(--purple);display:flex;align-items:center;justify-content:center;">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="var(--purple)" stroke-width="1.5"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--purple)" stroke-width="1.5"/></svg>
+      </div>
+    </div>
+    <div class="moat-node" style="position:absolute;left:50%;top:50%;animation:moatOrbit2 15s linear infinite;opacity:0;animation-delay:1s;">
+      <div style="transform:translate(105px,-8px);width:36px;height:36px;border-radius:50%;background:rgba(212,175,55,0.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="var(--gold)" stroke-width="1.5"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--gold)" stroke-width="1.5"/></svg>
+      </div>
+    </div>
+    <div class="moat-node" style="position:absolute;left:50%;top:50%;animation:moatOrbit3 18s linear infinite;opacity:0;animation-delay:1.4s;">
+      <div style="transform:translate(140px,-8px);width:36px;height:36px;border-radius:50%;background:rgba(59,173,228,0.15);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="var(--blue)" stroke-width="1.5"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--blue)" stroke-width="1.5"/></svg>
+      </div>
+    </div>
+    <div class="moat-node" style="position:absolute;left:50%;top:50%;animation:moatOrbit4 10s linear infinite;opacity:0;animation-delay:0.3s;">
+      <div style="transform:translate(85px,-8px);width:36px;height:36px;border-radius:50%;background:rgba(46,204,113,0.15);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="var(--green)" stroke-width="1.5"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--green)" stroke-width="1.5"/></svg>
+      </div>
+    </div>
+    <div class="moat-node" style="position:absolute;left:50%;top:50%;animation:moatOrbit5 20s linear infinite;opacity:0;animation-delay:1.8s;">
+      <div style="transform:translate(155px,-8px);width:32px;height:32px;border-radius:50%;background:rgba(155,89,182,0.1);border:1.5px solid rgba(155,89,182,0.5);display:flex;align-items:center;justify-content:center;">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="var(--purple)" stroke-width="1.5" opacity="0.6"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="var(--purple)" stroke-width="1.5" opacity="0.6"/></svg>
+      </div>
+    </div>
+
+    <!-- Time labels on the rings -->
+    <div style="position:absolute;left:50%;top:50%;transform:translate(78px,50px);font-family:var(--font-w);font-weight:700;font-size:11px;color:rgba(46,204,113,0.5);letter-spacing:1px;animation:fadeIn 1s ease-out 1.5s both;">TODAY</div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(118px,80px);font-family:var(--font-w);font-weight:700;font-size:11px;color:rgba(46,204,113,0.4);letter-spacing:1px;animation:fadeIn 1s ease-out 2s both;">6 MO</div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(148px,110px);font-family:var(--font-w);font-weight:700;font-size:11px;color:rgba(46,204,113,0.3);letter-spacing:1px;animation:fadeIn 1s ease-out 2.5s both;">1 YR</div>
+  </div>
+
+  <!-- Bottom insight -->
+  <div style="display:flex;justify-content:center;gap:40px;margin-top:16px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
+      <div style="font-size:15px;color:var(--cream-dim);">More creators join</div>
+    </div>
+    <div style="font-size:18px;color:var(--cream-muted);">&rarr;</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);"></div>
+      <div style="font-size:15px;color:var(--cream-dim);">Richer data patterns</div>
+    </div>
+    <div style="font-size:18px;color:var(--cream-muted);">&rarr;</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--purple);"></div>
+      <div style="font-size:15px;color:var(--cream-dim);">Smarter AI for everyone</div>
+    </div>
+    <div style="font-size:18px;color:var(--cream-muted);">&rarr;</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--blue);"></div>
+      <div style="font-size:15px;color:var(--cream-dim);">Impossible to replicate</div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">10</div>
 </div>
 
 <!-- ============ SLIDE 11: Market Size ============ -->
@@ -1357,7 +1468,7 @@
   </div>
 
   <div class="logo-text">FANDED</div>
-  <div class="page-num">10</div>
+  <div class="page-num">11</div>
 </div>
 
 <!-- ============ SLIDE 12: The Ask ============ -->
@@ -1405,7 +1516,7 @@
   </div>
 
   <div class="logo-text">FANDED</div>
-  <div class="page-num">11</div>
+  <div class="page-num">12</div>
 </div>
 
 <!-- ============ SLIDE 13: Team ============ -->
@@ -1498,7 +1609,7 @@
   </div>
 
   <div class="logo-text">FANDED</div>
-  <div class="page-num">12</div>
+  <div class="page-num">13</div>
 </div>
 
 <!-- ============ SLIDE 14: Closing ============ -->
@@ -1511,7 +1622,7 @@
     <div style="font-size:18px;color:var(--cream-muted);">travis@fanded.com</div>
   </div>
   <div class="logo-text">FANDED</div>
-  <div class="page-num">13</div>
+  <div class="page-num">14</div>
 </div>
 
 <!-- ============ APPENDIX — Data Brokerage Program ============ -->
