@@ -1829,7 +1829,7 @@
 <!-- Nav arrows -->
 <button class="deck-nav prev hidden" id="navPrev" aria-label="Previous slide">&#8249;</button>
 <button class="deck-nav next" id="navNext" aria-label="Next slide">&#8250;</button>
-<div class="deck-counter" id="deckCounter">1 / 19</div>
+<div class="deck-counter" id="deckCounter">1 / 15</div>
 
 <!-- Download button -->
 <div id="downloadBtn" style="position:fixed;top:20px;right:20px;z-index:300;display:none;gap:8px;">
@@ -2025,7 +2025,8 @@ function printDeck() {
     slides[current].classList.remove('active');
     current = idx;
     slides[current].classList.add('active');
-    counter.textContent = (current + 1) + ' / ' + total;
+    var mainSlides = 15;
+    counter.textContent = (current + 1) <= mainSlides ? (current + 1) + ' / ' + mainSlides : 'appendix';
     prevBtn.classList.toggle('hidden', current === 0);
     nextBtn.classList.toggle('hidden', current === total - 1);
     trackSlide(current);
