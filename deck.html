@@ -378,11 +378,9 @@
     transform: scale(0.95);
   }
   .slide.active .agent-card:nth-child(1) { animation: agentOnline 0.35s ease-out 0.2s forwards; }
-  .slide.active .agent-card:nth-child(2) { animation: agentOnline 0.35s ease-out 0.35s forwards; }
-  .slide.active .agent-card:nth-child(3) { animation: agentOnline 0.35s ease-out 0.5s forwards; }
-  .slide.active .agent-card:nth-child(4) { animation: agentOnline 0.35s ease-out 0.65s forwards; }
-  .slide.active .agent-card:nth-child(5) { animation: agentOnline 0.35s ease-out 0.8s forwards; }
-  .slide.active .agent-card:nth-child(6) { animation: agentOnline 0.35s ease-out 0.95s forwards; }
+  .slide.active .agent-card:nth-child(2) { animation: agentOnline 0.35s ease-out 0.4s forwards; }
+  .slide.active .agent-card:nth-child(3) { animation: agentOnline 0.35s ease-out 0.6s forwards; }
+  .slide.active .agent-card:nth-child(4) { animation: agentOnline 0.35s ease-out 0.8s forwards; }
   @keyframes agentOnline {
     0% { opacity: 0; transform: scale(0.95); box-shadow: none; }
     60% { box-shadow: 0 0 20px rgba(46,204,113,0.15); }
@@ -1047,33 +1045,25 @@
 <div class="slide" style="justify-content:center;">
   <div class="slide-label">THE SOLUTION</div>
   <h2 style="font-size:36px;margin-bottom:4px;">Meet <span style="color: var(--green);">MAWD.</span> Your AI chief of staff. <span style="color: var(--green);">$30/month.</span></h2>
-  <div class="body" style="margin-bottom:14px;font-size:20px;">Six agents that replace the team you can't afford.</div>
+  <div class="body" style="margin-bottom:18px;font-size:22px;">MAWD runs four agents. You just run your career.</div>
 
-  <!-- 3x2 agent grid -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
-    <div class="agent-card" style="background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:12px;padding:14px 16px;">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--gold);margin-bottom:4px;">Ledger</div>
-      <div style="font-size:16px;color:var(--cream-dim);line-height:1.35;">Taxes &amp; bookkeeping</div>
+  <!-- 2x2 agent grid -->
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px;">
+    <div class="agent-card" style="background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);border-radius:14px;padding:20px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--green);margin-bottom:6px;">CFO</div>
+      <div style="font-size:20px;color:var(--cream-dim);line-height:1.35;">Taxes, finances, projections</div>
     </div>
-    <div class="agent-card" style="background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.15);border-radius:12px;padding:14px 16px;">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--green);margin-bottom:4px;">CFO</div>
-      <div style="font-size:16px;color:var(--cream-dim);line-height:1.35;">Financial strategy &amp; forecasting</div>
+    <div class="agent-card" style="background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.15);border-radius:14px;padding:20px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--gold);margin-bottom:6px;">Agent</div>
+      <div style="font-size:20px;color:var(--cream-dim);line-height:1.35;">Deal flow, bookings, brand deals</div>
     </div>
-    <div class="agent-card" style="background:rgba(155,89,182,0.06);border:1px solid rgba(155,89,182,0.15);border-radius:12px;padding:14px 16px;">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--purple);margin-bottom:4px;">Pulse</div>
-      <div style="font-size:16px;color:var(--cream-dim);line-height:1.35;">Fan identity &amp; audience value</div>
+    <div class="agent-card" style="background:rgba(155,89,182,0.06);border:1px solid rgba(155,89,182,0.15);border-radius:14px;padding:20px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--purple);margin-bottom:6px;">Growth</div>
+      <div style="font-size:20px;color:var(--cream-dim);line-height:1.35;">Audience strategy, social, PR</div>
     </div>
-    <div class="agent-card" style="background:rgba(59,173,228,0.06);border:1px solid rgba(59,173,228,0.15);border-radius:12px;padding:14px 16px;">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--blue);margin-bottom:4px;">Scout</div>
-      <div style="font-size:16px;color:var(--cream-dim);line-height:1.35;">Deal flow &amp; opportunity ranking</div>
-    </div>
-    <div class="agent-card" style="background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.15);border-radius:12px;padding:14px 16px;">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--red);margin-bottom:4px;">Counsel</div>
-      <div style="font-size:16px;color:var(--cream-dim);line-height:1.35;">Contracts &amp; rights protection</div>
-    </div>
-    <div class="agent-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;">
-      <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--cream);margin-bottom:4px;">Compass</div>
-      <div style="font-size:16px;color:var(--cream-dim);line-height:1.35;">Daily briefing &amp; decisions</div>
+    <div class="agent-card" style="background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.15);border-radius:14px;padding:20px 24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:28px;color:var(--red);margin-bottom:6px;">Counsel</div>
+      <div style="font-size:20px;color:var(--cream-dim);line-height:1.35;">Contracts &amp; rights protection</div>
     </div>
   </div>
 
