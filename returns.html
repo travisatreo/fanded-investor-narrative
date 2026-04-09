@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fanded Investment Returns Memo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ================================================
+   SCREEN VERSION
+   ================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07070F;
+  --bg-card: #0F0F1C;
+  --cream: #F5F1EA;
+  --cream-dim: #9999BB;
+  --cream-muted: #6B6B8A;
+  --blue: #3BADE4;
+  --green: #2ECC71;
+  --gold: #C9A84C;
+  --border: #1C1C2E;
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'DM Sans', -apple-system, sans-serif;
+  --font-w: 'Bricolage Grotesque', 'DM Sans', sans-serif;
+}
+
+html, body { background: var(--bg); color: var(--cream); font-family: var(--font-b); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+.deck-frame { min-height: 100vh; border: 1.5px solid rgba(180,90,50,0.35); position: relative; }
+.deck-frame::before { content: ''; position: fixed; inset: 0; border: 1.5px solid rgba(180,90,50,0.35); pointer-events: none; z-index: 50; }
+
+.page { max-width: 960px; margin: 0 auto; padding: 80px 56px 80px; position: relative; }
+
+.watermark { position: fixed; bottom: 28px; left: 40px; font-family: var(--font-b); font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-muted); z-index: 10; }
+
+.download-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: flex-end; align-items: center; padding: 12px 24px; gap: 12px; background: linear-gradient(180deg, rgba(7,7,15,0.98) 60%, rgba(7,7,15,0) 100%); pointer-events: none; }
+.download-label { pointer-events: none; font-size: 11px; color: var(--cream-muted); font-weight: 300; }
+.download-btn { pointer-events: all; display: flex; align-items: center; gap: 8px; background: var(--blue); color: #07070F; font-family: var(--font-b); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 20px; border: none; cursor: pointer; transition: all 0.2s ease; }
+.download-btn:hover { background: #5BC0F0; transform: translateY(-1px); }
+.download-btn svg { width: 13px; height: 13px; }
+
+.header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 72px; animation: fadeUp 0.5s ease both; }
+.logo-mark { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 36px; height: 36px; object-fit: contain; }
+.logo-text { font-family: var(--font-b); font-size: 18px; font-weight: 600; color: var(--cream); }
+.memo-tag { text-align: right; }
+.memo-tag .tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.memo-tag .recipient { font-size: 12px; color: var(--cream-dim); margin-top: 5px; font-weight: 300; }
+
+.hero { margin-bottom: 72px; animation: fadeUp 0.5s 0.08s ease both; }
+.hero-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
+.hero h1 { font-family: var(--font-w); font-size: 52px; font-weight: 800; line-height: 1.05; color: var(--cream); }
+.hero h1 .blue { color: var(--blue); }
+.hero h1 .gold { color: var(--gold); }
+.hero p { font-size: 15px; font-weight: 300; color: var(--cream-dim); line-height: 1.7; max-width: 540px; margin-top: 16px; }
+
+.section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; display: block; }
+
+.terms-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 48px; animation: fadeUp 0.5s 0.16s ease both; }
+.term-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 20px; }
+.term-card .t-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-muted); margin-bottom: 8px; font-weight: 500; }
+.term-card .t-value { font-family: var(--font-w); font-size: 36px; font-weight: 800; color: var(--blue); line-height: 1; }
+.term-card .t-sub { font-size: 11px; color: var(--cream-muted); margin-top: 6px; font-weight: 300; line-height: 1.5; }
+
+.scenarios { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 48px; animation: fadeUp 0.5s 0.22s ease both; }
+.scenario-card { background: var(--bg-card); border: 1px solid var(--border); padding: 24px; }
+.scenario-card.base { border-color: rgba(59,173,228,0.3); background: rgba(59,173,228,0.04); }
+.s-badge { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; padding: 3px 8px; margin-bottom: 14px; }
+.conservative .s-badge { background: rgba(201,168,76,0.15); color: var(--gold); }
+.base .s-badge { background: rgba(59,173,228,0.2); color: var(--blue); }
+.strategic .s-badge { background: rgba(46,204,113,0.15); color: var(--green); }
+.s-title { font-family: var(--font-w); font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 16px; line-height: 1.3; }
+.s-num { font-family: var(--font-w); font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+.conservative .s-num { color: var(--gold); }
+.base .s-num { color: var(--blue); }
+.strategic .s-num { color: var(--green); }
+.s-metric-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream-muted); margin-bottom: 12px; }
+.s-return { font-family: var(--font-w); font-size: 22px; font-weight: 700; color: var(--cream); margin-top: 12px; }
+.s-return-label { font-size: 10px; color: var(--cream-muted); letter-spacing: 1px; text-transform: uppercase; }
+.s-note { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11px; color: var(--cream-muted); line-height: 1.55; font-weight: 300; }
+
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 48px; animation: fadeUp 0.5s 0.28s ease both; }
+.proof-card { background: var(--bg-card); border: 1px solid var(--border); padding: 24px; }
+.proof-card .p-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 16px; }
+.proof-list { list-style: none; }
+.proof-list li { font-size: 13px; font-weight: 300; color: var(--cream-dim); padding: 6px 0 6px 16px; position: relative; border-bottom: 1px solid rgba(28,28,46,0.8); line-height: 1.5; }
+.proof-list li:last-child { border-bottom: none; }
+.proof-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; background: var(--blue); border-radius: 50%; }
+.proof-list li strong { color: var(--cream); font-weight: 600; }
+
+.competitor-bar { background: rgba(59,173,228,0.05); border: 1px solid rgba(59,173,228,0.2); border-left: 4px solid var(--blue); padding: 20px 24px; margin-bottom: 48px; display: flex; gap: 16px; align-items: flex-start; animation: fadeUp 0.5s 0.32s ease both; }
+.live-dot { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; margin-top: 5px; flex-shrink: 0; animation: pulse 2s infinite; }
+.competitor-bar p { font-size: 13px; color: var(--cream-dim); line-height: 1.6; font-weight: 300; }
+.competitor-bar p strong { color: var(--cream); font-weight: 600; }
+
+.acquirers { margin-bottom: 48px; animation: fadeUp 0.5s 0.35s ease both; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-pill { background: var(--bg-card); border: 1px solid var(--border); padding: 6px 14px; font-size: 12px; color: var(--cream); font-weight: 400; }
+.tag-pill span { color: var(--cream-muted); font-weight: 300; }
+
+.thesis { background: var(--bg-card); border: 1px solid var(--border); padding: 32px; margin-bottom: 56px; animation: fadeUp 0.5s 0.4s ease both; position: relative; overflow: hidden; }
+.thesis::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--gold), transparent); }
+.thesis .t-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 16px; }
+.thesis blockquote { font-family: var(--font-d); font-size: 18px; font-style: italic; color: var(--cream); line-height: 1.65; }
+.thesis blockquote strong { font-style: normal; color: var(--blue); font-weight: 700; }
+
+.footer { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--border); animation: fadeUp 0.5s 0.44s ease both; }
+.footer-left p { font-family: var(--font-d); font-size: 13px; font-style: italic; color: var(--cream-muted); max-width: 400px; line-height: 1.6; }
+.footer-right { text-align: right; }
+.footer-right a { display: block; font-size: 14px; color: var(--blue); text-decoration: none; font-weight: 500; }
+.footer-right .deck-link { font-size: 11px; color: var(--cream-muted); margin-top: 4px; text-decoration: none; display: block; }
+.footer-right .founder { font-size: 11px; color: var(--cream-muted); margin-top: 6px; font-weight: 300; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+@media (max-width: 700px) {
+  .page { padding: 80px 24px 72px; }
+  .terms-row, .scenarios, .proof-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; }
+  .header { flex-direction: column; gap: 16px; }
+}
+
+
+/* ================================================
+   PRINT VERSION — Clean light design, no background
+   graphics needed, looks premium on paper
+   ================================================ */
+@media print {
+  @page { size: A4; margin: 14mm 16mm; }
+
+  * { animation: none !important; transition: none !important; }
+
+  .download-bar { display: none !important; }
+  .watermark { display: none !important; }
+  .deck-frame { border: none !important; background: white !important; min-height: auto !important; }
+  .deck-frame::before { display: none !important; }
+  .live-dot { display: none !important; }
+
+  html, body { background: white !important; color: #0A0A14 !important; }
+  .page { padding: 0 !important; max-width: 100% !important; }
+
+  .header { margin-bottom: 20px !important; padding-bottom: 14px !important; border-bottom: 2px solid #0A0A14 !important; }
+  .logo-text { color: #0A0A14 !important; font-size: 15px !important; }
+  .logo-icon { filter: invert(39%) sepia(100%) saturate(500%) hue-rotate(175deg) brightness(90%) !important; width: 28px !important; height: 28px !important; }
+  .memo-tag .tag { color: #1a6fa0 !important; }
+  .memo-tag .recipient { color: #555 !important; }
+
+  .hero { margin-bottom: 22px !important; }
+  .hero-label { color: #1a6fa0 !important; }
+  .hero h1 { font-size: 36px !important; color: #0A0A14 !important; line-height: 1.1 !important; }
+  .hero h1 .blue { color: #1a6fa0 !important; }
+  .hero h1 .gold { color: #8B6914 !important; }
+  .hero p { color: #555 !important; font-size: 12px !important; margin-top: 8px !important; max-width: 100% !important; }
+
+  .section-label { color: #1a6fa0 !important; margin-bottom: 8px !important; font-size: 9px !important; }
+
+  .terms-row { gap: 6px !important; margin-bottom: 20px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .term-card { background: #F0F6FA !important; border: 1px solid #C8DDE8 !important; border-left: 3px solid #1a6fa0 !important; padding: 12px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .term-card .t-label { color: #888 !important; }
+  .term-card .t-value { color: #1a6fa0 !important; font-size: 26px !important; }
+  .term-card .t-sub { color: #777 !important; font-size: 10px !important; }
+
+  .scenarios { gap: 6px !important; margin-bottom: 20px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .scenario-card { background: #F8FAFB !important; border: 1px solid #C8DDE8 !important; padding: 12px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .scenario-card.base { background: #EBF5FB !important; border-color: #1a6fa0 !important; }
+  .conservative .s-badge { background: #FEF9EC !important; color: #7A5800 !important; border: 1px solid #D4AC0D40 !important; }
+  .base .s-badge { background: #D6EAF8 !important; color: #1a6fa0 !important; }
+  .strategic .s-badge { background: #EAFAF1 !important; color: #1A7A45 !important; }
+  .s-title { color: #0A0A14 !important; font-size: 12px !important; margin-bottom: 8px !important; }
+  .conservative .s-num { color: #7A5800 !important; font-size: 24px !important; }
+  .base .s-num { color: #1a6fa0 !important; font-size: 24px !important; }
+  .strategic .s-num { color: #1A7A45 !important; font-size: 24px !important; }
+  .s-metric-label { color: #888 !important; font-size: 9px !important; }
+  .s-return { color: #0A0A14 !important; font-size: 16px !important; margin-top: 8px !important; }
+  .s-return-label { color: #888 !important; font-size: 9px !important; }
+  .s-note { color: #666 !important; border-top-color: #E2E8F0 !important; font-size: 9px !important; margin-top: 6px !important; padding-top: 6px !important; }
+
+  .proof-grid { gap: 6px !important; margin-bottom: 20px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .proof-card { background: #F8FAFB !important; border: 1px solid #C8DDE8 !important; padding: 14px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .proof-card .p-label { color: #1a6fa0 !important; font-size: 9px !important; margin-bottom: 10px !important; }
+  .proof-list li { color: #444 !important; border-bottom-color: #E2E8F0 !important; padding: 4px 0 4px 14px !important; font-size: 11px !important; }
+  .proof-list li::before { background: #1a6fa0 !important; width: 4px !important; height: 4px !important; }
+  .proof-list li strong { color: #0A0A14 !important; }
+
+  .competitor-bar { background: #EBF5FB !important; border: 1px solid #1a6fa0 !important; border-left: 4px solid #1a6fa0 !important; padding: 12px 16px !important; margin-bottom: 20px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .competitor-bar p { color: #333 !important; font-size: 11px !important; }
+  .competitor-bar p strong { color: #0A0A14 !important; }
+
+  .acquirers { margin-bottom: 20px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .tag-pill { background: #F0F6FA !important; border: 1px solid #C8DDE8 !important; color: #0A0A14 !important; font-size: 10px !important; padding: 4px 10px !important; }
+  .tag-pill span { color: #666 !important; }
+
+  .thesis { background: #0A0A14 !important; border: none !important; padding: 20px !important; margin-bottom: 24px !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .thesis::before { background: #1a6fa0 !important; }
+  .thesis .t-label { color: #3BADE4 !important; }
+  .thesis blockquote { color: #F5F1EA !important; font-size: 13px !important; line-height: 1.6 !important; }
+  .thesis blockquote strong { color: #3BADE4 !important; }
+
+  .footer { padding-top: 14px !important; border-top: 1px solid #C8DDE8 !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .footer-left p { color: #666 !important; font-size: 10px !important; }
+  .footer-right a { color: #1a6fa0 !important; font-size: 12px !important; }
+  .footer-right .deck-link, .footer-right .founder { color: #888 !important; font-size: 10px !important; }
+}
+
+</style>
+</head>
+<body>
+<div class="deck-frame">
+<div class="page">
+
+  <div class="header">
+    <div class="logo-mark">
+      <img src="https://fanded-investor-narrative.vercel.app/photos/fanded-logo.png" class="logo-icon" alt="Fanded">
+      <span class="logo-text">fanded</span>
+    </div>
+    <div class="memo-tag">
+      <div class="tag">Investor Memo</div>
+      <div class="recipient">April 2026</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">April 2026</div>
+    <h1>Fanded has unified <span class="blue">29,000 superfans</span> and <span class="gold">$1.4M</span> in tracked revenue for self-managed talent.<br>Here is how we scale it.</h1>
+    <p>Entry price, return scenarios, and the proof the business is already working.</p>
+  </div>
+
+  <div class="section-label">Entry Terms</div>
+  <div class="terms-row">
+    <div class="term-card">
+      <div class="t-label">Raise</div>
+      <div class="t-value">$1.5M</div>
+      <div class="t-sub">Pre-seed SAFE, YC standard terms</div>
+    </div>
+    <div class="term-card">
+      <div class="t-label">Valuation Cap</div>
+      <div class="t-value">$15M</div>
+      <div class="t-sub">Post-money. Below market avg of $17.9M for seed AI</div>
+    </div>
+    <div class="term-card">
+      <div class="t-label">Min Check</div>
+      <div class="t-value">$25K</div>
+      <div class="t-sub">Angel minimum. Round open now</div>
+    </div>
+  </div>
+
+  <div class="section-label">Return Scenarios on a $25K Check</div>
+  <div class="scenarios">
+    <div class="scenario-card conservative">
+      <div class="s-badge">Conservative - 36mo</div>
+      <div class="s-title">Series A. 1,000 MAWDs live.</div>
+      <div class="s-num">$50-75M</div>
+      <div class="s-metric-label">Valuation</div>
+      <div class="s-return">3-5x</div>
+      <div class="s-return-label">$75K-$125K returned</div>
+      <div class="s-note">5-7x revenue multiple on $10M ARR. Well-documented Series A comp for vertical SaaS in 2025-26.</div>
+    </div>
+    <div class="scenario-card base">
+      <div class="s-badge">Base Case - 48mo</div>
+      <div class="s-title">Series B. 10,000 MAWDs + data.</div>
+      <div class="s-num">$100-200M</div>
+      <div class="s-metric-label">Valuation</div>
+      <div class="s-return">7-13x</div>
+      <div class="s-return-label">$175K-$325K returned</div>
+      <div class="s-note">$14.8M ARR from SaaS + $11.2M data licensing. This is Fanded's stated 3-year target.</div>
+    </div>
+    <div class="scenario-card strategic">
+      <div class="s-badge">Strategic Exit - 36-60mo</div>
+      <div class="s-title">Acquisition by Spotify, Live Nation, or major agency.</div>
+      <div class="s-num">$200-500M</div>
+      <div class="s-metric-label">Acquisition Value</div>
+      <div class="s-return">13-33x</div>
+      <div class="s-return-label">$325K-$825K returned</div>
+      <div class="s-note">Strategic value is the dataset: consent-based first-party talent audience data no acquirer can build independently.</div>
+    </div>
+  </div>
+
+  <div class="section-label">The Business Is Already Working</div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="p-label">Live Traction</div>
+      <ul class="proof-list">
+        <li><strong>150+ talent</strong> onboarded, zero paid marketing</li>
+        <li><strong>29,000+ superfans</strong> unified across platforms</li>
+        <li><strong>$1.4M tracked fan LTV</strong> through the system</li>
+        <li><strong>1.9M+ data points</strong> ingested</li>
+        <li><strong>50+ on waitlist</strong> including management companies</li>
+      </ul>
+    </div>
+    <div class="proof-card">
+      <div class="p-label">Named Talent + Capital</div>
+      <ul class="proof-list">
+        <li><strong>Anna Akana</strong>, 2.8M subs, live on MAWD</li>
+        <li><strong>Asian American Girl Club</strong>, $1.4M tracked LTV</li>
+        <li><strong>Manny Jacinto</strong>, actor and investor</li>
+        <li><strong>Savage Garden</strong>, in talks for world tour</li>
+        <li><strong>Jason Kwon</strong> (CSO, OpenAI), in the round</li>
+        <li><strong>Dave Lu</strong> (Hyphen Capital), pre-seed lead</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="competitor-bar">
+    <div class="live-dot"></div>
+    <p><strong>Live market signal, April 9, 2026:</strong> Viralt.ai launched today running paid Instagram ads for the same market. They positioned to creators. Fanded is positioned to talent: musicians, athletes, actors, directors. <strong>They are spending money to find customers. Our customers are finding us.</strong></p>
+  </div>
+
+  <div class="acquirers">
+    <div class="section-label">Potential Strategic Acquirers</div>
+    <div class="tag-row">
+      <div class="tag-pill">Spotify <span>- needs first-party fan data</span></div>
+      <div class="tag-pill">Live Nation <span>- wants direct artist relationships</span></div>
+      <div class="tag-pill">CAA / WME / UTA <span>- agencies losing ground to AI</span></div>
+      <div class="tag-pill">Apple Music <span>- competing with Spotify for artists</span></div>
+      <div class="tag-pill">YouTube <span>- building creator monetization</span></div>
+      <div class="tag-pill">Salesforce <span>- entertainment vertical</span></div>
+    </div>
+  </div>
+
+  <div class="thesis">
+    <div class="t-label">The Investment Thesis</div>
+    <blockquote>AI has created infinite content and zero new artists. The commodity collapses. The scarce resource becomes priceless. <strong>Real talent is now scarcer and more valuable than ever.</strong> Labels and studios built their business on owning distribution. That layer is gone. What replaces it is infrastructure that works for the artist. Fanded is that infrastructure. The entry price is below market. The traction is real. The category has no owner yet. <strong>This is the moment before it becomes obvious to everyone.</strong></blockquote>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <p>"The future of music and entertainment is self-managed artists running AI-powered businesses. Fanded builds the infrastructure for that world."</p>
+    </div>
+    <div class="footer-right">
+      <a href="/cdn-cgi/l/email-protection#25515744534c566543444b4140410b464a48"><span class="__cf_email__" data-cfemail="b6c2c4d7c0dfc5f6d0d7d8d2d3d298d5d9db">[email&#160;protected]</span></a>
+      <a href="https://fanded-investor-narrative.vercel.app/deck.html" class="deck-link">Full Deck</a>
+      <div class="founder">Travis Atreo - Founder and CEO - Fanded</div>
+    </div>
+  </div>
+
+</div>
+<div class="watermark">FANDED</div>
+</div>
+
+<div class="download-bar">
+  <span class="download-label">Fanded Investor Memo - April 2026</span>
+  <button class="download-btn" id="printBtn" onclick="triggerPrint()">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="#07070F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Download PDF
+  </button>
+</div>
+
+<script>
+function triggerPrint() {
+  var btn = document.getElementById('printBtn');
+  var bar = document.querySelector('.download-bar');
+  var watermark = document.querySelector('.watermark');
+  if (btn) btn.style.display = 'none';
+  if (bar) bar.style.display = 'none';
+  if (watermark) watermark.style.display = 'none';
+  document.body.offsetHeight;
+  setTimeout(function() {
+    window.print();
+  }, 300);
+  window.addEventListener('afterprint', function restoreUI() {
+    if (btn) btn.style.display = 'flex';
+    if (bar) bar.style.display = 'flex';
+    if (watermark) watermark.style.display = 'block';
+    window.removeEventListener('afterprint', restoreUI);
+  });
+  setTimeout(function() {
+    if (btn) btn.style.display = 'flex';
+    if (bar) bar.style.display = 'flex';
+    if (watermark) watermark.style.display = 'block';
+  }, 4000);
+}
+window.addEventListener('keydown', function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'p') {
+    e.preventDefault();
+    triggerPrint();
+  }
+});
+</script>
+</body>
+</html>
