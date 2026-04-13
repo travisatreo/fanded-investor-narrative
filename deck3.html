@@ -86,12 +86,19 @@
   @media screen and (max-height: 500px) and (orientation: landscape),
          screen and (hover: none) and (pointer: coarse) and (orientation: landscape) {
     html, body { overflow: hidden; height: 100vh; height: 100dvh; background: #07070F; }
-    #deck { position: relative; width: 1280px; height: 720px; }
-    .slide { position: absolute; top: 0; left: 0; width: 1280px; height: 720px; min-height: 720px; overflow: hidden; justify-content: center; }
+    #deck { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; }
+    .slide {
+      position: absolute; top: 0; left: 0;
+      width: 1280px !important; height: 720px !important;
+      min-height: 0 !important; overflow: hidden;
+      transform-origin: top left !important;
+    }
     .slide.active { visibility: visible; opacity: 1; pointer-events: auto; z-index: 10; }
-    .deck-nav { display: flex !important; position: fixed; z-index: 200; }
-    .deck-nav.prev { left: 8px; } .deck-nav.next { right: 8px; }
-    .deck-counter { display: block !important; position: fixed; z-index: 200; }
+    .deck-nav { display: flex !important; position: fixed; z-index: 200; width: 32px; height: 32px; font-size: 16px; }
+    .deck-nav.prev { left: 4px; } .deck-nav.next { right: 4px; }
+    .deck-counter { display: block !important; position: fixed; z-index: 200; font-size: 10px; top: 6px; }
+    .logo-text { display: none !important; }
+    .page-num { display: none !important; }
   }
 
   .slide-label {
@@ -579,21 +586,22 @@
   function setLandscapeZoom() {
     var isLandscape = isLandscapeMobile();
     var allSlides = document.querySelectorAll('.slide');
+    var deck = document.getElementById('deck');
     if (isLandscape) {
-      var scale = window.innerWidth / 1280;
-      var renderedH = 720 * scale;
-      var topOffset = Math.round((window.innerHeight - renderedH) / 2);
-      var deck = document.getElementById('deck');
-      deck.style.position = 'fixed';
-      deck.style.top = topOffset + 'px';
-      deck.style.left = '0';
-      deck.style.transform = 'scale(' + scale + ')';
-      deck.style.transformOrigin = 'top left';
-      deck.style.overflow = 'hidden';
-      allSlides.forEach(function(s) { s.style.width = ''; s.style.transform = ''; s.style.left = ''; s.style.top = ''; });
+      // Scale 1280x720 slides to fit the mobile viewport
+      var scaleX = window.innerWidth / 1280;
+      var scaleY = window.innerHeight / 720;
+      var scale = Math.min(scaleX, scaleY);
+      // Center if aspect ratio doesn't match perfectly
+      var offsetX = (window.innerWidth - 1280 * scale) / 2;
+      var offsetY = (window.innerHeight - 720 * scale) / 2;
+      allSlides.forEach(function(s) {
+        s.style.transform = 'scale(' + scale + ')';
+        s.style.left = offsetX + 'px';
+        s.style.top = offsetY + 'px';
+      });
       if (!lastWasLandscape) { window.scrollTo(0, 0); document.body.style.overflow = 'hidden'; goTo(current); }
     } else {
-      var deck = document.getElementById('deck');
       deck.style.transform = ''; deck.style.transformOrigin = ''; deck.style.top = ''; deck.style.left = '';
       deck.style.position = ''; deck.style.overflow = ''; deck.style.width = ''; deck.style.height = '';
       allSlides.forEach(function(s) { s.style.transform = ''; s.style.left = ''; s.style.top = ''; s.style.width = ''; s.style.height = ''; });
