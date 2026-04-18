@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAWD - AI Talent Manager for Creatives</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: 20in 11.25in; margin: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #07070F;
+    --bg-card: #0F0F1C;
+    --cream: #F5F1EA;
+    --cream-dim: #9999BB;
+    --cream-muted: #6B6B8A;
+    --blue: #3BADE4;
+    --green: #2ECC71;
+    --red: #E74C3C;
+    --gold: #C9A84C;
+    --purple: #9B59B6;
+    --teal: #0D9488;
+    --pink: #EC4899;
+    --border: #1C1C2E;
+    --font-d: 'Playfair Display', Georgia, serif;
+    --font-b: 'DM Sans', -apple-system, sans-serif;
+    --font-w: 'Bricolage Grotesque', 'DM Sans', sans-serif;
+  }
+
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    background: var(--bg); color: var(--cream);
+    font-family: var(--font-b); -webkit-font-smoothing: antialiased;
+  }
+
+  /* Fixed 1920x1080 canvas (Canva standard). Scaled to fit viewport via JS transform. */
+  #deck {
+    position: fixed; top: 50%; left: 50%;
+    width: 1920px; height: 1080px;
+    transform-origin: center center;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Slide intrinsic size is 1280x720 (original design). `zoom: 1.5` scales the
+     visual render to 1920x1080 so all inline px values scale uniformly. */
+  .slide {
+    position: absolute; top: 0; left: 0;
+    width: 1280px; height: 720px;
+    zoom: 1.5;
+    padding: 48px 72px;
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden; background: var(--bg);
+    visibility: hidden; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    border: 1px solid rgba(245,241,234,0.45);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border-radius: 2px;
+  }
+
+  .slide.active {
+    visibility: visible; opacity: 1; pointer-events: auto; z-index: 10;
+  }
+
+  .deck-nav {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    z-index: 100; width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(7,7,15,0.6); backdrop-filter: blur(8px);
+    color: var(--cream); font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.5; transition: opacity 0.2s, background 0.2s;
+  }
+  .deck-nav:hover { opacity: 1; background: rgba(255,255,255,0.1); }
+  .deck-nav.prev { left: 16px; }
+  .deck-nav.next { right: 16px; }
+  .deck-nav.hidden { opacity: 0 !important; pointer-events: none; }
+
+  .deck-counter {
+    position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+    z-index: 100; font-family: var(--font-w); font-weight: 600;
+    font-size: 12px; color: var(--cream-muted); letter-spacing: 1px;
+  }
+
+  @media screen and (hover: none) and (pointer: coarse) and (orientation: portrait) {
+    html, body { overflow: hidden; height: 100vh; background: #07070F; }
+    #deck { display: none !important; }
+    .deck-nav, .deck-counter { display: none !important; }
+    #rotatePrompt { display: flex !important; }
+  }
+
+  /* Touch-landscape: kill staggered entry animations for smooth load on mobile */
+  @media screen and (hover: none) and (pointer: coarse) and (orientation: landscape) {
+    .pain-pill, .pain-trail, .agent-card, .tuned-card, .story-stat {
+      opacity: 1 !important; transform: none !important; animation: none !important;
+    }
+  }
+
+  .slide-label {
+    font-family: var(--font-w); font-weight: 700; font-size: 16px;
+    letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+    position: absolute; top: 60px; left: 72px; z-index: 20;
+  }
+
+  h1 { font-family: var(--font-d); font-weight: 900; font-size: 52px; line-height: 1.15; color: var(--cream); margin-bottom: 20px; }
+  h2 { font-family: var(--font-d); font-weight: 700; font-size: 40px; line-height: 1.2; color: var(--cream); margin-bottom: 16px; }
+  h3 { font-family: var(--font-w); font-weight: 700; font-size: 22px; color: var(--cream); margin-bottom: 12px; }
+
+  .body { font-size: 22px; color: var(--cream-dim); line-height: 1.6; max-width: 900px; }
+  .body-sm { font-size: 19px; color: var(--cream-muted); line-height: 1.5; }
+  .big-number { font-family: var(--font-w); font-weight: 800; font-size: 72px; line-height: 1; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 40px;
+    font-size: 18px; font-weight: 600; font-family: var(--font-w);
+    margin-right: 8px; margin-bottom: 10px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 28px 24px; text-align: center;
+  }
+  .stat-num { font-family: var(--font-w); font-weight: 800; font-size: 48px; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 18px; color: var(--cream-muted); }
+
+  .logo-text { display: none !important; }
+  .page-num { font-size: 12px; color: rgba(107,107,138,0.5); position: absolute; top: 20px; right: 72px; z-index: 50; }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes cardReveal { 0% { opacity: 0; transform: translateY(20px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes punchIn { 0% { opacity: 0; transform: scale(0.8); } 60% { transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes pillDrop { 0% { opacity: 0; transform: translateY(-12px) scale(0.9); } 70% { transform: translateY(2px) scale(1.02); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes agentOnline { 0% { opacity: 0; transform: scale(0.95); } 60% { box-shadow: 0 0 20px rgba(46,204,113,0.15); } 100% { opacity: 1; transform: scale(1); box-shadow: none; } }
+  @keyframes msgIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+
+  .pain-pill { opacity: 0; transform: translateY(-12px); font-size: 10px !important; padding: 3px 8px !important; margin-right: 4px !important; margin-bottom: 6px !important; }
+  .slide.active .pain-pill { animation: pillDrop 0.22s ease-out forwards; animation-delay: calc(var(--i, 0) * 0.025s); }
+  .pain-trail { opacity: 0; }
+  .slide.active .pain-trail { animation: fadeIn 0.4s ease-out 1.7s forwards; }
+
+  .agent-card { opacity: 0; transform: scale(0.95); }
+  .slide.active .agent-card:nth-child(1) { animation: agentOnline 0.35s ease-out 0.3s forwards; }
+  .slide.active .agent-card:nth-child(2) { animation: agentOnline 0.35s ease-out 0.55s forwards; }
+  .slide.active .agent-card:nth-child(3) { animation: agentOnline 0.35s ease-out 0.8s forwards; }
+  .slide.active .agent-card:nth-child(4) { animation: agentOnline 0.35s ease-out 1.05s forwards; }
+  .slide.active .agent-card:nth-child(5) { animation: agentOnline 0.35s ease-out 1.3s forwards; }
+  .slide.active .agent-card:nth-child(6) { animation: agentOnline 0.35s ease-out 1.55s forwards; }
+
+  .tuned-card { opacity: 0; transform: translateY(16px); }
+  .slide.active .tuned-card:nth-child(1) { animation: cardReveal 0.4s ease-out 0.2s forwards; }
+  .slide.active .tuned-card:nth-child(2) { animation: cardReveal 0.4s ease-out 0.45s forwards; }
+  .slide.active .tuned-card:nth-child(3) { animation: cardReveal 0.4s ease-out 0.7s forwards; }
+  .slide.active .tuned-card:nth-child(4) { animation: cardReveal 0.4s ease-out 0.95s forwards; }
+
+  .story-stat { opacity: 0; transform: translateY(12px); }
+  .slide.active .story-stat:nth-child(1) { animation: cardReveal 0.4s ease-out 0.2s forwards; }
+  .slide.active .story-stat:nth-child(2) { animation: cardReveal 0.4s ease-out 0.4s forwards; }
+  .slide.active .story-stat:nth-child(3) { animation: cardReveal 0.4s ease-out 0.6s forwards; }
+  .slide.active .story-stat:nth-child(4) { animation: cardReveal 0.4s ease-out 0.8s forwards; }
+
+  @page { size: 20in 11.25in; margin: 0; }
+  @media print {
+    *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    :root { --cream: #FFFFFF !important; --cream-dim: #F0EFF8 !important; --cream-muted: #DAD8EC !important; }
+    html, body { width: 1920px !important; height: auto !important; overflow: visible !important; }
+    #deck { position: relative !important; top: auto !important; left: auto !important; width: 1920px !important; height: auto !important; transform: none !important; }
+    .slide { position: relative !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; width: 1280px !important; height: 720px !important; zoom: 1.5 !important; page-break-after: always; }
+    .deck-nav, .deck-counter { display: none !important; }
+  }
+</style>
+</head>
+<script>
+  // Detect mobile landscape before first paint to prevent layout flash
+  (function() {
+    var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+    var isLandscape = (window.innerHeight <= 500 && window.innerWidth > window.innerHeight) || (isTouch && window.innerWidth > window.innerHeight);
+    if (isLandscape) document.documentElement.classList.add('is-landscape-mobile');
+  })();
+</script>
+<body>
+
+<!-- Rotate prompt for mobile portrait -->
+<div id="rotatePrompt" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#07070F;z-index:9999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0;margin:0;">
+  <div style="display:flex;flex-direction:column;align-items:center;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+    <div style="margin-bottom:32px;animation:rotateIcon 2s ease-in-out infinite;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7EB8DA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(90 12 12)"/>
+        <path d="M12 18h.01"/>
+      </svg>
+    </div>
+    <div style="font-family:var(--font-d);font-weight:700;font-size:24px;color:var(--cream);line-height:1.3;margin-bottom:10px;">Rotate your phone</div>
+    <div style="font-family:var(--font-w);font-weight:400;font-size:15px;color:var(--cream-muted);line-height:1.5;max-width:260px;">This deck is designed for landscape viewing.<br>Please rotate your device to continue.</div>
+  </div>
+</div>
+<style>
+  @keyframes rotateIcon {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-90deg); }
+    50%, 75% { transform: rotate(-90deg); }
+  }
+</style>
+
+<div id="deck">
+
+<!-- ============ SLIDE 1: TITLE (SMS hero variant) ============ -->
+<div class="slide active" style="justify-content:center;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(46,204,113,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+
+    <!-- Brand + pitch, centered -->
+    <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;">
+      <img src="logo.png" alt="Fanded" style="width:26px;height:26px;object-fit:contain;">
+      <span style="font-family:var(--font-w);font-weight:800;font-size:18px;letter-spacing:2px;color:#3BADE4;">Fanded</span>
+    </div>
+
+    <h1 style="font-size:180px;margin-bottom:28px;letter-spacing:-6px;line-height:0.9;">MAWD</h1>
+
+    <div style="font-family:var(--font-d);font-weight:400;font-size:24px;color:var(--cream);margin-bottom:22px;line-height:1.4;letter-spacing:5px;text-transform:uppercase;">
+      Your AI Talent Manager
+    </div>
+
+    <div style="font-family:var(--font-d);font-style:italic;font-size:22px;color:var(--cream-muted);margin-bottom:44px;line-height:1.5;letter-spacing:0.3px;max-width:740px;margin-left:auto;margin-right:auto;">
+      A team of private AI agents tuned specifically for creatives. It runs your business so you can stay creating.
+    </div>
+
+    <div style="display:inline-flex;align-items:center;gap:14px;">
+      <img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" style="width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center 25%;border:2px solid rgba(46,204,113,0.4);">
+      <div style="text-align:left;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Travis Atreo</div>
+        <div style="font-size:13px;color:var(--cream-muted);">Founder &amp; CEO &middot; Fanded Inc.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">1 / 10</div>
+</div>
+
+<!-- ============ SLIDE 2: I LIVED THIS ============ -->
+<div class="slide">
+  <div class="slide-label">WHY ME</div>
+
+  <div style="display:grid;grid-template-columns:220px 1fr;gap:52px;align-items:center;">
+    <img src="photos/travis-headshot.png" alt="Travis Atreo" style="width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:center 25%;border:3px solid rgba(201,168,76,0.4);">
+
+    <div>
+      <h2 style="font-size:56px;margin-bottom:20px;line-height:1.02;letter-spacing:-1.5px;">
+        I spent <span style="color:var(--blue);">20 years</span> building a house.<br>
+        <span style="color:var(--red);">One algorithm change</span> locked me out.
+      </h2>
+      <div style="font-size:24px;color:var(--cream);line-height:1.4;">
+        400M streams, 300+ records released, 100+ YouTube videos. <strong style="color:var(--red);">$20K a month, gone overnight.</strong> The house was still mine.<br>I just couldn&rsquo;t get back in.
+      </div>
+    </div>
+  </div>
+
+  <!-- Single attribution line, bottom -->
+  <div style="text-align:center;font-size:20px;color:var(--cream-muted);margin-top:48px;line-height:1.5;">
+    That&rsquo;s not a Travis problem. <span style="color:var(--cream);font-weight:600;">That&rsquo;s every creator.</span> &nbsp;&middot;&nbsp; So I built what I needed. That&rsquo;s MAWD.
+  </div>
+
+  <div class="page-num">2 / 10</div>
+</div>
+
+<!-- ============ SLIDE 3: THE PROBLEM ============ -->
+<div class="slide">
+  <div class="slide-label">THE PROBLEM</div>
+  <h2 style="font-size:56px;margin-bottom:10px;line-height:1.05;letter-spacing:-1px;">Creators are <span style="color:var(--red);">one-person companies.</span></h2>
+  <div style="font-size:22px;color:var(--cream-muted);margin-bottom:22px;line-height:1.4;max-width:1400px;"><strong style="color:var(--cream);">200M of them worldwide.</strong> Operating across 50 platforms, a dozen revenue streams, and 195 countries, with one person doing every job.</div>
+
+  <!-- 80/20 hero bar -->
+  <div style="display:flex;height:48px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);margin-bottom:10px;">
+    <div style="width:80%;background:rgba(231,76,60,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--font-w);font-weight:800;font-size:18px;color:var(--cream);letter-spacing:0.3px;">80% running the business</div>
+    <div style="width:20%;background:rgba(46,204,113,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--font-w);font-weight:800;font-size:18px;color:var(--cream);letter-spacing:0.3px;">20% creating</div>
+  </div>
+
+  <!-- Pills cascade, FLOODED -->
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+    <span class="pain-pill pill" style="--i:1;background:rgba(231,76,60,0.18);border:2px solid rgba(231,76,60,0.7);color:var(--red);font-size:22px !important;padding:8px 18px !important;font-weight:800;letter-spacing:0.5px;">Taxes</span>
+    <span class="pain-pill pill" style="--i:2;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Merch</span>
+    <span class="pain-pill pill" style="--i:3;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Licensing</span>
+    <span class="pain-pill pill" style="--i:4;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Content Strategy</span>
+    <span class="pain-pill pill" style="--i:5;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Brand Deals</span>
+    <span class="pain-pill pill" style="--i:6;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Contracts</span>
+    <span class="pain-pill pill" style="--i:7;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Royalties</span>
+    <span class="pain-pill pill" style="--i:8;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Booking</span>
+    <span class="pain-pill pill" style="--i:9;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Email &amp; Scheduling</span>
+    <span class="pain-pill pill" style="--i:10;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Bookkeeping</span>
+    <span class="pain-pill pill" style="--i:11;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Sync Deals</span>
+    <span class="pain-pill pill" style="--i:12;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Mechanical Royalties</span>
+    <span class="pain-pill pill" style="--i:13;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Publishing</span>
+    <span class="pain-pill pill" style="--i:14;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Playlist Pitching</span>
+    <span class="pain-pill pill" style="--i:15;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Thumbnails</span>
+    <span class="pain-pill pill" style="--i:16;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Metadata</span>
+    <span class="pain-pill pill" style="--i:17;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Copyright Strikes</span>
+    <span class="pain-pill pill" style="--i:18;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Tour Routing</span>
+    <span class="pain-pill pill" style="--i:19;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">PR &amp; Press</span>
+    <span class="pain-pill pill" style="--i:20;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">EPK</span>
+    <span class="pain-pill pill" style="--i:21;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">1099s</span>
+    <span class="pain-pill pill" style="--i:22;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Invoicing</span>
+    <span class="pain-pill pill" style="--i:23;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Fan CRM</span>
+    <span class="pain-pill pill" style="--i:24;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Insurance</span>
+    <span class="pain-pill pill" style="--i:25;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Visas</span>
+    <span class="pain-pill pill" style="--i:26;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Split Sheets</span>
+    <span class="pain-pill pill" style="--i:27;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">DSP Pitching</span>
+    <span class="pain-pill pill" style="--i:28;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Meetings</span>
+    <span class="pain-pill pill" style="--i:29;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Fan Emails</span>
+    <span class="pain-pill pill" style="--i:30;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Album Rollout</span>
+    <span class="pain-pill pill" style="--i:31;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Spotify</span>
+    <span class="pain-pill pill" style="--i:32;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Apple Music</span>
+    <span class="pain-pill pill" style="--i:33;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">YouTube Music</span>
+    <span class="pain-pill pill" style="--i:34;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Amazon Music</span>
+    <span class="pain-pill pill" style="--i:35;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Tidal</span>
+    <span class="pain-pill pill" style="--i:36;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Deezer</span>
+    <span class="pain-pill pill" style="--i:37;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Pandora</span>
+    <span class="pain-pill pill" style="--i:38;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">SoundCloud</span>
+    <span class="pain-pill pill" style="--i:39;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Audiomack</span>
+    <span class="pain-pill pill" style="--i:40;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Bandcamp</span>
+    <span class="pain-pill pill" style="--i:41;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">iHeartRadio</span>
+    <span class="pain-pill pill" style="--i:42;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Anghami</span>
+    <span class="pain-pill pill" style="--i:43;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Instagram</span>
+    <span class="pain-pill pill" style="--i:44;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">TikTok</span>
+    <span class="pain-pill pill" style="--i:45;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">X / Twitter</span>
+    <span class="pain-pill pill" style="--i:46;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Facebook</span>
+    <span class="pain-pill pill" style="--i:47;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Threads</span>
+    <span class="pain-pill pill" style="--i:48;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">LinkedIn</span>
+    <span class="pain-pill pill" style="--i:49;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Snapchat</span>
+    <span class="pain-pill pill" style="--i:50;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">YouTube</span>
+    <span class="pain-pill pill" style="--i:51;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">YouTube Shorts</span>
+    <span class="pain-pill pill" style="--i:52;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Discord</span>
+    <span class="pain-pill pill" style="--i:53;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Reddit</span>
+    <span class="pain-pill pill" style="--i:54;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Twitch</span>
+    <span class="pain-pill pill" style="--i:55;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Pinterest</span>
+    <span class="pain-pill pill" style="--i:56;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Premiere Pro</span>
+    <span class="pain-pill pill" style="--i:57;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Final Cut</span>
+    <span class="pain-pill pill" style="--i:58;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">DaVinci Resolve</span>
+    <span class="pain-pill pill" style="--i:59;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">CapCut</span>
+    <span class="pain-pill pill" style="--i:60;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">After Effects</span>
+    <span class="pain-pill pill" style="--i:61;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Pro Tools</span>
+    <span class="pain-pill pill" style="--i:62;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Logic Pro</span>
+    <span class="pain-pill pill" style="--i:63;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Ableton</span>
+    <span class="pain-pill pill" style="--i:64;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">FL Studio</span>
+    <span class="pain-pill pill" style="--i:65;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Reaper</span>
+    <span class="pain-pill pill" style="--i:66;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">iZotope</span>
+    <span class="pain-pill pill" style="--i:67;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Mixing</span>
+    <span class="pain-pill pill" style="--i:68;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Mastering</span>
+    <span class="pain-pill pill" style="--i:69;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Stems</span>
+    <span class="pain-pill pill" style="--i:70;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Audio Editing</span>
+    <span class="pain-pill pill" style="--i:71;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Analytics</span>
+    <span class="pain-pill pill" style="--i:72;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">A&amp;R</span>
+    <span class="pain-pill pill" style="--i:73;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Demos</span>
+    <span class="pain-pill pill" style="--i:74;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Rehearsals</span>
+    <span class="pain-pill pill" style="--i:75;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Stage Plots</span>
+    <span class="pain-pill pill" style="--i:76;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Tech Riders</span>
+    <span class="pain-pill pill" style="--i:77;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Guest Lists</span>
+    <span class="pain-pill pill" style="--i:78;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Ticketing</span>
+    <span class="pain-pill pill" style="--i:79;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Meet &amp; Greets</span>
+    <span class="pain-pill pill" style="--i:80;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Setlists</span>
+    <span class="pain-pill pill" style="--i:81;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Travel</span>
+    <span class="pain-pill pill" style="--i:82;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Flights</span>
+    <span class="pain-pill pill" style="--i:83;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">Hotels</span>
+    <span class="pain-pill pill" style="--i:84;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Per Diems</span>
+    <span class="pain-pill pill" style="--i:85;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Trademarks</span>
+    <span class="pain-pill pill" style="--i:86;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">NDAs</span>
+    <span class="pain-pill pill" style="--i:87;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">LLC Filings</span>
+    <span class="pain-pill pill" style="--i:88;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">ASCAP / BMI</span>
+    <span class="pain-pill pill" style="--i:89;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">MLC</span>
+    <span class="pain-pill pill" style="--i:90;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.3);color:var(--teal);">SoundExchange</span>
+    <span class="pain-pill pill" style="--i:91;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Neighboring Rights</span>
+    <span class="pain-pill pill" style="--i:92;background:rgba(59,173,228,0.1);border:1px solid rgba(59,173,228,0.3);color:var(--blue);">Merch Fulfillment</span>
+    <span class="pain-pill pill" style="--i:93;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);color:var(--purple);">Inventory</span>
+    <span class="pain-pill pill" style="--i:94;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold);">Shipping</span>
+    <span class="pain-pill pill" style="--i:95;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:var(--green);">Customer Service</span>
+    <span class="pain-pill pill" style="--i:96;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);">Contracts Review</span>
+  </div>
+
+  <!-- Closer, single line -->
+  <div style="text-align:center;font-size:22px;color:var(--cream);margin-top:12px;">
+    Every one of these <span style="color:var(--red);font-weight:700;">is the creator&rsquo;s job.</span>
+  </div>
+
+  <div class="page-num">3 / 10</div>
+</div>
+
+<!-- ============ SLIDE 4: THE SOLUTION ============ -->
+<div class="slide" style="justify-content:flex-start;padding-top:100px;">
+  <div class="slide-label">THE PRODUCT</div>
+
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:start;">
+
+    <!-- LEFT: Thesis + agents -->
+    <div>
+      <h2 style="font-size:44px;margin-bottom:10px;line-height:1.05;letter-spacing:-1px;">
+        The AI team <span style="color:var(--green);">every creator was supposed to have.</span>
+      </h2>
+      <div style="font-size:16px;color:var(--cream-muted);margin-bottom:22px;line-height:1.45;font-style:italic;">
+        Six specialized agents. One private brain. Never sleeps, never quits, never forgets.
+      </div>
+
+      <!-- Agent cards stacked -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="agent-card" style="background:rgba(46,204,113,0.12);border:1.5px solid rgba(46,204,113,0.5);border-radius:10px;padding:12px 14px;position:relative;">
+          <div style="position:absolute;top:-7px;right:10px;background:var(--green);color:#0A0A0F;font-family:var(--font-w);font-weight:800;font-size:8px;letter-spacing:1px;padding:2px 7px;border-radius:20px;">DAILY DRIVER</div>
+          <div style="font-family:var(--font-w);font-weight:900;font-size:20px;color:var(--green);line-height:1;">Content</div>
+          <div style="font-size:12px;color:var(--cream);margin-top:5px;line-height:1.35;">Inbox, DMs, posts, fan comms across every platform</div>
+        </div>
+        <div class="agent-card" style="background:rgba(155,89,182,0.08);border:1px solid rgba(155,89,182,0.3);border-radius:10px;padding:12px 14px;opacity:0.7;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:20px;color:var(--purple);line-height:1;">CFO</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:5px;line-height:1.35;">Track income, forecast runway, flag risk</div>
+        </div>
+        <div class="agent-card" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:12px 14px;opacity:0.7;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:20px;color:var(--gold);line-height:1;">Legal</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:5px;line-height:1.35;">Review contracts, benchmark rates, redline</div>
+        </div>
+        <div class="agent-card" style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:10px;padding:12px 14px;opacity:0.7;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:20px;color:var(--blue);line-height:1;">Distro</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:5px;line-height:1.35;">Reconcile royalties, chase underpayments</div>
+        </div>
+        <div class="agent-card" style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.3);border-radius:10px;padding:12px 14px;opacity:0.7;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:20px;color:var(--pink);line-height:1;">Ops</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:5px;line-height:1.35;">Book gigs, travel, logistics, calendar</div>
+        </div>
+        <div class="agent-card" style="background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.3);border-radius:10px;padding:12px 14px;opacity:0.7;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:20px;color:var(--teal);line-height:1;">Tax</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:5px;line-height:1.35;">Schedule C, deductions, quarterly filings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Product mock (Screen 7 — How should I start?) -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+    <!-- Phone frame: realistic iPhone device -->
+    <div style="position:relative;width:262px;padding:12px;background:linear-gradient(145deg,#2A2A32 0%,#0E0E12 50%,#1C1C22 100%);border-radius:50px;box-shadow:0 30px 70px rgba(0,0,0,0.7),0 0 0 1.5px rgba(245,241,234,0.12),inset 0 0 0 1px rgba(245,241,234,0.05);">
+      <!-- Side buttons -->
+      <div style="position:absolute;left:-2px;top:90px;width:2px;height:28px;background:#1C1C22;border-radius:2px 0 0 2px;"></div>
+      <div style="position:absolute;left:-2px;top:140px;width:2px;height:44px;background:#1C1C22;border-radius:2px 0 0 2px;"></div>
+      <div style="position:absolute;left:-2px;top:194px;width:2px;height:44px;background:#1C1C22;border-radius:2px 0 0 2px;"></div>
+      <div style="position:absolute;right:-2px;top:130px;width:2px;height:70px;background:#1C1C22;border-radius:0 2px 2px 0;"></div>
+      <!-- Screen -->
+      <div style="width:238px;background:#FFF;border-radius:38px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.8);">
+        <img src="photos/MAWD Texting2.PNG" alt="Travis texting with MAWD" style="display:block;width:100%;height:auto;">
+      </div>
+    </div>
+    <!-- Connective caption -->
+    <div style="font-size:10px;color:rgba(107,107,138,0.75);text-align:center;letter-spacing:0.3px;font-weight:400;">Text MAWD like a human. Content is the wedge &middot; CFO, Legal, Ops, Distro, Tax activate as artists grow.</div>
+    </div>
+
+  </div>
+
+  <div class="page-num">4 / 10</div>
+</div>
+
+<!-- ============ SLIDE 5: WHY US ============ -->
+<div class="slide">
+  <div class="slide-label">WHY US</div>
+  <h2 style="font-size:44px;margin-bottom:6px;line-height:1.05;letter-spacing:-1px;max-width:1100px;">
+    You can&rsquo;t paste your contracts into ChatGPT.<br><span style="color:var(--green);">So we built somewhere you can.</span>
+  </h2>
+  <div style="font-size:18px;color:var(--cream-muted);margin-bottom:16px;line-height:1.4;max-width:1200px;">
+    Your unreleased tracks, your deal memos, your tax data, your fan list. The things you can&rsquo;t hand to a public model. MAWD is the private system where they live and work.
+  </div>
+
+  <!-- Horizontal data-flow diagram: INPUTS → MAWD → OUTPUTS -->
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;margin-bottom:20px;">
+
+    <!-- LEFT: INPUTS -->
+    <div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:3px;color:var(--blue);text-transform:uppercase;margin-bottom:12px;">It sees everything &rarr;</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Gmail</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Stripe</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Plaid</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Spotify</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">YouTube</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Ingrooves</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">DocuSign</div>
+        <div style="background:rgba(59,173,228,0.08);border:1px solid rgba(59,173,228,0.3);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Songtrust</div>
+      </div>
+      <div style="font-size:12px;color:var(--cream-muted);margin-top:10px;letter-spacing:0.3px;">Every email, stream, dollar, and contract, in one brain.</div>
+    </div>
+
+    <!-- CENTER: MAWD hub with flowing arrows -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0;position:relative;">
+      <!-- incoming arrow -->
+      <div style="font-family:var(--font-w);font-weight:800;font-size:14px;color:var(--blue);letter-spacing:2px;margin-bottom:6px;">&#8595;</div>
+      <!-- MAWD core -->
+      <div style="width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(59,173,228,0.25) 0%,rgba(59,173,228,0.08) 60%,transparent 100%);border:2px solid rgba(59,173,228,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
+        <div style="position:absolute;inset:16px;border-radius:50%;border:1px solid rgba(59,173,228,0.25);"></div>
+        <div style="font-family:var(--font-w);font-weight:900;font-size:34px;color:var(--blue);letter-spacing:3px;line-height:1;">MAWD</div>
+        <div style="font-family:var(--font-w);font-weight:600;font-size:10px;color:var(--cream-muted);letter-spacing:3px;margin-top:6px;">THE BRAIN</div>
+      </div>
+      <!-- outgoing arrow -->
+      <div style="font-family:var(--font-w);font-weight:800;font-size:14px;color:var(--green);letter-spacing:2px;margin-top:6px;">&#8595;</div>
+    </div>
+
+    <!-- RIGHT: OUTPUTS -->
+    <div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:3px;color:var(--green);text-transform:uppercase;margin-bottom:12px;">&rarr; It does everything</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Sends emails</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Books gigs</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Files taxes</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Signs contracts</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Pitches sync</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Tracks royalties</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Posts content</div>
+        <div style="background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.35);border-radius:8px;padding:10px 14px;font-family:var(--font-w);font-weight:700;font-size:14px;color:var(--cream);">Pays invoices</div>
+      </div>
+      <div style="font-size:12px;color:var(--cream-muted);margin-top:10px;letter-spacing:0.3px;text-align:right;">Every action the creator never has time for.</div>
+    </div>
+  </div>
+
+  <!-- Pullquote + moat, single compact row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);">
+    <div style="font-size:18px;color:var(--cream);line-height:1.3;font-weight:600;border-left:3px solid var(--green);padding-left:16px;">
+      &ldquo;You&rsquo;re not the one holding it together anymore.&rdquo;
+      <div style="font-size:13px;color:var(--cream-muted);font-weight:400;margin-top:4px;">You keep making. MAWD holds everything else.</div>
+    </div>
+    <div style="font-size:13px;color:var(--cream-muted);line-height:1.4;text-align:right;">
+      <span style="color:var(--green);font-weight:700;">The moat:</span> Private by default. Your data, your agents, trained on your business. Never on the public model. Direct integrations. System of record.
+    </div>
+  </div>
+
+  <div class="page-num">5 / 10</div>
+</div>
+
+<!-- ============ SLIDE 6: IT&rsquo;S ALREADY WORKING ============ -->
+<div class="slide">
+  <div class="slide-label">TRACTION</div>
+  <h2 style="font-size:52px;margin-bottom:6px;line-height:1.05;letter-spacing:-1.5px;">It&rsquo;s already working.</h2>
+  <div style="font-size:20px;color:var(--cream-muted);margin-bottom:20px;">Three creators. Three outcomes we can attribute to MAWD.</div>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+    <!-- Anna Akana -->
+    <div style="display:flex;align-items:center;gap:20px;background:rgba(155,89,182,0.06);border:1px solid rgba(155,89,182,0.2);border-radius:14px;padding:16px 22px;">
+      <img src="photos/anna_opt.jpg" alt="Anna Akana" style="width:60px;height:60px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(155,89,182,0.4);">
+      <div style="width:160px;flex-shrink:0;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--cream);">Anna Akana</div>
+        <div style="font-size:14px;color:var(--purple);">2.8M subs</div>
+      </div>
+      <div style="width:1px;height:48px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
+      <div style="font-size:19px;color:var(--cream);line-height:1.35;">16 years on YouTube. <strong style="color:var(--purple);">First time she&rsquo;s ever had direct access to her fans.</strong></div>
+    </div>
+
+    <!-- AAGC -->
+    <div style="display:flex;align-items:center;gap:20px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.2);border-radius:14px;padding:16px 22px;">
+      <img src="photos/aagc_opt.jpg" alt="AAGC" style="width:60px;height:60px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(212,175,55,0.4);">
+      <div style="width:160px;flex-shrink:0;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--cream);">AAGC</div>
+        <div style="font-size:14px;color:var(--gold);">500K+ community</div>
+      </div>
+      <div style="width:1px;height:48px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
+      <div style="font-size:19px;color:var(--cream);line-height:1.35;"><strong style="color:var(--gold);">10,000 customer phone numbers</strong> surfaced from their inbox. SMS now driving commerce and media growth.</div>
+    </div>
+
+    <!-- Travis Atreo -->
+    <div style="display:flex;align-items:center;gap:20px;background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.2);border-radius:14px;padding:16px 22px;">
+      <img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" style="width:60px;height:60px;border-radius:50%;object-fit:cover;object-position:center 25%;flex-shrink:0;border:2px solid rgba(46,204,113,0.4);">
+      <div style="width:160px;flex-shrink:0;">
+        <div style="font-family:var(--font-w);font-weight:800;font-size:20px;color:var(--cream);">Travis Atreo</div>
+        <div style="font-size:14px;color:var(--green);">400M+ streams</div>
+      </div>
+      <div style="width:1px;height:48px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
+      <div style="font-size:19px;color:var(--cream);line-height:1.35;">Ran 2025 taxes, royalties, and contract review <strong style="color:var(--green);">with zero accountant time.</strong></div>
+    </div>
+  </div>
+
+  <!-- Waitlist hero -->
+  <div style="background:rgba(59,173,228,0.1);border:2px solid rgba(59,173,228,0.45);border-radius:14px;padding:18px 28px;display:flex;align-items:center;justify-content:center;gap:28px;">
+    <div style="font-family:var(--font-w);font-weight:900;font-size:60px;color:var(--blue);line-height:1;letter-spacing:-2px;">200+</div>
+    <div style="text-align:left;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:19px;color:var(--cream);line-height:1.2;">creators and management companies on waitlist</div>
+      <div style="font-size:15px;color:var(--cream-muted);margin-top:4px;">Zero paid marketing. All our network.</div>
+    </div>
+  </div>
+
+  <div class="logo-text">FANDED</div>
+  <div class="page-num">6 / 10</div>
+</div>
+
+<!-- ============ SLIDE 7: BUSINESS MODEL ============ -->
+<div class="slide">
+  <div class="slide-label">BUSINESS MODEL</div>
+  <h2 style="font-size:50px;margin-bottom:6px;line-height:1.05;letter-spacing:-1.5px;">
+    Seat + Usage + Upside. <span style="color:var(--green);">We grow when creators grow.</span>
+  </h2>
+  <div style="font-size:17px;color:var(--cream-muted);margin-bottom:20px;line-height:1.4;font-style:italic;">
+    &ldquo;The shift from SaaS to Intelligence-as-a-Service is well underway.&rdquo; &middot; Jensen Huang, NVIDIA
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;margin-bottom:14px;">
+    <!-- Base seat -->
+    <div style="background:rgba(59,173,228,0.06);border:1px solid rgba(59,173,228,0.35);border-radius:16px;padding:22px 24px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">Base Seat</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--cream);line-height:1;letter-spacing:-1px;margin-bottom:8px;">$50<span style="font-size:16px;color:var(--cream-muted);font-weight:400;">/seat/mo</span></div>
+      <div style="font-size:14px;color:var(--cream-muted);line-height:1.4;">Core agent team. Scales from solo to <strong style="color:var(--cream);">$999+/mo</strong> for labels, agencies, management.</div>
+    </div>
+
+    <!-- Usage / premium agents -->
+    <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.35);border-radius:16px;padding:22px 24px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Premium Agents</div>
+      <div style="font-family:var(--font-w);font-weight:800;font-size:44px;color:var(--cream);line-height:1;letter-spacing:-1px;margin-bottom:8px;">+ usage</div>
+      <div style="font-size:14px;color:var(--cream-muted);line-height:1.4;">Modular add-ons: Tax, Legal, Sync, Tour Ops. Upgrade only what you use, priced per workload.</div>
+    </div>
+
+    <!-- Upside take-rate -->
+    <div style="background:rgba(46,204,113,0.08);border:2px solid rgba(46,204,113,0.45);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:10px;">Upside Take-Rate</div>
+        <div style="font-family:var(--font-w);font-weight:900;font-size:60px;color:var(--green);line-height:1;letter-spacing:-2px;margin-bottom:6px;">1&ndash;3%</div>
+        <div style="font-size:15px;color:var(--cream);line-height:1.35;margin-bottom:10px;">
+          of every brand deal, sync, collab, or contract <strong>MAWD closes.</strong> Uncapped.
+        </div>
+      </div>
+      <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--cream-dim);line-height:1.4;">
+        <strong style="color:var(--green);">Enforcement:</strong> contracts and payments flow through MAWD.
+      </div>
+    </div>
+  </div>
+
+  <!-- Profitability curve -->
+  <div style="background:linear-gradient(90deg,rgba(59,173,228,0.08),rgba(201,168,76,0.1),rgba(46,204,113,0.18));border:1px solid rgba(46,204,113,0.3);border-radius:12px;padding:12px 22px;margin-bottom:12px;display:flex;align-items:center;gap:20px;">
+    <div style="font-family:var(--font-w);font-weight:800;font-size:13px;letter-spacing:2px;color:var(--cream);text-transform:uppercase;flex-shrink:0;">Profitability Curve</div>
+    <div style="flex:1;font-size:14px;color:var(--cream-dim);line-height:1.4;">Seat revenue is the floor. Usage compounds with workload. Take-rate compounds with the creator&rsquo;s wins. <strong style="color:var(--green);">Our margin grows as theirs does.</strong></div>
+  </div>
+
+  <!-- GAAS comp set footer -->
+  <div style="background:linear-gradient(90deg,rgba(46,204,113,0.08),rgba(59,173,228,0.08));border:1px solid rgba(46,204,113,0.25);border-radius:12px;padding:18px 24px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:13px;letter-spacing:2.5px;color:var(--cream);text-transform:uppercase;flex-shrink:0;">GAAS comp set</div>
+      <div style="display:flex;gap:32px;align-items:baseline;flex:1;justify-content:center;">
+        <div><strong style="color:var(--cream);font-family:var(--font-w);font-size:18px;">Harvey</strong> <span style="color:var(--green);font-weight:800;font-size:18px;">$11B</span> <span style="color:var(--cream-muted);font-size:13px;">legal</span></div>
+        <div><strong style="color:var(--cream);font-family:var(--font-w);font-size:18px;">Cognition</strong> <span style="color:var(--green);font-weight:800;font-size:18px;">$10.2B</span> <span style="color:var(--cream-muted);font-size:13px;">code</span></div>
+        <div><strong style="color:var(--cream);font-family:var(--font-w);font-size:18px;">Sierra</strong> <span style="color:var(--green);font-weight:800;font-size:18px;">$10B</span> <span style="color:var(--cream-muted);font-size:13px;">support</span></div>
+        <div><strong style="color:var(--cream);font-family:var(--font-w);font-size:18px;">MAWD</strong> <span style="color:var(--green);font-weight:800;font-size:18px;">creators</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">7 / 10</div>
+</div>
+
+<!-- ============ SLIDE 8: TEAM ============ -->
+<div class="slide">
+  <div class="slide-label" style="align-self:flex-start;">TEAM</div>
+  <h2 style="font-size:44px;margin-bottom:6px;line-height:1.05;letter-spacing:-1px;">Built by the creator <span style="color:var(--green);">we built it for.</span></h2>
+  <div style="font-size:18px;color:var(--cream-muted);margin-bottom:22px;">Founders who lived the problem. Advisors and backers who&rsquo;ve seen the scale.</div>
+
+  <!-- Leadership row, founders promoted -->
+  <div style="display:flex;gap:32px;margin-bottom:28px;align-items:flex-start;">
+    <!-- Travis -->
+    <div style="flex:1;text-align:center;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:22px 16px;">
+      <img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 25%;margin-bottom:12px;border:2px solid rgba(201,168,76,0.4);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--cream);">Travis Atreo</div>
+      <div style="font-family:var(--font-w);font-weight:600;font-size:15px;color:var(--gold);margin:4px 0 6px;">Founder &amp; CEO</div>
+      <div style="font-size:14px;color:var(--cream-muted);line-height:1.3;">400M streams. 20 years independent.<br>Built MAWD because he needed it.</div>
+    </div>
+    <!-- Kevin -->
+    <div style="flex:1;text-align:center;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:22px 16px;">
+      <img src="photos/kevin_opt.jpg" alt="Kevin Pamittan" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 20%;margin-bottom:12px;border:2px solid rgba(201,168,76,0.4);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--cream);">Kevin Pamittan</div>
+      <div style="font-family:var(--font-w);font-weight:600;font-size:15px;color:var(--gold);margin:4px 0 6px;">CTO</div>
+      <div style="font-size:14px;color:var(--cream-muted);line-height:1.3;">Shipped ML systems at scale.<br>Architect of MAWD&rsquo;s agent stack.</div>
+    </div>
+    <!-- Lewis -->
+    <div style="flex:1;text-align:center;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:22px 16px;">
+      <img src="photos/lewis.png" alt="Lewis Zhuo" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 25%;margin-bottom:12px;border:2px solid rgba(201,168,76,0.4);">
+      <div style="font-family:var(--font-w);font-weight:800;font-size:22px;color:var(--cream);">Lewis Zhuo</div>
+      <div style="font-family:var(--font-w);font-weight:600;font-size:15px;color:var(--gold);margin:4px 0 6px;">Head of Clubs &amp; Operations</div>
+      <div style="font-size:14px;color:var(--cream-muted);line-height:1.3;">Front lines at Apple and Tesla.<br>Leads Clubs and member operations.</div>
+    </div>
+  </div>
+
+  <!-- Advisors + Backers, compact single row each -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:2px;color:var(--cream-muted);text-transform:uppercase;margin-bottom:10px;">Advisors</div>
+      <div style="font-size:15px;color:var(--cream);line-height:1.7;">
+        <strong style="color:var(--cream);">Dr. Chris Mattmann</strong> <span style="color:var(--cream-muted);">&middot; Chief Data &amp; AI Officer, UCLA (ex-NASA JPL)</span><br>
+        <strong style="color:var(--cream);">Ted Schilowitz</strong> <span style="color:var(--cream-muted);">&middot; 1st employee, RED Cinema</span><br>
+        <strong style="color:var(--cream);">Eric Toda</strong> <span style="color:var(--cream-muted);">&middot; Global Head of Social, Meta</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:12px;letter-spacing:2px;color:var(--cream-muted);text-transform:uppercase;margin-bottom:10px;">Backed by</div>
+      <div style="font-size:15px;color:var(--cream);line-height:1.7;">
+        <strong style="color:var(--cream);">Jason Kwon</strong> <span style="color:var(--cream-muted);">&middot; CSO, OpenAI</span><br>
+        <strong style="color:var(--cream);">Dave Lu</strong> <span style="color:var(--cream-muted);">&middot; Hyphen Capital</span><br>
+        <strong style="color:var(--cream);">Josh Cooley</strong> <span style="color:var(--cream-muted);">&middot; Director, Toy Story 4</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">8 / 10</div>
+</div>
+
+<!-- ============ SLIDE 9: ROADMAP ============ -->
+<div class="slide">
+  <div class="slide-label">ROADMAP</div>
+  <h2 style="font-size:46px;margin-bottom:6px;line-height:1.05;letter-spacing:-1.2px;">
+    From wedge to <span style="color:var(--green);">the layer every creator deal runs through.</span>
+  </h2>
+  <div style="font-size:17px;color:var(--cream-muted);margin-bottom:22px;line-height:1.4;">Three acts. Each one compounds the last. Each one is a bigger business than the one before it.</div>
+
+  <!-- Three-phase roadmap -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:14px;margin-bottom:18px;">
+    <!-- Act I: Wedge -->
+    <div style="background:rgba(59,173,228,0.06);border:1px solid rgba(59,173,228,0.4);border-radius:14px;padding:18px 20px;position:relative;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Act I &middot; Now &ndash; 18 mo</div>
+      <div style="font-family:var(--font-w);font-weight:900;font-size:26px;color:var(--cream);line-height:1.05;margin-bottom:8px;letter-spacing:-0.5px;">The Wedge</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.45;margin-bottom:10px;">MAWD ships as the AI talent manager for solo creators. Seat + usage pricing. Inbox, taxes, royalties, contracts.</div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--cream-muted);line-height:1.4;">
+        <div>&middot; 5,000 paying creators</div>
+        <div>&middot; $3M ARR</div>
+        <div>&middot; First take-rate dollar booked</div>
+      </div>
+    </div>
+
+    <!-- Act II: Platform -->
+    <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.4);border-radius:14px;padding:18px 20px;">
+      <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Act II &middot; Year 2 &ndash; 3</div>
+      <div style="font-family:var(--font-w);font-weight:900;font-size:26px;color:var(--cream);line-height:1.05;margin-bottom:8px;letter-spacing:-0.5px;">The Platform</div>
+      <div style="font-size:13px;color:var(--cream-dim);line-height:1.45;margin-bottom:10px;">Management, labels, agencies run their rosters on MAWD. Contracts and payments close inside the product. Take-rate becomes the primary revenue line.</div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--cream-muted);line-height:1.4;">
+        <div>&middot; 50K+ creators on platform</div>
+        <div>&middot; $50M+ GMV flowing through MAWD</div>
+        <div>&middot; Take-rate = majority of revenue</div>
+      </div>
+    </div>
+
+    <!-- Act III: Endgame -->
+    <div style="background:rgba(46,204,113,0.1);border:2px solid rgba(46,204,113,0.5);border-radius:14px;padding:18px 20px;position:relative;">
+      <div style="position:absolute;top:12px;right:12px;font-family:var(--font-w);font-weight:800;font-size:9px;letter-spacing:2px;color:var(--green);background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);border-radius:4px;padding:3px 7px;">ENDGAME</div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Act III &middot; Year 3+</div>
+      <div style="font-family:var(--font-w);font-weight:900;font-size:26px;color:var(--cream);line-height:1.05;margin-bottom:8px;letter-spacing:-0.5px;">Agent-to-Agent Dealflow</div>
+      <div style="font-size:13px;color:var(--cream);line-height:1.45;margin-bottom:10px;">Brands, platforms, and managers send deals to creator agents. MAWD is the protocol. Every brand deal, sync, tour buy, and licensing transaction in the creator economy settles through us.</div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--cream-dim);line-height:1.4;">
+        <div>&middot; 1&ndash;3% take on creator economy GMV</div>
+        <div>&middot; Multi-billion dollar outcome</div>
+        <div>&middot; The layer the whole market runs on</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Market context footer -->
+  <div style="background:linear-gradient(90deg,rgba(59,173,228,0.05),rgba(46,204,113,0.08));border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
+    <div style="font-family:var(--font-w);font-weight:700;font-size:11px;letter-spacing:2px;color:var(--cream-muted);text-transform:uppercase;">Creator economy GMV by 2030</div>
+    <div style="font-family:var(--font-w);font-weight:900;font-size:30px;color:var(--green);letter-spacing:-1px;">$480B</div>
+    <div style="font-size:13px;color:var(--cream-dim);flex:1;text-align:right;line-height:1.35;">A 1% take on a fraction of this is a generational business. We are building the rails.</div>
+  </div>
+
+  <div class="page-num">9 / 10</div>
+</div>
+
+<!-- ============ SLIDE 10: THE CLOSE ============ -->
+<div class="slide" style="justify-content:center;align-items:center;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(46,204,113,0.05) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:center;width:100%;">
+
+    <!-- LEFT: the ask -->
+    <div>
+      <div style="font-family:var(--font-w);font-weight:700;font-size:13px;letter-spacing:4px;color:var(--cream-muted);text-transform:uppercase;margin-bottom:20px;">THE ASK</div>
+
+      <h1 style="font-size:50px;line-height:1.05;margin-bottom:14px;letter-spacing:-1.6px;">
+        <span style="color:var(--green);">$1.5M</span> to turn every creator<br>
+        into a studio <strong>that runs itself.</strong>
+      </h1>
+
+      <div style="font-size:18px;color:var(--cream-dim);margin-bottom:24px;line-height:1.5;">
+        Pre-seed SAFE at <strong style="color:var(--cream);">$15M cap.</strong> Lead open.
+      </div>
+
+      <!-- Month 18 outcome -->
+      <div style="margin-bottom:18px;padding:14px 20px;background:rgba(46,204,113,0.06);border:1px solid rgba(46,204,113,0.3);border-radius:12px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:10px;letter-spacing:3px;color:var(--green);text-transform:uppercase;margin-bottom:4px;">By month 18</div>
+        <div style="font-family:var(--font-w);font-weight:800;font-size:17px;color:var(--cream);line-height:1.3;">
+          5,000 paying creators &middot; <span style="color:var(--green);">$3M ARR</span> &middot; first take-rate revenue &middot; Series A metrics
+        </div>
+      </div>
+
+      <!-- Use of funds, simple row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:30px;color:var(--blue);line-height:1;letter-spacing:-1px;">18 mo</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:6px;">runway to Series A</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:30px;color:var(--gold);line-height:1;letter-spacing:-1px;">4 hires</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:6px;">engineers to ship MAWD</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-family:var(--font-w);font-weight:900;font-size:30px;color:var(--green);line-height:1;letter-spacing:-1px;">200+</div>
+          <div style="font-size:12px;color:var(--cream-muted);margin-top:6px;">waitlist creators activated</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:20px;">
+        <div style="font-family:var(--font-w);font-weight:700;font-size:17px;color:var(--cream);">travis@fanded.com</div>
+        <div style="width:4px;height:4px;border-radius:50%;background:var(--cream-muted);"></div>
+        <div style="font-family:var(--font-w);font-weight:700;font-size:17px;color:var(--cream);">fanded.com</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: product mock (MAWD briefing) -->
+    <div style="display:flex;justify-content:center;align-items:center;">
+      <div style="position:relative;width:290px;padding:12px;background:linear-gradient(145deg,#2A2A32 0%,#0E0E12 50%,#1C1C22 100%);border-radius:54px;box-shadow:0 40px 90px rgba(0,0,0,0.7),0 0 0 1.5px rgba(245,241,234,0.12),inset 0 0 0 1px rgba(245,241,234,0.05);">
+        <!-- Side buttons -->
+        <div style="position:absolute;left:-2px;top:100px;width:2px;height:30px;background:#1C1C22;border-radius:2px 0 0 2px;"></div>
+        <div style="position:absolute;left:-2px;top:155px;width:2px;height:48px;background:#1C1C22;border-radius:2px 0 0 2px;"></div>
+        <div style="position:absolute;left:-2px;top:215px;width:2px;height:48px;background:#1C1C22;border-radius:2px 0 0 2px;"></div>
+        <div style="position:absolute;right:-2px;top:145px;width:2px;height:78px;background:#1C1C22;border-radius:0 2px 2px 0;"></div>
+        <!-- Screen -->
+        <div style="width:266px;background:#0A0A0F;border-radius:42px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.8);">
+          <img src="photos/MAWD1.PNG" alt="MAWD proactively briefing Travis on his YouTube business" style="display:block;width:100%;height:auto;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-num">10 / 10</div>
+</div>
+
+</div><!-- /deck -->
+
+<button class="deck-nav prev hidden" id="navPrev" aria-label="Previous slide">&#8249;</button>
+<button class="deck-nav next" id="navNext" aria-label="Next slide">&#8250;</button>
+<div class="deck-counter" id="deckCounter" style="display:none;">1 / 10</div>
+
+<script>
+(function() {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var current = 0;
+  var counter = document.getElementById('deckCounter');
+  var prevBtn = document.getElementById('navPrev');
+  var nextBtn = document.getElementById('navNext');
+
+  var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  function isLandscapeMobile() {
+    var smallLandscape = window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+    var touchLandscape = isTouch && window.innerWidth > window.innerHeight;
+    return smallLandscape || touchLandscape;
+  }
+
+  // Fit-to-viewport: scale the fixed 1920x1080 deck canvas to fit any screen (letterbox).
+  function fitDeck() {
+    var deck = document.getElementById('deck');
+    if (!deck) return;
+    var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    deck.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  fitDeck();
+  var lastWidth = window.innerWidth, lastHeight = window.innerHeight;
+  window.addEventListener('resize', function() {
+    // Ignore iOS URL bar height-only jitter during scroll
+    if (window.innerWidth !== lastWidth || Math.abs(window.innerHeight - lastHeight) > 80) {
+      lastWidth = window.innerWidth; lastHeight = window.innerHeight; fitDeck();
+    }
+  });
+  window.addEventListener('orientationchange', function() {
+    var checks = 0;
+    var poll = setInterval(function() { checks++; fitDeck(); if (checks > 10) clearInterval(poll); }, 100);
+  });
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.classList.toggle('hidden', current === 0);
+    nextBtn.classList.toggle('hidden', current === total - 1);
+  }
+
+  prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+  });
+
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) { dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+  }, { passive: true });
+
+  goTo(0);
+})();
+</script>
+
+</body>
+</html>
