@@ -7,28 +7,59 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   @page { size: 20in 11.25in; margin: 0; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #07070F;
-    --bg-card: #0F0F1C;
-    --cream: #F5F1EA;
-    --cream-dim: #9999BB;
-    --cream-muted: #6B6B8A;
-    --blue: #3BADE4;
-    --green: #2ECC71;
-    --red: #E74C3C;
-    --gold: #C9A84C;
-    --purple: #9B59B6;
-    --teal: #0D9488;
-    --pink: #EC4899;
-    --border: #1C1C2E;
-    --font-d: 'Playfair Display', Georgia, serif;
+    /* fanded.com dark — deepened */
+    --bg:        #030310;
+    --bg-0:      #030310;
+    --bg-1:      #05051A;
+    --bg-2:      #08082A;
+    --bg-3:      #0E0E3A;
+    --bg-card:   rgba(255,255,255,0.03);
+    --surface:   rgba(255,255,255,0.03);
+    --surface-2: rgba(255,255,255,0.05);
+    --hairline:  rgba(255,255,255,0.07);
+    --hairline-2:rgba(255,255,255,0.12);
+    --border:    rgba(255,255,255,0.07);
+
+    /* Ink (text) — remaps cream tokens to fanded.com ink scale */
+    --cream:       #EDEDF5;
+    --cream-dim:   #B6B6CC;
+    --cream-muted: #7A7A94;
+    --ink-hi:      #EDEDF5;
+    --ink-md:      #B6B6CC;
+    --ink-lo:      #7A7A94;
+    --ink-xlo:     #4D4D6A;
+
+    /* Accent system — semantic colors, all harmonized to purple-glow mood */
+    --blue:        #9A8EFF;   /* lavender primary (was azure) */
+    --blue-light:  #B9AFFF;
+    --blue-deep:   #5D50D1;
+    --blue-glow:   rgba(154,142,255,0.45);
+    --mint:        #5EE5C2;   /* money / growth */
+    --mint-glow:   rgba(94,229,194,0.35);
+    --green:       #5EE5C2;   /* remap — old green → mint */
+    --amber:       #F5C26B;   /* legal / warning / taxes */
+    --amber-glow:  rgba(245,194,107,0.35);
+    --gold:        #F5C26B;   /* remap — old gold → amber */
+    --red:         #FF8A7A;   /* coral — softer than true red */
+    --coral:       #FF8A7A;
+    --coral-glow:  rgba(255,138,122,0.35);
+    --sky:         #6FD3F0;   /* platforms / distribution */
+    --sky-glow:    rgba(111,211,240,0.35);
+    --teal:        #6FD3F0;   /* remap */
+    --pink:        #F06FB4;   /* creative */
+    --pink-glow:   rgba(240,111,180,0.35);
+    --purple:      #F06FB4;   /* remap */
+
+    --font-d: 'Playfair Display', Georgia, serif;   /* reserved for slide-1 MAWD title */
     --font-b: 'DM Sans', -apple-system, sans-serif;
-    --font-w: 'Bricolage Grotesque', 'DM Sans', sans-serif;
+    --font-w: 'DM Sans', -apple-system, sans-serif; /* remap — was Bricolage */
+    --font-m: 'JetBrains Mono', ui-monospace, Menlo, monospace;
   }
 
   html, body {
@@ -100,38 +131,90 @@
   }
 
   .slide-label {
-    font-family: var(--font-w); font-weight: 700; font-size: 16px;
-    letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+    font-family: var(--font-m); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.22em; color: var(--ink-lo); text-transform: uppercase;
     position: absolute; top: 60px; left: 72px; z-index: 20;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .slide-label::before {
+    content:""; width:7px; height:7px; border-radius:50%;
+    background: var(--blue); box-shadow: 0 0 10px var(--blue-glow);
   }
 
-  h1 { font-family: var(--font-d); font-weight: 900; font-size: 52px; line-height: 1.15; color: var(--cream); margin-bottom: 20px; }
-  h2 { font-family: var(--font-d); font-weight: 700; font-size: 40px; line-height: 1.2; color: var(--cream); margin-bottom: 16px; }
-  h3 { font-family: var(--font-w); font-weight: 700; font-size: 22px; color: var(--cream); margin-bottom: 12px; }
+  /* h1/h2 are now DM Sans. MAWD title-screen word uses .title-mawd for Playfair. */
+  h1 { font-family: var(--font-b); font-weight: 600; font-size: 52px; line-height: 1.02; color: var(--cream); letter-spacing: -0.024em; margin-bottom: 20px; }
+  h2 { font-family: var(--font-b); font-weight: 600; font-size: 40px; line-height: 1.04; color: var(--cream); letter-spacing: -0.022em; margin-bottom: 16px; }
+  h3 { font-family: var(--font-b); font-weight: 600; font-size: 22px; color: var(--cream); letter-spacing: -0.015em; margin-bottom: 12px; }
+
+  /* Title-screen MAWD keeps the serif display treatment */
+  .title-mawd { font-family: var(--font-d) !important; font-weight: 900 !important; letter-spacing: -6px !important; }
 
   .body { font-size: 22px; color: var(--cream-dim); line-height: 1.6; max-width: 900px; }
   .body-sm { font-size: 19px; color: var(--cream-muted); line-height: 1.5; }
-  .big-number { font-family: var(--font-w); font-weight: 800; font-size: 72px; line-height: 1; }
+  .big-number { font-family: var(--font-b); font-weight: 700; font-size: 72px; line-height: 1; letter-spacing: -0.025em; }
 
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; border-radius: 40px;
-    font-size: 18px; font-weight: 600; font-family: var(--font-w);
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 18px; font-weight: 500; font-family: var(--font-b);
     margin-right: 8px; margin-bottom: 10px;
+    letter-spacing: -0.01em;
   }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
 
   .stat-card {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 28px 24px; text-align: center;
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 14px; padding: 28px 24px; text-align: center;
   }
-  .stat-num { font-family: var(--font-w); font-weight: 800; font-size: 48px; line-height: 1; margin-bottom: 8px; }
+  .stat-num { font-family: var(--font-b); font-weight: 700; font-size: 48px; line-height: 1; letter-spacing: -0.025em; margin-bottom: 8px; }
   .stat-label { font-size: 18px; color: var(--cream-muted); }
 
   .logo-text { display: none !important; }
-  .page-num { font-size: 12px; color: rgba(107,107,138,0.5); position: absolute; top: 20px; right: 72px; z-index: 50; }
+  .page-num {
+    font-family: var(--font-m); font-weight: 500; font-size: 11px;
+    letter-spacing: 0.1em; color: var(--ink-xlo);
+    position: absolute; top: 60px; right: 72px; z-index: 50;
+  }
+
+  /* === Slide background: fanded.com purple glow + dotted texture === */
+  .slide::before {
+    content:""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(55% 45% at 70% 0%, rgba(154,142,255,0.10), transparent 70%),
+      radial-gradient(40% 35% at 10% 100%, rgba(94,229,194,0.04), transparent 70%);
+  }
+  .slide::after {
+    content:""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.35; mix-blend-mode: screen;
+  }
+  .slide > * { z-index: 1; }
+  .slide > *:not(.slide-label):not(.page-num):not(.logo-text) { position: relative; }
+
+  /* === em emphasis — fanded.com pattern: no italic, weight 500, lavender === */
+  .slide em { font-style: normal; font-weight: 500; color: var(--blue); }
+
+  /* === pain-pill: neutralize inline rgba backgrounds, keep inline color for category text === */
+  .pain-pill, .pill {
+    background: var(--surface) !important;
+    font-family: var(--font-b) !important;
+    font-weight: 500 !important;
+  }
+  .pain-pill {
+    border: 1px solid var(--hairline) !important;
+  }
+  /* Hero pill keeps its thicker border (inline style wins for border, but amplify) */
+  .pain-pill[style*="font-size:22px"] {
+    background: linear-gradient(180deg, rgba(245,194,107,0.22), rgba(245,194,107,0.08)) !important;
+    border: 1px solid rgba(245,194,107,0.5) !important;
+    box-shadow: 0 4px 14px var(--amber-glow);
+  }
+
+  /* === agent card shadow override === */
+  .agent-card { box-shadow: none !important; }
 
   /* === ANIMATIONS === */
   @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
@@ -213,40 +296,48 @@
 
 <div id="deck">
 
-<!-- ============ SLIDE 1: TITLE (SMS hero variant) ============ -->
+<!-- ============ SLIDE 1: TITLE (fanded.com aesthetic) ============ -->
 <div class="slide active" style="justify-content:center;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(46,204,113,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+  <!-- Lavender glow behind hero -->
+  <div style="position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(154,142,255,0.16) 0%,rgba(94,229,194,0.04) 40%,transparent 70%);pointer-events:none;"></div>
 
-  <div style="max-width:900px;margin:0 auto;text-align:center;">
+  <div style="max-width:900px;margin:0 auto;text-align:center;position:relative;">
 
-    <!-- Brand + pitch, centered -->
-    <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;">
-      <img src="logo.png" alt="Fanded" style="width:26px;height:26px;object-fit:contain;">
-      <span style="font-family:var(--font-w);font-weight:800;font-size:18px;letter-spacing:2px;color:#3BADE4;">Fanded</span>
+    <!-- Brand wordmark — mono + glowing dot, fanded.com pattern -->
+    <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:40px;padding:7px 16px;background:var(--surface);border:1px solid var(--hairline);border-radius:999px;">
+      <img src="logo.png" alt="Fanded" style="width:18px;height:18px;object-fit:contain;filter:drop-shadow(0 2px 8px var(--blue-glow));">
+      <span style="font-family:var(--font-b);font-weight:600;font-size:14px;letter-spacing:-0.01em;color:var(--ink-hi);">fanded</span>
+      <span style="width:1px;height:12px;background:var(--hairline-2);margin:0 4px;"></span>
+      <span style="font-family:var(--font-m);font-weight:500;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-lo);">v2.0 · 2026</span>
     </div>
 
-    <h1 style="font-size:180px;margin-bottom:28px;letter-spacing:-6px;line-height:0.9;">MAWD</h1>
+    <h1 class="title-mawd" style="font-size:200px;margin-bottom:0;line-height:0.9;letter-spacing:-8px;background:linear-gradient(180deg, var(--ink-hi) 0%, #B9AFFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">MAWD</h1>
 
-    <div style="font-family:var(--font-d);font-weight:400;font-size:24px;color:var(--cream);margin-bottom:22px;line-height:1.4;letter-spacing:5px;text-transform:uppercase;">
+    <!-- Eyebrow-style tagline, mono -->
+    <div style="font-family:var(--font-m);font-weight:500;font-size:13px;color:var(--ink-lo);margin-top:14px;margin-bottom:28px;line-height:1;letter-spacing:0.3em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;">
+      <span style="width:40px;height:1px;background:var(--hairline-2);"></span>
       Your AI Talent Manager
+      <span style="width:40px;height:1px;background:var(--hairline-2);"></span>
     </div>
 
-    <div style="font-family:var(--font-d);font-style:italic;font-size:22px;color:var(--cream-muted);margin-bottom:44px;line-height:1.5;letter-spacing:0.3px;max-width:740px;margin-left:auto;margin-right:auto;">
-      A team of private AI agents tuned specifically for creatives. It runs your business so you can stay creating.
+    <!-- Subtitle — DM Sans, em pattern -->
+    <div style="font-family:var(--font-b);font-weight:400;font-size:22px;color:var(--ink-md);margin-bottom:48px;line-height:1.5;letter-spacing:-0.01em;max-width:720px;margin-left:auto;margin-right:auto;">
+      A team of <em>private AI agents</em> tuned specifically for creatives.<br>It runs your business so you can stay creating.
     </div>
 
-    <div style="display:inline-flex;align-items:center;gap:14px;">
-      <img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" style="width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center 25%;border:2px solid rgba(46,204,113,0.4);">
+    <!-- Author chip — surface card -->
+    <div style="display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;background:var(--surface);border:1px solid var(--hairline);border-radius:999px;">
+      <img src="photos/travis-headshot_opt.jpg" alt="Travis Atreo" style="width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:center 25%;border:1.5px solid rgba(154,142,255,0.4);">
       <div style="text-align:left;">
-        <div style="font-family:var(--font-w);font-weight:700;font-size:15px;color:var(--cream);">Travis Atreo</div>
-        <div style="font-size:13px;color:var(--cream-muted);">Founder &amp; CEO &middot; Fanded Inc.</div>
+        <div style="font-family:var(--font-b);font-weight:600;font-size:14px;color:var(--ink-hi);letter-spacing:-0.01em;line-height:1.2;">Travis Atreo</div>
+        <div style="font-family:var(--font-m);font-weight:500;font-size:10px;color:var(--ink-lo);letter-spacing:0.12em;text-transform:uppercase;margin-top:2px;">Founder &amp; CEO · Fanded Inc.</div>
       </div>
     </div>
 
   </div>
 
   <div class="logo-text">FANDED</div>
-  <div class="page-num">1 / 10</div>
+  <div class="page-num">01 / 10</div>
 </div>
 
 <!-- ============ SLIDE 2: I LIVED THIS ============ -->
