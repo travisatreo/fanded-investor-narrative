@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Fan List Is The Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: letter; margin: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #02030A;
+    --surface:   #07091A;
+    --surface-2: #0E1124;
+    --ink:       #F4F4FF;
+    --ink-2:     #D5D5EE;
+    --ink-3:     #9595B5;
+    --rule:      rgba(244,244,255,0.08);
+    --rule-2:    rgba(244,244,255,0.16);
+
+    --cyan:      #5BE9FF;
+    --violet:    #2563EB;
+    --magenta:   #93C5FD;
+    --lime:      #C8FF3D;
+    --amber:     #FFB84D;
+
+    --grad: linear-gradient(135deg, #5BE9FF 0%, #4A9FFF 50%, #2563EB 100%);
+
+    --font-d: 'Space Grotesk', -apple-system, sans-serif;
+    --font-s: 'Instrument Serif', Georgia, serif;
+    --font-b: 'Inter', -apple-system, sans-serif;
+    --font-m: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+
+  html, body {
+    margin: 0;
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-b); -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    position: relative;
+    width: 8.5in; height: 11in;
+    padding: 0.85in 0.85in 0.95in;
+    overflow: hidden;
+    background: var(--bg);
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  /* Dot grid */
+  .page::before {
+    content:""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(rgba(244,244,255,1) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.025;
+  }
+
+  /* Aurora */
+  .aurora { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; opacity: 0.55; }
+  .aurora .blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.55; mix-blend-mode: screen; }
+
+  .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+
+  /* Chrome */
+  .chrome-tl {
+    position: absolute; top: 0.5in; left: 0.85in;
+    font-family: var(--font-d); font-weight: 500; font-size: 10pt;
+    color: var(--ink-3); letter-spacing: 0.18em; text-transform: uppercase;
+    z-index: 5;
+  }
+  .chrome-br {
+    position: absolute; bottom: 0.5in; right: 0.85in;
+    font-family: var(--font-d); font-weight: 500; font-size: 10pt;
+    color: var(--ink-3); letter-spacing: -0.01em;
+    z-index: 5;
+  }
+  .chrome-bl {
+    position: absolute; bottom: 0.5in; left: 0.85in;
+    font-family: var(--font-m); font-weight: 500; font-size: 9pt;
+    color: var(--ink-3); letter-spacing: 0.22em; text-transform: uppercase;
+    z-index: 5;
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--font-m); font-weight: 500; font-size: 10pt;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--cyan);
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--cyan); }
+  .eyebrow.lime { color: var(--lime); }      .eyebrow.lime::before { background: var(--lime); }
+  .eyebrow.mag  { color: var(--magenta); }   .eyebrow.mag::before  { background: var(--magenta); }
+  .eyebrow.amb  { color: var(--amber); }     .eyebrow.amb::before  { background: var(--amber); }
+  .eyebrow.vio  { color: var(--violet); }    .eyebrow.vio::before  { background: var(--violet); }
+
+  /* Type */
+  .h-cover { font-family: var(--font-d); font-weight: 500; font-size: 72pt; line-height: 0.94; letter-spacing: -0.035em; color: var(--ink); }
+  .h-cover em { font-family: var(--font-s); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+  .h-cover .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .h-section { font-family: var(--font-d); font-weight: 500; font-size: 36pt; line-height: 1.04; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 22px; }
+  .h-section em { font-family: var(--font-s); font-style: italic; font-weight: 400; letter-spacing: -0.005em; }
+
+  .h-sub { font-family: var(--font-d); font-weight: 500; font-size: 16pt; line-height: 1.2; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 10px; }
+  .h-sub em { font-family: var(--font-s); font-style: italic; font-weight: 400; }
+
+  .lede { font-family: var(--font-b); font-size: 14pt; line-height: 1.5; color: var(--ink); letter-spacing: -0.005em; margin-bottom: 18px; }
+  .lede em { font-family: var(--font-s); font-style: italic; color: var(--ink); }
+
+  p.body { font-family: var(--font-b); font-size: 11.5pt; line-height: 1.62; color: var(--ink-2); margin-bottom: 12px; letter-spacing: -0.003em; }
+  p.body em { font-family: var(--font-s); font-style: italic; color: var(--ink); font-size: 13pt; line-height: 1; }
+  p.body strong { color: var(--ink); font-weight: 600; }
+
+  .meta-row {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--font-m); font-size: 9pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .meta-row .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-3); }
+
+  /* Cards / blocks */
+  .pull {
+    position: relative;
+    border-left: 2px solid var(--cyan);
+    padding: 6px 0 6px 18px;
+    margin: 18px 0 22px;
+    font-family: var(--font-s); font-style: italic; font-size: 18pt; line-height: 1.32; color: var(--ink); letter-spacing: -0.005em;
+  }
+  .pull.lime { border-left-color: var(--lime); }
+  .pull.mag  { border-left-color: var(--magenta); }
+  .pull.amb  { border-left-color: var(--amber); }
+
+  .card {
+    background: linear-gradient(180deg, rgba(244,244,255,0.04), rgba(244,244,255,0.012));
+    border: 1px solid var(--rule-2);
+    border-radius: 12px;
+    padding: 18px 20px;
+    break-inside: avoid;
+  }
+  .card .num {
+    font-family: var(--font-d); font-weight: 500; font-size: 11pt;
+    color: var(--cyan); letter-spacing: 0.08em;
+    margin-bottom: 6px; display: block;
+  }
+  .card.lime .num { color: var(--lime); }
+  .card.mag .num  { color: var(--magenta); }
+  .card.amb .num  { color: var(--amber); }
+  .card.vio .num  { color: var(--violet); }
+  .card .stage {
+    font-family: var(--font-d); font-weight: 500; font-size: 17pt; line-height: 1.1; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 7px;
+  }
+  .card p {
+    font-family: var(--font-b); font-size: 10.5pt; line-height: 1.55; color: var(--ink-2);
+  }
+
+  .grid-5 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 11px;
+  }
+  .grid-5 > .span2 { grid-column: 1 / -1; }
+  .grid-5 .card { padding: 13px 16px; }
+  .grid-5 .card .num { font-size: 9.5pt; margin-bottom: 4px; }
+  .grid-5 .card .stage { font-size: 14pt; margin-bottom: 5px; line-height: 1.08; }
+  .grid-5 .card p { font-size: 9.5pt; line-height: 1.5; }
+
+  .principle {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .principle:last-child { border-bottom: none; }
+  .principle .idx {
+    flex: 0 0 36px;
+    font-family: var(--font-d); font-weight: 500; font-size: 22pt; line-height: 1; color: var(--cyan); letter-spacing: -0.02em;
+  }
+  .principle.lime .idx { color: var(--lime); }
+  .principle.mag .idx  { color: var(--magenta); }
+  .principle .bd { flex: 1; }
+  .principle h4 {
+    font-family: var(--font-d); font-weight: 500; font-size: 14pt; line-height: 1.15; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.01em;
+  }
+  .principle p {
+    font-family: var(--font-b); font-size: 11pt; line-height: 1.55; color: var(--ink-2);
+  }
+
+  .never-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 12px 16px;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: rgba(244,244,255,0.015);
+  }
+  .never-row .x {
+    flex: 0 0 18px; height: 18px; border-radius: 50%;
+    border: 1px solid var(--magenta); position: relative; top: 4px;
+  }
+  .never-row .x::before, .never-row .x::after {
+    content: ""; position: absolute; inset: 0; margin: auto;
+    width: 8px; height: 1px; background: var(--magenta);
+    top: 50%; left: 50%; transform-origin: center;
+  }
+  .never-row .x::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .never-row .x::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+  .never-row p {
+    font-family: var(--font-b); font-size: 11pt; line-height: 1.5; color: var(--ink-2);
+  }
+  .never-row p strong { color: var(--ink); font-weight: 600; }
+
+  .order-stack {
+    border: 1px solid var(--rule-2); border-radius: 14px;
+    padding: 22px 24px; margin: 14px 0 18px;
+    background: linear-gradient(180deg, rgba(91,233,255,0.05), rgba(244,244,255,0.012));
+  }
+  .order-stack .row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--rule);
+    font-family: var(--font-d); font-weight: 500;
+  }
+  .order-stack .row:last-child { border-bottom: none; }
+  .order-stack .row .k { color: var(--ink); font-size: 16pt; letter-spacing: -0.01em; }
+  .order-stack .row .v { color: var(--ink-3); font-family: var(--font-m); font-size: 9.5pt; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  .closing {
+    font-family: var(--font-s); font-style: italic; font-size: 26pt; line-height: 1.18; color: var(--ink); letter-spacing: -0.01em;
+    margin-top: 18px;
+  }
+  .closing .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* Cover layout */
+  .cover { display: flex; flex-direction: column; height: 100%; }
+  .cover .top { flex: 0 0 auto; }
+  .cover .mid { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover .bot { flex: 0 0 auto; display: flex; justify-content: space-between; align-items: flex-end; }
+
+  .rule-thin { height: 1px; background: var(--rule-2); margin: 14px 0 18px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:520px;height:520px;left:-120px;top:-100px;background:#5BE9FF;opacity:0.32;"></div>
+    <div class="blob" style="width:560px;height:560px;right:-160px;bottom:-80px;background:#2563EB;opacity:0.28;"></div>
+    <div class="blob" style="width:380px;height:380px;left:40%;top:38%;background:#93C5FD;opacity:0.16;"></div>
+  </div>
+
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content cover">
+    <div class="top">
+      <div class="meta-row" style="margin-top: 0.4in;">
+        <span>Working document</span>
+        <span class="dot"></span>
+        <span>April 2026</span>
+        <span class="dot"></span>
+        <span>For the team</span>
+      </div>
+    </div>
+
+    <div class="mid">
+      <h1 class="h-cover">
+        The Fan List Is<br>
+        <em class="grad">The Company.</em>
+      </h1>
+      <div class="rule-thin" style="margin-top: 28px; max-width: 240px;"></div>
+      <p class="lede" style="max-width: 5.6in; margin-top: 18px;">
+        A working document for the Fanded team on the one belief that holds the whole company together: <em>without the fan list, we are a wrapper. With it, we are infrastructure.</em>
+      </p>
+    </div>
+
+    <div class="bot">
+      <div>
+        <div style="font-family: var(--font-m); font-size: 9pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;">Author</div>
+        <div style="font-family: var(--font-d); font-weight: 500; font-size: 13pt; color: var(--ink); letter-spacing: -0.01em;">Travis Atreo</div>
+        <div style="font-family: var(--font-b); font-size: 10pt; color: var(--ink-3); margin-top: 2px;">Founder &amp; CEO, Fanded Inc.</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-family: var(--font-m); font-size: 9pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px;">Status</div>
+        <div style="font-family: var(--font-d); font-weight: 500; font-size: 13pt; color: var(--cyan); letter-spacing: -0.01em;">Active belief</div>
+        <div style="font-family: var(--font-b); font-size: 10pt; color: var(--ink-3); margin-top: 2px;">Read in full. Then come back to it.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bl">01</div>
+</div>
+
+<!-- ============ PAGE 2 — THE ONE THING ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:420px;height:420px;right:-120px;top:-80px;background:#5BE9FF;opacity:0.22;"></div>
+  </div>
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content">
+    <div class="eyebrow">01 &middot; The one thing we believe</div>
+    <h2 class="h-section">Without the fan list, Fanded is a commodity assistant. <em>With it, we are the only company building infrastructure for talent in the AI era.</em></h2>
+
+    <p class="body">This is not a marketing distinction. This is the entire reason we exist.</p>
+
+    <p class="body">If MAWD is just six agents helping a musician run their career (calendar, finances, admin, strategy), then we are competing with ChatGPT, Claude, Gemini, and every vertical AI tool shipping in the next eighteen months. Those tools will get cheaper, faster, and more capable than us on raw assistant functionality because they have more capital and bigger model access. We lose that race. Every wrapper company loses that race eventually.</p>
+
+    <div class="pull">
+      The fan list is what makes us not a wrapper. It is the proprietary, accumulating, talent-specific data asset that no foundation model has and no general assistant can build.
+    </div>
+
+    <p class="body">It is the moat. It is the only moat.</p>
+
+    <p class="body"><strong>Everything we build is in service of the fan list.</strong> If we ever forget that order, we die.</p>
+  </div>
+
+  <div class="chrome-bl">02</div>
+  <div class="chrome-br">The Fan List Is The Company</div>
+</div>
+
+<!-- ============ PAGE 3 — TALENT VS CREATORS ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:460px;height:460px;left:-140px;bottom:-120px;background:#C8FF3D;opacity:0.16;"></div>
+  </div>
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content">
+    <div class="eyebrow lime">02 &middot; Talent is not the same as creators</div>
+    <h2 class="h-section">This is a value we hold and a market truth <em>we operate on.</em></h2>
+
+    <p class="body">Influencers and YouTubers can have fans, but their fandom is built on personality, format, and platform algorithm. The relationship is mediated by the surface they perform on. When the platform changes, the audience erodes.</p>
+
+    <p class="body">Talent is different. Talent relies on their craft (the song, the performance, the role, the album, the show) to drive fandom. The art is the gravitational center. The fan came for the work and stays for the work. The relationship is anchored in something the talent created and owns at the level of soul, even when ownership of masters or rights has been negotiated away.</p>
+
+    <div class="pull lime">
+      A Manny Jacinto fan is not loyal to a posting cadence. They are loyal to Manny. A Darren Hayes fan does not unfollow because the algorithm shifted. They have been there for thirty years because the songs still mean something.
+    </div>
+
+    <p class="body">This is why talent fans are more loyal, more economically valuable, and more willing to pay directly than creator fans.</p>
+
+    <p class="body"><strong>We are not building for creators. We are building for talent.</strong> The distinction matters because our entire product philosophy only works when the gravitational center is craft, not personality. Fans pay for belonging, not content. The art is the scalable object that aggregates the audience. The relationship is the asset.</p>
+
+    <p class="body">If we ever blur this line, we will end up building tools that optimize for engagement metrics instead of fan depth, and we will become indistinguishable from every creator economy product that has come before us.</p>
+  </div>
+
+  <div class="chrome-bl">03</div>
+  <div class="chrome-br">The Fan List Is The Company</div>
+</div>
+
+<!-- ============ PAGE 4 — WHY THE FAN LIST IS THE ASSET ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:460px;height:460px;right:-140px;top:-120px;background:#93C5FD;opacity:0.20;"></div>
+  </div>
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content">
+    <div class="eyebrow mag">03 &middot; Why the fan list is the asset</div>
+    <h2 class="h-section">Three reasons, <em>in order of depth.</em></h2>
+
+    <div style="margin-top: 8px;">
+      <div class="principle">
+        <div class="idx">01</div>
+        <div class="bd">
+          <h4>It is the moat.</h4>
+          <p>ChatGPT cannot tell an artist which two hundred of their fans are most likely to convert to paid membership next month, because ChatGPT does not have that artist's cross-platform fan data and never will. The fan list is the proprietary substrate that no foundation model can replicate.</p>
+        </div>
+      </div>
+
+      <div class="principle lime">
+        <div class="idx">02</div>
+        <div class="bd">
+          <h4>It is what makes the agents intelligent.</h4>
+          <p>A CFO agent that does not know revenue is coming from the top five hundred superfans is just bookkeeping. A strategic advisor agent that does not know which fans are in which cities is just generic advice. The fan list is what makes every MAWD agent smart about this specific artist's specific business. Without it, the agents are smart in a vacuum. With it, they are an actual private chief of staff.</p>
+        </div>
+      </div>
+
+      <div class="principle mag">
+        <div class="idx">03</div>
+        <div class="bd">
+          <h4>It is the artist's true asset.</h4>
+          <p>Masters get negotiated away. Streams are rented from platforms. Followers belong to Meta. The list of humans who care enough to give the artist money and attention directly is the only thing that compounds in the artist's favor across a career. Labels know this. Agencies know this. That is why they hoard it. Fanded's entire moral position is that this asset belongs to the talent, and we are the infrastructure that lets them hold it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bl">04</div>
+  <div class="chrome-br">The Fan List Is The Company</div>
+</div>
+
+<!-- ============ PAGE 5 — THE RECURSIVE LOOP ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:520px;height:520px;left:30%;top:30%;background:#5BE9FF;opacity:0.18;"></div>
+  </div>
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content">
+    <div class="eyebrow amb" style="margin-bottom: 18px;">04 &middot; The recursive loop we are building</div>
+    <h2 class="h-section" style="font-size: 22pt; margin-bottom: 10px; line-height: 1.08;">The fan list is not static. It is a living system <em>that has to feed itself.</em></h2>
+
+    <p class="body" style="margin-bottom: 12px; font-size: 10.5pt;">Five stages. Every feature, every agent, every surface must serve one of them.</p>
+
+    <div class="grid-5">
+      <div class="card">
+        <span class="num">STAGE 01 &middot; CAPTURE</span>
+        <div class="stage">Bring the fan in.</div>
+        <p>Pull fans into the talent's owned ecosystem from every source: streaming platforms, social, email lists, Patreon, distributor data, live events. The Journal is our strongest capture mechanic because it ties capture to the artistic act itself. It does not feel like data collection. It feels like intimacy.</p>
+      </div>
+
+      <div class="card lime">
+        <span class="num">STAGE 02 &middot; RANK</span>
+        <div class="stage">Score the loyalty.</div>
+        <p>Score fans across platforms to identify true loyalists, conversion targets, and dormant high-value relationships. This is where MAWD's intelligence shows up. Ranking must be a living signal, not a snapshot, or activation fires at the wrong people.</p>
+      </div>
+
+      <div class="card mag">
+        <span class="num">STAGE 03 &middot; ORGANIZE</span>
+        <div class="stage">Make chaos legible.</div>
+        <p>This is MAWD's six-agent layer: CFO, fan database, canonical career data, strategic advisory. Talent should feel this stage as relief. Fans should never see it.</p>
+      </div>
+
+      <div class="card amb">
+        <span class="num">STAGE 04 &middot; ACTIVATE</span>
+        <div class="stage">Move at the speed of feeling.</div>
+        <p>Keep fans engaged through the talent's ongoing artistic output. Journal is the hero surface. Activation depends on the artist showing up consistently, and artists are not disciplined by default. MAWD must lower the energy cost of transmitting (prompting, assisting, drafting) so the artist can move at the speed of feeling, not the speed of admin.</p>
+      </div>
+
+      <div class="card vio span2" style="border-color: rgba(91,233,255,0.45); box-shadow: 0 0 40px rgba(91,233,255,0.10);">
+        <span class="num" style="color: var(--cyan);">STAGE 05 &middot; COMPOUND</span>
+        <div class="stage">Fans grow the fan community.</div>
+        <p>This is where Fanded becomes a network instead of a tool. It is the weakest stage in our current build and the most important one to crack. It only works inside something that feels like belonging, which is why our language conventions matter: <em style="font-family: var(--font-s); color: var(--ink);">members, not followers; club, not audience; transmission, not post.</em> Compounding happens inside identity, not broadcast.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bl">05</div>
+  <div class="chrome-br">The Fan List Is The Company</div>
+</div>
+
+<!-- ============ PAGE 6 — IN SERVICE / NEVER DO ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:380px;height:380px;left:-100px;top:60%;background:#FFB84D;opacity:0.14;"></div>
+  </div>
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content">
+    <div class="eyebrow vio">05 &middot; What we are building in service of the loop</div>
+    <h3 class="h-sub" style="font-size: 22pt; line-height: 1.1; margin-bottom: 16px;">Every roadmap decision passes through one filter: <em>does this make the fan list more valuable to the talent?</em></h3>
+
+    <p class="body" style="margin-bottom: 14px;">If the answer is yes, we ship it. If the answer is no, we do not, no matter how cool the feature is or how impressive it looks in a demo.</p>
+
+    <div class="order-stack">
+      <div class="row"><span class="k">The Journal</span><span class="v">Capture &amp; activation surface</span></div>
+      <div class="row"><span class="k">MAWD</span><span class="v">Intelligence layer over the fan list</span></div>
+      <div class="row"><span class="k">Clubs</span><span class="v">Compounding surface for shared identity</span></div>
+    </div>
+
+    <p class="body" style="margin-bottom: 28px;">These three things are the company. <strong>Everything else is in support.</strong></p>
+
+    <div class="eyebrow mag" style="margin-top: 8px;">06 &middot; What we will never do</div>
+
+    <div class="never-row">
+      <div class="x"></div>
+      <p><strong>Never sell, share, or commoditize fan data across talent.</strong> The fan list belongs to the talent. We are stewards, not owners.</p>
+    </div>
+    <div class="never-row">
+      <div class="x"></div>
+      <p><strong>Never build features that optimize for vanity metrics over fan depth.</strong> We are not in the engagement business. We are in the belonging business.</p>
+    </div>
+    <div class="never-row">
+      <div class="x"></div>
+      <p><strong>Never position Fanded as a tool for influencers or general creators.</strong> Our gravitational center is talent: people whose craft drives their fandom. Drift on this point dilutes the whole company.</p>
+    </div>
+    <div class="never-row">
+      <div class="x"></div>
+      <p><strong>Never let MAWD become a generic assistant.</strong> Every agent must be made smart by the fan list, or it does not belong in the system.</p>
+    </div>
+  </div>
+
+  <div class="chrome-bl">06</div>
+  <div class="chrome-br">The Fan List Is The Company</div>
+</div>
+
+<!-- ============ PAGE 7 — THE REMINDER ============ -->
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:600px;height:600px;left:50%;top:30%;transform:translateX(-50%);background:#5BE9FF;opacity:0.22;"></div>
+    <div class="blob" style="width:520px;height:520px;left:-160px;bottom:-180px;background:#2563EB;opacity:0.28;"></div>
+    <div class="blob" style="width:420px;height:420px;right:-140px;top:-120px;background:#93C5FD;opacity:0.18;"></div>
+  </div>
+  <div class="chrome-tl">FANDED &middot; INTERNAL</div>
+
+  <div class="content">
+    <div class="eyebrow">07 &middot; The reminder</div>
+    <h2 class="h-section">When the work gets noisy <em>(fundraising, launches, hiring, pressure),</em> come back to this.</h2>
+
+    <div class="order-stack" style="margin-top: 28px;">
+      <div class="row"><span class="k">The fan list</span><span class="v" style="color: var(--cyan);">is the asset</span></div>
+      <div class="row"><span class="k">MAWD</span><span class="v" style="color: var(--lime);">is the intelligence</span></div>
+      <div class="row"><span class="k">Journal &amp; Clubs</span><span class="v" style="color: var(--magenta);">are the surfaces</span></div>
+      <div class="row"><span class="k">Talent</span><span class="v" style="color: var(--amber);">is who we serve</span></div>
+    </div>
+
+    <p class="body" style="margin-top: 26px; font-size: 13pt;">If we keep these in the right order, Fanded becomes infrastructure. If we lose the order, we become a commodity.</p>
+
+    <div class="closing">
+      We are building <span class="grad">infrastructure.</span>
+    </div>
+  </div>
+
+  <div class="chrome-bl">07</div>
+  <div class="chrome-br">The Fan List Is The Company</div>
+</div>
+
+</body>
+</html>
