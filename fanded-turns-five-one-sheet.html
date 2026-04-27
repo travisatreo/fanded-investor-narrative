@@ -41,7 +41,7 @@
   .page {
     position: relative;
     width: 8.5in; height: 11in;
-    padding: 0.55in 0.65in 0.55in;
+    padding: 0.45in 0.6in 0.45in;
     overflow: hidden;
     background: var(--bg);
   }
@@ -63,7 +63,7 @@
   /* Top chrome */
   .top-row {
     display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .top-row .tag {
     font-family: var(--font-d); font-weight: 500; font-size: 9pt;
@@ -79,10 +79,10 @@
   .title-block {
     display: flex; align-items: flex-end; justify-content: space-between;
     gap: 28px;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
   }
   .title-block h1 {
-    font-family: var(--font-d); font-weight: 500; font-size: 44pt; line-height: 0.95; letter-spacing: -0.035em; color: var(--ink);
+    font-family: var(--font-d); font-weight: 500; font-size: 36pt; line-height: 0.95; letter-spacing: -0.035em; color: var(--ink);
     flex: 1;
   }
   .title-block h1 em { font-family: var(--font-s); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
@@ -90,28 +90,28 @@
 
   .title-block .lede {
     flex: 0 0 2.9in;
-    font-family: var(--font-b); font-size: 10.5pt; line-height: 1.5; color: var(--ink-2); letter-spacing: -0.003em;
-    padding-bottom: 6px;
+    font-family: var(--font-b); font-size: 10pt; line-height: 1.45; color: var(--ink-2); letter-spacing: -0.003em;
+    padding-bottom: 4px;
   }
-  .title-block .lede em { font-family: var(--font-s); font-style: italic; color: var(--ink); font-size: 12pt; }
+  .title-block .lede em { font-family: var(--font-s); font-style: italic; color: var(--ink); font-size: 11.5pt; }
 
-  .rule { height: 1px; background: var(--rule-2); margin: 0 0 16px; }
+  .rule { height: 1px; background: var(--rule-2); margin: 0 0 12px; }
 
   /* Lessons */
   .lessons {
     display: flex; flex-direction: column;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
   .lesson {
-    display: grid; grid-template-columns: 38px 1.85in 1fr; gap: 18px;
-    padding: 11px 0;
+    display: grid; grid-template-columns: 34px 1.7in 1fr; gap: 16px;
+    padding: 7px 0;
     border-bottom: 1px solid var(--rule);
     align-items: baseline;
   }
   .lesson:last-child { border-bottom: none; }
 
   .lesson .num {
-    font-family: var(--font-d); font-weight: 500; font-size: 22pt; line-height: 1;
+    font-family: var(--font-d); font-weight: 500; font-size: 19pt; line-height: 1;
     letter-spacing: -0.02em;
   }
   .lesson.cyan .num { color: var(--cyan); }
@@ -121,22 +121,22 @@
   .lesson.vio  .num { color: var(--violet); }
 
   .lesson .head {
-    font-family: var(--font-d); font-weight: 500; font-size: 12.5pt; line-height: 1.18; letter-spacing: -0.015em; color: var(--ink);
+    font-family: var(--font-d); font-weight: 500; font-size: 11.5pt; line-height: 1.15; letter-spacing: -0.015em; color: var(--ink);
   }
   .lesson .head em { font-family: var(--font-s); font-style: italic; font-weight: 400; }
 
   .lesson .body {
-    font-family: var(--font-b); font-size: 9.5pt; line-height: 1.5; color: var(--ink-2); letter-spacing: -0.003em;
+    font-family: var(--font-b); font-size: 8.75pt; line-height: 1.42; color: var(--ink-2); letter-spacing: -0.003em;
   }
   .lesson .body strong { color: var(--ink); font-weight: 600; }
 
   /* Vision section */
   .vision-header {
     display: flex; align-items: baseline; justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   .vision-header h2 {
-    font-family: var(--font-d); font-weight: 500; font-size: 16pt; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
+    font-family: var(--font-d); font-weight: 500; font-size: 14pt; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
   }
   .vision-header h2 em { font-family: var(--font-s); font-style: italic; font-weight: 400; }
   .vision-header .label {
@@ -144,23 +144,23 @@
   }
 
   .vision-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px;
-    margin-bottom: 14px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px 22px;
+    margin-bottom: 10px;
   }
   .v-row {
-    display: flex; gap: 11px; align-items: flex-start;
-    padding: 7px 0;
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 5px 0;
     border-bottom: 1px dashed var(--rule);
   }
   .v-row .mark {
-    flex: 0 0 19px; height: 19px; border-radius: 50%;
+    flex: 0 0 18px; height: 18px; border-radius: 50%;
     border: 1px solid var(--cyan);
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-m); font-size: 8pt; color: var(--cyan);
+    font-family: var(--font-m); font-size: 7.5pt; color: var(--cyan);
     margin-top: 1px;
   }
   .v-row p {
-    font-family: var(--font-b); font-size: 9.5pt; line-height: 1.4; color: var(--ink-2);
+    font-family: var(--font-b); font-size: 8.75pt; line-height: 1.35; color: var(--ink-2);
     flex: 1;
   }
   .v-row p strong { color: var(--ink); font-weight: 600; }
@@ -169,11 +169,11 @@
   .footer {
     margin-top: auto;
     display: flex; justify-content: space-between; align-items: flex-end;
-    padding-top: 14px;
+    padding-top: 10px;
     border-top: 1px solid var(--rule-2);
   }
   .closing {
-    font-family: var(--font-s); font-style: italic; font-size: 18pt; line-height: 1.15; color: var(--ink); letter-spacing: -0.01em;
+    font-family: var(--font-s); font-style: italic; font-size: 15pt; line-height: 1.15; color: var(--ink); letter-spacing: -0.01em;
     flex: 1;
   }
   .closing .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
