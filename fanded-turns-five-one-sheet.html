@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Today Fanded Turns Five — One Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: letter; margin: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #02030A;
+    --ink:       #F4F4FF;
+    --ink-2:     #D5D5EE;
+    --ink-3:     #9595B5;
+    --rule:      rgba(244,244,255,0.08);
+    --rule-2:    rgba(244,244,255,0.16);
+
+    --cyan:      #5BE9FF;
+    --violet:    #2563EB;
+    --magenta:   #93C5FD;
+    --lime:      #C8FF3D;
+    --amber:     #FFB84D;
+
+    --grad: linear-gradient(135deg, #5BE9FF 0%, #4A9FFF 50%, #2563EB 100%);
+
+    --font-d: 'Space Grotesk', -apple-system, sans-serif;
+    --font-s: 'Instrument Serif', Georgia, serif;
+    --font-b: 'Inter', -apple-system, sans-serif;
+    --font-m: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+
+  html, body {
+    margin: 0;
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-b); -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    position: relative;
+    width: 8.5in; height: 11in;
+    padding: 0.55in 0.65in 0.55in;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  /* Dot grid */
+  .page::before {
+    content:""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(rgba(244,244,255,1) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.025;
+  }
+
+  /* Aurora */
+  .aurora { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; opacity: 0.5; }
+  .aurora .blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.55; mix-blend-mode: screen; }
+
+  .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+
+  /* Top chrome */
+  .top-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+  }
+  .top-row .tag {
+    font-family: var(--font-d); font-weight: 500; font-size: 9pt;
+    color: var(--ink-3); letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .top-row .meta {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-m); font-size: 8.5pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .top-row .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-3); }
+
+  /* Title block */
+  .title-block {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 22px;
+  }
+  .title-block h1 {
+    font-family: var(--font-d); font-weight: 500; font-size: 44pt; line-height: 0.95; letter-spacing: -0.035em; color: var(--ink);
+    flex: 1;
+  }
+  .title-block h1 em { font-family: var(--font-s); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+  .title-block h1 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .title-block .lede {
+    flex: 0 0 2.9in;
+    font-family: var(--font-b); font-size: 10.5pt; line-height: 1.5; color: var(--ink-2); letter-spacing: -0.003em;
+    padding-bottom: 6px;
+  }
+  .title-block .lede em { font-family: var(--font-s); font-style: italic; color: var(--ink); font-size: 12pt; }
+
+  .rule { height: 1px; background: var(--rule-2); margin: 0 0 16px; }
+
+  /* Lessons */
+  .lessons {
+    display: flex; flex-direction: column;
+    margin-bottom: 18px;
+  }
+  .lesson {
+    display: grid; grid-template-columns: 38px 1.85in 1fr; gap: 18px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .lesson:last-child { border-bottom: none; }
+
+  .lesson .num {
+    font-family: var(--font-d); font-weight: 500; font-size: 22pt; line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .lesson.cyan .num { color: var(--cyan); }
+  .lesson.lime .num { color: var(--lime); }
+  .lesson.mag  .num { color: var(--magenta); }
+  .lesson.amb  .num { color: var(--amber); }
+  .lesson.vio  .num { color: var(--violet); }
+
+  .lesson .head {
+    font-family: var(--font-d); font-weight: 500; font-size: 12.5pt; line-height: 1.18; letter-spacing: -0.015em; color: var(--ink);
+  }
+  .lesson .head em { font-family: var(--font-s); font-style: italic; font-weight: 400; }
+
+  .lesson .body {
+    font-family: var(--font-b); font-size: 9.5pt; line-height: 1.5; color: var(--ink-2); letter-spacing: -0.003em;
+  }
+  .lesson .body strong { color: var(--ink); font-weight: 600; }
+
+  /* Vision section */
+  .vision-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .vision-header h2 {
+    font-family: var(--font-d); font-weight: 500; font-size: 16pt; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .vision-header h2 em { font-family: var(--font-s); font-style: italic; font-weight: 400; }
+  .vision-header .label {
+    font-family: var(--font-m); font-size: 8.5pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan);
+  }
+
+  .vision-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px;
+    margin-bottom: 14px;
+  }
+  .v-row {
+    display: flex; gap: 11px; align-items: flex-start;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .v-row .mark {
+    flex: 0 0 19px; height: 19px; border-radius: 50%;
+    border: 1px solid var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-m); font-size: 8pt; color: var(--cyan);
+    margin-top: 1px;
+  }
+  .v-row p {
+    font-family: var(--font-b); font-size: 9.5pt; line-height: 1.4; color: var(--ink-2);
+    flex: 1;
+  }
+  .v-row p strong { color: var(--ink); font-weight: 600; }
+
+  /* Footer */
+  .footer {
+    margin-top: auto;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-2);
+  }
+  .closing {
+    font-family: var(--font-s); font-style: italic; font-size: 18pt; line-height: 1.15; color: var(--ink); letter-spacing: -0.01em;
+    flex: 1;
+  }
+  .closing .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .footer .author {
+    text-align: right;
+  }
+  .footer .author .label {
+    font-family: var(--font-m); font-size: 8pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 3px;
+  }
+  .footer .author .name {
+    font-family: var(--font-d); font-weight: 500; font-size: 11pt; color: var(--ink); letter-spacing: -0.01em;
+  }
+  .footer .author .title {
+    font-family: var(--font-b); font-size: 9pt; color: var(--ink-3); margin-top: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="aurora">
+    <div class="blob" style="width:480px;height:480px;left:-160px;top:-140px;background:#5BE9FF;opacity:0.18;"></div>
+    <div class="blob" style="width:440px;height:440px;right:-220px;bottom:-160px;background:#4A9FFF;opacity:0.10;"></div>
+    <div class="blob" style="width:340px;height:340px;left:42%;top:55%;background:#93C5FD;opacity:0.08;"></div>
+  </div>
+
+  <div class="content">
+
+    <!-- Top chrome -->
+    <div class="top-row">
+      <div class="tag">FANDED &middot; ANNIVERSARY ONE-SHEET</div>
+      <div class="meta">
+        <span>Year five</span>
+        <span class="dot"></span>
+        <span>April 2026</span>
+        <span class="dot"></span>
+        <span>From the founder</span>
+      </div>
+    </div>
+
+    <!-- Title block -->
+    <div class="title-block">
+      <h1>Today Fanded<br>turns <em class="grad">five.</em></h1>
+      <div class="lede">
+        <em>Five lessons from five years</em> building the first AI infrastructure for the talent industry &mdash; and the world we are building toward in the next five.
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <!-- Lessons -->
+    <div class="lessons">
+      <div class="lesson cyan">
+        <div class="num">01</div>
+        <div class="head">Crypto gave us <em>the playbook.</em></div>
+        <div class="body">NFTs extracted from talent &mdash; but crypto proved a system could move value between fans and talent <strong>without an institution in the middle.</strong> Fanded and MAWD were born from those ashes. For the first time, the technology to build power for talent is accessible to teams who know how to use it.</div>
+      </div>
+
+      <div class="lesson lime">
+        <div class="num">02</div>
+        <div class="head">Artists are <em>solo founders</em> of global industries.</div>
+        <div class="body">Every working artist is the PM, the executive, and the marketer of a global corporation, with no capital to hire a team. <strong>200M solo creators are burning out trying to handle it alone.</strong> Agentic AI is the only thing that scales the back office of a one-person business to match the front office.</div>
+      </div>
+
+      <div class="lesson mag">
+        <div class="num">03</div>
+        <div class="head">The fan list is the <em>line between talent and creators.</em></div>
+        <div class="body">Creators can be talent, but talent does not want to be creators. <strong>The fan list is the only asset that compounds in the artist&rsquo;s favor across a career.</strong> Fans pay on a recurring rail because they are thanking the talent for the gift &mdash; not paying for services. That is our distinction from every productivity platform.</div>
+      </div>
+
+      <div class="lesson amb">
+        <div class="num">04</div>
+        <div class="head">The liability <em>is the moat.</em></div>
+        <div class="body">MAWD privatizes the most sensitive business data an artist owns. <strong>Horizontal AIs cannot copy us because they will not take on the liability of holding it.</strong> Fanded must be built B2B2C with security at or above bank-grade. The liability others avoid is exactly where our leverage compounds.</div>
+      </div>
+
+      <div class="lesson vio">
+        <div class="num">05</div>
+        <div class="head">Talent is the <em>future of work.</em></div>
+        <div class="body">We are the first team to refuse to see talent as an asset to extract from. Gen Z and Gen Alpha are choosing entrepreneurship as a career, not falling into it. <strong>Fanded&rsquo;s systems will power the next 50 years of solo-founder work</strong> &mdash; for creators, athletes, actors, musicians, and every category not yet named.</div>
+      </div>
+    </div>
+
+    <!-- Vision -->
+    <div class="vision-header">
+      <h2>The world we are building <em>toward.</em></h2>
+      <div class="label">If we get the next five right</div>
+    </div>
+
+    <div class="vision-grid">
+      <div class="v-row"><div class="mark">01</div><p><strong>Creating is the number-one sought-after job.</strong></p></div>
+      <div class="v-row"><div class="mark">02</div><p><strong>Schools teach artist-preneurship</strong> as core curriculum.</p></div>
+      <div class="v-row"><div class="mark">03</div><p><strong>Recurring fan support is the cultural norm</strong> for the arts.</p></div>
+      <div class="v-row"><div class="mark">04</div><p><strong>It&rsquo;s cool to be a Fanded member</strong> of an artist.</p></div>
+      <div class="v-row"><div class="mark">05</div><p><strong>Touring is now affordable.</strong></p></div>
+      <div class="v-row"><div class="mark">06</div><p><strong>The growth of art is substantial</strong> &mdash; measurable across every medium.</p></div>
+      <div class="v-row"><div class="mark">07</div><p><strong>Every city has 1,000+ professional creatives</strong> earning $100K+ from their craft.</p></div>
+      <div class="v-row"><div class="mark">08</div><p><strong>Shame for pursuing being an artist or athlete</strong> never exists again.</p></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="closing">Five years in. <span class="grad">The next fifty start now.</span></div>
+      <div class="author">
+        <div class="label">Author</div>
+        <div class="name">Travis Atreo</div>
+        <div class="title">Founder &amp; CEO, Fanded Inc.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
